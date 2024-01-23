@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Studienwebsite</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="music" type="music" href="{{ url_for('static', filename='button-sound.mp3') }}">
+    <div id="button-sound-path" style="display: none;">{{ url_for('static', filename='button-sound.mp3') }}</div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href='https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.css' rel='stylesheet' />
+    <script src='https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div id="background">
+        <video autoplay loop muted>
+            <source src="{{ url_for('static', filename='bg_wp2.mp4') }}" type="video/mp4">
+            Ihr Browser unterstützt das Videoelement nicht.
+        </video>
+    </div>
+    <div id="timer"></div>
+    <div id="selection-bar">
+        <i class="fas fa-music" data-window="music-window"></i>
+        <i class="fas fa-clock" data-window="clock-window"></i>
+        <i class="far fa-calendar-alt" data-window="calendar-alt-window"></i>
+        <i class="fas fa-sticky-note" data-window="sticky-note-window"></i>
+        <i class="fas fa-cog" data-window="settings-window"></i>
+    </div>
+    <div id="music-window" class="window draggable">
+        <div class="window-header">
+            <span>Music</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+            <!-- Content goes here -->
+        </div>
+    </div>
+    <div id="clock-window" class="window draggable">
+        <div class="window-header">
+            <span>Pomodoro</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+            <main class="app">
+                <div class="timer">
+                    <progress id="js-progress" max="100"></progress>
+                  <div class="button-group mode-buttons" id="js-mode-buttons">
+                    <button
+                      data-mode="pomodoro"
+                      class="button active mode-button"
+                      id="js-pomodoro"
+                    >
+                      Pomodoro
+                    </button>
+                    <button
+                      data-mode="shortBreak"
+                      class="button mode-button"
+                      id="js-short-break"
+                    >
+                      Short break
+                    </button>
+                    <button
+                      data-mode="longBreak"
+                      class="button mode-button"
+                      id="js-long-break"
+                    >
+                      Long break
+                    </button>
+                  </div>
+                  <div class="clock" id="js-clock">
+                    <span id="js-minutes">25</span>
+                    <span class="separator">:</span>
+                    <span id="js-seconds">00</span>
+                  </div>
+                  <button class="main-button" data-action="start" id="js-btn">
+                    Start
+                  </button>
+                </div>
+              </main>
+              <div class="hidden">
+                <audio src="{{ url_for('static', filename='backtowork.mp3') }}" data-sound="pomodoro"></audio>
+                <audio src="{{ url_for('static', filename='break.mp3') }}" data-sound="shortBreak"></audio>
+                <audio src="{{ url_for('static', filename='break.mp3') }}" data-sound="longBreak"></audio>
+              </div>
+    </div>
+</div>
+    <div id="calendar-alt-window" class="window draggable">
+        <div class="window-header">
+            <span>Calendar</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+            <div id="calendar"></div>
+        </div>
+    </div>
+    <div id="sticky-note-window" class="window draggable">
+        <div class="window-header">
+            <span>Notes</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+            <div id="sticky-note-editorjs"></div>
+        </div>
+    </div>
+    </div>
+    <div id="settings-window" class="window draggable">
+        <div class="window-header">
+            <span>Settings</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+          
+        </div>
+    </div>
+</body>
+</html>

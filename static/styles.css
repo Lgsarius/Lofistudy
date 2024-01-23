@@ -1,0 +1,376 @@
+body, html {
+    font-family: sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+
+#background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+}
+
+#pomodoro-app {
+    font-size: 1.5em;
+}
+
+#timer {
+    margin: 1em;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  progress {
+    border-radius: 2px;
+    width: 100%;
+    height: 12px;
+    position: fixed;
+    top: 0;
+  }
+  
+  progress::-webkit-progress-bar {
+   background-color: rgba(0, 0, 0, 0.1);;
+  }
+  
+  progress::-webkit-progress-value {
+    background-color: #fff;
+  }
+  
+  .timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .clock {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    font-family: arial, sans-serif;
+  }
+  
+  .mode-button {
+    font-size: 16px;
+    height: 28px;
+    cursor: pointer;
+    box-shadow: none;
+    font-weight: 300;
+    color: #fff;
+    border: 1px solid transparent;
+    margin: 0px;
+    border-radius: 4px;
+    padding: 2px 12px;
+    background: none;
+  }
+  
+  .mode-button.active {
+    border-color: #fff;
+  }
+  
+  .main-button {
+    cursor: pointer;
+    box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+    font-size: 22px;
+    height: 55px;
+    text-transform: uppercase;
+    color: hsl(175, 26%, 41%);
+    font-weight: bold;
+    width: 200px;
+    background-color: white;
+    border-width: initial;
+    border-style: none;
+    margin: 20px 0px 0px;
+    padding: 0px 12px;
+    border-radius: 4px;
+    transition: color 0.5s ease-in-out 0s;
+  }
+  
+  button:focus, button:active {
+    outline: none;
+  }
+  
+  .main-button.active {
+    transform: translateY(6px);
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  @media screen and (max-width: 550px) {
+    .clock {
+      font-size: 8rem;
+    }
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(100%);
+  }
+  
+  .text {
+    width: 50%;
+    text-align: center;
+  }
+  
+  .text.study {
+    color: white;
+  }
+  
+  input:checked + .slider .text.study {
+    color: #2196F3;
+  }
+  
+  .text.break {
+    color: #2196F3;
+  }
+  
+  input:checked + .slider .text.break {
+    color: white;
+  }
+#buttons {
+    margin: 0.5em;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+select {
+    width: 100px;
+    margin-left: 10px;
+}
+
+
+
+
+#selection-bar {
+    position: fixed;
+    bottom: 20px; /* Lassen Sie die Leiste über dem unteren Rand schweben */
+    left: 5%; /* Zentrieren Sie die Auswahlleiste */
+    width: 90%; /* Reduzieren Sie die Breite, um die abgerundeten Ecken sichtbar zu machen */
+    height: 100px; /* oder die gewünschte Höhe */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* optionaler heller Rand */
+    display: flex;
+    justify-content: space-around; /* Verteilen Sie die Icons gleichmäßig */
+    align-items: center;
+    color: white; /* Textfarbe */
+    font-size: 20px; /* Schriftgröße */
+    border-radius: 25px; /* Halbe Höhe für vollständig abgerundete Ecken */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Schatten für den "Schwebe"-Effekt */
+}
+
+
+#selection-bar i {
+    font-size: 40px; /* Size of the icons */
+    margin: 0 20px; /* Space between the icons */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+
+
+#selection-bar i:hover {
+    transform: scale(1.1); /* Increase the size of the icon when hovered */
+    color: yellow; /* Change the color when hovered */
+}
+
+#selection-bar i:active {
+    transform: scale(0.9); /* Decrease the size of the icon when clicked */
+}
+
+.window {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Same as the selection bar */
+    display: none; /* Hide windows by default */
+    justify-content: space-around; /* Same as the selection bar */
+    align-items: center; /* Same as the selection bar */
+    color: white; /* Same as the selection bar */
+    font-size: 20px; /* Same as the selection bar */
+    border-radius: 25px; /* Same as the selection bar */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Same as the selection bar */
+    left: 5%; /* Same as the selection bar */
+    bottom: 20px; /* Same as the selection bar */
+}
+
+#music-window {
+    height: 600px;
+    width: 600px;
+}
+
+#clock-window {
+    height: 400px;
+    width: 400px;
+}
+
+#calendar-alt-window {
+    height: 700px;
+    width: 400px;
+}
+
+#sticky-note-window {
+    height: 600px;
+    width: 600px;
+}
+
+#settings-window {
+    height: 600px;
+    width: 600px;
+}
+.window-header {
+    text-align: center;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 10px;
+    cursor: move; /* Change cursor to indicate the window can be dragged */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-content {
+    width: auto; /* Same as the selection bar */
+    height: auto; /* Same as the selection bar */
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.ce-toolbar__actions.ce-toolbar__actions--opened {
+    width: 2rem !important; /* Begrenzen Sie die Breite auf den Inhalt */
+}
+.cdx-marker {
+    background-color: #ffff00 !important; /* Setzen Sie die Hintergrundfarbe auf ein helles Gelb */
+}
+.ce-conversion-toolbar__tools {
+    color: black !important; /* Setzen Sie die Textfarbe auf Schwarz */
+}
+.ce-inline-toolbar__toggler-and-button-wrapper {
+    color: black !important; /* Setzen Sie die Textfarbe auf Dunkel */
+}
+.ce-toolbar__plus, .ce-toolbar__actions, .ce-toolbar__settings-btn {
+    left: 0 !important; /* Position auf die linke Seite setzen */
+    color: white !important; /* Farbe auf Weiß setzen */
+}
+.ce-block {
+    padding-left: 55px; /* Ändern Sie diese Zahl, um den genauen Platzbedarf anzupassen */
+    z-index: 1;
+}
+::selection {
+    background: #ff800050 !important;  /* Orangefarbener Hintergrund */
+    color: white; /* Weißer Text */
+}
+.ce-toolbar__plus:hover {
+    background: #ff800050 !important;
+    color: inherit;
+  }
+  .ce-block--selected .ce-block__content {
+    background: #ff800050 !important;
+}
+#sticky-note-textarea {
+    margin-top: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    backdrop-filter: blur(10px);
+    flex-grow: 1;
+    height: 100%;
+    border-bottom-left-radius: 25px;
+border-bottom-right-radius: 25px;
+    resize: none;
+}
+.close-window {
+    background: none; /* Remove button background */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    margin-right: 10px;
+}
+
+.close-window i {
+    color: white; /* Make the icon white */
+}
+#calendar {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
