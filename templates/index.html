@@ -14,9 +14,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script> var musicFiles = {{ music_files | tojson | safe }}; </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
@@ -41,8 +43,33 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div class="window-content">
-            <!-- Content goes here -->
+    
+        <div class="song-selection">
+            <ul id="song-list">
+            </ul>
+        </div>
+        <div class="window-music-content">
+            <div class="music-controls">
+            <div id="music_prev" class="music-control">
+                <i class="fas fa-step-backward"></i>
+            </div>
+            <div id="music_play_pause" class="music-control">
+                <i class="fas fa-play"></i>
+            </div>
+            <div id="music_next" class="music-control">
+                <i class="fas fa-step-forward"></i>
+            </div>
+            <div id="music_shuffle" class="music-control">
+                <i class="fas fa-random"></i>
+            </div>
+            <input type="range" id="volume_slider" min="0" max="1" step="0.01" value="1">
+        </div>
+            <span id="track_name"></span>
+            <div id="time_controls">
+            <input type="range" id="progress_slider" min="0" max="1" step="0.01" value="0">
+            
+                <span id="current_time">0:00</span> / <span id="total_time">0:00</span>
+            </div>
         </div>
     </div>
     <div id="clock-window" class="window draggable">

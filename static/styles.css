@@ -16,6 +16,7 @@ body, html {
 }
 
 
+
 #background video {
     position: absolute;
     top: 50%;
@@ -231,7 +232,7 @@ select {
     align-items: center;
     color: white; /* Textfarbe */
     font-size: 20px; /* Schriftgröße */
-    border-radius: 25px; /* Halbe Höhe für vollständig abgerundete Ecken */
+    border-radius: 10px; /* Halbe Höhe für vollständig abgerundete Ecken */
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Schatten für den "Schwebe"-Effekt */
 }
 
@@ -263,7 +264,7 @@ select {
     align-items: center; /* Same as the selection bar */
     color: white; /* Same as the selection bar */
     font-size: 20px; /* Same as the selection bar */
-    border-radius: 25px; /* Same as the selection bar */
+    border-radius: 10px; /* Same as the selection bar */
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Same as the selection bar */
     left: 5%; /* Same as the selection bar */
     bottom: 20px; /* Same as the selection bar */
@@ -293,9 +294,21 @@ select {
     height: 600px;
     width: 600px;
 }
+.playlist-selection {
+  padding: 10px;
+}
+
+#playlist-selector {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+}
 .window-header {
     text-align: center;
-    border-radius: 25px;
+    border-radius: 10px;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
     color: white;
@@ -373,4 +386,91 @@ border-bottom-right-radius: 25px;
     padding: 10px;
     box-sizing: border-box;
     flex-grow: 1;
+}
+
+
+.window-music-content .music-control.shuffle-enabled i.fa-random {
+  color: #ff800050;
+}
+.parent-container {
+  position: relative;
+}
+.window-music-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+.song-selection {
+  height: 400px; /* Adjust as needed */
+  overflow-y: auto;
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 10px; /* Round the corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Add a shadow for a card-like effect */
+  padding: 20px; /* Add some padding */
+  padding-top: 0px!important;
+  
+}
+
+#song-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#song-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#song-list li:hover {
+  background-color: #ff800050;
+  cursor: pointer;
+}
+#track_name {
+  order: 1;
+}
+
+#current_time,
+#progress_slider,
+#time_controls,
+#total_time {
+  order: 2;
+  width: 60%;
+  text-align: center;
+
+}
+
+.music-controls {
+  order: 3;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.music-control svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
