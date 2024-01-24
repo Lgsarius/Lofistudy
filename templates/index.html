@@ -18,16 +18,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
-    <script> var musicFiles = {{ music_files | tojson | safe }}; </script>
+    <script>
+        var videoFiles = {{ video_files | tojson | safe }}; console.log(videoFiles);</script>
+    <script> var musicFiles = {{ music_files | tojson | safe }}; console.log(musicFiles) </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
     <div id="background">
-        <video autoplay loop muted>
-            <source src="{{ url_for('static', filename='bg_wp2.mp4') }}" type="video/mp4">
-            Ihr Browser unterstützt das Videoelement nicht.
+        <video id="background-video" autoplay loop muted>
+            <source id="video-source" src="{{ url_for('static', filename='bg_wp5.mp4') }}" type="video/mp4">
         </video>
+        <button id="next-button" style="position: absolute; top: 10px; right: 10px;">Change Background</button>
+        <div id="clock" class="clock"></div>
     </div>
+    
     <div id="timer"></div>
     <div id="selection-bar">
         <i class="fas fa-music" data-window="music-window"></i>

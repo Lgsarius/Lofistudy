@@ -6,7 +6,14 @@ body, html {
     overflow: hidden;
     font-family: sans-serif;
 }
-
+.clock {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  color: white;
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
+}
 #background {
     position: fixed;
     top: 0;
@@ -17,17 +24,17 @@ body, html {
 
 
 
-#background video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
-    background-size: cover;
+#background-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  object-fit: fill;
 }
 
 #pomodoro-app {
@@ -470,7 +477,34 @@ border-bottom-right-radius: 25px;
   border: 6px solid transparent;
   background-clip: content-box;
 }
+#next-button {
+  color: aliceblue;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #008CBA; /* Blue background */
+  border: none; /* Remove borders */
+  padding: 12px 24px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer; /* Mouse pointer on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: all 0.5s; /* Add transition effect */
+  box-shadow: 0 9px #999; /* Add a shadow */
+}
 
+#next-button:hover {
+  background-color: #4CAF50; /* Green background on hover */
+  color: white; /* White text on hover */
+}
+
+#next-button:active {
+  box-shadow: 0 5px #666; /* Add an inset shadow on click */
+  transform: translateY(4px); /* Move the button down on click */
+}
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }

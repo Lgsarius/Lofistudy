@@ -1,3 +1,32 @@
+function updateClock() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  if (hours < 10) hours = "0" + hours;
+  if (minutes < 10) minutes = "0" + minutes;
+  if (seconds < 10) seconds = "0" + seconds;
+  document.getElementById('clock').textContent = hours + ":" + minutes + ":" + seconds;
+}
+
+setInterval(updateClock, 1000);
+document.addEventListener('DOMContentLoaded', function() {
+  var videoSource = document.getElementById('video-source');
+  var backgroundVideo = document.getElementById('background-video');
+  var nextButton = document.getElementById('next-button');
+
+  var videos = videoFiles;  // Use the videoFiles array passed from the template
+
+  var currentVideoIndex = 0;
+
+  nextButton.addEventListener('click', function() {
+      currentVideoIndex = (currentVideoIndex + 1) % videos.length;  // Cycle through the videos
+      videoSource.src = videos[currentVideoIndex];
+      backgroundVideo.load();  // Load the new video
+  });
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog').forEach(icon => {
         icon.addEventListener('click', function() {
@@ -434,4 +463,5 @@ document.getElementById('music_pause').addEventListener('click', function() {
 });
 
 };
+
 
