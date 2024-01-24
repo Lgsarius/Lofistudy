@@ -34,7 +34,7 @@ body, html {
   height: auto;
   z-index: -100;
   background-size: cover;
-  
+
   object-fit: cover;
 
   object-position: center;
@@ -82,7 +82,8 @@ body, html {
     position: fixed;
     align-self: center;
     top: 0;
-    left: 0; /* Add this line */
+    left: 0;
+    padding-top: 2rem; 
 }
   
   progress::-webkit-progress-bar {
