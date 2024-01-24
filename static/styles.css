@@ -34,8 +34,10 @@ body, html {
   height: auto;
   z-index: -100;
   background-size: cover;
-  object-fit: cover; /* Fügt diese Zeile hinzu */
-  object-position: center; /* Fügt diese Zeile hinzu */
+  
+  object-fit: cover;
+
+  object-position: center;
 }
 
 #pomodoro-app {
