@@ -1,22 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash 
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 import os
+from models import User
+from extensions import db, login_manager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
-db = SQLAlchemy(app)
-login_manager = LoginManager()
+db.init_app(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
-
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -31,10 +26,10 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if not user or not check_password_hash(user.password, password):
+            flash('Invalid username or password.')
             return redirect(url_for('login'))
 
         login_user(user)
-
         return redirect(url_for('home'))
 
     return render_template('login.html')
@@ -42,8 +37,9 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form.get('username')
+        username = request.form.get('email')
         password = request.form.get('password')
+        
 
         user = User.query.filter_by(username=username).first()
 
@@ -58,6 +54,10 @@ def signup():
         return redirect(url_for('login'))
 
     return render_template('signup.html')
+
+@app.route('/resetpassword')
+def resetpassword():
+    return render_template('resetpassword.html')
 
 @app.route('/')
 @login_required
@@ -84,10 +84,12 @@ def get_songs():
     return jsonify(music_files=music_files)
 
 @app.route('/Legal Notice')
+@login_required
 def legal_notice():
     return render_template('legal_notice.html')
 
 @app.route('/Privacy Policy')
+@login_required
 def privacy_policy():
     return render_template('privacy_policy.html')
 
@@ -98,4 +100,6 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-     app.run(debug=True, host='0.0.0.0', port=5050)
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True, host='0.0.0.0', port=5050)

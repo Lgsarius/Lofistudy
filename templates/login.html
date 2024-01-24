@@ -1,34 +1,41 @@
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&family=Figtree:wght@700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='loginstyles.css') }}"
-        <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
-        <heade >
-    </head>
-    <style>
-        </style>
-    <body>
-        <div class="container">
-            <div class="pic2"></div>
-            <img src="{{ url_for('static', filename='loginlogo.png') }}" alt="">
-            <h1>Log in To Continue</h1>
-            <div class="inp">
-                <input type="text" id="username">
-                <label onclick="focusinp('usr')" for="Username">Username</label>
-            </div>
-            <div class="inp">
-                <input type="password" id="password">
-                <label onclick="focusinp('pass')" for="Password">Password</label>
-            </div>
-            <div style="display: flex;"><a href="">Forgot Password? - Support</a></div>
-            <button type="submit">Login</button>
-            <a  onclick="myFunction()" href="#">Dont have a account? Sign up</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&family=Figtree:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='loginstyles.css') }}">
+    <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
+</head>
+<body class="login-body" style="background-image: url('{{ url_for('static', filename='loginbg.png') }}'); background-size: cover;">
+    <div class="container">
+        <div class="login-form">
+            <img src="{{ url_for('static', filename='loginlogo.png') }}" alt="" class="login-logo">
+                            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-warning">
+                    {{ messages[0] }}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            <h1 class="login-title">Log in To Continue</h1>
+            <form action="{{ url_for('login') }}" method="post">
+                <div class="inp">
+                    <input type="text" name="email" id="email" placeholder="Email">
+                </div>
+                <div class="inp">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </div>
+                <div class="forgot-password">
+                    <a onclick="myFunction()" href="{{ url_for('resetpassword') }}" class="signup-link">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <a onclick="myFunction()" href="{{ url_for('signup') }}" class="signup-link">Dont have a account? Sign up</a>
         </div>
-        <div class="pic">
-           
-        </div>
-    </body>
+    </div>
+</body>
+</html>
