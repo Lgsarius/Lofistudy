@@ -77,8 +77,10 @@ body, html {
     width: 100%;
     height: 12px;
     position: fixed;
+    align-self: center;
     top: 0;
-  }
+    left: 0; /* Add this line */
+}
   
   progress::-webkit-progress-bar {
    background-color: rgba(0, 0, 0, 0.1);;
