@@ -39,15 +39,24 @@
     align-items: center;
 
 }
+.password-field {
+    padding-right: 30px;  /* Make room for the icon */
+}
 
+.field-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: grey;
+    cursor: pointer;
+}
 .inp {
     text-align: left;
     align-items: center;
     display: flex;
     justify-content: center;
+    position: relative;
     padding: 10px;
-
-
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
     transition: all 0.3s ease;
 }
@@ -61,6 +70,7 @@
     border: none;
     outline: none;
     flex-grow: 1;
+ 
     transition: all 0.3s ease;
 }
 input {
@@ -96,7 +106,7 @@ input:hover, input:focus {
 
 .login-button {
     
-    background-color: #4CAF50; /* Green background */
+    background-color: #FAA04B; /* Green background */
     border: none; /* Remove border */
     color: white; /* White text */
     padding: 15px 32px; /* Some padding */
@@ -116,7 +126,7 @@ input:hover, input:focus {
 }
 
 .login-button:hover {
-    background-color: #3e8e41; /* Change background */
+    background-color: #FAA04B; /* Change background */
     box-shadow: 0 5px #666; /* Change shadow */
     transform: translateY(4px); /* Move button slightly on hover */
 }

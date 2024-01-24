@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 import os
+import re
 from models import User
 from extensions import db, login_manager
 
@@ -20,7 +21,7 @@ def load_user(user_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
+        username = request.form.get('email')
         password = request.form.get('password')
 
         user = User.query.filter_by(username=username).first()
@@ -39,19 +40,30 @@ def signup():
     if request.method == 'POST':
         username = request.form.get('email')
         password = request.form.get('password')
-        
+        repeat_password = request.form.get('repeat_password')
+
+        # Validate email
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", username):
+            flash('Invalid email address.')
+            return redirect(url_for('signup'))
+
+        # Check if passwords match
+        if password != repeat_password:
+            flash('Passwords do not match.')
+            return redirect(url_for('signup'))
 
         user = User.query.filter_by(username=username).first()
 
         if user:
+            flash('User already exists.')
             return redirect(url_for('signup'))
 
-        new_user = User(username=username, password=generate_password_hash(password, method='sha256'))
+        new_user = User(username=username, password=generate_password_hash(password, method='pbkdf2:sha256'))
 
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('login'))
+        return redirect(url_for('home'))  # Redirect to home page
 
     return render_template('signup.html')
 
