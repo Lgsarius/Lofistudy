@@ -478,4 +478,13 @@ document.getElementById('music_pause').addEventListener('click', function() {
 
 };
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  var modal = document.getElementById("loginModal");
+  var span = document.getElementsByClassName("close")[0];
+
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+});
+
 

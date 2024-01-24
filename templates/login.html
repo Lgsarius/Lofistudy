@@ -1,0 +1,34 @@
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&family=Figtree:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='loginstyles.css') }}"
+        <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
+        <heade >
+    </head>
+    <style>
+        </style>
+    <body>
+        <div class="container">
+            <div class="pic2"></div>
+            <img src="{{ url_for('static', filename='loginlogo.png') }}" alt="">
+            <h1>Log in To Continue</h1>
+            <div class="inp">
+                <input type="text" id="username">
+                <label onclick="focusinp('usr')" for="Username">Username</label>
+            </div>
+            <div class="inp">
+                <input type="password" id="password">
+                <label onclick="focusinp('pass')" for="Password">Password</label>
+            </div>
+            <div style="display: flex;"><a href="">Forgot Password? - Support</a></div>
+            <button type="submit">Login</button>
+            <a  onclick="myFunction()" href="#">Dont have a account? Sign up</a>
+        </div>
+        <div class="pic">
+           
+        </div>
+    </body>
