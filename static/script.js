@@ -105,6 +105,7 @@ function handleDragStart(e) {
             };
         });
     });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
