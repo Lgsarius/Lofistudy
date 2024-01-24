@@ -24,6 +24,12 @@ def get_songs():
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
 
     return jsonify(music_files=music_files)
+@app.route('/Legal Notice')
+def legal_notice():
+    return render_template('legal_notice.html')
 
+@app.route('/Privacy Policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
 if __name__ == '__main__':
      app.run(debug=True, host='0.0.0.0', port=5050)
