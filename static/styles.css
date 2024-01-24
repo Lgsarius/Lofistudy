@@ -7,7 +7,6 @@ body, html {
     font-family: sans-serif;
 }
 #clockgroß {
-  position: absolute;
   top: 40px;
   right: 10px;
   color: white;
