@@ -64,34 +64,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Make the window draggable by the header
             // Get the window header
-            windowHeader.addEventListener('mousedown', function(e) {
-                var offsetX = e.clientX - window.getBoundingClientRect().left;
-                var offsetY = e.clientY - window.getBoundingClientRect().top;
-            
-                function mouseMoveHandler(e) {
-                    var newTop = e.clientY - offsetY;
-                    var newLeft = e.clientX - offsetX;
-                
-            
-                    // Überprüfen Sie die Grenzen und passen Sie die Position an, wenn das Fenster versucht, außerhalb des Viewports zu gehen
-                    if (newLeft < 0) newLeft = 0;
-                    if (newTop < 0) newTop = 0;
-                    if (newLeft + window.getBoundingClientRect().width > document.documentElement.clientWidth) newLeft = document.documentElement.clientWidth - window.getBoundingClientRect().width;
-                    if (newTop + window.getBoundingClientRect().height > document.documentElement.clientHeight) newTop = document.documentElement.clientHeight - window.getBoundingClientRect().height;
-                
-                    window.style.top = newTop + 'px';
-                    window.style.left = newLeft + 'px';
-                }
-            
-                document.addEventListener('mousemove', mouseMoveHandler);
-            
-                document.addEventListener('mouseup', function() {
-                    document.removeEventListener('mousemove', mouseMoveHandler);
-                }, { once: true });
-            });
+            windowHeader.addEventListener('mousedown', handleDragStart);
+windowHeader.addEventListener('touchstart', handleDragStart);
+
+function handleDragStart(e) {
+    var clientX = e.clientX || e.touches[0].clientX;
+    var clientY = e.clientY || e.touches[0].clientY;
+
+    var offsetX = clientX - window.getBoundingClientRect().left;
+    var offsetY = clientY - window.getBoundingClientRect().top;
+
+    function handleDragMove(e) {
+        var clientX = e.clientX || e.touches[0].clientX;
+        var clientY = e.clientY || e.touches[0].clientY;
+
+        var newTop = clientY - offsetY;
+        var newLeft = clientX - offsetX;
+
+        // Überprüfen Sie die Grenzen und passen Sie die Position an, wenn das Fenster versucht, außerhalb des Viewports zu gehen
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
+        if (newLeft + window.getBoundingClientRect().width > document.documentElement.clientWidth) newLeft = document.documentElement.clientWidth - window.getBoundingClientRect().width;
+        if (newTop + window.getBoundingClientRect().height > document.documentElement.clientHeight) newTop = document.documentElement.clientHeight - window.getBoundingClientRect().height;
+
+        window.style.top = newTop + 'px';
+        window.style.left = newLeft + 'px';
+    }
+
+    document.addEventListener('mousemove', handleDragMove);
+    document.addEventListener('touchmove', handleDragMove);
+
+    function handleDragEnd() {
+        document.removeEventListener('mousemove', handleDragMove);
+        document.removeEventListener('touchmove', handleDragMove);
+    }
+
+    document.addEventListener('mouseup', handleDragEnd, { once: true });
+    document.addEventListener('touchend', handleDragEnd, { once: true });
+
+            };
         });
     });
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
