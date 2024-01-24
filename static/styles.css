@@ -5,6 +5,7 @@ body, html {
     padding: 0;
     overflow: hidden;
     font-family: sans-serif;
+    
 }
 #clockgroß {
   top: 40px;
@@ -14,30 +15,31 @@ body, html {
   font-family: 'Courier New', Courier, monospace;
 }
 #background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-}
-
-
-
-#background-video {
   position: fixed;
-  right: 0;
-  bottom: 0;
+  top: 0;
+  left: 0;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  background-size: cover;
-
-  object-fit: cover;
-
-  object-position: center;
+  background-size: contain;
+  object-fit: contain;
+  overflow: hidden;  /* Add this line */
 }
+#background-video {
+  
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -100;
+  zoom: 0.5;
+  transform: translate(-50%, -50%);
+  background: no-repeat;
+  background-size:contain;
+  
+}
+
+
 
 #pomodoro-app {
     font-size: 1.5em;
@@ -233,7 +235,7 @@ select {
     bottom: 20px; /* Lassen Sie die Leiste über dem unteren Rand schweben */
     left: 5%; /* Zentrieren Sie die Auswahlleiste */
     width: 90%; /* Reduzieren Sie die Breite, um die abgerundeten Ecken sichtbar zu machen */
-    height: 100px; /* oder die gewünschte Höhe */
+    height: 80px; /* oder die gewünschte Höhe */
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.2); /* optionaler heller Rand */
@@ -281,8 +283,8 @@ select {
 }
 
 #music-window {
-    height: 600px;
-    width: 600px;
+    height: 400px;
+    width: 400px;
 }
 
 #clock-window {
@@ -310,6 +312,7 @@ select {
 
 #playlist-selector {
   width: 90%;
+  height: 90%;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -411,16 +414,17 @@ border-bottom-right-radius: 25px;
   align-items: center;
   position: absolute;
   bottom: 2rem;
-  width: 100%;
+  width: 90%;
 }
 .song-selection {
-  height: 400px; /* Adjust as needed */
+  height: 50%; /* Adjust as needed */
   overflow-y: auto;
   border: 1px solid #ccc; /* Add a border */
   border-radius: 10px; /* Round the corners */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Add a shadow for a card-like effect */
   padding: 20px; /* Add some padding */
   padding-top: 0px!important;
+  font-size: 16px; /* Increase font-size */
   
 }
 
@@ -451,7 +455,81 @@ border-bottom-right-radius: 25px;
   text-align: center;
 
 }
+.logout-button {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+}
 
+.logout-button:hover {
+  background-color: #d32f2f; /* Darker red */
+}
+.legal_notice-button {
+  position: fixed;
+  left: 20px;
+  top: 70px;  /* Add this line */
+  display: flex;
+  flex-direction: column;
+}
+
+.legal_notice-button a, .privacy_policy-button a, #next-button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  width: 200px;
+  height: 50px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;  /* Add this line */
+  box-sizing: border-box;
+}
+
+.legal_notice-button a:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+.privacy_policy-button {
+  position: fixed;
+  left: 20px;
+  top: 150px;  /* Add this line */
+  display: flex;
+  flex-direction: column;
+}
+
+#next-button {
+  position: fixed;
+  left: 20px;
+  top: 230px;
+  display: flex;
+  flex-direction: column;
+  line-height: 50px;  /* Add this line */
+  font-size: 16px;  /* Add this line */
+}
+
+
+
+.privacy_policy-button a:hover {
+  background-color: #45a049; /* Darker green */
+}
+#next-button:hover {
+  background-color: #45a049; /* Darker green */
+}
 .music-controls {
   order: 3;
   display: flex;
@@ -467,6 +545,7 @@ border-bottom-right-radius: 25px;
 
 ::-webkit-scrollbar {
   width: 20px;
+  height: 50px;
   cursor: pointer;
 }
 
@@ -480,34 +559,7 @@ border-bottom-right-radius: 25px;
   border: 6px solid transparent;
   background-clip: content-box;
 }
-#next-button {
-  color: aliceblue;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #008CBA; /* Blue background */
-  border: none; /* Remove borders */
-  padding: 12px 24px; /* Some padding */
-  text-align: center; /* Centered text */
-  text-decoration: none; /* Remove underline */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Mouse pointer on hover */
-  border-radius: 5px; /* Rounded corners */
-  transition: all 0.5s; /* Add transition effect */
-  box-shadow: 0 9px #999; /* Add a shadow */
-}
 
-#next-button:hover {
-  background-color: #4CAF50; /* Green background on hover */
-  color: white; /* White text on hover */
-}
-
-#next-button:active {
-  box-shadow: 0 5px #666; /* Add an inset shadow on click */
-  transform: translateY(4px); /* Move the button down on click */
-}
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }

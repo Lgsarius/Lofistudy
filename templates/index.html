@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="LofiStudy is a website that helps you to study.">
     <meta name="author" content="LofiStudy">
     <title>LofiStudy</title>
@@ -33,7 +33,7 @@
         <video id="background-video" autoplay loop muted>
             <source id="video-source" src="{{ url_for('static', filename='bg_wp5.mp4') }}" type="video/mp4">
         </video>
-        <button id="next-button" style="position: absolute; top: 10px; right: 10px;">Change Background</button>
+        
         <div id="clockgroß" class="clockgroß"></div>
     </div>
     <div id="timer"></div>
@@ -164,8 +164,17 @@
             </button>
         </div>
         <div class="window-content">
-            <a onclick="myFunction()" href="{{ url_for('logout') }}" class="signup-link">Logout</a>
-          
+         
+            <button id="next-button">Change Background</button>
+            <div class="logout-button">
+                <a href="{{ url_for('logout') }}" class="signup-link">Logout</a>
+            </div>
+            <div class="legal_notice-button">
+                <a href="{{ url_for('legal_notice') }}" class="signup-link">legal notice</a>
+            </div>
+            <div class="privacy_policy-button">
+                <a href="{{ url_for('privacy_policy') }}" class="signup-link">privacy policy</a>
+            </div>
         </div>
     </div>
 </body>
