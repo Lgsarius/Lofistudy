@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog').forEach(icon => {
-        icon.addEventListener('click', function() {
+  document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link').forEach(icon => {
+    icon.addEventListener('click', function() {
             // Get the corresponding window
             var windowId = this.dataset.window;
             var window = document.getElementById(windowId);
@@ -335,7 +335,6 @@ window.onload = function() {
       try {
           decodedFilename = decodeURIComponent(filename);
       } catch (e) {
-          console.error('URIError: Failed to decode filename: ', filename);
           decodedFilename = filename; // Use the original filename if decoding fails
       }
       
@@ -487,4 +486,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  var youtubeUrlElement = document.getElementById('youtube-url');
+  if (youtubeUrlElement) {
+      youtubeUrlElement.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+              var url = this.value;
+              var videoId = url.split('v=')[1];
+              var embedUrl = 'https://www.youtube.com/embed/' + videoId;
+              document.getElementById('youtube-video').innerHTML = '<iframe width="560" height="315" src="' + embedUrl + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+          }
+      });
+  }
+});
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('url-input').addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+          var url = new URL(this.value);
+          var faviconUrl = 'https://s2.googleusercontent.com/s2/favicons?domain=' + url.hostname;
+          var urlList = document.getElementById('url-list');
+          var urlItem = document.createElement('div');
+          urlItem.className = 'url-item';
+          urlItem.innerHTML = '<img src="' + faviconUrl + '" style="width: 32px; height: 32px; padding-right: 10px;"><a href="' + url.href + '" target="_blank">' + url.hostname + '</a><br><span>' + url.href + '</span>';
+          urlList.appendChild(urlItem);
+          this.value = '';
+      }
+  });
+});

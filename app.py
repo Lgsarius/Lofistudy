@@ -7,7 +7,6 @@ from models import User
 from extensions import db, login_manager
 from flask_dance.contrib.google import make_google_blueprint, google
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'

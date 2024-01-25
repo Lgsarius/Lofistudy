@@ -266,7 +266,7 @@ select {
 
 #selection-bar i:hover {
     transform: scale(1.1); /* Increase the size of the icon when hovered */
-    color: yellow; /* Change the color when hovered */
+    color: #F3A953; /* Change the color when hovered */
 }
 
 #selection-bar i:active {
@@ -313,10 +313,56 @@ select {
     height: 600px;
     width: 600px;
 }
+#url-window {
+  height: 300px;
+  width: 400px;
+}
+#video-window {
+  height: 100px;
+  width: 300px;
+  resize: both;
+  overflow: auto;
+}
+#sound-window {
+  height: 400px;
+  width: 300px;
+}
+
 .playlist-selection {
   padding: 10px;
 }
+#video-window .window-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 
+#youtube-url-container {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ccc;
+}
+
+#youtube-url-container input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#youtube-video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#youtube-video iframe {
+  width: 100%;
+  height: 100%;
+}
 #playlist-selector {
   width: 90%;
   height: 90%;
@@ -352,7 +398,7 @@ select {
     width: 2rem !important; /* Begrenzen Sie die Breite auf den Inhalt */
 }
 .cdx-marker {
-    background-color: #ffff00 !important; /* Setzen Sie die Hintergrundfarbe auf ein helles Gelb */
+    background-color: #F3A953 !important; /* Setzen Sie die Hintergrundfarbe auf ein helles Gelb */
 }
 .ce-conversion-toolbar__tools {
     color: black !important; /* Setzen Sie die Textfarbe auf Schwarz */
@@ -593,3 +639,217 @@ border-bottom-right-radius: 25px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+
+
+#url-input-container {
+  padding: 10px;
+}
+
+#url-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#url-list {
+  max-height: 200px; /* Höhe von zwei URL-Elementen */
+  overflow-y: auto; /* Erlaubt das Scrollen, wenn der Inhalt die maximale Höhe überschreitet */
+}
+
+.url-item span {
+  color: #333;
+  font-size: 40%; /* Reduziert die Schriftgröße auf 60% */
+}
+
+.url-item {
+  margin-bottom: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.url-item a {
+  text-decoration: none;
+  color: #333;
+}
+
+
+
+
+.mixer-panel {
+  z-index: 99999999;
+  border-radius: 16px;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 11px;
+}
+
+.mood-btn-img {
+  height: 70px;
+  width: 70px;
+  border-radius: 12px;
+  background-color: var(--color-bgd-200);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px;
+  cursor: pointer;
+}
+.mood-btn-img * {
+  transition: all ease-in-out 200ms;
+}
+.mood-btn-img img {
+  height: 12px;
+  width: 12px;
+}
+.mood-btn-img p {
+  opacity: 0.3;
+}
+
+.mood-btn-img .selected p {
+  opacity: 1;
+}
+
+.mood-btns {
+  width: 173px;
+  height: 116px;
+  padding: 0px 10px 13px 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-left: 13px;
+} 
+
+.mood-btns-title {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mood-btn {
+  height: 41px;
+  width: 41px;
+  border-radius: 50%;
+  background-color: rgba(217, 217, 217, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2px; 
+  cursor: pointer;
+  position: relative; 
+}
+.mood-btn * {
+  transition: opacity ease-in-out 200ms;
+}
+.mood-btn div {
+  /*bottom: -2px;*/
+  margin-top: 12px;
+  position: absolute; 
+  width: 52px;
+  height: 52px;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mood-btn-name {
+ margin-top: 7px;
+ margin-right: 3px;
+ color: rgba(255, 255, 255, 0.3);
+}
+
+.mood-btn.selected p {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  color: white;
+  border: 0 solid white;
+  height: 16px;
+  width: 16px;
+  border-radius: 50px;
+  background: var(--color-primary);
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  color: white;
+  height: 16px;
+  width: 16px;
+  border-radius: 50px;
+  background: white;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+  margin-top: 1px;
+  color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+  background: white;
+  cursor: pointer;
+}
+
+.level-input {
+  min-width: 150px;
+  z-index: 400;
+  border-radius: 8px;
+  position: relative;
+}
+.level-input-image {
+  position: relative;
+}
+.level-input-image input[type="range"] {
+  opacity: 0;
+}
+.level-input-image input[type="range"]::-moz-range-thumb,
+.level-input-image input[type="range"]::-webkit-slider-thumb {
+  background: #fff0 !important;
+  border: 0 solid #fff0 !important;
+  opacity: 0 !important;
+  transform: translateY(10px);
+}
+.level-input-image input {
+  height: 24px;
+}
+.level-input-image input::-webkit-slider-runnable-track {
+  height: 24px;
+}
+
+.level-input-image input::-moz-range-track {
+  height: 24px;
+}
+.level-input-image input::-ms-track {
+  height: 24px;
+}
+
+.level-thumb {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  position: absolute;
+  height: 24px;
+  pointer-events: none;
+  width: 24px;
+  cursor: pointer !important;
+}
+
+.locked-level {
+  height: 38px;
+  width: 38px;
+  position: absolute;
+  /* left: 0px; */
+  /* top: 4px; */
+  opacity: 0.55; 
+  margin-left: -7px;
+  margin-top: -3px;
+  z-index: 999999999999999;
+  cursor: pointer !important;
+}
+
+
