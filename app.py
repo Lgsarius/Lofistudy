@@ -28,7 +28,7 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/login/google')
+@app.route('/google/authorized')
 def login_google():
     if not google.authorized:
         return redirect(url_for("google.login"))
