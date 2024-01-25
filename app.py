@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
     client_secret="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",
-    scope=["profile", "email"],
+    scope=["https://www.googleapis.com/auth/userinfo.profile", "openid", "https://www.googleapis.com/auth/userinfo.email"],
     redirect_url="/google/authorized"
 )
 app.register_blueprint(google_blueprint, url_prefix="/login/google")
