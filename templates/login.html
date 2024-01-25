@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="LofiStudy is a website that helps you to study.">
     <meta name="author" content="LofiStudy">
-    <title>LofiStudy Login</title>
+    <title>LofiStudy Sign in</title>
     <meta property="og:image" href="{{ url_for('static', filename='picture.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
                     </div>
                 {% endif %}
                 {% endwith %}
-                <h1 class="login-title">Log in To Continue</h1>
+                <h1 class="login-title">Sign in to continue</h1>
                 <a href="{{ url_for('login_google') }}" class="google-login-button">
                     <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Google Login Button">
                 </a>
@@ -41,7 +41,7 @@
                 <div class="forgot-password">
                     <a onclick="myFunction()" href="{{ url_for('resetpassword') }}" class="signup-link">Forgot Password?</a>
                 </div>
-                <button type="submit" class="login-button">Login</button>
+                <button type="submit" class="login-button">Sign in</button>
             </form>
             <a onclick="myFunction()" href="{{ url_for('signup') }}" class="signup-link">Dont have a account? Sign up</a>
         </div>
