@@ -16,6 +16,7 @@ google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
     client_secret="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",
     scope=["profile", "email"]
+    redirect_url="/login/google/authorized"
 )
 app.register_blueprint(google_blueprint, url_prefix="/login/google")
 
