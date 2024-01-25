@@ -26,8 +26,11 @@
                     </div>
                 {% endif %}
                 {% endwith %}
-            <h1 class="login-title">Log in To Continue</h1>
-            <form action="{{ url_for('login') }}" method="post">
+                <h1 class="login-title">Log in To Continue</h1>
+                <a href="{{ url_for('login_google') }}" class="google-login-button">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Google Login Button">
+                </a>
+                <form action="{{ url_for('login') }}" method="post">
                 <div class="inp">
                     <input type="text" name="email" id="email" placeholder="Email">
                 </div>

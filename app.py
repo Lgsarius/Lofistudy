@@ -5,10 +5,19 @@ import os
 import re
 from models import User
 from extensions import db, login_manager
+from flask_dance.contrib.google import make_google_blueprint, google
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+
+google_blueprint = make_google_blueprint(
+    client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
+    client_secret="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",
+    scope=["profile", "email"]
+)
+app.register_blueprint(google_blueprint, url_prefix="/login/google")
 
 db.init_app(app)
 login_manager.login_view = 'login'
@@ -17,6 +26,21 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+@app.route('/login/google')
+def login_google():
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+    resp = google.get("/oauth2/v1/userinfo")
+    if resp.ok:
+        session['username'] = resp.json()['email']
+        user = User.query.filter_by(username=session['username']).first()
+        if user is None:
+            user = User(username=session['username'])
+            db.session.add(user)
+            db.session.commit()
+        login_user(user)
+    return redirect(url_for('home'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -96,12 +120,10 @@ def get_songs():
     return jsonify(music_files=music_files)
 
 @app.route('/Legal Notice')
-@login_required
 def legal_notice():
     return render_template('legal_notice.html')
 
 @app.route('/Privacy Policy')
-@login_required
 def privacy_policy():
     return render_template('privacy_policy.html')
 

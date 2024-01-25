@@ -7,6 +7,13 @@ body, html {
     font-family: sans-serif;
     
 }
+
+.google-login-button {
+  display: block;
+  width: 200px;
+  margin: 0 auto 20px; /* Zentriert den Button und fügt einen unteren Abstand hinzu */
+}
+
 #clockgroß {
   top: 40px;
   right: 10px;
