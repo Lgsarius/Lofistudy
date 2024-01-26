@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='loginstyles.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
-</head>
+</head>    
 <body class="login-body" style="background-image: url('{{ url_for('static', filename='loginbg.png') }}'); background-size: cover;">
     <div class="container">
         <div class="login-form">
@@ -46,72 +46,5 @@
             <a onclick="myFunction()" href="{{ url_for('signup') }}" class="signup-link">Dont have a account? Sign up</a>
         </div>
     </div>
-    <div class="cassette">
-        
-    <div class="rectangle "> 
-        <div class="inner-rectangle">
-            <div class="title">
-                <p>Lofi Mixtape- Tap to play</p>
-            
-            </div>
-            <div class="title">
-              
-            </div>
-            <div class="ribon-container">
-                <div class="box">
-                    <div class="tape-wheel">
-                        <div class="teethBox ">
-                            <div class="teeth">
-                            
-                            </div>
-                            <div class="teeth">
-                            
-                            </div>
-                            <div class="teeth">
-                            
-                            </div>
-                            <div class="teeth">
-                            
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tape">
-                        <div class="tape-ribbon "></div>
-                        <div class="tape-ribbon-two "></div>
-                    </div>
-                    <div class="tape-wheel">
-                        <div class="teethBox ">
-                            <div class="teeth">
-                            
-                            </div>
-                            <div class="teeth">
-                            
-                            </div>
-                            <div class="teeth">
-                            
-                            </div>
-                            <div class="teeth">
-                            
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="cassette-body">
-            <div class="squares">
-
-            </div>
-            <div class="squares two">
-                
-            </div>
-        </div>
-       
-    </div>
-    </div>
-    
-    <audio id="audioPlayer" autoplay loop>
-        <source id="audioSource" src="https://namratapdrjs.netlify.app/lofi-music.mp3" type="audio/mpeg">
-    </audio>
 </body>
 </html>

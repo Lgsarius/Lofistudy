@@ -43,18 +43,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
   new Password('.password-div1');
   new Password('.password-div2');
 });
-
-$(document).ready(function() {
-  var audElem = document.getElementById('audioPlayer');
-
-  $(".cassette").click(function() {
-      song(audElem);
-  });
-
-  function song(a) {
-      $(".teethBox").addClass("playing");
-      $(".tape-ribbon").addClass("play");
-      $(".tape-ribbon-two").addClass("play-two");
-      a.play();
-  }
-});
