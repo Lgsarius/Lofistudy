@@ -345,6 +345,7 @@ window.onload = function() {
           sounds[currentSoundIndex].stop(); // Stop the current song
           currentSoundIndex = i; // Update the current song index to the selected song
           sounds[currentSoundIndex].play(); // Start playing the selected song
+          playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
       });
       songList.appendChild(listItem);
   }
