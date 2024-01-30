@@ -9,26 +9,23 @@ function updateClock() {
   document.getElementById('clockgroß').textContent = hours + ":" + minutes + ":" + seconds;
 }
 
-setInterval(updateClock, 1000);
 document.addEventListener('DOMContentLoaded', function() {
-  var videoSource = document.getElementById('video-source');
   var backgroundVideo = document.getElementById('background-video');
-  var nextButton = document.getElementById('next-button');
+  var wallpaperSelection = document.querySelectorAll('.wallpaper-selection video'); // Wählt alle Videos in der Wallpaper-Auswahl aus
 
-  var videos = videoFiles;  // Use the videoFiles array passed from the template
-
-  var currentVideoIndex = 0;
-
-  nextButton.addEventListener('click', function() {
-      currentVideoIndex = (currentVideoIndex + 1) % videos.length;  // Cycle through the videos
-      videoSource.src = videos[currentVideoIndex];
-      backgroundVideo.load();  // Load the new video
+  wallpaperSelection.forEach(function(video) {
+    video.addEventListener('click', function() {
+      var newWallpaper = video.querySelector('source').src; // Holt den Pfad des angeklickten Videos
+      backgroundVideo.querySelector('source').src = newWallpaper; // Setzt das Hintergrundvideo auf das angeklickte Video
+      backgroundVideo.load(); // Lädt das neue Hintergrundvideo
+    });
   });
 });
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link').forEach(icon => {
+  document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image').forEach(icon => {
     icon.addEventListener('click', function() {
             // Get the corresponding window
             var windowId = this.dataset.window;
@@ -68,6 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
 windowHeader.addEventListener('touchstart', handleDragStart);
 
 function handleDragStart(e) {
+  if (window.id === 'wallpaper-window') {
+    return;
+}
     var clientX = e.clientX || e.touches[0].clientX;
     var clientY = e.clientY || e.touches[0].clientY;
 
@@ -106,6 +106,8 @@ function handleDragStart(e) {
         });
     });
 });
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');

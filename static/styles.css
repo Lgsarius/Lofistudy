@@ -292,16 +292,19 @@ select {
 #music-window {
     height: 400px;
     width: 400px;
+    user-select: none;
 }
 
 #clock-window {
     height: 400px;
     width: 400px;
+    user-select: none;
 }
 
 #calendar-alt-window {
     height: 700px;
     width: 400px;
+    user-select: none;
 }
 
 #sticky-note-window {
@@ -312,10 +315,22 @@ select {
 #settings-window {
     height: 600px;
     width: 600px;
+    user-select: none;
 }
+#wallpaper-window {
+  position: fixed;
+  top: 70%;
+  height: 300px;
+    width: 800px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
 #url-window {
   height: 300px;
   width: 400px;
+  user-select: none;
 }
 #video-window {
   height: 100px;
@@ -707,3 +722,22 @@ border-bottom-right-radius: 25px;
   transform: rotate(15deg); /* Animation */
 }
 
+
+
+.wallaper-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Zentriert die Elemente horizontal */
+  align-items: center; /* Zentriert die Elemente vertikal */
+}
+
+.wallaper-selection-image {
+  display: center;
+  width: 20%; /* Jedes Bild nimmt 1/3 des Karussells ein */
+  margin: 10px;
+  transition: transform 0.3s ease;
+}
+
+.wallaper-selection-image:hover {
+  transform: scale(1.1);
+}
