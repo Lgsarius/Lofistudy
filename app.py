@@ -23,7 +23,32 @@ google_blueprint = make_google_blueprint(
     redirect_url="/google/authorized"
 )
 app.register_blueprint(google_blueprint, url_prefix="/login/google")
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import google
+with app.app_context():
+    @oauth_authorized.connect_via(google)
+    def google_logged_in(blueprint, token):
+        if not token:
+            flash("Failed to log in with Google.", category="error")
+            return False
 
+        resp = blueprint.session.get("/oauth2/v1/userinfo")
+        if not resp.ok:
+            msg = "Failed to fetch user info from Google."
+            flash(msg, category="error")
+            return False
+
+        info = resp.json()
+        # use the user info here
+
+        # Save the token to use it for future requests
+        blueprint.token = token
+
+        # If the token is expired, refresh it
+        if blueprint.token.get('expires_in') <= 0:
+            blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
+        
+        
 db.init_app(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
