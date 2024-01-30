@@ -330,9 +330,9 @@ select {
 }
 #wallpaper-window {
   position: fixed;
-  top: 76%;
+  top: calc(80% - 80px); /* Adjust this value based on the actual height of your selection bar */
   height: 300px;
-    width: 800px;
+  width: 800px;
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
@@ -758,6 +758,11 @@ border-bottom-right-radius: 25px;
 .wallaper-selection-image:hover {
   transform: scale(1.1);
 }
+
 #background-video {
   transition: opacity 0.5s ease-in-out;
+}
+
+.wallaper-selection-image::-webkit-media-controls {
+  display: none !important;
 }
