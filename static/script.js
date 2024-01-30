@@ -11,13 +11,27 @@ function updateClock() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var backgroundVideo = document.getElementById('background-video');
-  var wallpaperSelection = document.querySelectorAll('.wallpaper-selection video'); // Wählt alle Videos in der Wallpaper-Auswahl aus
+  var wallpaperSelection = document.querySelectorAll('.wallaper-selection-image');
 
   wallpaperSelection.forEach(function(video) {
     video.addEventListener('click', function() {
-      var newWallpaper = video.querySelector('source').src; // Holt den Pfad des angeklickten Videos
-      backgroundVideo.querySelector('source').src = newWallpaper; // Setzt das Hintergrundvideo auf das angeklickte Video
-      backgroundVideo.load(); // Lädt das neue Hintergrundvideo
+      var newWallpaper = video.querySelector('source').src;
+
+      // Setze die Opazität auf 0
+      backgroundVideo.style.opacity = 0;
+
+      // Warte auf das Ende der Übergangsanimation
+      backgroundVideo.addEventListener('transitionend', function() {
+        // Ändere das Video und lade es
+        backgroundVideo.querySelector('source').src = newWallpaper;
+        backgroundVideo.load();
+
+        // Warte bis das Video geladen ist
+        backgroundVideo.onloadeddata = function() {
+          // Setze die Opazität zurück auf 1
+          backgroundVideo.style.opacity = 1;
+        };
+      }, { once: true });
     });
   });
 });

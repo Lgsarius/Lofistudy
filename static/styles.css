@@ -5,6 +5,7 @@ body, html {
     padding: 0;
     overflow: hidden;
     font-family: sans-serif;
+    background-color: #333;
     
 }
 
@@ -291,35 +292,45 @@ select {
 
 #music-window {
     height: 400px;
+    top: 50%;
+    left: 50%;
     width: 400px;
     user-select: none;
 }
 
 #clock-window {
     height: 400px;
+    top: 50%;
+    left: 50%;
     width: 400px;
     user-select: none;
 }
 
 #calendar-alt-window {
     height: 700px;
+    top: 50%;
+    left: 50%;
     width: 400px;
     user-select: none;
 }
 
 #sticky-note-window {
     height: 600px;
+    top: 50%;
+    left: 50%;
     width: 600px;
 }
 
 #settings-window {
     height: 600px;
+    top: 50%;
+    left: 50%;
     width: 600px;
     user-select: none;
 }
 #wallpaper-window {
   position: fixed;
-  top: 70%;
+  top: 76%;
   height: 300px;
     width: 800px;
   left: 50%;
@@ -329,17 +340,23 @@ select {
 
 #url-window {
   height: 300px;
+  top: 50%;
+  left: 50%;
   width: 400px;
   user-select: none;
 }
 #video-window {
   height: 100px;
+  top: 50%;
+  left: 50%;
   width: 300px;
   resize: both;
   overflow: hidden;
 }
 #sound-window {
   height: 300px;
+  top: 50%;
+  left: 50%;
   width: 200px;
 }
 
@@ -740,4 +757,7 @@ border-bottom-right-radius: 25px;
 
 .wallaper-selection-image:hover {
   transform: scale(1.1);
+}
+#background-video {
+  transition: opacity 0.5s ease-in-out;
 }
