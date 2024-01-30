@@ -355,18 +355,21 @@ select {
   width: 300px;
   resize: both;
   overflow: hidden;
+  user-select: none;
 }
 #sound-window {
   height: 300px;
   top: 50%;
   left: 50%;
   width: 200px;
+  user-select: none;
 }
 #spotify-window {
   height: 300px;
   top: 50%;
   left: 50%;
   width: 400px;
+  user-select: none;
 }
 .playlist-selection {
   padding: 10px;
