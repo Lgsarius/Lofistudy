@@ -239,7 +239,7 @@ function updateClock() {
   sec.textContent = seconds;
 
   const text =
-    timer.mode === 'pomodoro' ? 'Stuy time!' : 'Take a break!';
+    timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
   document.title = `${minutes}:${seconds} — ${text}`;
 
   const progress = document.getElementById('js-progress');

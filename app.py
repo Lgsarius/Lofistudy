@@ -133,7 +133,7 @@ def resetpassword():
 @app.route('/')
 @login_required
 def home():
-    music_dirs = ['lofi', 'chillbeat']
+    music_dirs = []
     music_files = []
     video_files = [url_for('static', filename=f) for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
     for music_dir in music_dirs:
@@ -145,7 +145,7 @@ def home():
 @app.route('/get_songs')
 @login_required
 def get_songs():
-    music_dirs = ['lofi', 'chillbeat']
+    music_dirs = []
     music_files = []
 
     for music_dir in music_dirs:
