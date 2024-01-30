@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash 
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash, json
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 import os
 import re
-from models import User
+from models import User, Note
 from extensions import db, login_manager
 from flask_dance.contrib.google import make_google_blueprint, google
 
@@ -157,6 +157,25 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+@app.route('/save', methods=['POST'])
+@login_required
+def save():
+    print("saving notes")
+    data = request.get_json()
+    note = Note(content=json.dumps(data), user=current_user)
+    db.session.add(note)
+    db.session.commit()
+    return '', 204
+
+@app.route('/load', methods=['GET'])
+@login_required
+def load():
+    note = current_user.notes.order_by(Note.id.desc()).first()
+    if note is not None:
+        return jsonify(json.loads(note.content))
+    else:
+        return jsonify({})
+    
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

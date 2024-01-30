@@ -279,49 +279,77 @@ function handleMode(event) {
 });
 var editor;
 document.addEventListener('DOMContentLoaded', function() {
-    var editor = new EditorJS({
-        holder: 'sticky-note-editorjs',
-        tools: {
-            header: {
-                class: Header,
-                inlineToolbar: ['link'],
-                config: {
-                    placeholder: 'Enter a header',
-                    levels: [1, 2, 3, 4],
-                    defaultLevel: 3
-                },
-                shortcut: 'CMD+SHIFT+H'
-            },
-            list: {
-                class: List,
-                inlineToolbar: true,
-                shortcut: 'CMD+SHIFT+L'
-            },
-            quote: {
-                class: Quote,
-                inlineToolbar: true,
-                config: {
-                    quotePlaceholder: 'Enter a quote',
-                    captionPlaceholder: 'Quote\'s author',
-                },
-                shortcut: 'CMD+SHIFT+O'
-            },
-            marker: {
-                class: Marker,
-                shortcut: 'CMD+SHIFT+M'
-            },
-            code: {
-                class: CodeTool,
-                shortcut: 'CMD+SHIFT+C'
-            },
-            checklist: {
-                class: Checklist,
-                inlineToolbar: true,
-            },
-          
-        },
+  var editor = new EditorJS({
+      holder: 'sticky-note-editorjs',
+      tools: {
+          header: {
+              class: Header,
+              inlineToolbar: ['link'],
+              config: {
+                  placeholder: 'Enter a header',
+                  levels: [1, 2, 3, 4],
+                  defaultLevel: 3
+              },
+              shortcut: 'CMD+SHIFT+H'
+          },
+          list: {
+              class: List,
+              inlineToolbar: true,
+              shortcut: 'CMD+SHIFT+L'
+          },
+          quote: {
+              class: Quote,
+              inlineToolbar: true,
+              config: {
+                  quotePlaceholder: 'Enter a quote',
+                  captionPlaceholder: 'Quote\'s author',
+              },
+              shortcut: 'CMD+SHIFT+O'
+          },
+          marker: {
+              class: Marker,
+              shortcut: 'CMD+SHIFT+M'
+          },
+          code: {
+              class: CodeTool,
+              shortcut: 'CMD+SHIFT+C'
+          },
+          checklist: {
+              class: Checklist,
+              inlineToolbar: true,
+          },
+      },
+
     });
-});
+
+    var saveTimeout;
+    editor.isReady.then(() => {
+      editor.blocks.subscribe('change', () => {
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+            editor.save().then((outputData) => {
+                fetch('/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(outputData),
+                })
+            }).catch((error) => {
+                console.log('Saving failed: ', error)
+            });
+        }, 2000);  // Save after 2 seconds of inactivity
+    });
+    fetch('/load', {
+      method: 'GET',
+  }).then(response => response.json()).then(data => {
+      editor.render(data);
+  }).catch((error) => {
+      console.log('Loading failed: ', error)
+  });
+  });
+} );
+
 var sounds = [];
 
 window.onload = function() {
@@ -469,11 +497,15 @@ playPauseButton.addEventListener('click', function() {
         playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';  // Change button content to pause icon
     }
 });
-document.getElementById('music_play').addEventListener('click', function() {
-  sounds[currentSoundIndex].play();
+window.addEventListener('DOMContentLoaded', (event) => {
+  document.getElementById('music_play').addEventListener('click', function() {
+      sounds[currentSoundIndex].play();
+  });
 });
+window.addEventListener('DOMContentLoaded', (event) => {
 document.getElementById('music_pause').addEventListener('click', function() {
   sounds[currentSoundIndex].pause();
+});
 });
 
 };
@@ -481,7 +513,7 @@ document.getElementById('music_pause').addEventListener('click', function() {
 document.addEventListener('DOMContentLoaded', (event) => {
   var modal = document.getElementById("loginModal");
   var span = document.getElementsByClassName("close")[0];
-
+  var span = document.getElementById('mySpan'); 
   span.onclick = function() {
       modal.style.display = "none";
   }
