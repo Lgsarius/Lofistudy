@@ -321,7 +321,7 @@ select {
   height: 100px;
   width: 300px;
   resize: both;
-  overflow: auto;
+  overflow: hidden;
 }
 #sound-window {
   height: 400px;
