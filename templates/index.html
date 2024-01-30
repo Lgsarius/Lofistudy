@@ -38,6 +38,7 @@
     <div id="timer"></div>
     <div id="selection-bar">
         <i class="fas fa-music" data-window="music-window"></i>
+        <i class="fab fa-soundcloud" data-window="spotify-window"></i>
         <i class="fas fa-volume-up" data-window="sound-window"></i>
         <i class="fas fa-video" data-window="video-window"></i>
         <i class="fas fa-link" data-window="url-window"></i>
@@ -56,12 +57,22 @@
         </div>
         <div class="window-content">
             <div class="wallaper-selection">
-                <video class="wallaper-selection-image" src="{{ url_for('static', filename='bg_wp.mp4') }}" preload="metadata"></video>
-                <video class="wallaper-selection-image" src="{{ url_for('static', filename='bg_wp2.mp4') }}" preload="metadata"></video>
-                <video class="wallaper-selection-image" src="{{ url_for('static', filename='bg_wp3.mp4') }}" preload="metadata"></video>
-                <video class="wallaper-selection-image" src="{{ url_for('static', filename='bg_wp4.mp4') }}" preload="metadata"></video>
-                <video class="wallaper-selection-image" src="{{ url_for('static', filename='bg_wp5.mp4') }}" preload="metadata"></video> 
-            </div>
+                <video id="video1" class="wallaper-selection-image" preload="auto">
+                  <source src="{{ url_for('static', filename='bg_wp.mp4') }}" type="video/mp4">
+                </video>
+                <video id="video2" class="wallaper-selection-image" preload="auto">
+                  <source src="{{ url_for('static', filename='bg_wp2.mp4') }}" type="video/mp4">
+                </video>
+                <video id="video3" class="wallaper-selection-image" preload="auto">
+                  <source src="{{ url_for('static', filename='bg_wp3.mp4') }}" type="video/mp4">
+                </video>
+                <video id="video4" class="wallaper-selection-image" preload="auto">
+                  <source src="{{ url_for('static', filename='bg_wp4.mp4') }}" type="video/mp4">
+                </video>
+                <video id="video5" class="wallaper-selection-image" preload="auto">
+                  <source src="{{ url_for('static', filename='bg_wp5.mp4') }}" type="video/mp4">
+                </video>
+              </div>
         </div>
     </div>
     <div id="music-window" class="window draggable">
@@ -241,6 +252,7 @@
                 <audio id="snow-audio" src="{{ url_for('static', filename='media/keyboard.mp3') }}"></audio>
             </div>
         </div>
+    </div>
     <div id="url-window" class="window draggable">
         <div class="window-header">
             <span>URLs</span>
@@ -255,5 +267,21 @@
             <div id="url-list"></div>
         </div>
     </div>
+    <div id="spotify-window" class="window draggable">
+        <div class="window-header">
+            <span>Spotify</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+            <select id="soundcloud-select">
+              <option value="soundcloud-1">Lofi Girl</option>
+              <option value="soundcloud-2">Relax Cafe Music BGM</option>
+              <!-- Add more options here as needed -->
+            </select>
+            <iframe id="soundcloud-1" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746424434&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/lofi_girl" title="Lofi Girl" target="_blank" style="color: #cccccc; text-decoration: none;">Lofi Girl</a> · <a href="https://soundcloud.com/lofi_girl/sets/lofi-girl-beats-to-relax-study" title="Lofi Girl - beats to relax/study to" target="_blank" style="color: #cccccc; text-decoration: none;">Lofi Girl - beats to relax/study to</a></div></div>
+            <iframe id="soundcloud-2" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1711780743&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/relaxcafemusic" title="Relax Cafe Music BGM" target="_blank" style="color: #cccccc; text-decoration: none;">Relax Cafe Music BGM</a> · <a href="https://soundcloud.com/relaxcafemusic/sets/coffee-table-jazz" title="Coffee Table Jazz" target="_blank" style="color: #cccccc; text-decoration: none;">Coffee Table Jazz</a></div>     
+        </div>
 </body>
 </html>

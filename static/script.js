@@ -11,13 +11,27 @@ function updateClock() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var backgroundVideo = document.getElementById('background-video');
-  var wallpaperSelection = document.querySelectorAll('.wallpaper-selection video'); // Wählt alle Videos in der Wallpaper-Auswahl aus
+  var wallpaperSelection = document.querySelectorAll('.wallaper-selection-image');
 
   wallpaperSelection.forEach(function(video) {
     video.addEventListener('click', function() {
-      var newWallpaper = video.querySelector('source').src; // Holt den Pfad des angeklickten Videos
-      backgroundVideo.querySelector('source').src = newWallpaper; // Setzt das Hintergrundvideo auf das angeklickte Video
-      backgroundVideo.load(); // Lädt das neue Hintergrundvideo
+      var newWallpaper = video.querySelector('source').src;
+
+      // Setze die Opazität auf 0
+      backgroundVideo.style.opacity = 0;
+
+      // Warte auf das Ende der Übergangsanimation
+      backgroundVideo.addEventListener('transitionend', function() {
+        // Ändere das Video und lade es
+        backgroundVideo.querySelector('source').src = newWallpaper;
+        backgroundVideo.load();
+
+        // Warte bis das Video geladen ist
+        backgroundVideo.onloadeddata = function() {
+          // Setze die Opazität zurück auf 1
+          backgroundVideo.style.opacity = 1;
+        };
+      }, { once: true });
     });
   });
 });
@@ -25,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image').forEach(icon => {
+  document.querySelectorAll('.fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fab.fa-soundcloud').forEach(icon => {
     icon.addEventListener('click', function() {
             // Get the corresponding window
             var windowId = this.dataset.window;
@@ -539,7 +553,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('url-input').addEventListener('keypress', function(event) {
       if (event.key === 'Enter') {
-          var url = new URL(this.value);
+          var inputValue = this.value;
+          if (!inputValue.startsWith('http://') && !inputValue.startsWith('https://')) {
+              inputValue = 'http://' + inputValue;
+          }
+          var url = new URL(inputValue);
           var faviconUrl = 'https://s2.googleusercontent.com/s2/favicons?domain=' + url.hostname;
           var urlList = document.getElementById('url-list');
           var urlItem = document.createElement('div');
@@ -600,4 +618,33 @@ document.querySelectorAll('.win10-thumb').forEach(slider => {
       audioElement.volume = this.value;
   });
 });
+});
+// When the page loads
+window.addEventListener('DOMContentLoaded', (event) => {
+  // Hide all iframes
+  var iframes = document.querySelectorAll('.window-content iframe');
+  for (var i = 0; i < iframes.length; i++) {
+    iframes[i].style.display = 'none';
+  }
+
+  // Show the first iframe
+  var firstIframe = document.getElementById('soundcloud-1');
+  if (firstIframe) {
+    firstIframe.style.display = 'block';
+  }
+});
+
+// When the select value changes
+document.getElementById('soundcloud-select').addEventListener('change', function() {
+  // Hide all iframes
+  var iframes = document.querySelectorAll('.window-content iframe');
+  for (var i = 0; i < iframes.length; i++) {
+    iframes[i].style.display = 'none';
+  }
+
+  // Show selected iframe
+  var selectedIframe = document.getElementById(this.value);
+  if (selectedIframe) {
+    selectedIframe.style.display = 'block';
+  }
 });

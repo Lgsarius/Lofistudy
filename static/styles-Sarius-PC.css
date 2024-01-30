@@ -340,10 +340,9 @@ select {
 
 #url-window {
   height: 300px;
-  width: 400px;
   top: 50%;
   left: 50%;
-  resize: both;
+  width: 400px;
   user-select: none;
 }
 #video-window {
@@ -360,12 +359,7 @@ select {
   left: 50%;
   width: 200px;
 }
-#spotify-window {
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-}
+
 .playlist-selection {
   padding: 10px;
 }
