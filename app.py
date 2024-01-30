@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 import os
+from oauthlib.oauth2 import TokenExpiredError
 import re
 from models import User, Note
 from extensions import db, login_manager
@@ -32,7 +33,11 @@ with app.app_context():
             flash("Failed to log in with Google.", category="error")
             return False
 
-        resp = blueprint.session.get("/oauth2/v1/userinfo")
+        try:
+            resp = blueprint.session.get("/oauth2/v1/userinfo")
+        except TokenExpiredError:
+            blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
+            resp = blueprint.session.get("/oauth2/v1/userinfo")
         if not resp.ok:
             msg = "Failed to fetch user info from Google."
             flash(msg, category="error")
