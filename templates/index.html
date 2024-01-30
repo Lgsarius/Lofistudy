@@ -203,12 +203,28 @@
             </button>
         </div>
         <div class="window-content">
-            <div class="volume-slider-container">
-               <div class="relative"><h4 class="mh-m mt-s mood-btns-title" style="margin-bottom: 1px;">ALL SOUNDS</h4><div class="ml-m row sb cv" style="padding-bottom: 5px; height: 40px;"><p class="effect-label ant-col-6" style="line-height: 16px;">Keyboard</p><div class="ant-col-18"><div class="level-input-image undefined"><div class="track-full row"><div class="filler" style="width: 13px; display: none;"></div><div class="track" style="flex: 0 1 0%; display: none;"></div></div><img class="level-thumb" alt="" src="/static/media/keyboard.9172b6b606a8a37aeda7fb1cd1cb42de.svg" style="left: 18px;"><input type="range" name="volume" min="0" max="100" value="0" style="width: 180px;"></div></div></div><div class="ml-m row sb cv" style="padding-bottom: 5px; height: 40px;"><p class="effect-label ant-col-6" style="line-height: 16px;">Street</p><div class="ant-col-18"><div class="level-input-image undefined"><div class="track-full row"><div class="filler" style="width: 13px; display: initial;"></div><div class="track" style="flex: 0.21 1 0%; display: initial;"></div></div><img class="level-thumb" alt="" src="/static/media/city.cd56e75b4e1d539f1d552144cde886a1.svg" style="left: 45.3px;"><input type="range" name="volume" min="0" max="100" value="21" style="width: 180px;"></div></div></div><div class="ml-m row sb cv" style="padding-bottom: 5px; height: 40px;"><p class="effect-label ant-col-6" style="line-height: 16px;">City Rain</p><div class="ant-col-18"><div class="level-input-image undefined"><div class="track-full row"><div class="filler" style="width: 13px; display: none;"></div><div class="track" style="flex: 0 1 0%; display: none;"></div></div><img class="level-thumb" alt="" src="/static/media/rain-city.4f429ea284564b98a02b9ab7aab740ba.svg" style="left: 18px;"><input type="range" name="volume" min="0" max="100" value="0" style="width: 180px;"></div></div></div>
-                </div>
+            <div class="sound-control">
+                <button class="sound-icon" id="street-sound-icon">
+                    <img src="{{ url_for('static', filename='media/rain.svg') }}" alt="Rain">
+                </button>
+                <input type="range" min="0" max="1" step="0.01" id="street-volume" class="win10-thumb">
+                <audio id="street-audio" src="{{ url_for('static', filename='media/rain.mp3') }}"></audio>
+            </div>
+            <div class="sound-control">
+                <button class="sound-icon" id="rain-sound-icon">
+                    <img src="{{ url_for('static', filename='media/wind.svg') }}" alt="Wind">
+                </button>
+                <input type="range" min="0" max="1" step="0.01" id="rain-volume" class="win10-thumb" >
+                <audio id="rain-audio" src="{{ url_for('static', filename='media/wind.mp3') }}"></audio>
+            </div>
+            <div class="sound-control">
+                <button class="sound-icon" id="snow-sound-icon">
+                    <img src="{{ url_for('static', filename='media/keyboard.svg') }}" alt="Keyboard">
+                </button>
+                <input type="range" min="0" max="1" step="0.01" id="snow-volume" class="win10-thumb">
+                <audio id="snow-audio" src="{{ url_for('static', filename='media/keyboard.mp3') }}"></audio>
             </div>
         </div>
-    </div>
     <div id="url-window" class="window draggable">
         <div class="window-header">
             <span>URLs</span>

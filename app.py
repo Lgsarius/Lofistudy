@@ -14,7 +14,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
     client_secret="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",
-    scope=["https://www.googleapis.com/auth/userinfo.profile", "openid", "https://www.googleapis.com/auth/userinfo.email"],
+     scope=[
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "openid",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/calendar.readonly" 
+    ],
     redirect_url="/google/authorized"
 )
 app.register_blueprint(google_blueprint, url_prefix="/login/google")
@@ -118,6 +123,25 @@ def get_songs():
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
 
     return jsonify(music_files=music_files)
+
+@app.route('/calendar_events')
+def calendar_events():
+    if not google.authorized:
+        return jsonify([])  # Return an empty list if the user is not logged in
+    resp = google.get("https://www.googleapis.com/calendar/v3/calendars/primary/events")
+    if resp.ok:
+        events = resp.json()['items']
+        fullcalendar_events = [
+            {
+                'title': event['summary'],
+                'start': event['start']['dateTime'],
+                'end': event['end']['dateTime'],
+            }
+            for event in events
+        ]
+    else:
+        fullcalendar_events = []  # Return an empty list if there was an error
+    return jsonify(fullcalendar_events)
 
 @app.route('/Legal Notice')
 def legal_notice():

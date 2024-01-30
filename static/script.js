@@ -108,15 +108,15 @@ function handleDragStart(e) {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+  var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-    });
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: '/calendar_events'  // Add this line
+  });
 
-    calendar.render();
+  calendar.render();
 });
-
 
 
 const timer = {
@@ -515,4 +515,55 @@ document.addEventListener('DOMContentLoaded', function() {
           this.value = '';
       }
   });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Für das erste Icon
+  document.getElementById('street-sound-icon').addEventListener('click', function() {
+      const audioElement = document.getElementById('street-audio');
+      audioElement.loop = true; // Set loop to true
+      const imgElement = this.querySelector('img');
+      if (audioElement.paused) {
+          audioElement.play();
+          imgElement.style.filter = 'brightness(0) invert(1)'; // Make SVG white
+      } else {
+          audioElement.pause();
+          imgElement.style.filter = ''; // Reset SVG color
+      }
+  });
+
+  // Für das zweite Icon
+  document.getElementById('rain-sound-icon').addEventListener('click', function() {
+      const audioElement = document.getElementById('rain-audio');
+      audioElement.loop = true; // Set loop to true
+      const imgElement = this.querySelector('img');
+      if (audioElement.paused) {
+          audioElement.play();
+          imgElement.style.filter = 'brightness(0) invert(1)'; // Make SVG white
+      } else {
+          audioElement.pause();
+          imgElement.style.filter = ''; // Reset SVG color
+      }
+  });
+
+  // Für das dritte Icon
+  document.getElementById('snow-sound-icon').addEventListener('click', function() {
+      const audioElement = document.getElementById('snow-audio');
+      audioElement.loop = true; // Set loop to true
+      const imgElement = this.querySelector('img');
+      if (audioElement.paused) {
+          audioElement.play();
+          imgElement.style.filter = 'brightness(0) invert(1)'; // Make SVG white
+      } else {
+          audioElement.pause();
+          imgElement.style.filter = ''; // Reset SVG color
+      }
+  });
+
+document.querySelectorAll('.win10-thumb').forEach(slider => {
+  slider.addEventListener('input', function() {
+      const audioElement = document.getElementById(this.id.replace('volume', 'audio'));
+      audioElement.volume = this.value;
+  });
+});
 });
