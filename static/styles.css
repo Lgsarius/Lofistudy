@@ -772,3 +772,31 @@ border-bottom-right-radius: 25px;
 .wallaper-selection-image::-webkit-media-controls {
   display: none !important;
 }
+
+.window-content iframe {
+  display: none;
+}
+
+.window-content #soundcloud-1 {
+  display: block;
+}
+
+#soundcloud-select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  position: center;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+#soundcloud-select:focus {
+  outline: none;
+  border-color: #007BFF;
+}

@@ -619,20 +619,17 @@ document.querySelectorAll('.win10-thumb').forEach(slider => {
   });
 });
 });
-// When the page loads
-window.addEventListener('DOMContentLoaded', (event) => {
-  // Hide all iframes
-  var iframes = document.querySelectorAll('.window-content iframe');
-  for (var i = 0; i < iframes.length; i++) {
-    iframes[i].style.display = 'none';
-  }
 
+
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
   // Show the first iframe
   var firstIframe = document.getElementById('soundcloud-1');
   if (firstIframe) {
     firstIframe.style.display = 'block';
   }
-});
+
 
 // When the select value changes
 document.getElementById('soundcloud-select').addEventListener('change', function() {
@@ -642,9 +639,23 @@ document.getElementById('soundcloud-select').addEventListener('change', function
     iframes[i].style.display = 'none';
   }
 
-  // Show selected iframe
+  window.addEventListener('DOMContentLoaded', (event) => {
+    // Hide all iframes
+    var iframes = document.querySelectorAll('.window-content iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      iframes[i].style.display = 'none';
+    }
+  
+    // Show the first iframe
+    var firstIframe = document.getElementById('soundcloud-1');
+    if (firstIframe) {
+      firstIframe.style.display = 'block';
+    }
+  }); // Show the selected iframe
   var selectedIframe = document.getElementById(this.value);
   if (selectedIframe) {
     selectedIframe.style.display = 'block';
   }
-});
+} );
+}
+);
