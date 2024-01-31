@@ -10,7 +10,7 @@ from flask_dance.contrib.google import make_google_blueprint, google
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL') + "?sslmode=require"
 
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
