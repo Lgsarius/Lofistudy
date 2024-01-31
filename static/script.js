@@ -455,3 +455,35 @@ document.getElementById('soundcloud-select').addEventListener('change', function
 }
 );
 
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var script = document.createElement('script');
+  script.src = "https://w.soundcloud.com/player/api.js";
+  document.body.appendChild(script);
+
+  // Wait for the API script to load before using it
+  window.onload = function() {
+      // Get the volume input and the SoundCloud embeds
+      var volumeInput = document.getElementById('volume');
+      var soundcloudEmbeds = [
+          SC.Widget(document.getElementById('soundcloud-1')),
+          SC.Widget(document.getElementById('soundcloud-2')),
+          SC.Widget(document.getElementById('soundcloud-3'))
+      ];
+
+      // Function to set the volume of the SoundCloud embeds
+      function setVolume() {
+          var volume = parseInt(volumeInput.value, 10); // Convert to a number between 0 and 100
+          soundcloudEmbeds.forEach(function(embed) {
+              embed.setVolume(volume);
+          });
+      }
+
+      // Set the volume when the input changes
+      volumeInput.addEventListener('input', setVolume);
+
+      // Set the initial volume
+      setVolume();
+  }   
+});
