@@ -10,7 +10,7 @@ from flask_dance.contrib.google import make_google_blueprint, google
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL') + "?sslmode=require"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://wenginlbtrauvi:bf8dbc9bd09e18f75de9ce77018b02ddfd892133cbfe750f5050db0085fd0a94@ec2-34-241-82-91.eu-west-1.compute.amazonaws.com:5432/da93lp495dnq71?sslmode=require".replace("postgres://", "postgresql://", 1)
 
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
