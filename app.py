@@ -45,12 +45,7 @@ google_blueprint = make_google_blueprint(
         "https://www.googleapis.com/auth/userinfo.email",
     ],
     redirect_url="/google/authorized"
-    offline=True
 )
-@google_blueprint.token_loader
-def get_google_token(token=None):
-    return google_blueprint.token
-
 app.register_blueprint(google_blueprint, url_prefix="/login/google")
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import google
