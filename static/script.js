@@ -123,16 +123,6 @@ function handleDragStart(e) {
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      events: '/calendar_events'  // Add this line
-  });
-
-  calendar.render();
-});
 
 
 const timer = {
@@ -337,48 +327,9 @@ document.addEventListener('DOMContentLoaded', function() {
       },
 
     });
-
-    var saveTimeout;
-    editor.isReady.then(() => {
-      editor.blocks.subscribe('change', () => {
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
-            editor.save().then((outputData) => {
-                fetch('/save', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(outputData),
-                })
-            }).catch((error) => {
-                console.log('Saving failed: ', error)
-            });
-        }, 2000);  // Save after 2 seconds of inactivity
-    });
-    fetch('/load', {
-      method: 'GET',
-  }).then(response => response.json()).then(data => {
-      editor.render(data);
-  }).catch((error) => {
-      console.log('Loading failed: ', error)
-  });
-  });
-} );
-
-
-
-
-  
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  var modal = document.getElementById("loginModal");
-  var span = document.getElementsByClassName("close")[0];
-  var span = document.getElementById('mySpan'); 
-  span.onclick = function() {
-      modal.style.display = "none";
-  }
 });
+
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
   var youtubeUrlElement = document.getElementById('youtube-url');
@@ -393,7 +344,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       });
   }
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('url-input').addEventListener('keypress', function(event) {
