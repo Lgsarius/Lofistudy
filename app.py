@@ -27,6 +27,7 @@ app.register_blueprint(google_blueprint, url_prefix="/login/google")
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import google
 with app.app_context():
+    db.create_all()
     @oauth_authorized.connect_via(google)
     def google_logged_in(blueprint, token):
         if not token:
