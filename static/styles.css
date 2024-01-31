@@ -687,14 +687,19 @@ border-bottom-right-radius: 25px;
 
 #url-input-container {
   padding: 10px;
+  color: #000;
 }
 
 #url-input {
-  width: 100%;
+  width: 97%;
+
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
+  color: #ffffff;
+  height: 25px;
+  font-size: 16px;
+  background-color: #0A0A0A;
 }
 
 #url-list {
@@ -704,6 +709,7 @@ border-bottom-right-radius: 25px;
 
 .url-item span {
   color: #333;
+  background-color: #0A0A0A;
   font-size: 40%; /* Reduziert die Schriftgröße auf 60% */
 }
 
@@ -711,14 +717,15 @@ border-bottom-right-radius: 25px;
   margin-bottom: 5px;
   padding: 5px;
   padding-left: 10px;
-  background-color: #f9f9f9;
+  background-color: #0A0A0A;
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 5px;
+  color: #ffffff;
 }
 
 .url-item a {
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
 }
 
 
@@ -813,9 +820,11 @@ border-bottom-right-radius: 25px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: #0A0A0A;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  
+  
 }
 .volume-icon {
   margin-right: 10px;
@@ -862,6 +871,8 @@ iframe {
 .soundcloud-container {
   display: flex;
   width: 100%;
+  border-radius: 1px;
+  border: 1px solid #e5e5e5;
 }
 
 
@@ -872,6 +883,7 @@ iframe {
 #soundcloud-select {
   position: absolute;
   width: 90%;
+  color: #ffffff;
   height: 35px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -879,9 +891,12 @@ iframe {
   font-size: 16px;
   top: 330px; /* Adjust as needed */
   left: 20px; /* Adjust as needed */
-  background-color: #f8f8f8;
-  color: #333;
+  background-color: #0A0A0A;
+  
   margin-top: 20px;
+}
+#soundcloud-select::-ms-expand {
+  color: #ffffff; /* This will change the arrow color to white in IE and Edge */
 }
 
 .volume-slider, iframe {
@@ -890,4 +905,8 @@ iframe {
 
 .parent-container {
   position: relative;
+}
+
+.soundcloud-container iframe {
+  filter: invert(1) hue-rotate(180deg);
 }
