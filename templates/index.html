@@ -203,19 +203,38 @@
             </button>
         </div>
         <div class="window-content">
-         
-            <button id="next-button">Change Background</button>
-            <div class="logout-button">
-                <a href="{{ url_for('logout') }}" class="signup-link">Logout</a>
-            </div>
-            <div class="legal_notice-button">
-                <a href="{{ url_for('legal_notice') }}" class="signup-link">legal notice</a>
-            </div>
-            <div class="privacy_policy-button">
-                <a href="{{ url_for('privacy_policy') }}" class="signup-link">privacy policy</a>
+            <div class="settings-container">
+                <div class="settings-item">
+                    <span class="settings-text">Placeholder 1</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span class="settings-text">Placeholder 2</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span class="settings-text">Placeholder 3</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-footer">
+                    <div class="settings-item">
+                        <a href="{{ url_for('legal_notice') }}" class="settings-link">Legal Notice</a>
+                    </div>
+                    <div class="settings-item">
+                        <a href="{{ url_for('privacy_policy') }}" class="settings-link">Privacy Policy</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
     <div id="video-window" class="window draggable">
         <div class="window-header">
             <span>Youtube</span>
