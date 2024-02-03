@@ -322,6 +322,13 @@ select {
   user-select: none;
 }
 
+#account-window {
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  user-select: none;
+}
 #clock-window {
   height: 400px;
   top: 50%;
@@ -1077,4 +1084,20 @@ input:checked + .slider:before {
 #sticky-note-editorjs {
   max-height: 50vh;
   overflow-y: auto;
+}
+
+
+#coming-soon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  animation: fadeIn 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
 }

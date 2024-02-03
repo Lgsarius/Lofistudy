@@ -224,19 +224,28 @@ def chat():
     data = request.json
     user_message = data['message']
 
-    response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo',
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": user_message}
-        ]
-    )
+ 
 
-    assistant_reply = response['choices'][0]['message']['content']
+    return jsonify({'message': 'success', 'response': user_message}), 200
 
-    return jsonify({'message': assistant_reply})
-
+@app.route('/change_password', methods=['POST'])
+@login_required
+def change_password():
+    data = request.get_json()
+    if 'new_password' in data:
+        hashed_password = generate_password_hash(data['new_password'], method='pbkdf2:sha256')
+        current_user.password = hashed_password
+        db.session.commit()
+        return jsonify({'message': 'Password changed successfully'}), 200
+    return jsonify({'message': 'No new password provided'}), 400
 migrate = Migrate(app, db)
+@app.route('/delete_account', methods=['POST'])
+@login_required
+def delete_account():
+    db.session.delete(current_user)
+    db.session.commit()
+    return jsonify({'message': 'Account deleted successfully'}), 200
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
