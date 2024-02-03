@@ -10,7 +10,11 @@ from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from openai import OpenAI
+import openai
+from dotenv import load_dotenv
 
+load_dotenv()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -26,17 +30,17 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     user_username = db.Column(db.String(100), db.ForeignKey('user.username'))
-
     user = db.relationship('User', backref=db.backref('notes', lazy='dynamic'))
-    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")  # or other relevant config var
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
-
-# rest of connection code using the connection string `uri`
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
+
+client = OpenAI(
+  api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
+)
 
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
@@ -62,19 +66,12 @@ with app.app_context():
         except TokenExpiredError:
             blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
             resp = blueprint.session.get("/oauth2/v1/userinfo")
-        
         if not resp.ok:
             msg = "Failed to fetch user info from Google."
             flash(msg, category="error")
             return False
-
         info = resp.json()
-        # use the user info here
-
-        # Save the token to use it for future requests
         blueprint.token = token
-
-        # If the token is expired, refresh it
         if blueprint.token.get('expires_in') <= 0:
             blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
         
@@ -107,16 +104,12 @@ def login():
     if request.method == 'POST':
         username = request.form.get('email')
         password = request.form.get('password')
-
         user = User.query.filter_by(username=username).first()
-
         if not user or not check_password_hash(user.password, password):
             flash('Invalid username or password.')
             return redirect(url_for('login'))
-
         login_user(user)
         return redirect(url_for('home'))
-
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -125,30 +118,20 @@ def signup():
         username = request.form.get('email')
         password = request.form.get('password')
         repeat_password = request.form.get('repeat_password')
-
-        # Validate email
         if not re.match(r"[^@]+@[^@]+\.[^@]+", username):
             flash('Invalid email address.')
             return redirect(url_for('signup'))
-
-        # Check if passwords match
         if password != repeat_password:
             flash('Passwords do not match.')
             return redirect(url_for('signup'))
-
         user = User.query.filter_by(username=username).first()
-
         if user:
             flash('User already exists.')
             return redirect(url_for('signup'))
-
         new_user = User(username=username, password=generate_password_hash(password, method='pbkdf2:sha256'))
-
         db.session.add(new_user)
         db.session.commit()
-
         return redirect(url_for('home'))  # Redirect to home page
-
     return render_template('signup.html')
 
 @app.route('/resetpassword')
@@ -165,7 +148,6 @@ def home():
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
-
     return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper, notes=current_user.notecontent)
 
 @app.route('/get_songs')
@@ -173,11 +155,9 @@ def home():
 def get_songs():
     music_dirs = []
     music_files = []
-
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
-
     return jsonify(music_files=music_files)
 
 @app.route('/calendar_events')
@@ -238,6 +218,23 @@ def set_wallpaper():
 def load():
     data = json.loads(current_user.notecontent)
     return jsonify(data), 200
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    data = request.json
+    user_message = data['message']
+
+    response = openai.ChatCompletion.create(
+        model='gpt-3.5-turbo',
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": user_message}
+        ]
+    )
+
+    assistant_reply = response['choices'][0]['message']['content']
+
+    return jsonify({'message': assistant_reply})
 
 migrate = Migrate(app, db)
 if __name__ == '__main__':

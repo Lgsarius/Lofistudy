@@ -38,10 +38,10 @@
     </div>
     <div id="timer"></div>
     <div id="selection-bar">
-       
         <i class="fab fa-soundcloud" data-window="spotify-window"></i>
         <i class="fas fa-volume-up" data-window="sound-window"></i>
         <i class="fas fa-video" data-window="video-window"></i>
+        <i class="fas fa-comments" data-window="gpt-window"></i>
         <i class="fas fa-image" data-window="wallpaper-window"></i>
         <i class="fas fa-link" data-window="url-window"></i>
         <i class="fas fa-clock" data-window="clock-window"></i>
@@ -319,12 +319,26 @@
                     <input type="range" id="volume" name="volume" min="0" max="100" orient="vertical">
                     <span class="volume-icon">&#128266;</span>
                 </div>
-            
             <iframe id="soundcloud-1" width="80%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746424434&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
             <iframe id="soundcloud-2" width="80%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1711780743&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
             <iframe id="soundcloud-3" width="80%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1573126828&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
+        </div> 
         </div>
-                
+    </div>
+        <div id="gpt-window" class="window draggable">
+            <div class="window-header">
+                <span>ChatGPT</span>
+                <button class="close-window">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="window-content">
+                <form id="chat-form">
+                    <input type="text" id="user-input" placeholder="Type your message here...">
+                    <button type="submit">Send</button>
+                </form>
+                <div id="chat-output"></div>
+            </div>
         </div>
 </body>
 </html>
