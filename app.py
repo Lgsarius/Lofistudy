@@ -20,6 +20,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.Text, unique=True)  # changed to db.Text
     password = db.Column(db.Text)
     wallpaper = db.Column(db.String(120), nullable=True)
+    notecontent = db.Column(db.Text, nullable=True)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -165,7 +166,7 @@ def home():
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
 
-    return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper)
+    return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper, notes=current_user.notecontent)
 
 @app.route('/get_songs')
 @login_required
@@ -218,19 +219,9 @@ def logout():
 def save():
     print("saving notes")
     data = request.get_json()
-    note = Note(content=json.dumps(data), user=current_user)
-    db.session.add(note)
+    current_user.notecontent = json.dumps(data)
     db.session.commit()
     return '', 204
-
-@app.route('/load', methods=['GET'])
-@login_required
-def load():
-    note = current_user.notes.order_by(Note.id.desc()).first()
-    if note is not None:
-        return jsonify(json.loads(note.content))
-    else:
-        return jsonify({})
 
 @app.route('/set_wallpaper', methods=['POST'])
 @login_required
@@ -242,12 +233,12 @@ def set_wallpaper():
         return jsonify({'message': 'Wallpaper set successfully'}), 200
     return jsonify({'message': 'No wallpaper provided'}), 400
 
+@app.route('/load', methods=['GET'])
+@login_required
 def load():
-    note = current_user.notes.order_by(Note.id.desc()).first()
-    if note is not None:
-        return jsonify(json.loads(note.content))
-    else:
-        return jsonify({})
+    data = json.loads(current_user.notecontent)
+    return jsonify(data), 200
+
 migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():

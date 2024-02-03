@@ -1059,3 +1059,35 @@ input:checked + .slider:before {
   color: grey;
   text-decoration: underline;
 }
+
+
+#save-button {
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  border: none;
+  padding: 10px 20px;
+  transition: transform 0.1s; /* Add this line */
+}
+
+#save-button:active {
+  transform: scale(0.9); /* Add this block */
+}
+
+
+#load-button {
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  border: none;
+  padding: 10px 20px;
+  transition: transform 0.1s;
+}
+
+#load-button:active {
+  transform: scale(0.9);
+}
+
+
+#sticky-note-editorjs {
+  max-height: 50vh; /* Set the maximum height to 100% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling when necessary */
+}

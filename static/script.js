@@ -295,51 +295,87 @@ function handleMode(event) {
 });
 var editor;
 document.addEventListener('DOMContentLoaded', function() {
-  var editor = new EditorJS({
-      holder: 'sticky-note-editorjs',
-      tools: {
-          header: {
-              class: Header,
-              inlineToolbar: ['link'],
-              config: {
-                  placeholder: 'Enter a header',
-                  levels: [1, 2, 3, 4],
-                  defaultLevel: 3
-              },
-              shortcut: 'CMD+SHIFT+H'
-          },
-          list: {
-              class: List,
-              inlineToolbar: true,
-              shortcut: 'CMD+SHIFT+L'
-          },
-          quote: {
-              class: Quote,
-              inlineToolbar: true,
-              config: {
-                  quotePlaceholder: 'Enter a quote',
-                  captionPlaceholder: 'Quote\'s author',
-              },
-              shortcut: 'CMD+SHIFT+O'
-          },
-          marker: {
-              class: Marker,
-              shortcut: 'CMD+SHIFT+M'
-          },
-          code: {
-              class: CodeTool,
-              shortcut: 'CMD+SHIFT+C'
-          },
-          checklist: {
-              class: Checklist,
-              inlineToolbar: true,
-          },
+  editor = new EditorJS({
+    holder: 'sticky-note-editorjs',
+    tools: {
+      header: {
+        class: Header,
+        inlineToolbar: ['link'],
+        config: {
+          placeholder: 'Enter a header',
+          levels: [1, 2, 3, 4],
+          defaultLevel: 3
+        },
+        shortcut: 'CMD+SHIFT+H'
       },
-
-    });
+      list: {
+        class: List,
+        inlineToolbar: true,
+        shortcut: 'CMD+SHIFT+L'
+      },
+      quote: {
+        class: Quote,
+        inlineToolbar: true,
+        config: {
+          quotePlaceholder: 'Enter a quote',
+          captionPlaceholder: 'Quote\'s author',
+        },
+        shortcut: 'CMD+SHIFT+O'
+      },
+      marker: {
+        class: Marker,
+        shortcut: 'CMD+SHIFT+M'
+      },
+      code: {
+        class: CodeTool,
+        shortcut: 'CMD+SHIFT+C'
+      },
+      checklist: {
+        class: Checklist,
+        inlineToolbar: true,
+      },
+    },
+  });
 });
 
+// Function to save the editor data
+function saveEditorData() {
+  editor.save().then((outputData) => {
+    fetch('/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(outputData)
+    }).then(() => {
+      console.log('Data saved');
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+  }).catch((error) => {
+    console.error('Saving failed: ', error);
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('load-button').addEventListener('click', function() {
+  fetch('/load', {
+    method: 'GET',
+  })
+  .then(response => response.json())
+  .then(data => {
+    editor.isReady.then(() => {
+      editor.render(data);
+    });
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+});
+});
 
+document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('save-button').addEventListener('click', saveEditorData);
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
   var youtubeUrlElement = document.getElementById('youtube-url');
