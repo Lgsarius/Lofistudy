@@ -16,19 +16,29 @@ document.addEventListener('DOMContentLoaded', function() {
   wallpaperSelection.forEach(function(video) {
     video.addEventListener('click', function() {
       var newWallpaper = video.querySelector('source').src;
+      var newWallpapersave = video.querySelector('source').src.split('/').pop();
 
-      // Setze die Opazität auf 0
+      // Save the selected wallpaper for the logged-in user
+      fetch('/set_wallpaper', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ wallpaper: newWallpapersave })
+      });
+
+      // Set the opacity to 0
       backgroundVideo.style.opacity = 0;
 
-      // Warte auf das Ende der Übergangsanimation
+      // Wait for the end of the transition animation
       backgroundVideo.addEventListener('transitionend', function() {
-        // Ändere das Video und lade es
+        // Change the video and load it
         backgroundVideo.querySelector('source').src = newWallpaper;
         backgroundVideo.load();
 
-        // Warte bis das Video geladen ist
+        // Wait until the video is loaded
         backgroundVideo.onloadeddata = function() {
-          // Setze die Opazität zurück auf 1
+          // Set the opacity back to 1
           backgroundVideo.style.opacity = 1;
         };
       }, { once: true });

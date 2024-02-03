@@ -18,7 +18,8 @@ login_manager = LoginManager()
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text, unique=True)  # changed to db.Text
-    password = db.Column(db.Text)  # changed to db.Text
+    password = db.Column(db.Text)
+    wallpaper = db.Column(db.String(120), nullable=True)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -159,11 +160,12 @@ def home():
     music_dirs = []
     music_files = []
     video_files = [url_for('static', filename=f) for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
+    wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
 
-    return render_template('index.html', music_files=music_files, video_files=video_files)
+    return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper)
 
 @app.route('/get_songs')
 @login_required
@@ -178,6 +180,7 @@ def get_songs():
     return jsonify(music_files=music_files)
 
 @app.route('/calendar_events')
+@login_required
 def calendar_events():
     if not google.authorized:
         return jsonify([])  # Return an empty list if the user is not logged in
@@ -222,6 +225,23 @@ def save():
 
 @app.route('/load', methods=['GET'])
 @login_required
+def load():
+    note = current_user.notes.order_by(Note.id.desc()).first()
+    if note is not None:
+        return jsonify(json.loads(note.content))
+    else:
+        return jsonify({})
+
+@app.route('/set_wallpaper', methods=['POST'])
+@login_required
+def set_wallpaper():
+    data = request.get_json()
+    if 'wallpaper' in data:
+        current_user.wallpaper = data['wallpaper']
+        db.session.commit()
+        return jsonify({'message': 'Wallpaper set successfully'}), 200
+    return jsonify({'message': 'No wallpaper provided'}), 400
+
 def load():
     note = current_user.notes.order_by(Note.id.desc()).first()
     if note is not None:
