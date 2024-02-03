@@ -601,3 +601,27 @@ document.getElementById('chat-form').addEventListener('submit', function(event) 
   });
 });
 });
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const deleteAccountForm = document.querySelector('form[data-url="{{ url_for(\'delete_account\') }}"]');
+  if (deleteAccountForm) {
+      const deleteAccountButton = deleteAccountForm.querySelector('button[type="submit"]');
+      deleteAccountButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  deleteAccountForm.submit();
+              }
+          })
+      });
+  }
+});

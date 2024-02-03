@@ -31,6 +31,7 @@ class Note(db.Model):
     content = db.Column(db.Text)
     user_username = db.Column(db.String(100), db.ForeignKey('user.username'))
     user = db.relationship('User', backref=db.backref('notes', lazy='dynamic'))
+    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")  # or other relevant config var
@@ -244,7 +245,8 @@ migrate = Migrate(app, db)
 def delete_account():
     db.session.delete(current_user)
     db.session.commit()
-    return jsonify({'message': 'Account deleted successfully'}), 200
+    logout_user()
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     with app.app_context():
