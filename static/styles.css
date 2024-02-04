@@ -17,14 +17,17 @@ html {
 }
 
 #clockgroß {
-  position: absolute; /* or 'fixed' if you want it to stay at the top left even when scrolling */
+  position: absolute;
+  /* or 'fixed' if you want it to stay at the top left even when scrolling */
   top: 10px;
-  left: 10px; /* changed from 'right' to 'left' */
+  left: 10px;
+  /* changed from 'right' to 'left' */
   color: white;
   font-size: 24px;
   font-family: "Courier New", Courier, monospace;
   user-select: none;
 }
+
 #early-access-banner {
   position: absolute;
   top: 10px;
@@ -32,11 +35,14 @@ html {
   right: -50px;
   width: 200px;
   height: 50px;
-  background: rgba(207, 207, 207, 0.16); /* semi-transparent black */
+  background: rgba(207, 207, 207, 0.16);
+  /* semi-transparent black */
   color: rgba(255, 255, 255, 0.342);
   text-align: center;
-  line-height: 50px; /* vertically center the text */
-  transform: rotate(40deg); /* rotate the banner */
+  line-height: 50px;
+  /* vertically center the text */
+  transform: rotate(40deg);
+  /* rotate the banner */
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -345,6 +351,7 @@ select {
   width: 400px;
   user-select: none;
 }
+
 #clock-window {
   height: 400px;
   top: 50%;
@@ -375,6 +382,7 @@ select {
   width: 600px;
   user-select: none;
 }
+
 #gpt-window {
   height: 600px;
   top: 50%;
@@ -1122,9 +1130,11 @@ input:checked + .slider:before {
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -1133,11 +1143,13 @@ input:checked + .slider:before {
 .form-group {
   margin-bottom: 20px;
 }
+
 .form-group label {
   display: block;
   margin-bottom: 5px;
   font-size: 1.2em;
 }
+
 .form-group input {
   width: 60%;
   max-width: 500px;
@@ -1145,16 +1157,22 @@ input:checked + .slider:before {
   border: 1px solid #ced4da;
   border-radius: 4px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  display: block; /* Center the input */
-  margin: auto; /* Center the input */
+  display: block;
+  /* Center the input */
+  margin: auto;
+  /* Center the input */
 }
+
 .form-group input:focus {
   border-color: #007bff;
   outline: none;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Add box-shadow when input is focused */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  /* Add box-shadow when input is focused */
 }
+
 .form-group input::placeholder {
-  color: lightgrey; /* Light grey placeholder text */
+  color: lightgrey;
+  /* Light grey placeholder text */
 }
 
 .form-group button {
@@ -1166,12 +1184,16 @@ input:checked + .slider:before {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  display: block; /* Center the input */
-  margin: auto; /* Center the input */
+  display: block;
+  /* Center the input */
+  margin: auto;
+  /* Center the input */
   transition: background-color 0.3s ease, transform 0.3s ease;
-  display: block; /* Center the button */
+  display: block;
+  /* Center the button */
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
 .form-group button:hover {
   transform: scale(1.05);
 }
@@ -1191,6 +1213,7 @@ input:checked + .slider:before {
 .form-group button[style="background-color: red;"]:hover {
   background-color: #c82333;
 }
+
 /* Change the button color based on its function */
 /* Make the form responsive */
 @media (max-width: 600px) {
@@ -1216,9 +1239,11 @@ input:checked + .slider:before {
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  bottom: 125%; /* Position the tooltip above the icon */
+  bottom: 125%;
+  /* Position the tooltip above the icon */
   left: 50%;
-  margin-left: -60px; /* Use half of the tooltip width to center the tooltip */
+  margin-left: -60px;
+  /* Use half of the tooltip width to center the tooltip */
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -1239,7 +1264,6 @@ input:checked + .slider:before {
 .task-menu {
   cursor: pointer;
 }
-
 
 .info {
   position: relative;
@@ -1265,7 +1289,8 @@ input:checked + .slider:before {
   bottom: 75%;
   opacity: 0;
   transition: opacity 0.3s;
-  font-size: 12px; /* adjust this value to change the size of the text */
+  font-size: 12px;
+  /* adjust this value to change the size of the text */
 }
 
 .info:hover .info-text {
@@ -1273,20 +1298,19 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-
 #fullscreen-btn {
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 5px;
   color: #ffffff;
-  font-size: 30px; /* Increase this value to make the icon bigger */
+  font-size: 30px;
+  /* Increase this value to make the icon bigger */
   cursor: pointer;
   z-index: 1000;
   transition: background-color 0.3s ease;
 }
 
 #fullscreen-btn:hover {
-
   transform: scale(1.15);
 }
