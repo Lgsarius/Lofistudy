@@ -1,4 +1,7 @@
-# Lofi Study
+<p align="center">
+  <img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/loginlogo.png" alt="Lofi Study Logo" width="100">
+  <h1 align="center">Lofi Study</h1>
+</p>
 
 Welcome to Lofi Study, a website dedicated to providing a relaxing environment for studying.
 
