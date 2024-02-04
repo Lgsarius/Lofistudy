@@ -346,47 +346,61 @@ select {
 
 #account-window {
   height: 400px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   user-select: none;
 }
 
 #clock-window {
   height: 400px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   user-select: none;
 }
 
 #calendar-alt-window {
   height: 700px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   user-select: none;
 }
 
 #sticky-note-window {
   height: 600px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 50%;
+  left: 50%;;
   width: 600px;
 }
 
 #settings-window {
   height: 600px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 600px;
   user-select: none;
 }
 
 #gpt-window {
   height: 600px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 600px;
   user-select: none;
 }
@@ -404,19 +418,21 @@ select {
 
 #url-window {
   height: 300px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
-  top: 50%;
-  left: 50%;
   resize: both;
   user-select: none;
 }
 
 #video-window {
   height: 100px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 300px;
   resize: both;
   overflow: hidden;
@@ -425,24 +441,30 @@ select {
 
 #sound-window {
   height: 300px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 200px;
   user-select: none;
 }
 
 #spotify-window {
   height: 400px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   user-select: none;
 }
 
 #task-window {
   height: 400px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   user-select: none;
 }
