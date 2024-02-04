@@ -572,6 +572,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       SC.Widget(document.getElementById("soundcloud-1")),
       SC.Widget(document.getElementById("soundcloud-2")),
       SC.Widget(document.getElementById("soundcloud-3")),
+      SC.Widget(document.getElementById("soundcloud-4")),
     ];
 
     // Function to set the volume of the SoundCloud embeds
