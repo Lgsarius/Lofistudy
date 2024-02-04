@@ -153,8 +153,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const timer = {
-  pomodoro: 1,
-  shortBreak: 1,
+  pomodoro: 25,
+  shortBreak: 5,
   longBreak: 15,
   longBreakInterval: 4,
   sessions: 0,
@@ -636,7 +636,7 @@ document.getElementById('add-task-btn').addEventListener('click', function() {
 
 document.getElementById('save-task-btn').addEventListener('click', function() {
   var taskName = document.getElementById('task-name').value;
-  var pomodoroCount = parseInt(document.getElementById('pomodoro-count').value);
+  var pomodoroCount = timer.completedPomodoros
 
   // Add the new task to the tasks array
   tasks.push({
