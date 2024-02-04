@@ -9,25 +9,40 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Legal Notice</title>
     <style>
-        html, body{
-            height: 100%;
-            background-image: url("{{ url_for('static', filename='leagal_bg.jpg') }}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
+        body,
+        html {
+          font-family: sans-serif;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          font-family: sans-serif;
+          background-color: #333;
         }
-        
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            background-size: contain;
+            object-fit: contain;
+            overflow: hidden;
+            background-image: url("{{ url_for('static', filename='leagal_bg.jpg') }}");
+          }
         .content {
+            margin-top: 10%;
+            color: #fff;
             margin: 0 auto;
             max-width: 800px;
+            max-height: 90%;
             padding: 20px;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             border-radius: 10px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow-y: auto;
         }
         .back-button {
             display: inline-block;
