@@ -1,14 +1,22 @@
-function updateClock() {
-  var now = new Date();
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
-  if (hours < 10) hours = "0" + hours;
-  if (minutes < 10) minutes = "0" + minutes;
-  if (seconds < 10) seconds = "0" + seconds;
-  document.getElementById("clockgroß").textContent =
-    hours + ":" + minutes + ":" + seconds;
-}
+document.addEventListener("DOMContentLoaded", function () {
+  function updateClock() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    if (hours < 10) hours = "0" + hours;
+    if (minutes < 10) minutes = "0" + minutes;
+    if (seconds < 10) seconds = "0" + seconds;
+    document.getElementById("clockgroß").textContent =
+      hours + ":" + minutes + ":" + seconds;
+  }
+
+  // Call the function once to display the time initially
+  updateClock();
+
+  // Then call the function every second to update the time
+  setInterval(updateClock, 1000);
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   var backgroundVideo = document.getElementById("background-video");
@@ -636,13 +644,14 @@ document.getElementById('add-task-btn').addEventListener('click', function() {
 
 document.getElementById('save-task-btn').addEventListener('click', function() {
   var taskName = document.getElementById('task-name').value;
-  var pomodoroCount = timer.completedPomodoros
+  var pomodoroCount = document.getElementById('pomodoro-count').value;
+  
 
   // Add the new task to the tasks array
   tasks.push({
     name: taskName,
     totalPomodoros: pomodoroCount,
-    completedPomodoros: 0
+    completedPomodoros: 0,
   });
 
   // Clear the tasks list

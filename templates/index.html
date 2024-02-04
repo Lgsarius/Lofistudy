@@ -35,8 +35,9 @@
     </video>
 </div>
         
-        <div id="clockgroß" class="clockgroß"></div>
+
     </div>
+    <div id="clockgroß"></div>
     <div id="timer"></div>
     <div id="selection-bar">
         <div class="tooltip">
@@ -233,6 +234,9 @@
             <div id="tasks-list">
                 <!-- Tasks will be dynamically added here -->
             </div>
+            <div id="coming-soon">
+                <h1>Coming Soon...</h1>
+        </div>
         </div>
     </div>
     <div id="sticky-note-window" class="window draggable">
@@ -295,6 +299,22 @@
             <i class="fas fa-user-circle" data-window="account-window"></i> 
             <div class="settings-container">
                 <div class="settings-item">
+                    <span class="settings-text">Pomodoro</span>
+                    <input type="number" id="pomodoro-time" min="1">
+                </div>
+                <div class="settings-item">
+                    <span class="settings-text">Short Break</span>
+                    <input type="number" id="short-break-time" min="1">
+                </div>
+                <div class="settings-item">
+                    <span class="settings-text">Long Break</span>
+                    <input type="number" id="long-break-time" min="1">
+                </div>
+                <div class="settings-item">
+                    <span class="settings-text">Long Break Interval</span>
+                    <input type="number" id="long-break-interval" min="1">
+                </div>
+                <div class="settings-item">
                     <span class="settings-text">Placeholder 1</span>
                     <label class="switch">
                         <input type="checkbox">
@@ -315,6 +335,9 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
+                <div id="coming-soon">
+                    <h1>Coming Soon...</h1>
+            </div>
                 <div class="settings-footer">
                     <div class="settings-item">
                         <a href="{{ url_for('legal_notice') }}" class="settings-link">Legal Notice</a>

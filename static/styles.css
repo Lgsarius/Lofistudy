@@ -17,8 +17,9 @@ html {
 }
 
 #clockgroß {
-  top: 40px;
-  right: 10px;
+  position: absolute; /* or 'fixed' if you want it to stay at the top left even when scrolling */
+  top: 10px;
+  left: 10px; /* changed from 'right' to 'left' */
   color: white;
   font-size: 24px;
   font-family: "Courier New", Courier, monospace;
