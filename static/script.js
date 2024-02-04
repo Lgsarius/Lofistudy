@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelectorAll(
-      ".fas.fa-music, .fas.fa-clock, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
+      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
     )
     .forEach((icon) => {
       icon.addEventListener("click", function () {
@@ -153,8 +153,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const timer = {
-  pomodoro: 25,
-  shortBreak: 5,
+  pomodoro: 1,
+  shortBreak: 1,
   longBreak: 15,
   longBreakInterval: 4,
   sessions: 0,
@@ -199,7 +199,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const endTime = Date.parse(new Date()) + total * 1000;
 
     if (timer.mode === "pomodoro") timer.sessions++;
-
     mainButton.dataset.action = "stop";
     mainButton.textContent = "stop";
     mainButton.classList.add("active");
@@ -213,12 +212,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("ZEITENDE", total);
         clearInterval(interval);
 
+       
+
         switch (timer.mode) {
           case "pomodoro":
+            timer.completedPomodoros++;
             if (timer.sessions % timer.longBreakInterval === 0) {
               switchMode("longBreak");
             } else {
               switchMode("shortBreak");
+             
             }
             break;
           default:
@@ -624,4 +627,57 @@ document.addEventListener('DOMContentLoaded', (event) => {
           })
       });
   }
+});
+var tasks = [];
+document.addEventListener("DOMContentLoaded", function() {
+document.getElementById('add-task-btn').addEventListener('click', function() {
+  document.getElementById('task-form').style.display = 'block';
+});
+
+document.getElementById('save-task-btn').addEventListener('click', function() {
+  var taskName = document.getElementById('task-name').value;
+  var pomodoroCount = parseInt(document.getElementById('pomodoro-count').value);
+
+  // Add the new task to the tasks array
+  tasks.push({
+    name: taskName,
+    totalPomodoros: pomodoroCount,
+    completedPomodoros: 0
+  });
+
+  // Clear the tasks list
+  document.getElementById('tasks-list').innerHTML = '';
+
+  // Re-render the tasks
+  tasks.forEach(function(task, index) {
+    var taskElement = document.createElement('div');
+    taskElement.className = 'task';
+    taskElement.dataset.index = index;
+    taskElement.innerHTML = `
+      <span>${task.name} - ${task.completedPomodoros}/${task.totalPomodoros}</span>
+      <div class="task-menu">...</div>
+    `;
+
+    document.getElementById('tasks-list').appendChild(taskElement);
+  });
+
+  document.getElementById('task-form').style.display = 'none';
+  document.getElementById('task-name').value = '';
+  document.getElementById('pomodoro-count').value = '';
+});
+
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.className == 'task-menu') {
+    var index = parseInt(e.target.parentNode.dataset.index);
+    var task = tasks[index];
+
+    var taskName = prompt('Edit Task Name', task.name);
+    var pomodoroCount = prompt('Edit Pomodoro Count', task.totalPomodoros);
+
+    task.name = taskName;
+    task.totalPomodoros = parseInt(pomodoroCount);
+
+    e.target.previousSibling.textContent = `${taskName} - ${task.completedPomodoros}/${pomodoroCount}`;
+  }
+});
 });

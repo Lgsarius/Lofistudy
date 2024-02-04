@@ -60,6 +60,10 @@
             <span class="tooltiptext">Switch Wallpaper</span>
           </div>
           <div class="tooltip">
+            <i class="fas fa-clipboard" data-window="task-window"></i>
+            <span class="tooltiptext">Task Tracker</span>
+          </div>
+          <div class="tooltip">
             <i class="fas fa-link" data-window="url-window"></i>
             <span class="tooltiptext">Save URLs</span>
           </div>
@@ -210,6 +214,25 @@
         </div>
         <div class="window-content">
             <div id="calendar"></div>
+        </div>
+    </div>
+    <div id="task-window" class="window draggable">
+        <div class="window-header">
+            <span>Task Tracker</span>
+            <button class="close-window">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="window-content">
+            <button id="add-task-btn" style="background-color: blue; color: white;">ADD</button>
+            <div id="task-form" style="display: none;">
+                <input type="text" id="task-name" placeholder="Task Name">
+                <input type="number" id="pomodoro-count" placeholder="Pomodoro Count">
+                <button id="save-task-btn">Save</button>
+            </div>
+            <div id="tasks-list">
+                <!-- Tasks will be dynamically added here -->
+            </div>
         </div>
     </div>
     <div id="sticky-note-window" class="window draggable">
