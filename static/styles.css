@@ -341,7 +341,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+ 
   width: 400px;
   user-select: none;
 }
@@ -351,7 +351,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 400px;
   user-select: none;
 }
@@ -361,7 +361,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+ 
   width: 400px;
   user-select: none;
 }
@@ -371,7 +371,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 400px;
   user-select: none;
 }
@@ -381,7 +381,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  
   bottom: 50%;
   left: 50%;;
   width: 600px;
@@ -392,7 +392,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 600px;
   user-select: none;
 }
@@ -402,7 +402,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  
   width: 600px;
   user-select: none;
 }
@@ -414,7 +414,7 @@ select {
   height: 300px;
   width: 800px;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   user-select: none;
 }
 
@@ -423,7 +423,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 400px;
   resize: both;
   user-select: none;
@@ -434,7 +434,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 300px;
   resize: both;
   overflow: hidden;
@@ -446,7 +446,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 200px;
   user-select: none;
 }
@@ -456,7 +456,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 400px;
   user-select: none;
 }
@@ -466,7 +466,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 400px;
   user-select: none;
 }
