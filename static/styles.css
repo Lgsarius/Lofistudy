@@ -23,10 +23,12 @@ html {
   color: white;
   font-size: 24px;
   font-family: "Courier New", Courier, monospace;
+  user-select: none;
 }
 #early-access-banner {
   position: absolute;
   top: 10px;
+  user-select: none;
   right: -50px;
   width: 200px;
   height: 50px;
@@ -1269,4 +1271,22 @@ input:checked + .slider:before {
 .info:hover .info-text {
   visibility: visible;
   opacity: 1;
+}
+
+
+#fullscreen-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  color: #ffffff;
+  font-size: 30px; /* Increase this value to make the icon bigger */
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#fullscreen-btn:hover {
+
+  transform: scale(1.15);
 }
