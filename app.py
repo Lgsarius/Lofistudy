@@ -25,6 +25,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.Text)
     wallpaper = db.Column(db.String(120), nullable=True)
     notecontent = db.Column(db.Text, nullable=True)
+    tasks = db.Column(db.Text, nullable=True)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -240,6 +241,7 @@ def change_password():
         return jsonify({'message': 'Password changed successfully'}), 200
     return jsonify({'message': 'No new password provided'}), 400
 migrate = Migrate(app, db)
+
 @app.route('/delete_account', methods=['POST'])
 @login_required
 def delete_account():
@@ -247,6 +249,16 @@ def delete_account():
     db.session.commit()
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/tasks', methods=['POST'])
+@login_required
+def tasks():
+    data = request.get_json()
+    if 'tasks' in data:
+        current_user.tasks = json.dumps(data['tasks'])
+        db.session.commit()
+        return jsonify({'message': 'Tasks saved successfully'}), 200
+    return jsonify({'message': 'No tasks provided'}), 400
 
 if __name__ == '__main__':
     with app.app_context():
