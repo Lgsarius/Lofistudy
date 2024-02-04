@@ -24,6 +24,19 @@ html {
   font-size: 24px;
   font-family: "Courier New", Courier, monospace;
 }
+#early-access-banner {
+  position: absolute;
+  top: 10px;
+  right: -50px;
+  width: 200px;
+  height: 50px;
+  background: rgba(207, 207, 207, 0.16); /* semi-transparent black */
+  color: rgba(255, 255, 255, 0.342);
+  text-align: center;
+  line-height: 50px; /* vertically center the text */
+  transform: rotate(40deg); /* rotate the banner */
+  font-family: "Courier New", Courier, monospace;
+}
 
 #background {
   position: fixed;
@@ -367,7 +380,6 @@ select {
   width: 600px;
   user-select: none;
 }
-
 
 #wallpaper-window {
   position: fixed;
@@ -1095,7 +1107,6 @@ input:checked + .slider:before {
   overflow-y: auto;
 }
 
-
 #coming-soon {
   position: absolute;
   top: 50%;
@@ -1106,12 +1117,16 @@ input:checked + .slider:before {
 }
 
 @keyframes fadeIn {
-  0% {opacity: 0;}
-  50% {opacity: 1;}
-  100% {opacity: 0;}
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-
-
 
 .form-group {
   margin-bottom: 20px;
@@ -1177,12 +1192,12 @@ input:checked + .slider:before {
 /* Change the button color based on its function */
 /* Make the form responsive */
 @media (max-width: 600px) {
-  .form-group input, .form-group button {
-      width: 100%;
-      max-width: none;
+  .form-group input,
+  .form-group button {
+    width: 100%;
+    max-width: none;
   }
 }
-
 
 .tooltip {
   position: relative;
@@ -1211,8 +1226,6 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-
-
 .task {
   display: flex;
   justify-content: space-between;
@@ -1223,4 +1236,37 @@ input:checked + .slider:before {
 
 .task-menu {
   cursor: pointer;
+}
+
+
+.info {
+  position: relative;
+  display: inline-block;
+}
+
+.info-icon {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.info-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  left: 125%;
+  bottom: 75%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px; /* adjust this value to change the size of the text */
+}
+
+.info:hover .info-text {
+  visibility: visible;
+  opacity: 1;
 }
