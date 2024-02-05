@@ -170,8 +170,8 @@ const timer = {
 document.addEventListener("DOMContentLoaded", (event) => {
   let interval;
 
-  const buttonSoundPath =
-    document.getElementById("button-sound-path").textContent;
+  const buttonSoundPath = document.getElementById("button-sound-path")
+    .textContent;
   const buttonSound = new Audio(buttonSoundPath);
   const mainButton = document.getElementById("js-btn");
   mainButton.addEventListener("click", () => {
@@ -220,8 +220,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("ZEITENDE", total);
         clearInterval(interval);
 
-       
-
         switch (timer.mode) {
           case "pomodoro":
             timer.completedPomodoros++;
@@ -229,7 +227,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
               switchMode("longBreak");
             } else {
               switchMode("shortBreak");
-             
             }
             break;
           default:
@@ -591,115 +588,172 @@ window.addEventListener("DOMContentLoaded", (event) => {
   };
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-document.getElementById('chat-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  var userInput = document.getElementById('user-input').value;
-  fetch('/chat', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({message: userInput}),
-  })
-  .then(response => response.json())
-  .then(data => {
-      var chatOutput = document.getElementById('chat-output');
-      chatOutput.innerHTML += '<p>User: ' + userInput + '</p>';
-      chatOutput.innerHTML += '<p>ChatGPT: ' + data.response + '</p>';
-  })
-  .catch((error) => {
-      console.error('Error:', error);
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("chat-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      var userInput = document.getElementById("user-input").value;
+      fetch("/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userInput }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          var chatOutput = document.getElementById("chat-output");
+          chatOutput.innerHTML += "<p>User: " + userInput + "</p>";
+          chatOutput.innerHTML += "<p>ChatGPT: " + data.response + "</p>";
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
+});
+
+function confirmDelete() {
+  Swal.fire({
+    title: "Are you sure?",
+    text:
+      "Are you sure you want to delete your Lofi Study account? This action cannot be undone.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete my Lofi Study account!",
+    customClass: {
+      popup: "my-popup",
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch("/delete_account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          // Wenn die Antwort eine Umleitung ist, leiten Sie die Seite zu der neuen URL um
+          if (response.redirected) {
+            window.location.href = response.url;
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
+    }
   });
-});
-});
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  const deleteAccountForm = document.querySelector('form[data-url="{{ url_for(\'delete_account\') }}"]');
-  if (deleteAccountForm) {
-      const deleteAccountButton = deleteAccountForm.querySelector('button[type="submit"]');
-      deleteAccountButton.addEventListener('click', function(event) {
-          event.preventDefault();
-          Swal.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  deleteAccountForm.submit();
-              }
-          })
-      });
-  }
-});
+}
 var tasks = [];
-document.addEventListener("DOMContentLoaded", function() {
-document.getElementById('add-task-btn').addEventListener('click', function() {
-  document.getElementById('task-form').style.display = 'block';
-});
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("add-task-btn")
+    .addEventListener("click", function () {
+      document.getElementById("task-form").style.display = "block";
+    });
 
-document.getElementById('save-task-btn').addEventListener('click', function() {
-  var taskName = document.getElementById('task-name').value;
-  var pomodoroCount = document.getElementById('pomodoro-count').value;
-  
+  document
+    .getElementById("save-task-btn")
+    .addEventListener("click", function () {
+      var taskName = document.getElementById("task-name").value;
+      var pomodoroCount = document.getElementById("pomodoro-count").value;
 
-  // Add the new task to the tasks array
-  tasks.push({
-    name: taskName,
-    totalPomodoros: pomodoroCount,
-    completedPomodoros: 0,
-  });
+      // Add the new task to the tasks array
+      tasks.push({
+        name: taskName,
+        totalPomodoros: pomodoroCount,
+        completedPomodoros: 0,
+      });
 
-  // Clear the tasks list
-  document.getElementById('tasks-list').innerHTML = '';
+      // Clear the tasks list
+      document.getElementById("tasks-list").innerHTML = "";
 
-  // Re-render the tasks
-  tasks.forEach(function(task, index) {
-    var taskElement = document.createElement('div');
-    taskElement.className = 'task';
-    taskElement.dataset.index = index;
-    taskElement.innerHTML = `
+      // Re-render the tasks
+      tasks.forEach(function (task, index) {
+        var taskElement = document.createElement("div");
+        taskElement.className = "task";
+        taskElement.dataset.index = index;
+        taskElement.innerHTML = `
       <span>${task.name} - ${task.completedPomodoros}/${task.totalPomodoros}</span>
       <div class="task-menu">...</div>
     `;
 
-    document.getElementById('tasks-list').appendChild(taskElement);
-  });
+        document.getElementById("tasks-list").appendChild(taskElement);
+      });
 
-  document.getElementById('task-form').style.display = 'none';
-  document.getElementById('task-name').value = '';
-  document.getElementById('pomodoro-count').value = '';
-});
+      document.getElementById("task-form").style.display = "none";
+      document.getElementById("task-name").value = "";
+      document.getElementById("pomodoro-count").value = "";
+    });
 
-document.addEventListener('click', function(e) {
-  if (e.target && e.target.className == 'task-menu') {
-    var index = parseInt(e.target.parentNode.dataset.index);
-    var task = tasks[index];
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.className == "task-menu") {
+      var index = parseInt(e.target.parentNode.dataset.index);
+      var task = tasks[index];
 
-    var taskName = prompt('Edit Task Name', task.name);
-    var pomodoroCount = prompt('Edit Pomodoro Count', task.totalPomodoros);
+      var taskName = prompt("Edit Task Name", task.name);
+      var pomodoroCount = prompt("Edit Pomodoro Count", task.totalPomodoros);
 
-    task.name = taskName;
-    task.totalPomodoros = parseInt(pomodoroCount);
+      task.name = taskName;
+      task.totalPomodoros = parseInt(pomodoroCount);
 
-    e.target.previousSibling.textContent = `${taskName} - ${task.completedPomodoros}/${pomodoroCount}`;
-  }
-});
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-document.getElementById('fullscreen-btn').addEventListener('click', function() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen(); 
+      e.target.previousSibling.textContent = `${taskName} - ${task.completedPomodoros}/${pomodoroCount}`;
     }
-  }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("fullscreen-btn")
+    .addEventListener("click", function () {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+});
+
+window.addEventListener("DOMContentLoaded", (event) => {
+document.getElementById('password-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var currentPassword = document.getElementById('current-password').value;
+  var newPassword = document.getElementById('new-password').value;
+  var confirmPassword = document.getElementById('confirm-password').value;
+
+  fetch('/change_password', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'current-password': currentPassword,
+      'new-password': newPassword,
+      'confirm-password': confirmPassword,
+    }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      alert(data.error);
+    } else {
+      alert(data.success);
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 });
 });

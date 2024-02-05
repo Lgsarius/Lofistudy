@@ -11,7 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from openai import OpenAI
-import openai
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -234,13 +233,21 @@ def chat():
 @login_required
 def change_password():
     data = request.get_json()
-    if 'new_password' in data:
-        hashed_password = generate_password_hash(data['new_password'], method='pbkdf2:sha256')
-        current_user.password = hashed_password
-        db.session.commit()
-        return jsonify({'message': 'Password changed successfully'}), 200
-    return jsonify({'message': 'No new password provided'}), 400
-migrate = Migrate(app, db)
+    current_password = data.get('current-password')
+    new_password = data.get('new-password')
+    confirm_password = data.get('confirm-password')
+
+    if not current_user.check_password(current_password):
+        return jsonify({'error': 'Current password is incorrect'}), 400
+
+    if new_password != confirm_password:
+        return jsonify({'error': 'New password and confirm password do not match'}), 400
+
+    current_user.set_password(new_password)
+    db.session.commit()
+
+    return jsonify({'success': 'Password changed successfully'}), 200
+
 
 @app.route('/delete_account', methods=['POST'])
 @login_required
@@ -260,6 +267,7 @@ def tasks():
         return jsonify({'message': 'Tasks saved successfully'}), 200
     return jsonify({'message': 'No tasks provided'}), 400
 
+migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

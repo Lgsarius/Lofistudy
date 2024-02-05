@@ -341,7 +341,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
- 
+
   width: 400px;
   user-select: none;
 }
@@ -361,7 +361,7 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
- 
+
   width: 400px;
   user-select: none;
 }
@@ -381,9 +381,9 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  
+
   bottom: 50%;
-  left: 50%;;
+  left: 50%;
   width: 600px;
 }
 
@@ -402,22 +402,21 @@ select {
   position: absolute;
   top: 50%;
   left: 50%;
-  
+
   width: 600px;
   user-select: none;
 }
 
 #wallpaper-window {
   position: fixed;
-  top: calc(80% - 80px);
-  /* Adjust this value based on the actual height of your selection bar */
+  top: 80%;
   height: 300px;
-  width: 800px;
+  margin: auto;
+  width: 50%;
   left: 50%;
-
   user-select: none;
+  transform: translate(-50%, -50%);
 }
-
 #url-window {
   height: 300px;
   position: absolute;
@@ -1337,4 +1336,28 @@ input:checked + .slider:before {
 
 #fullscreen-btn:hover {
   transform: scale(1.15);
+}
+
+.user-icon {
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: left top;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+  color: #f3a953;
+}
+
+#user-icon:active {
+  transform: scale(0.9) !important;
+}
+
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
