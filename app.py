@@ -46,14 +46,10 @@ class Task(db.Model):
         }    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
-uri = os.getenv('DATABASE_URL')
-if uri is None:
-    print("uri is not set")
-else:
-    if uri.startswith("postgres://"):
-        # rest of your code
-        uri = uri.replace("postgres://", "postgresql://", 1)
-        app.config['SQLALCHEMY_DATABASE_URI'] = uri
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 client = OpenAI(
   api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
