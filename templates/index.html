@@ -336,6 +336,7 @@
                 </button>
                 <div id="task-form" style="display: none;">
                     <input type="text" id="task-name" placeholder="Task Name" />
+                    <input type="hidden" id="username" value="{{ user.username }}">
                     <input
                         type="number"
                         id="pomodoro-count"
@@ -345,9 +346,7 @@
                 <div id="tasks-list">
                     <!-- Tasks will be dynamically added here -->
                 </div>
-                <div id="coming-soon">
-                    <h1>Coming Soon...</h1>
-                </div>
+               
             </div>
         </div>
         <div id="sticky-note-window" class="window draggable">

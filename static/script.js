@@ -170,8 +170,8 @@ const timer = {
 document.addEventListener("DOMContentLoaded", (event) => {
   let interval;
 
-  const buttonSoundPath = document.getElementById("button-sound-path")
-    .textContent;
+  const buttonSoundPath =
+    document.getElementById("button-sound-path").textContent;
   const buttonSound = new Audio(buttonSoundPath);
   const mainButton = document.getElementById("js-btn");
   mainButton.addEventListener("click", () => {
@@ -616,8 +616,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function confirmDelete() {
   Swal.fire({
     title: "Are you sure?",
-    text:
-      "Are you sure you want to delete your Lofi Study account? This action cannot be undone.",
+    text: "Are you sure you want to delete your Lofi Study account? This action cannot be undone.",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
@@ -666,28 +665,26 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       var taskName = document.getElementById("task-name").value;
       var pomodoroCount = document.getElementById("pomodoro-count").value;
+      var username = document.getElementById("username").value;
 
-      // Add the new task to the tasks array
-      tasks.push({
-        name: taskName,
-        totalPomodoros: pomodoroCount,
-        completedPomodoros: 0,
-      });
+      fetch('/add-task', {
+        method: 'POST',
+        body: JSON.stringify({ name: taskName, totalPomodoros: pomodoroCount, user_username: username  }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          tasks.push({
+            id: data.id,
+            name: taskName,
+            totalPomodoros: pomodoroCount,
+            completedPomodoros: 0,
+          });
 
-      // Clear the tasks list
-      document.getElementById("tasks-list").innerHTML = "";
-
-      // Re-render the tasks
-      tasks.forEach(function (task, index) {
-        var taskElement = document.createElement("div");
-        taskElement.className = "task";
-        taskElement.dataset.index = index;
-        taskElement.innerHTML = `
-      <span>${task.name} - ${task.completedPomodoros}/${task.totalPomodoros}</span>
-      <div class="task-menu">...</div>
-    `;
-
-        document.getElementById("tasks-list").appendChild(taskElement);
+          document.getElementById("tasks-list").innerHTML = "";
+          renderTasks();
+        }
       });
 
       document.getElementById("task-form").style.display = "none";
@@ -695,10 +692,58 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("pomodoro-count").value = "";
     });
 
+  function renderTasks() {
+    tasks.forEach(function (task) {
+      var taskElement = document.createElement("div");
+      taskElement.className = "task";
+      taskElement.dataset.id = task.id;
+
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "task-check";
+      checkbox.addEventListener("change", function () {
+        taskElement.querySelector(".task-name").style.textDecoration = this
+          .checked
+          ? "line-through"
+          : "none";
+      });
+
+      var taskName = document.createElement("span");
+      taskName.className = "task-name";
+      taskName.textContent = `${task.name} -  ${task.completedPomodoros}/${task.totalPomodoros}`;
+
+      var taskMenu = document.createElement("div");
+      taskMenu.className = "task-menu";
+      taskMenu.textContent = "...";
+      var trashCan = document.createElement("span");
+      trashCan.className = "task-delete";
+      trashCan.textContent = "🗑️";
+      trashCan.addEventListener("click", function () {
+        var id = this.parentNode.dataset.id;
+        fetch(`/delete-task/${id}`, { method: "DELETE" })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              tasks = tasks.filter(task => task.id !== id);
+              document.getElementById("tasks-list").innerHTML = "";
+              renderTasks();
+            }
+          });
+      });
+
+      taskElement.appendChild(checkbox);
+      taskElement.appendChild(trashCan);
+      taskElement.appendChild(taskName);
+      taskElement.appendChild(taskMenu);
+
+      document.getElementById("tasks-list").appendChild(taskElement);
+    });
+  }
+
   document.addEventListener("click", function (e) {
     if (e.target && e.target.className == "task-menu") {
-      var index = parseInt(e.target.parentNode.dataset.index);
-      var task = tasks[index];
+      var id = parseInt(e.target.parentNode.dataset.id);
+      var task = tasks.find(task => task.id === id);
 
       var taskName = prompt("Edit Task Name", task.name);
       var pomodoroCount = prompt("Edit Pomodoro Count", task.totalPomodoros);
@@ -726,34 +771,36 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 window.addEventListener("DOMContentLoaded", (event) => {
-document.getElementById('password-form').addEventListener('submit', function(event) {
-  event.preventDefault();
+  document
+    .getElementById("password-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-  var currentPassword = document.getElementById('current-password').value;
-  var newPassword = document.getElementById('new-password').value;
-  var confirmPassword = document.getElementById('confirm-password').value;
+      var currentPassword = document.getElementById("current-password").value;
+      var newPassword = document.getElementById("new-password").value;
+      var confirmPassword = document.getElementById("confirm-password").value;
 
-  fetch('/change_password', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      'current-password': currentPassword,
-      'new-password': newPassword,
-      'confirm-password': confirmPassword,
-    }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.error) {
-      alert(data.error);
-    } else {
-      alert(data.success);
-    }
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});
+      fetch("/change_password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "current-password": currentPassword,
+          "new-password": newPassword,
+          "confirm-password": confirmPassword,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.error);
+          } else {
+            alert(data.success);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
 });

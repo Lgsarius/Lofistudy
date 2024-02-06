@@ -1276,17 +1276,7 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-.task {
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid black;
-  margin: 10px 0;
-  padding: 10px;
-}
 
-.task-menu {
-  cursor: pointer;
-}
 
 .info {
   position: relative;
@@ -1360,4 +1350,63 @@ input:checked + .slider:before {
   background: rgba(0, 0, 0, 0.5) !important;
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.task:hover {
+  background-color: #f9f9f9;
+  color: #141212;
+}
+
+.task-check {
+  margin-right: 10px;
+}
+
+.task-name {
+  flex-grow: 1;
+}
+
+.task-menu {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.task-menu:hover {
+ 
+}
+
+#task-form {
+  margin-bottom: 20px;
+}
+
+#task-form input[type="text"],
+#task-form input[type="number"] {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+#add-task-btn,
+#save-task-btn {
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-task-btn:hover,
+#save-task-btn:hover {
+  background-color: darkblue;
 }
