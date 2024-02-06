@@ -344,8 +344,11 @@
                     <button id="save-task-btn">Save</button>
                 </div>
                 <div id="tasks-list">
-                    <!-- Tasks will be dynamically added here -->
+                    {% for task in tasks %}
+                    <p>{{ task.name }}</p>
+                {% endfor %}
                 </div>
+            
                
             </div>
         </div>

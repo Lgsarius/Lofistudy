@@ -30,7 +30,7 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     user_username = db.Column(db.String(100), db.ForeignKey('user.username'))
-    user = db.relationship('User', backref=db.backref('notes', lazy='dynamic'))
+    user = db.Column(db.Text, unique=True)
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,7 +38,12 @@ class Task(db.Model):
     totalPomodoros = db.Column(db.Integer, nullable=True)
     completedPomodoros = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'totalPomodoros': self.totalPomodoros,
+        }    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL_NEU")  # or other relevant config var
@@ -153,10 +158,12 @@ def home():
     music_files = []
     video_files = [url_for('static', filename=f) for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
     wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
+    username = User.query.filter_by(username=current_user.username).first()
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
-    return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper, notes=current_user.notecontent)
+    return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks )	
 
 @app.route('/get_songs')
 @login_required
@@ -263,21 +270,14 @@ def delete_account():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/tasks', methods=['POST'])
-@login_required
-def tasks():
-    data = request.get_json()
-    if 'tasks' in data:
-        current_user.tasks = json.dumps(data['tasks'])
-        db.session.commit()
-        return jsonify({'message': 'Tasks saved successfully'}), 200
-    return jsonify({'message': 'No tasks provided'}), 400
-
 @app.route('/add-task', methods=['POST'])
 def add_task():
-    task = Task(name=request.json['name'], totalPomodoros=request.json['totalPomodoros'])
+    task = Task(name=request.json['name'], totalPomodoros=request.json['totalPomodoros'], user_id=current_user.id)
     db.session.add(task)
     db.session.commit()
+    print(task.id)
+   
+    print("test")
     return jsonify(success=True, id=task.id)
 
 @app.route('/edit-task/<int:task_id>', methods=['PUT'])
@@ -291,6 +291,12 @@ def edit_task(task_id):
     task.completedPomodoros = request.json.get('completedPomodoros', task.completedPomodoros)
     db.session.commit()
     return jsonify(success=True, id=task.id)
+
+@app.route('/get-tasks')
+@login_required
+def get_tasks():
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
+    return jsonify(tasks=[task.to_dict() for task in tasks])
 
 @app.route('/delete-task/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):

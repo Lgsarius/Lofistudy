@@ -653,7 +653,25 @@ function confirmDelete() {
   });
 }
 var tasks = [];
+
+function fetchTasks() {
+  fetch('/get-tasks')
+    .then(response => response.json())
+    .then(data => {
+      tasks = data.tasks.map(task => ({
+        id: task.id,
+        name: task.name,
+        totalPomodoros: task.totalPomodoros,
+        completedPomodoros: 0,
+      }));
+
+      renderTasks();
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  fetchTasks();
+
   document
     .getElementById("add-task-btn")
     .addEventListener("click", function () {
