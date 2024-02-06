@@ -418,7 +418,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var videoId = url.split("v=")[1];
         var embedUrl = "https://www.youtube.com/embed/" + videoId;
         document.getElementById("youtube-video").innerHTML =
-          '<iframe width="560" height="315" src="' +
+          '<iframe style="clear: both; display: block" width="560" height="515" src="' +
           embedUrl +
           '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       }
