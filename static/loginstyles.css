@@ -384,3 +384,17 @@ transform: rotate(-25.08deg);
         transform: translateX(0px);
     }
 }
+
+.settings-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+  .settings-item {
+    margin: 0 10px;
+  }
