@@ -28,7 +28,7 @@
             background-size: contain;
             object-fit: contain;
             overflow: hidden;
-           
+            background-image: url("{{ url_for('static', filename='leagal_bg.jpg') }}");
           }
           .content {
             margin-top: 50px;
@@ -81,7 +81,7 @@
 </head>
 <body>
     <div id="background">
-        background-image: url("{{ url_for('static', filename='leagal_bg.jpg') }}");
+      
     </div>
     <div class="content">
         <a href="{{ url_for('home') }}" class="back-button">Back</a>
