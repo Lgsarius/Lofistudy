@@ -410,13 +410,15 @@ select {
 #wallpaper-window {
   position: fixed;
   top: 80%;
-  height: 38vh;  /* Adjust this value as needed */
+  height: 38vh;
+  /* Adjust this value as needed */
   margin: auto;
   width: 50%;
   left: 50%;
   user-select: none;
   transform: translate(-50%, -50%);
 }
+
 #url-window {
   height: 300px;
   position: absolute;
@@ -1276,8 +1278,6 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-
-
 .info {
   position: relative;
   display: inline-block;
@@ -1345,8 +1345,8 @@ input:checked + .slider:before {
   transform: scale(0.9) !important;
 }
 
-
-.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+.swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
   background: rgba(0, 0, 0, 0.5) !important;
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -1380,7 +1380,6 @@ input:checked + .slider:before {
 }
 
 .task-menu:hover {
- 
 }
 
 #task-form {

@@ -1,400 +1,390 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=Long+Cang&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Long+Cang&display=swap");
 .login-body {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    place-items: center;
-    min-height: 100vh;
-    height: 95vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    overflow: hidden;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+  min-height: 100vh;
+  height: 95vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
 }
 
 .container {
-    width: 90%;
-    max-width: 400px;
-    height: 80%;
-    max-height: 600px !important;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    color: white;
+  width: 90%;
+  max-width: 400px;
+  height: 80%;
+  max-height: 600px !important;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
 }
 
 @media screen and (min-width: 800px) and (min-height: 1200px !) {
-    .container {
-        width: 50%;
-        max-width: 800px;
-        height: 50%;
-        max-height: 1200px;
-    }
+  .container {
+    width: 50%;
+    max-width: 800px;
+    height: 50%;
+    max-height: 1200px;
+  }
 }
 
 .login-form {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    align-items: center;
-
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  align-items: center;
 }
 .password-field {
-    padding-right: 30px;  /* Make room for the icon */
+  padding-right: 30px; /* Make room for the icon */
 }
 
 .field-icon {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    color: grey;
-    cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: grey;
+  cursor: pointer;
 }
 .inp {
-    text-align: left;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding: 10px;
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-    transition: all 0.3s ease;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 10px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
-.inp:hover, .inp:focus-within {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.1);
+.inp:hover,
+.inp:focus-within {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
 }
 
 .inp input {
-    border: none;
-    outline: none;
-    flex-grow: 1;
- 
-    transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+
+  transition: all 0.3s ease;
 }
 input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-    width: 100%;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
-input:hover, input:focus {
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.1);
-    outline: none;
+input:hover,
+input:focus {
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
-.inp input:hover, .inp input:focus {
-    transform: scale(1.05);
+.inp input:hover,
+.inp input:focus {
+  transform: scale(1.05);
 }
 
-.login-title, .forgot-password, .signup-link {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    color: white;
-    text-align: center;
-
+.login-title,
+.forgot-password,
+.signup-link {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
 }
 .signup-link {
-    text-align: center;
-    margin: 20px 2px;
-    display: block;
+  text-align: center;
+  margin: 20px 2px;
+  display: block;
 }
 
 .login-button {
-    
-    background-color: #FAA04B; /* Green background */
-    border: none; /* Remove border */
-    color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: block; /* Get it to display inline */
-    font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Add some margin */
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%; /* adjust as needed */
-    cursor: pointer; /* Add a pointer on hover */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 9px #999; /* Add a shadow */
-    transition: all 0.3s ease; /* Add transition */
-    align-items: center;
+  background-color: #faa04b; /* Green background */
+  border: none; /* Remove border */
+  color: white; /* White text */
+  padding: 15px 32px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Get it to display inline */
+  font-size: 16px; /* Increase font size */
+  margin: 4px 2px; /* Add some margin */
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%; /* adjust as needed */
+  cursor: pointer; /* Add a pointer on hover */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 9px #999; /* Add a shadow */
+  transition: all 0.3s ease; /* Add transition */
+  align-items: center;
 }
 
 .login-button:hover {
-    background-color: #FAA04B; /* Change background */
-    box-shadow: 0 5px #666; /* Change shadow */
-    transform: translateY(4px); /* Move button slightly on hover */
+  background-color: #faa04b; /* Change background */
+  box-shadow: 0 5px #666; /* Change shadow */
+  transform: translateY(4px); /* Move button slightly on hover */
 }
 
 .login-logo {
-    display: block;
-    margin: auto;
-    width: 100px; /* Adjust this to make the image smaller or larger */
-    height: 100px; /* Adjust this to make the image smaller or larger */
-    border-radius: 50%; /* This will make the image rounded */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* This will give the image a 3D look */
-    object-fit: cover; /* This will ensure the image maintains its aspect ratio */
-    background: white; /* This will set the background color of the image */
+  display: block;
+  margin: auto;
+  width: 100px; /* Adjust this to make the image smaller or larger */
+  height: 100px; /* Adjust this to make the image smaller or larger */
+  border-radius: 50%; /* This will make the image rounded */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* This will give the image a 3D look */
+  object-fit: cover; /* This will ensure the image maintains its aspect ratio */
+  background: white; /* This will set the background color of the image */
 }
 
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 .cassette {
-    text-align: center;
+  text-align: center;
 }
-p{
-    font-family: 'Long Cang', cursive;
-    font-size: 2rem;
-    font-weight: bold;
-    position: relative;
-    top:-30px;
+p {
+  font-family: "Long Cang", cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+  top: -30px;
 }
-h2{
-    position: relative;
-    left:-150px;
-    top:-45px;
+h2 {
+  position: relative;
+  left: -150px;
+  top: -45px;
 }
-.rectangle{
-    box-shadow: -20px 20px 5px #080a0a97;
-    width:450px;
-    height: 280px;
-    background:#1A1A1A;
-    border-radius: 1rem; 
-    display: flex;
-    justify-content: center;
-    z-index: -3;
-    flex-wrap: wrap;
-
+.rectangle {
+  box-shadow: -20px 20px 5px #080a0a97;
+  width: 450px;
+  height: 280px;
+  background: #1a1a1a;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  z-index: -3;
+  flex-wrap: wrap;
 }
 .inner-rectangle {
-    position: relative;
-    top:20px;
-    width:350px;
-    height: 180px;
-    background:#CEBAA1;
-    border-radius:5px ;
-    border-top-right-radius: 10%;
-    border-top-left-radius: 10%;
-}
-.inner-rectangle::before{
-    content: '';
-    position: absolute;
-    width:105%;
-    height: 105%;
-    background: #000000;
-    z-index: -1;
-    left:-10px;
-    border-radius:5px ;
-    border-top-right-radius: 10%;
-    border-top-left-radius: 10%;
-}
-.title{
-    text-align: center;
-    border:1px solid black;
-    width:100%;
-    height: 30px;
-    border-right: 0;
-    border-left: 0;
-}
-.ribon-container{
-    position: relative;
-    top:20px;
-    width:100%;
-    height: 70px;
-    background: #A25B23;
-}
-.box{
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    top:2px;
-    left:60px;
-    background:#272727 ;
-    width:230px;
-    height: 93%;
-    border-radius: 30px;
-    border: 3px solid #CEBAA1;
-}
-.cassette-body{
-    position:relative;
-    width:285px;
-    border-bottom: 50px solid #000000;
-	border-left: 25px solid transparent;
-	border-right: 25px solid transparent;
-	height: 20px;
-    top: 25px;
-}
-.squares{
-    position: relative;
-    top:15px;
-    height:15px;
-    width:15px;
-    border-radius: 5px;
-    border:3px solid #696969;
-    background:#59AFA5;
-}
-.two{
-    top: 0px;
-    left:215px;
-}
-.tape-wheel{
-    position: relative;
-    width:60px;
-    height: 98%;
-    border-radius: 50%;
-    background: #59AFA5;
-    border:5px solid #696B6B;
-}
-.tape{
-    position: relative;
-    top:10px;
-    width:60px;
-    height: 60%;
-    border-radius: 10%;
-    background: #59AFA5;
-    display: flex;
-    justify-content: space-between;
-   overflow: hidden;
-}
-.teethBox{
   position: relative;
-  border:5px solid #272727;
-  width:100%;
-  height:100%;
+  top: 20px;
+  width: 350px;
+  height: 180px;
+  background: #cebaa1;
+  border-radius: 5px;
+  border-top-right-radius: 10%;
+  border-top-left-radius: 10%;
+}
+.inner-rectangle::before {
+  content: "";
+  position: absolute;
+  width: 105%;
+  height: 105%;
+  background: #000000;
+  z-index: -1;
+  left: -10px;
+  border-radius: 5px;
+  border-top-right-radius: 10%;
+  border-top-left-radius: 10%;
+}
+.title {
+  text-align: center;
+  border: 1px solid black;
+  width: 100%;
+  height: 30px;
+  border-right: 0;
+  border-left: 0;
+}
+.ribon-container {
+  position: relative;
+  top: 20px;
+  width: 100%;
+  height: 70px;
+  background: #a25b23;
+}
+.box {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 2px;
+  left: 60px;
+  background: #272727;
+  width: 230px;
+  height: 93%;
+  border-radius: 30px;
+  border: 3px solid #cebaa1;
+}
+.cassette-body {
+  position: relative;
+  width: 285px;
+  border-bottom: 50px solid #000000;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 20px;
+  top: 25px;
+}
+.squares {
+  position: relative;
+  top: 15px;
+  height: 15px;
+  width: 15px;
+  border-radius: 5px;
+  border: 3px solid #696969;
+  background: #59afa5;
+}
+.two {
+  top: 0px;
+  left: 215px;
+}
+.tape-wheel {
+  position: relative;
+  width: 60px;
+  height: 98%;
+  border-radius: 50%;
+  background: #59afa5;
+  border: 5px solid #696b6b;
+}
+.tape {
+  position: relative;
+  top: 10px;
+  width: 60px;
+  height: 60%;
+  border-radius: 10%;
+  background: #59afa5;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.teethBox {
+  position: relative;
+  border: 5px solid #272727;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   transform: rotate(0);
- 
 }
 
-.teeth:nth-child(1){
-    
-position: relative;
-width: 10px;
-height: 11px;
-top:5px;
-background: #272727;
-transform: rotate(-25.08deg);
+.teeth:nth-child(1) {
+  position: relative;
+  width: 10px;
+  height: 11px;
+  top: 5px;
+  background: #272727;
+  transform: rotate(-25.08deg);
 }
-.teeth:nth-child(1){
-    
-    position: relative;
-    left:10px;
-    width: 10px;
-    height: 11px;
-    top:-0px;
-    background: #272727;
-    transform: rotate(-25.08deg);
-    }
-.teeth:nth-child(2){
+.teeth:nth-child(1) {
+  position: relative;
+  left: 10px;
+  width: 10px;
+  height: 11px;
+  top: -0px;
+  background: #272727;
+  transform: rotate(-25.08deg);
+}
+.teeth:nth-child(2) {
+  position: relative;
+  left: 30px;
+  top: -5px;
+  width: 10px;
+  height: 11px;
+  background: #272727;
+  transform: rotate(61.63deg);
+}
+.teeth:nth-child(3) {
+  position: relative;
+  left: 20px;
+  width: 10px;
+  height: 11px;
+  top: 5px;
+  background: #272727;
+  transform: rotate(-25.08deg);
+}
 
-    position: relative;
-    left:30px;
-    top:-5px;
-    width: 10px;
-    height: 11px;
-    background: #272727;
-    transform: rotate(61.63deg);
-    }
-.teeth:nth-child(3){
+.teeth:nth-child(4) {
+  position: relative;
+  top: -15px;
+  width: 10px;
+  height: 11px;
+  background: #272727;
+  transform: rotate(61.63deg);
+}
 
-    position: relative;
-    left:20px;
-    width: 10px;
-    height: 11px;
-    top:5px;
-    background: #272727;
-    transform: rotate(-25.08deg);
-    }
+.tape-ribbon {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  background: #623d18;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border: 1px solid black;
+  border-left: 0;
+  transform: translateX(-20px);
+}
+.tape-ribbon-two {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  background: #623d18;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border: 1px solid black;
+  transform: translateX(20px);
+  border-right: 0;
+}
+.playing {
+  animation: spin-teeth 1.3s linear infinite;
+}
+.play {
+  animation: slide 1.8s linear alternate infinite;
+}
+.play-two {
+  animation: slide2 1.8s linear alternate-reverse infinite;
+}
+@keyframes spin-teeth {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-    .teeth:nth-child(4){
-      
-        position: relative;
-        top:-15px;
-        width: 10px;
-        height: 11px;
-        background: #272727;
-        transform: rotate(61.63deg);
- }
- 
-.tape-ribbon{
-    position: relative;
-    width:40%;
-    height: 100%;
-    background: #623D18;
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border:1px solid black;
-    border-left: 0;
+@keyframes slide {
+  from {
     transform: translateX(-20px);
-   
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
-.tape-ribbon-two{
-    position: relative;
-    width:40%;
-    height: 100%;
-    background: #623D18;
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    border:1px solid black;
+@keyframes slide2 {
+  from {
     transform: translateX(20px);
-    border-right: 0;
-   
-}
-.playing{
-    animation: spin-teeth 1.3s linear  infinite;
-}
-.play{
-    animation: slide 1.8s linear alternate infinite;
-}
-.play-two{
-    animation: slide2 1.8s linear alternate-reverse infinite;
-}
-@keyframes spin-teeth{
-    from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
- }
-
-@keyframes slide{
-    from {
-        transform: translateX(-20px);
-    }
-    to {
-        transform: translateX(0px);
-    }
-}
-@keyframes slide2{
-    from {
-        transform: translateX(20px);
-    }
-    to {
-        transform: translateX(0px);
-    }
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 
 .settings-footer {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
-
-  .settings-item {
-    margin: 0 10px;
-  }
+.settings-item {
+  margin: 0 10px;
+}
