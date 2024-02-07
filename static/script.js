@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get the window header
         windowHeader.addEventListener("mousedown", handleDragStart);
         windowHeader.addEventListener("touchstart", handleDragStart);
-        
+
         function handleDragStart(e) {
           if (window.id === "wallpaper-window") {
             return;
@@ -658,10 +658,10 @@ function confirmDelete() {
 var tasks = [];
 
 function fetchTasks() {
-  fetch('/get-tasks')
-    .then(response => response.json())
-    .then(data => {
-      tasks = data.tasks.map(task => ({
+  fetch("/get-tasks")
+    .then((response) => response.json())
+    .then((data) => {
+      tasks = data.tasks.map((task) => ({
         id: task.id,
         name: task.name,
         totalPomodoros: task.totalPomodoros,
@@ -688,25 +688,29 @@ document.addEventListener("DOMContentLoaded", function () {
       var pomodoroCount = document.getElementById("pomodoro-count").value;
       var username = document.getElementById("username").value;
 
-      fetch('/add-task', {
-        method: 'POST',
-        body: JSON.stringify({ name: taskName, totalPomodoros: pomodoroCount, user_username: username  }),
-        headers: { 'Content-Type': 'application/json' }
+      fetch("/add-task", {
+        method: "POST",
+        body: JSON.stringify({
+          name: taskName,
+          totalPomodoros: pomodoroCount,
+          user_username: username,
+        }),
+        headers: { "Content-Type": "application/json" },
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          tasks.push({
-            id: data.id,
-            name: taskName,
-            totalPomodoros: pomodoroCount,
-            completedPomodoros: 0,
-          });
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            tasks.push({
+              id: data.id,
+              name: taskName,
+              totalPomodoros: pomodoroCount,
+              completedPomodoros: 0,
+            });
 
-          document.getElementById("tasks-list").innerHTML = "";
-          renderTasks();
-        }
-      });
+            document.getElementById("tasks-list").innerHTML = "";
+            renderTasks();
+          }
+        });
 
       document.getElementById("task-form").style.display = "none";
       document.getElementById("task-name").value = "";
@@ -745,7 +749,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .then((response) => response.json())
           .then((data) => {
             if (data.success) {
-              tasks = tasks.filter(task => task.id !== id);
+              tasks = tasks.filter((task) => task.id !== id);
               document.getElementById("tasks-list").innerHTML = "";
               renderTasks();
             }
@@ -764,7 +768,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (e) {
     if (e.target && e.target.className == "task-menu") {
       var id = parseInt(e.target.parentNode.dataset.id);
-      var task = tasks.find(task => task.id === id);
+      var task = tasks.find((task) => task.id === id);
 
       var taskName = prompt("Edit Task Name", task.name);
       var pomodoroCount = prompt("Edit Pomodoro Count", task.totalPomodoros);
