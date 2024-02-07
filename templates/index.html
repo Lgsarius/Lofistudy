@@ -75,7 +75,11 @@
             </video>
         </div>
 
-        <div id="clockgroß"></div>
+        <div id="clockgroß">
+            <input type="number" id="timerInput" min="0" value="0">
+            <button id="playButton">Play</button>
+            <audio id="alarmSound" src="alarm.mp3"></audio>
+        </div>
         <button id="fullscreen-btn"><i class="fas fa-expand"></i></button>
         <div id="early-access-banner">Alpha</div>
         <div id="timer"></div>
@@ -345,7 +349,7 @@
                 </div>
                 <div id="tasks-list">
                     {% for task in tasks %}
-                    <p>{{ task.name }}</p>
+                    <p hidden>{{ task.name }}</p>
                 {% endfor %}
                 </div>
             

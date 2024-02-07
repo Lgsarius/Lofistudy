@@ -10,6 +10,28 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("clockgroß").textContent =
       hours + ":" + minutes + ":" + seconds;
   }
+  document.addEventListener("DOMContentLoaded", function () {
+    var timerInput = document.getElementById('timerInput');
+    var playButton = document.getElementById('playButton');
+    var alarmSound = document.getElementById('alarmSound');
+    var timerId = null;
+
+    playButton.addEventListener('click', function () {
+        // Clear any existing timer
+        if (timerId !== null) {
+            clearTimeout(timerId);
+        }
+
+        // Get the timer value in seconds
+        var timerValue = Number(timerInput.value);
+
+        // Start the timer
+        timerId = setTimeout(function () {
+            // Play the alarm sound when the timer reaches zero
+            alarmSound.play();
+        }, timerValue * 1000);
+    });
+});
 
   // Call the function once to display the time initially
   updateClock();
@@ -657,24 +679,25 @@ function confirmDelete() {
 }
 var tasks = [];
 
-function fetchTasks() {
-  fetch("/get-tasks")
-    .then((response) => response.json())
-    .then((data) => {
-      tasks = data.tasks.map((task) => ({
-        id: task.id,
-        name: task.name,
-        totalPomodoros: task.totalPomodoros,
-        completedPomodoros: 0,
-      }));
 
-      renderTasks();
-    });
-}
 
 document.addEventListener("DOMContentLoaded", function () {
+  function fetchTasks() {
+    fetch("/get-tasks")
+      .then((response) => response.json())
+      .then((data) => {
+        tasks = data.tasks.map((task) => ({
+          id: task.id,
+          name: task.name,
+          totalPomodoros: task.totalPomodoros,
+          completedPomodoros: 0,
+        }));
+        renderTasks();
+     
+      });
+  }
   fetchTasks();
-
+  
   document
     .getElementById("add-task-btn")
     .addEventListener("click", function () {
@@ -744,17 +767,17 @@ document.addEventListener("DOMContentLoaded", function () {
       trashCan.className = "task-delete";
       trashCan.textContent = "🗑️";
       trashCan.addEventListener("click", function () {
-        var id = this.parentNode.dataset.id;
+        var id = Number(this.parentNode.dataset.id); // Convert id to a number
         fetch(`/delete-task/${id}`, { method: "DELETE" })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              tasks = tasks.filter((task) => task.id !== id);
-              document.getElementById("tasks-list").innerHTML = "";
-              renderTasks();
-            }
-          });
-      });
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    tasks = tasks.filter((task) => task.id !== id);
+                    document.getElementById("tasks-list").innerHTML = "";
+                    renderTasks();
+                }
+            });
+    });
 
       taskElement.appendChild(checkbox);
       taskElement.appendChild(trashCan);
