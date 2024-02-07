@@ -1409,3 +1409,28 @@ input:checked + .slider:before {
 #save-task-btn:hover {
   background-color: darkblue;
 }
+
+#nextButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#nextButton svg {
+  color: white; /* Change the default color to white */
+  transition: color 0.3s ease, transform 0.3s ease; /* Add transition for transform */
+}
+
+#nextButton:hover svg {
+  color: white;
+  transform: scale(1.2); /* Scale the icon when hovering */
+}
+
+#nextButton:active svg {
+  transform: scale(0.9); /* Scale the icon when clicking */
+}
+
+#nextButton.clicked svg {
+  color: #ff800050;
+}

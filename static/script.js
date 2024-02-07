@@ -586,9 +586,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   script.src = "https://w.soundcloud.com/player/api.js";
   document.body.appendChild(script);
 
-  // Wait for the API script to load before using it
   window.onload = function () {
-    // Get the volume input and the SoundCloud embeds
     var volumeInput = document.getElementById("volume");
     var soundcloudEmbeds = [
       SC.Widget(document.getElementById("soundcloud-1")),
@@ -597,18 +595,61 @@ window.addEventListener("DOMContentLoaded", (event) => {
       SC.Widget(document.getElementById("soundcloud-4")),
     ];
 
-    // Function to set the volume of the SoundCloud embeds
+    var currentIndex = 0; // Keep track of the current embed
+
     function setVolume() {
-      var volume = parseInt(volumeInput.value, 10); // Convert to a number between 0 and 100
+      var volume = parseInt(volumeInput.value, 10);
       soundcloudEmbeds.forEach(function (embed) {
         embed.setVolume(volume);
       });
     }
 
-    // Set the volume when the input changes
+  
+    let shuffleMode = false;
+
+    function shuffleToggle() {
+      shuffleMode = !shuffleMode;
+      let shuffleButton = document.getElementById("shuffleButton");
+      if (shuffleMode) {
+          shuffleButton.style.backgroundColor = "white";
+          shuffleButton.style.color = "black";
+      } else {
+          shuffleButton.style.backgroundColor = "black";
+          shuffleButton.style.color = "white";
+      }
+  }
+    function next() {
+      soundcloudEmbeds[currentIndex].isPaused((isPaused) => {
+          if (!isPaused) {
+              soundcloudEmbeds[currentIndex].next();
+          } else {
+              currentIndex = (currentIndex + 1) % soundcloudEmbeds.length;
+              soundcloudEmbeds[currentIndex].play();
+          }
+      });
+  }
+  function onTrackFinish() {
+    if (shuffleMode) {
+        currentIndex = Math.floor(Math.random() * soundcloudEmbeds.length);
+    } else {
+        currentIndex = (currentIndex + 1) % soundcloudEmbeds.length;
+    }
+    soundcloudEmbeds[currentIndex].play();
+}
+
+
     volumeInput.addEventListener("input", setVolume);
 
-    // Set the initial volume
+    // Add event listeners for your next, prev, and play/pause buttons
+    document.getElementById("nextButton").addEventListener("click", next);
+    document.getElementById("nextButton").addEventListener("click", function() {
+      this.classList.add("clicked");
+      setTimeout(() => this.classList.remove("clicked"), 400);
+  });
+// Add FINISH event listener for each SoundCloud widget
+for (let i = 0; i < soundcloudEmbeds.length; i++) {
+    soundcloudEmbeds[i].bind(SC.Widget.Events.FINISH, onTrackFinish);
+}
     setVolume();
   };
 });
