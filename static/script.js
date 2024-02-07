@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
+var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelectorAll(
@@ -80,7 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Show the window
         window.style.display = "block";
-
+        highestZIndex++;
+        window.style.zIndex = highestZIndex;
         // Add a click event listener to the close button
         var closeButton = window.querySelector(".close-window");
 
@@ -105,11 +106,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get the window header
         windowHeader.addEventListener("mousedown", handleDragStart);
         windowHeader.addEventListener("touchstart", handleDragStart);
-
+        
         function handleDragStart(e) {
           if (window.id === "wallpaper-window") {
             return;
           }
+          highestZIndex++;
+          window.style.zIndex = highestZIndex;
           var clientX = e.clientX || e.touches[0].clientX;
           var clientY = e.clientY || e.touches[0].clientY;
 

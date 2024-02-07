@@ -379,19 +379,19 @@ select {
 #sticky-note-window {
   height: 600px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
 
-  bottom: 50%;
-  left: 50%;
   width: 600px;
 }
 
 #settings-window {
   height: 600px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
 
   width: 600px;
   user-select: none;
@@ -400,9 +400,9 @@ select {
 #gpt-window {
   height: 600px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
   width: 600px;
   user-select: none;
 }
