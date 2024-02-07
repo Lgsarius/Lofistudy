@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash, json
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash, json, send_from_directory, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 import os
@@ -7,7 +7,9 @@ import re
 from flask_dance.contrib.google import make_google_blueprint, google
 from extensions import db
 from flask_login import UserMixin
+from urllib.parse import urljoin
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, timedelta
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from openai import OpenAI
@@ -97,6 +99,25 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    """Generate sitemap.xml. Makes a list of urls and date modified."""
+    pages=[]
+    ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
+    # static pages
+    static_pages = url_for('static', filename='robots.txt'), url_for('static', filename='sitemap.xml')
+    for page in static_pages:
+        pages.append(
+            [urljoin(request.url, page),ten_days_ago]
+        )
+    
+
+    
+    sitemap_xml = render_template('sitemap_template.xml', pages=pages)
+    response= make_response(sitemap_xml)
+    response.headers["Content-Type"] = "application/xml"    
+    
+    return response
 @app.route('/google/authorized')
 def login_google():
     if not google.authorized:
@@ -150,6 +171,10 @@ def signup():
 @app.route('/resetpassword')
 def resetpassword():
     return render_template('resetpassword.html')
+
+@app.route('/robots.txt')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 @app.route('/')
 @login_required
