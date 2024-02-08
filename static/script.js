@@ -256,6 +256,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             break;
           default:
             switchMode("pomodoro");
+            
         }
 
         if (Notification.permission === "granted") {
@@ -604,20 +605,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }
 
-  
-    let shuffleMode = false;
-
-    function shuffleToggle() {
-      shuffleMode = !shuffleMode;
-      let shuffleButton = document.getElementById("shuffleButton");
-      if (shuffleMode) {
-          shuffleButton.style.backgroundColor = "white";
-          shuffleButton.style.color = "black";
-      } else {
-          shuffleButton.style.backgroundColor = "black";
-          shuffleButton.style.color = "white";
-      }
-  }
     function next() {
       soundcloudEmbeds[currentIndex].isPaused((isPaused) => {
           if (!isPaused) {
@@ -628,14 +615,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
           }
       });
   }
-  function onTrackFinish() {
-    if (shuffleMode) {
-        currentIndex = Math.floor(Math.random() * soundcloudEmbeds.length);
-    } else {
-        currentIndex = (currentIndex + 1) % soundcloudEmbeds.length;
-    }
-    soundcloudEmbeds[currentIndex].play();
-}
 
 
     volumeInput.addEventListener("input", setVolume);
