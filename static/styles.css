@@ -55,7 +55,8 @@ html {
   background-size: contain;
   object-fit: contain;
   overflow: hidden;
-  /* Add this line */
+  height: 100%;
+  width: 100%;
 }
 
 #background-video {
@@ -65,7 +66,7 @@ html {
   min-width: 100%;
   min-height: 100%;
   z-index: -100;
-  zoom: 0.5;
+  zoom: 0.3;
   transform: translate(-50%, -50%);
   background: no-repeat;
   background-size: contain;
