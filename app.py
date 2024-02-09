@@ -332,7 +332,12 @@ def delete_task(task_id):
     db.session.delete(task)
     db.session.commit()
     return jsonify(success=True)
-
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+@app.route('/FAQ')
+def FAQ():
+    return render_template('faq.html')
 migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():

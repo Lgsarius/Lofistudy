@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ</title>
+    <style>
+     html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    background-image: url("{{ url_for("static", filename="loginbg.png") }}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+    min-height: 100vh;
+}
+      .faq-item {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        font-size: 16px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px !important;
+        width: 50%; /* Setzt die Breite auf 50% */
+        margin: 0 auto; /* Zentriert das Element */
+      }
+
+      .faq-question {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .faq-answer {
+        margin-bottom: 10px;
+      }
+      .login-logo {
+        display: block;
+        margin-left: auto;
+        margin-top: 20px;
+        filter: invert(1) brightness(100);
+        margin-right: auto;
+        width: 10%; /* Sie können diesen Wert ändern, um die Größe des Logos anzupassen */
+      }
+      h1 {
+        text-align: center;
+        color: white;
+      }
+      .faq-list {
+    overflow-y: auto; /* Zeigt einen Scrollbar an, wenn der Inhalt überläuft */
+    height: 80%; /* Stellen Sie sicher, dass die Höhe definiert ist */
+}
+
+/* Anpassen des Scrollbars */
+.faq-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.faq-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.faq-list::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.faq-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+  </head>
+  <body>
+    
+    <a href="{{ url_for('home') }}" class="back-button">Back</a>
+    <img src="{{ url_for('static', filename='logo_text.svg') }}"
+      alt="LofiStudy Logo"
+      class="login-logo white-logo"
+    />
+    
+    <h1>Häufig gestellte Fragen</h1>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">Frage 1</div>
+        <div class="faq-answer">Antwort auf Frage 1...</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 3</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Frage 2</div>
+        <div class="faq-answer">Antwort auf Frage 2...</div>
+      </div>
+    </div>
+  </body>
+</html>

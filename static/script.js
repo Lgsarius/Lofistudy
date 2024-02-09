@@ -872,3 +872,23 @@ window.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+document.querySelector('.dropdown-button').addEventListener('click', function() {
+  var dropdownMenu = this.nextElementSibling;
+  dropdownMenu.classList.toggle('active');
+});
+});
+
+document.addEventListener("DOMContentLoaded", (event) => {
+document.querySelector('a[href="/about"]').addEventListener('click', function(event) {
+  event.preventDefault();
+  document.getElementById('about-us').classList.add('active');
+});
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+document.getElementById('close-button').addEventListener('click', function() {
+  document.getElementById('about-us').classList.remove('active');
+});
+});

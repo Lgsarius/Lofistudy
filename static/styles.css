@@ -1434,3 +1434,174 @@ input:checked + .slider:before {
 #nextButton.clicked svg {
   color: #ff800050;
 }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  bottom: 150%; /* Position the menu higher above the icon */
+  left: 50%; /* Center the menu */
+  transform: translateX(-50%); /* Adjust the position so the menu is centered */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 10px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  left: 5%;
+  min-width: 180px;
+  z-index: 1;
+}
+.dropdown-menu a {
+  color: rgb(255, 255, 255) !important;
+  padding: 8px 12px !important;
+  text-decoration: none !important;
+  display: block !important;
+  font-size: 14px !important;
+}
+.dropdown-menu a:hover {
+  background-color: #f3a953 !important;
+  color: #333 !important; 
+}
+.dropdown-menu.active {
+  display: block;
+}
+.dropdown-menu a i {
+  margin-right: 5px !important;
+  font-size: 16px !important;
+}
+.dropdown-menu a i:hover {
+  background-color: #f3a953 !important;
+  color: #333 !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: auto;
+  z-index: 9999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+
+#about-us {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  text-align: justify;
+}
+#about-us.active {
+  display: flex;
+}
+#about-us .login-logo {
+  display: block;
+  margin-top: 20px;
+  filter: invert(1) brightness(100);
+  margin: 0 auto;
+  width: 200px;
+  align-items: center;
+  height: auto;
+}
+
+#about-us h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2em;
+}
+
+#about-us p {
+ 
+  margin-top: 50px;
+  max-width: 50%;
+  text-align: center;
+  padding: auto;
+  line-height: 1.6;
+}
+#links-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+#about-us a {
+  display: flex !important;
+  font-size: 30px;
+  color: #f3a953;
+  text-decoration: none;
+  justify-content: space-between !important;
+  display: inline-block !important;
+  margin-top: 20px;
+}
+
+#about-us a:hover {
+  color: #fff;
+}
+
+.close-button {
+  position: absolute;
+  top: 30px;
+  right: 60px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 19999;
+}
+
+
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Setzt die Breite auf 100% des Containers */
+  margin: 0 auto;
+  gap: 20px;
+  flex-wrap: nowrap; /* Verhindert, dass die Elemente in eine neue Zeile wechseln */
+}
+
+.icon-box {
+  width: 30%; /* Setzt die Breite auf 30% des Containers */
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start; /* Positioniert die Icons auf der linken Seite */
+  align-items: center; /* Zentriert den Inhalt vertikal */
+  transition: transform 0.3s ease;
+  margin-right: 20px;
+  padding-left: 20px; /* Fügt etwas Platz auf der linken Seite hinzu, damit die Icons nicht direkt am Rand sind */
+}
+
+.icon-box i {
+  font-size: 2em; /* Verdoppelt die Größe der Icons */
+}
+
+.icon-box i + span {
+  font-weight: bold; /* Macht den Text dicker */
+  margin-left: 10px; /* Fügt etwas Platz zwischen dem Icon und dem Text hinzu */
+}
+.icon-box:hover {
+  transform: scale(1.1);
+}
+
+.icon-box img {
+  width: 50%;
+}
