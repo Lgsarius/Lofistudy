@@ -135,16 +135,7 @@ input:focus {
   transform: translateY(4px); /* Move button slightly on hover */
 }
 
-.login-logo {
-  display: block;
-  margin: auto;
-  width: 100px; /* Adjust this to make the image smaller or larger */
-  height: 100px; /* Adjust this to make the image smaller or larger */
-  border-radius: 50%; /* This will make the image rounded */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* This will give the image a 3D look */
-  object-fit: cover; /* This will ensure the image maintains its aspect ratio */
-  background: white; /* This will set the background color of the image */
-}
+
 
 * {
   box-sizing: border-box;
@@ -387,4 +378,29 @@ h2 {
 
 .settings-item {
   margin: 0 10px;
+}
+
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  25% {
+    transform: translatey(-10px);
+  }
+ 
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+.login-logo {
+  width: 100px; /* Adjust this to make the image smaller or larger */
+  height: 100px; /* Adjust this to make the image smaller or larger */
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.19)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.23));
+  animation: float 2s ease-in-out infinite;
+}
+
+.white-logo {
+  filter: invert(1) brightness(100);
 }

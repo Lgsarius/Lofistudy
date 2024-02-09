@@ -20,7 +20,7 @@
 <body class="login-body" style="background-image: url('{{ url_for('static', filename='loginbg.png') }}'); background-size: cover;">
     <div class="container">
         <div class="login-form">
-            <img src="{{ url_for('static', filename='loginlogo.png') }}" alt="" class="login-logo">
+            <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
                             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <div class="alert alert-warning">
