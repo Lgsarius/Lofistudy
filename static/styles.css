@@ -1570,10 +1570,9 @@ input:checked + .slider:before {
 .social-icons {
   display: flex;
   justify-content: space-between;
-  width: 100%; /* Setzt die Breite auf 100% des Containers */
+  width: 1000px; /* Erhöht die Breite, um die größeren .icon-box-Elemente aufzunehmen */
   margin: 0 auto;
   gap: 20px;
-  flex-wrap: nowrap; /* Verhindert, dass die Elemente in eine neue Zeile wechseln */
 }
 
 .icon-box {
@@ -1601,7 +1600,17 @@ input:checked + .slider:before {
 .icon-box:hover {
   transform: scale(1.1);
 }
+.icon-box:nth-child(1):hover i {
+  color: #079AEB; /* Ändert die Farbe des Twitter-Icons beim Überfahren mit der Maus auf blau */
+}
 
+.icon-box:nth-child(2):hover i {
+  color: #D8205E; /* Ändert die Farbe des Instagram-Icons beim Überfahren mit der Maus auf #D8205E */
+}
+
+.icon-box:nth-child(3):hover i {
+  color: orange; /* Ändert die Farbe des E-Mail-Icons beim Überfahren mit der Maus auf orange */
+}
 .icon-box img {
   width: 50%;
 }
