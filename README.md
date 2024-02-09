@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/loginlogo.png" alt="Lofi Study Logo" width="100">
+  <img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/logo_text.svg" alt="Lofi Study Logo" width="100">
   <h1 align="center">Lofi Study</h1>
 </p>
 
