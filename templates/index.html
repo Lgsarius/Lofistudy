@@ -39,7 +39,6 @@
             rel="stylesheet" />
         <script
             src="https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.js"></script>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.1/css/all.min.css">
         <script
             src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
         <script
@@ -61,6 +60,33 @@
         <script>
       var videoFiles = {{ video_files | tojson | safe }};
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var charactername = "{{ charactername }}";
+            console.log(charactername + " logged in");
+            while (charactername == "null" || charactername == "None" || charactername == "") {
+                var newCharacterName = prompt("Please enter a LofiStudy name:");
+                if (newCharacterName) {
+                    fetch('/update_charactername', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ charactername: newCharacterName })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Character name updated successfully!');
+                            charactername = newCharacterName;
+                        } else {
+                            alert('Failed to update character name.');
+                        }
+                    });
+                }
+            }
+        });
+    </script>          
         <script>
       var musicFiles = {{ music_files | tojson | safe }};
     </script>
@@ -97,13 +123,17 @@
                 <i class="fas fa-video" data-window="video-window"></i>
                 <span class="tooltiptext">Youtube Player</span>
             </div>
-                <div class="tooltip">
-                <i class="fas fa-clipboard" data-window="task-window"></i>
-                <span class="tooltiptext">Task Tracker</span>
+            <div class="tooltip">
+                <i class="fas fa-comments" data-window="gpt-window"></i>
+                <span class="tooltiptext">Chatbot</span>
             </div>
             <div class="tooltip">
                 <i class="fas fa-image" data-window="wallpaper-window"></i>
                 <span class="tooltiptext">Switch Background</span>
+            </div>
+            <div class="tooltip">
+                <i class="fas fa-clipboard" data-window="task-window"></i>
+                <span class="tooltiptext">Task Tracker</span>
             </div>
             <div class="tooltip">
                 <i class="fas fa-link" data-window="url-window"></i>
@@ -119,44 +149,13 @@
                 <span class="tooltiptext">Notes</span>
             </div>
             <div class="tooltip">
+                <i class="fas fa-cog" data-window="leaderboard-window"></i>
+                <span class="tooltiptext">Leaderboard</span>
+            </div>
+            <div class="tooltip">
                 <i class="fas fa-cog" data-window="settings-window"></i>
                 <span class="tooltiptext">Settings</span>
             </div>
-            <div class="tooltip">
-                <i class="fas fa-ellipsis-v dropdown-button" data-window="other-window"></i>
-                
-                <div class="dropdown-menu">
-                    <a href="{{ url_for('contact') }}"><i class="fas fa-envelope"></i> Contact Us</a>
-                    <a href="/about"><i class="fas fa-info-circle"></i> About Us</a>
-                    <a href="{{ url_for('FAQ') }}"><i class="fas fa-question-circle"></i> Faq</a>
-                    <a href="https://forms.gle/As5D7UjNY3oUCJRE6"><i class="fas fa-comment-dots"></i> Share Feedback</a>
-                </div>
-                
-            </div>
-        </div>
-        <div id="about-us" class="overlay">
-            <button id="close-button" class="close-button">X</button>
-            <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
-            <h1 class="mv-l">About us</h1>
-            <p class="center-txt">As students ourselves, we get the struggle of staying focused amidst digital clutter. That's why we made Lofistudy – your all-in-one solution for studying, working, or unwinding. No more juggling between devices or battling ads. Just a calm, distraction-free space to help you thrive. <br><br>Welcome to Lofistudy.<br><br> We are constantly improving, make sure to follow our socials to stay updated!</p>
-            <div class="social-icons">
-            <div class="icon-box">
-                <i class="fab fa-twitter-square"></i> <span>@lofistudy</span>
-            </div>
-            <div class="icon-box">
-                <i class="fab fa-instagram"></i> <span>@lofistudy</span>
-            </div>
-            <div class="icon-box">
-                <i class="fas fa-envelope"></i> <span>support@mousewerk.de</span>
-            </div>
-        </div>
-            
-        <div class="links-footer">
-            <a href="{{ url_for('legal_notice') }}">Legal Notice</a>
-            <a>      |   	</a>
-            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
-          </div>
-        </div>
         </div>
         <div id="wallpaper-window" class="window draggable">
             <div class="window-header">
@@ -388,6 +387,21 @@
                
             </div>
         </div>
+        <div id="leaderboard-window" class="window draggable">
+            <div class="window-header">
+                <div class="info">
+                    <i class="fa fa-info-circle"></i>
+                    <span class="info-text">Pomodoro Leaderboard</span>
+                    <span>Pomodoro Leaderboard</span>
+                </div>
+                <button class="close-window">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="window-content">
+             
+            </div>
+        </div>
         <div id="sticky-note-window" class="window draggable">
             <div class="window-header">
                 <div class="info">
@@ -515,12 +529,19 @@
                     </div>
                     <div class="settings-footer">
                         <div class="settings-item">
+                            <a href="{{ url_for('legal_notice') }}"
+                                class="settings-link">Legal Notice</a>
+                        </div>
+                        <div class="settings-item">
                             <a
                                 href="{{ url_for('logout') }}"
                                 class="settings-link"
                                 style="color: red;">Logout</a>
                         </div>
-
+                        <div class="settings-item">
+                            <a href="{{ url_for('privacy_policy') }}"
+                                class="settings-link">Privacy Policy</a>
+                        </div>
                     </div>
                 </div>
             </div>
