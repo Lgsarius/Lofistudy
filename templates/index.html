@@ -395,7 +395,16 @@
                 </button>
             </div>
             <div class="window-content">
-             
+                <ul>
+                    {% for user in leaderboard %}
+                        <li>
+                            {% if loop.first %}
+                                <i class="fas fa-crown"></i>
+                            {% endif %}
+                            {{ user.charactername }}: {{ user.pomodoro_time_count }}
+                        </li>
+                    {% endfor %}
+                    </ul>
             </div>
         </div>
         <div id="sticky-note-window" class="window draggable">
