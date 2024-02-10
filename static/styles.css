@@ -1659,3 +1659,8 @@ ul li:last-child {
   color: gold;
   animation: shimmer 1s ease-in-out infinite;
 }
+.first-place {
+  color: gold;
+  font-weight: bold;
+  animation: shimmer 1s ease-in-out infinite;
+}
