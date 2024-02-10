@@ -61,32 +61,30 @@
       var videoFiles = {{ video_files | tojson | safe }};
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", async function () {
             var charactername = "{{ charactername }}";
             console.log(charactername + " logged in");
             while (charactername == "null" || charactername == "None" || charactername == "") {
                 var newCharacterName = prompt("Please enter a LofiStudy name:");
                 if (newCharacterName) {
-                    fetch('/update_charactername', {
+                    const response = await fetch('/update_charactername', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({ charactername: newCharacterName })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Character name updated successfully!');
-                            charactername = newCharacterName;
-                        } else {
-                            alert('Failed to update character name.');
-                        }
                     });
+                    const data = await response.json();
+                    if (data.success) {
+                        alert('Character name updated successfully!');
+                        charactername = newCharacterName;
+                    } else {
+                        alert('Failed to update character name.');
+                    }
                 }
             }
         });
-    </script>          
+    </script>         
         <script>
       var musicFiles = {{ music_files | tojson | safe }};
     </script>
