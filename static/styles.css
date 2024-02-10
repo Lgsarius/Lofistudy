@@ -398,6 +398,16 @@ select {
   user-select: none;
 }
 
+#leaderboard-window {
+  height: 400px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+  width: 300px;
+  user-select: none;
+}
+
 #gpt-window {
   height: 600px;
   position: absolute;

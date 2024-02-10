@@ -86,7 +86,7 @@ var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelectorAll(
-      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
+      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
     )
     .forEach((icon) => {
       icon.addEventListener("click", function () {
@@ -248,6 +248,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
         switch (timer.mode) {
           case "pomodoro":
             timer.completedPomodoros++;
+            // Send a POST request to the Flask server
+            fetch('/update_pomodoros', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({}) // No need to send any data
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                console.log('Pomodoros updated successfully!');
+              } else {
+                console.log('Failed to update pomodoros.');
+              }
+            });
             if (timer.sessions % timer.longBreakInterval === 0) {
               switchMode("longBreak");
             } else {

@@ -354,6 +354,16 @@ def update_charactername():
     else:
         return jsonify({'success': False}), 400
     
+@app.route('/update_pomodoros', methods=['POST'])
+@login_required
+def update_pomodoros():
+    if current_user.pomodoro_time_count is None:
+        current_user.pomodoro_time_count = 1
+    else:
+        current_user.pomodoro_time_count += 1
+    db.session.commit()
+    return jsonify({'success': True})
+
 migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():
