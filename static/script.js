@@ -838,57 +838,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-window.addEventListener("DOMContentLoaded", (event) => {
-  document
-    .getElementById("password-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
+//window.addEventListener("DOMContentLoaded", (event) => {
+ ////   .getElementById("password-form")
+   ////    event.preventDefault();
 
-      var currentPassword = document.getElementById("current-password").value;
-      var newPassword = document.getElementById("new-password").value;
-      var confirmPassword = document.getElementById("confirm-password").value;
+  ////    var currentPassword = document.getElementById("current-password").value;
+  ////    var newPassword = document.getElementById("new-password").value;
+  ////    var confirmPassword = document.getElementById("confirm-password").value;
 
-      fetch("/change_password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "current-password": currentPassword,
-          "new-password": newPassword,
-          "confirm-password": confirmPassword,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            alert(data.success);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-document.querySelector('.dropdown-button').addEventListener('click', function() {
-  var dropdownMenu = this.nextElementSibling;
-  dropdownMenu.classList.toggle('active');
-});
-});
-
-document.addEventListener("DOMContentLoaded", (event) => {
-document.querySelector('a[href="/about"]').addEventListener('click', function(event) {
-  event.preventDefault();
-  document.getElementById('about-us').classList.add('active');
-});
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-document.getElementById('close-button').addEventListener('click', function() {
-  document.getElementById('about-us').classList.remove('active');
-});
-});
+    ////  fetch("/change_password", {
+   ////     method: "POST",
+    ////    headers: {
+     ////     "Content-Type": "application/json",
+     ////   },
+    ////    body: JSON.stringify({
+  ////        "current-password": currentPassword,
+   ////       "new-password": newPassword,
+    ////      "confirm-password": confirmPassword,
+    ////    }),
+ ////     })
+   ////     .then((response) => response.json())
+     ////   .then((data) => {
+      ////    if (data.error) {
+     ////       alert(data.error);
+     ////     } else {
+     ////       alert(data.success);
+    ////      }
+   ////     })
+  ////      .catch((error) => {
+   ////       console.error("Error:", error);
+  ////      });
+ ////   });
+////})////;

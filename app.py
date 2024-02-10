@@ -12,21 +12,20 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from openai import OpenAI
-from dotenv import load_dotenv
 
-load_dotenv()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text, unique=True)  # changed to db.Text
+    username = db.Column(db.Text, unique=True)
+    charactername = db.Column(db.Text, nullable=True)
     password = db.Column(db.Text)
     wallpaper = db.Column(db.String(120), nullable=True)
     notecontent = db.Column(db.Text, nullable=True)
     tasks = db.Column(db.Text, nullable=True)
+    pomodoro_time_count = db.Column(db.String(120), nullable=True)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,9 +52,6 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
-client = OpenAI(
-  api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
-)
 
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
@@ -185,10 +181,13 @@ def home():
     wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     username = User.query.filter_by(username=current_user.username).first()
+    leaderboard = User.query.order_by(User.pomodoro_time_count.desc()).limit(10).all()
+    leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
+    charactername = current_user.charactername
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
-    return render_template('index.html', music_files=music_files, video_files=video_files, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks )	
+    return render_template('index.html', music_files=music_files, video_files=video_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)	
 
 @app.route('/get_songs')
 @login_required
@@ -335,9 +334,26 @@ def delete_task(task_id):
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
 @app.route('/FAQ')
 def FAQ():
     return render_template('faq.html')
+
+from flask import request, jsonify
+
+@app.route('/update_charactername', methods=['POST'])
+@login_required
+def update_charactername():
+    data = request.get_json()
+    new_charactername = data.get('charactername')
+
+    if new_charactername:
+        current_user.charactername = new_charactername
+        db.session.commit()
+        return jsonify({'success': True}), 200
+    else:
+        return jsonify({'success': False}), 400
+    
 migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():
