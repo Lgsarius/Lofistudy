@@ -886,3 +886,38 @@ document.addEventListener("DOMContentLoaded", function () {
   ////      });
  ////   });
 ////})////;
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector('.dropdown-button').addEventListener('click', function() {
+    var dropdownMenu = this.nextElementSibling;
+    dropdownMenu.classList.toggle('active');
+  });
+  });
+  
+  document.addEventListener("DOMContentLoaded", (event) => {
+  document.querySelector('a[href="/about"]').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('about-us').classList.add('active');
+  });
+  });
+  
+  document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById('close-button').addEventListener('click', function() {
+    document.getElementById('about-us').classList.remove('active');
+  });
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById('twitter-box').addEventListener('click', function() {
+    window.open('https://twitter.com/lofistudy', '_blank');
+});
+});
+document.addEventListener("DOMContentLoaded", function () {
+document.getElementById('instagram-box').addEventListener('click', function() {
+    window.open('https://instagram.com/lofistudy', '_blank');
+});
+});
+document.addEventListener("DOMContentLoaded", function () {
+document.getElementById('email-box').addEventListener('click', function() {
+    window.location.href = 'mailto:support@mousewerk.de';
+});
+});

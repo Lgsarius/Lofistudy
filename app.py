@@ -360,7 +360,7 @@ def update_pomodoros():
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 1
     else:
-        current_user.pomodoro_time_count += 1
+        current_user.pomodoro_time_count + 1
     db.session.commit()
     return jsonify({'success': True})
 
