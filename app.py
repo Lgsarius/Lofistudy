@@ -204,13 +204,21 @@ def resetpassword():
         return 'Email has been sent!'
     return render_template('resetpassword.html')
 
-@app.route('/reset/<token>')
+@app.route('/reset/<token>', methods=['GET', 'POST'])
 def reset_token(token):
-    try:
-        email = s.loads(token, salt='email-confirm', max_age=3600)
-    except SignatureExpired:
-        return '<h2>The token is expired!</h2>'
-    return render_template('reset_token.html', token=token)
+    user = User.verify_reset_token(token)
+    if not user:
+        # Wenn der Token ungültig ist, leiten Sie den Benutzer zu einer Fehlerseite weiter
+        return redirect(url_for('token_invalid'))
+
+    if request.method == 'POST':
+        new_password = request.form['password']
+        hashed_password = generate_password_hash(new_password, method='sha256')
+        user.password = hashed_password
+        db.session.commit()
+        return 'Password has been changed!'
+    else:
+        return render_template('reset_token.html', token=token)
 
 @app.route('/robots.txt')
 def static_from_root():
