@@ -32,8 +32,7 @@ class User(UserMixin, db.Model):
     notecontent = db.Column(db.Text, nullable=True)
     tasks = db.Column(db.Text, nullable=True)
     pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
-
-    
+    fs_uniquifier = db.Column(db.Text, nullable=False)
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
