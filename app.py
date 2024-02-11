@@ -213,7 +213,7 @@ def reset_token(token):
 
     if request.method == 'POST':
         new_password = request.form['password']
-        hashed_password = generate_password_hash(new_password, method='sha256')
+        hashed_password = generate_password_hash(new_password, method='pbkdf2:sha256')
         user.password = hashed_password
         db.session.commit()
         return 'Password has been changed!'
