@@ -921,3 +921,16 @@ document.getElementById('email-box').addEventListener('click', function() {
     window.location.href = 'mailto:support@mousewerk.de';
 });
 });
+document.addEventListener("DOMContentLoaded", function () {
+document.querySelector('#leaderboard-window').addEventListener('click', function() {
+  fetch('/api/leaderboard')
+  .then(response => response.json())
+  .then(data => {
+      let leaderboardHTML = '';
+      data.forEach(user => {
+          leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
+      });
+      document.querySelector('#leaderboard-window .window-content ul').innerHTML = leaderboardHTML;
+  });
+});
+});

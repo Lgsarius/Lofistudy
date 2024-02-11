@@ -286,6 +286,17 @@ def legal_notice():
 def privacy_policy():
     return render_template('privacy_policy.html')
 
+@app.route('/api/leaderboard')
+def leaderboard_api():
+    leaderboard = User.query.filter(User.charactername.isnot(None)).order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(10).all()
+    leaderboard_data = []
+    for user in leaderboard:
+        leaderboard_data.append({
+            'charactername': user.charactername,
+            'pomodoro_time_count': user.pomodoro_time_count
+        })
+    return jsonify(leaderboard_data)
+
 @app.route('/logout')
 @login_required
 def logout():
