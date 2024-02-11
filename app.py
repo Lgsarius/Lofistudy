@@ -335,6 +335,7 @@ def delete_account():
     return redirect(url_for('login'))
 
 @app.route('/add-task', methods=['POST'])
+@login_required
 def add_task():
     task = Task(name=request.json['name'], totalPomodoros=request.json['totalPomodoros'], user_id=current_user.id)
     db.session.add(task)
@@ -345,6 +346,7 @@ def add_task():
     return jsonify(success=True, id=task.id)
 
 @app.route('/edit-task/<int:task_id>', methods=['PUT'])
+@lofin_required
 def edit_task(task_id):
     task = Task.query.get(task_id)
     if task is None:
@@ -397,11 +399,16 @@ def update_charactername():
 @app.route('/update_pomodoros', methods=['POST'])
 @login_required
 def update_pomodoros():
+    print("Updating pomodoros for user:", current_user.charactername)
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 1
     else:
-        current_user.pomodoro_time_count + 1
-    db.session.commit()
+        current_user.pomodoro_time_count += 1
+    try:
+        db.session.commit()
+        print("Successfully updated pomodoros")
+    except Exception as e:
+        print("Error updating pomodoros:", e)
     return jsonify({'success': True})
 
 migrate = Migrate(app, db)
