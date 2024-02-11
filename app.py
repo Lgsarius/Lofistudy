@@ -9,6 +9,7 @@ from extensions import db
 from flask_login import UserMixin
 from urllib.parse import urljoin
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import cast, Integer
 from datetime import datetime, timedelta
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -29,7 +30,7 @@ class User(UserMixin, db.Model):
     wallpaper = db.Column(db.String(120), nullable=True)
     notecontent = db.Column(db.Text, nullable=True)
     tasks = db.Column(db.Text, nullable=True)
-    pomodoro_time_count = db.Column(db.String(120), nullable=True)
+    pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -212,16 +213,22 @@ def reset_token(token):
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
+@app.template_filter('sort_by_pomodoro_time_count')
+def sort_by_pomodoro_time_count(users):
+    return sorted(users, key=lambda user: int(user.pomodoro_time_count) if user.pomodoro_time_count is not None else 0, reverse=True)
+
 @app.route('/')
 @login_required
 def home():
+    if current_user.pomodoro_time_count is None:
+        current_user.pomodoro_time_count = 0
     music_dirs = []
     music_files = []
     video_files = [url_for('static', filename=f) for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
     wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     username = User.query.filter_by(username=current_user.username).first()
-    leaderboard = User.query.order_by(User.pomodoro_time_count.desc()).limit(10).all()
+    leaderboard = User.query.filter(User.charactername.isnot(None)).order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(10).all()
     leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
     charactername = current_user.charactername
     for music_dir in music_dirs:
@@ -346,7 +353,7 @@ def add_task():
     return jsonify(success=True, id=task.id)
 
 @app.route('/edit-task/<int:task_id>', methods=['PUT'])
-@lofin_required
+@login_required
 def edit_task(task_id):
     task = Task.query.get(task_id)
     if task is None:
