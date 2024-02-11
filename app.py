@@ -188,37 +188,13 @@ def resetpassword():
             print(app.config.get('MAIL_USERNAMES'))
             msg = Message('Password Reset Request for Lofistudy.social', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
             link = url_for('reset_token', token=token, _external=True)
-            msg.html = """
+            msg.html = r"""
 <html>
-    <head>
-        <style>
-            .email-content {
-                font-family: Arial, sans-serif;
-                margin: 0 auto;
-                padding: 20px;
-                max-width: 600px;
-            }
-            .button {
-                display: inline-block;
-                padding: 12px 24px;
-                margin: 20px 0;
-                font-size: 16px;
-                color: #fff;
-                background-color: #007BFF;
-                border: none;
-                border-radius: 4px;
-                text-decoration: none;
-            }
-            .button:hover {
-                background-color: #0056b3;
-            }
-        </style>
-    </head>
     <body>
-        <div class="email-content">
+        <div style="font-family: Arial, sans-serif; margin: 0 auto; padding: 20px; max-width: 600px;">
             <img src="https://i.ibb.co/xCM5qjc/Lofistudy-02.png" alt="Logo">
             <p>Um Ihr Passwort zurückzusetzen, klicken Sie auf den folgenden Button:</p>
-            <a href="{}" class="button">Passwort zurücksetzen</a>
+            <a href="{}" style="display: inline-block; padding: 12px 24px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #007BFF; border: none; border-radius: 4px; text-decoration: none;">Passwort zurücksetzen</a>
             <p>Wenn Sie diese Anfrage nicht gestellt haben, kontaktieren Sie bitte unser Team.</p>
         </div>
     </body>
