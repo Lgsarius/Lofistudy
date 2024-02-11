@@ -929,7 +929,7 @@ document.addEventListener("DOMContentLoaded", function () {
           let leaderboardHTML = '';
           data.forEach((user, index) => {
               if (index === 0) { // If the user is the first in the list
-                  leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${user.charactername}</span>: ${user.pomodoro_time_count}</li>`;
+                  leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
               } else {
                   leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
               }
