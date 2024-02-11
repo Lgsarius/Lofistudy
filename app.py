@@ -32,6 +32,7 @@ class User(UserMixin, db.Model):
     tasks = db.Column(db.Text, nullable=True)
     pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
 
+    
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
@@ -421,7 +422,7 @@ def update_pomodoros():
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 1
     else:
-        current_user.pomodoro_time_count += 1
+        current_user.pomodoro_time_count = int(current_user.pomodoro_time_count) + 1
     try:
         db.session.commit()
         print("Successfully updated pomodoros")
