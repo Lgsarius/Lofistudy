@@ -12,8 +12,12 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
 
+
+s = URLSafeTimedSerializer('your-secret-key')
 db = SQLAlchemy()
 login_manager = LoginManager()
 
@@ -51,7 +55,14 @@ uri = os.getenv("DATABASE_URL")  # or other relevant config var
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
-
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAMES")
+app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORDS")
+app.config['MAIL_DEFAULT_SENDER'] = 'support@mousewerk.de'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 google_blueprint = make_google_blueprint(
     client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
@@ -164,9 +175,37 @@ def signup():
         return redirect(url_for('home'))  # Redirect to home page
     return render_template('signup.html')
 
-@app.route('/resetpassword')
+@app.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword():
+    if request.method == 'POST':
+        email = request.form['email']
+        user = User.query.filter_by(username=email).first()
+        print(app.config.get('MAIL_USERNAMES'))
+        if user:
+            token = s.dumps(email, salt='email-confirm')
+            print(app.config.get('MAIL_USERNAMES'))
+            msg = Message('Password Reset Request', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
+            link = url_for('reset_token', token=token, _external=True)
+            msg.html = """
+                            <html>
+                                <body>
+                                    <p>To reset your password, click the following button:</p>
+                                    <a href="{}" style="display: inline-block; padding: 10px 20px; color: white; background-color: blue; text-decoration: none;">Reset Password</a>
+                                    <p>If you did not make this request, please contact our team.</p>
+                                </body>
+                            </html>
+                            """.format(link)
+            mail.send(msg)
+        return 'Email has been sent!'
     return render_template('resetpassword.html')
+
+@app.route('/reset/<token>')
+def reset_token(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+    except SignatureExpired:
+        return '<h2>The token is expired!</h2>'
+    return render_template('reset_token.html', token=token)
 
 @app.route('/robots.txt')
 def static_from_root():
