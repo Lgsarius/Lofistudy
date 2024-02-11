@@ -186,18 +186,45 @@ def resetpassword():
         if user:
             token = s.dumps(email, salt='email-confirm')
             print(app.config.get('MAIL_USERNAMES'))
-            msg = Message('Password Reset Request', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
+            msg = Message('Password Reset Request for Lofistudy.social', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
             link = url_for('reset_token', token=token, _external=True)
             msg.html = """
-                            <html>
-                                <body>
-                                    <p>To reset your password, click the following button:</p>
-                                    <a href="{}" style="display: inline-block; padding: 10px 20px; color: white; background-color: blue; text-decoration: none;">Reset Password</a>
-                                    <p>If you did not make this request, please contact our team.</p>
-                                </body>
-                            </html>
-                            """.format(link)
-            mail.send(msg)
+<html>
+    <head>
+        <style>
+            .email-content {
+                font-family: Arial, sans-serif;
+                margin: 0 auto;
+                padding: 20px;
+                max-width: 600px;
+            }
+            .button {
+                display: inline-block;
+                padding: 12px 24px;
+                margin: 20px 0;
+                font-size: 16px;
+                color: #fff;
+                background-color: #007BFF;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+            }
+            .button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="email-content">
+            <img src="https://i.ibb.co/xCM5qjc/Lofistudy-02.png" alt="Logo">
+            <p>Um Ihr Passwort zurückzusetzen, klicken Sie auf den folgenden Button:</p>
+            <a href="{}" class="button">Passwort zurücksetzen</a>
+            <p>Wenn Sie diese Anfrage nicht gestellt haben, kontaktieren Sie bitte unser Team.</p>
+        </div>
+    </body>
+</html>
+""".format(link)
+        mail.send(msg)
         return 'Email has been sent!'
     return render_template('resetpassword.html')
 
