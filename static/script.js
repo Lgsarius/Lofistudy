@@ -922,15 +922,19 @@ document.getElementById('email-box').addEventListener('click', function() {
 });
 });
 document.addEventListener("DOMContentLoaded", function () {
-document.querySelector('#leaderboard-window').addEventListener('click', function() {
-  fetch('/api/leaderboard')
-  .then(response => response.json())
-  .then(data => {
-      let leaderboardHTML = '';
-      data.forEach(user => {
-          leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
+  document.querySelector('#leaderboard-window').addEventListener('click', function() {
+      fetch('/api/leaderboard')
+      .then(response => response.json())
+      .then(data => {
+          let leaderboardHTML = '';
+          data.forEach((user, index) => {
+              if (index === 0) { // If the user is the first in the list
+                  leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${user.charactername}</span>: ${user.pomodoro_time_count}</li>`;
+              } else {
+                  leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
+              }
+          });
+          document.querySelector('#leaderboard-window .window-content ul').innerHTML = leaderboardHTML;
       });
-      document.querySelector('#leaderboard-window .window-content ul').innerHTML = leaderboardHTML;
   });
-});
 });
