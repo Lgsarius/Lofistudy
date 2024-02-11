@@ -440,7 +440,7 @@
             </div>
             <div class="window-content">
                 <ul>
-                    {% for user in leaderboard %}
+                    {% for user in leaderboard|sort(attribute='pomodoro_time_count', reverse=True) %}
                         <li>
                             {% if loop.first %}
                                 <i class="fas fa-crown"></i>
@@ -451,7 +451,7 @@
                             : {{ user.pomodoro_time_count }}
                         </li>
                     {% endfor %}
-                    </ul>
+                </ul>
             </div>
         </div>
         <div id="sticky-note-window" class="window draggable">

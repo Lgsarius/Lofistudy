@@ -156,6 +156,7 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        charactername = request.form.get('charactername')
         username = request.form.get('email')
         password = request.form.get('password')
         repeat_password = request.form.get('repeat_password')
@@ -169,7 +170,7 @@ def signup():
         if user:
             flash('User already exists.')
             return redirect(url_for('signup'))
-        new_user = User(username=username, password=generate_password_hash(password, method='pbkdf2:sha256'))
+        new_user = User(username=username, password=generate_password_hash(password, method='pbkdf2:sha256'), charactername=charactername)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('home'))  # Redirect to home page
