@@ -145,6 +145,7 @@ def login_google():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+       
         username = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(username=username).first()
@@ -152,6 +153,8 @@ def login():
            flash('Invalid username or password.')
            return redirect(url_for('login'))
         login_user(user)
+        
+        db.session.commit()
         return redirect(url_for('home'))
     return render_template('login.html')
 

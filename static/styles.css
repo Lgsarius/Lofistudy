@@ -1671,3 +1671,10 @@ ul li:last-child {
     /* Add any other styles you need */
 }
 
+.second-place {
+  color: #C0C0C0; /* Silver */
+}
+
+.third-place {
+  color: #CD7F32; /* Bronze */
+}
