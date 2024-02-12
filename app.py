@@ -120,7 +120,6 @@ def sitemap():
         pages.append(
             [urljoin(request.url, page),ten_days_ago]
         )
-    
     sitemap_xml = render_template('sitemap_template.xml', pages=pages)
     response= make_response(sitemap_xml)
     response.headers["Content-Type"] = "application/xml"    
