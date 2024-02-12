@@ -33,6 +33,7 @@ class User(UserMixin, db.Model):
     tasks = db.Column(db.Text, nullable=True)
     pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
     fs_uniquifier = db.Column(db.Text, nullable=False)
+    
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
@@ -146,9 +147,9 @@ def login():
         username = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(username=username).first()
-       # if not user or not check_password_hash(user.password, password):
-        #   flash('Invalid username or password.')
-         #  return redirect(url_for('login'))
+        if not user or not check_password_hash(user.password, password):
+           flash('Invalid username or password.')
+           return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('home'))
     return render_template('login.html')
