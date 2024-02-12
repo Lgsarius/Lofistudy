@@ -91,6 +91,18 @@
                 }
             });
         });
+        document.addEventListener("DOMContentLoaded", function () {
+        $(document).ready(function(){
+            $('input[type="checkbox"]').click(function(){
+                if($(this).prop("checked") == true){
+                    $("#clockgroß").show();
+                }
+                else if($(this).prop("checked") == false){
+                    $("#clockgroß").hide();
+                }
+            });
+        });
+    });
     </script>         
         <script>
       var musicFiles = {{ music_files | tojson | safe }};
@@ -107,7 +119,7 @@
             </video>
         </div>
 
-        <div id="clockgroß">  </div>
+        <div id="clockgroß" style="display: none;"></div>
 
       
         <button id="fullscreen-btn"><i class="fas fa-expand"></i></button>
@@ -550,7 +562,7 @@
                         <input type="number" id="long-break-interval" min="1" />
                     </div>
                     <div class="settings-item">
-                        <span class="settings-text">Placeholder 1</span>
+                        <span class="settings-text">Enable Watch</span>
                         <label class="switch">
                             <input type="checkbox" />
                             <span class="slider round"></span>
@@ -570,9 +582,7 @@
                             <span class="slider round"></span>
                         </label>
                     </div>
-                    <div id="coming-soon">
-                        <h1>Coming Soon...</h1>
-                    </div>
+                 
                     <div class="settings-footer">
                         <div class="settings-item">
                             <a href="{{ url_for('legal_notice') }}"
