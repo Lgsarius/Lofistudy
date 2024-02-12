@@ -194,7 +194,8 @@ def resetpassword():
 <html>
     <body>
         <div style="font-family: Arial, sans-serif; margin: 0 auto; padding: 20px; max-width: 600px;">
-            <img src="https://i.ibb.co/xCM5qjc/Lofistudy-02.png" alt="Logo">
+            <img src="https://i.ibb.co/xCM5qjc/Lofistudy-02.png" style="width: 30%;
+    height: auto; alt="Logo">
             <p>Um Ihr Passwort zurückzusetzen, klicken Sie auf den folgenden Button:</p>
             <a href="{}" style="display: inline-block; padding: 12px 24px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #007BFF; border: none; border-radius: 4px; text-decoration: none;">Passwort zurücksetzen</a>
             <p>Wenn Sie diese Anfrage nicht gestellt haben, kontaktieren Sie bitte unser Team.</p>
