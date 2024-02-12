@@ -32,7 +32,9 @@ class User(UserMixin, db.Model):
     notecontent = db.Column(db.Text, nullable=True)
     tasks = db.Column(db.Text, nullable=True)
     pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
+    
     fs_uniquifier = db.Column(db.Text, nullable=False)
+    checked = db.Column(db.Boolean, default=False)
     
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -441,6 +443,22 @@ def update_pomodoros():
         print("Successfully updated pomodoros")
     except Exception as e:
         print("Error updating pomodoros:", e)
+    return jsonify({'success': True})
+
+class Checkbox(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    checked = db.Column(db.Boolean, default=False)
+
+@app.route('/get-checkbox-value')
+@login_required
+def get_checkbox_value():
+    return jsonify({'checked': current_user.checked})
+
+@app.route('/update-checkbox-value', methods=['POST'])
+@login_required
+def update_checkbox_value():
+    current_user.checked = request.json.get('checked', False)
+    db.session.commit()
     return jsonify({'success': True})
 
 migrate = Migrate(app, db)
