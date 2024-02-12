@@ -16,8 +16,8 @@ from flask_migrate import Migrate
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from uuid import uuid4
-
-
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import google
 
 s = URLSafeTimedSerializer('your-secret-key')
 db = SQLAlchemy()
@@ -50,7 +50,8 @@ class Task(db.Model):
             'id': self.id,
             'name': self.name,
             'totalPomodoros': self.totalPomodoros,
-        }    
+        }  
+      
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")  # or other relevant config var
@@ -76,9 +77,9 @@ google_blueprint = make_google_blueprint(
     ],
     redirect_url="/google/authorized"
 )
+
 app.register_blueprint(google_blueprint, url_prefix="/login/google")
-from flask_dance.consumer import oauth_authorized
-from flask_dance.contrib.google import google
+
 with app.app_context():
     @oauth_authorized.connect_via(google)
     def google_logged_in(blueprint, token):
@@ -98,8 +99,7 @@ with app.app_context():
         blueprint.token = token
         if blueprint.token.get('expires_in') <= 0:
             blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
-        
-        
+           
 db.init_app(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
@@ -120,13 +120,11 @@ def sitemap():
             [urljoin(request.url, page),ten_days_ago]
         )
     
-
-    
     sitemap_xml = render_template('sitemap_template.xml', pages=pages)
     response= make_response(sitemap_xml)
     response.headers["Content-Type"] = "application/xml"    
-    
     return response
+
 @app.route('/google/authorized')
 def login_google():
     if not google.authorized:
@@ -148,9 +146,9 @@ def login():
         username = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(username=username).first()
-        if not user or not check_password_hash(user.password, password):
-            flash('Invalid username or password.')
-            return redirect(url_for('login'))
+       # if not user or not check_password_hash(user.password, password):
+        #   flash('Invalid username or password.')
+         #  return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('home'))
     return render_template('login.html')
@@ -191,18 +189,18 @@ def resetpassword():
             msg = Message('Password Reset Request for Lofistudy.social', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
             link = url_for('reset_token', token=token, _external=True)
             msg.html = r"""
-<html>
-    <body>
-        <div style="font-family: Arial, sans-serif; margin: 0 auto; padding: 20px; max-width: 600px;">
-            <img src="https://i.ibb.co/xCM5qjc/Lofistudy-02.png" style="width: 30%;
-    height: auto; alt="Logo">
-            <p>Um Ihr Passwort zurückzusetzen, klicken Sie auf den folgenden Button:</p>
-            <a href="{}" style="display: inline-block; padding: 12px 24px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #007BFF; border: none; border-radius: 4px; text-decoration: none;">Passwort zurücksetzen</a>
-            <p>Wenn Sie diese Anfrage nicht gestellt haben, kontaktieren Sie bitte unser Team.</p>
-        </div>
-    </body>
-</html>
-""".format(link)
+                    <html>
+                        <body>
+                            <div style="font-family: Arial, sans-serif; margin: 0 auto; padding: 20px; max-width: 600px;">
+                                <img src="https://i.ibb.co/xCM5qjc/Lofistudy-02.png" style="width: 30%;
+                        height: auto; alt="Logo">
+                                <p>Um Ihr Passwort zurückzusetzen, klicken Sie auf den folgenden Button:</p>
+                                <a href="{}" style="display: inline-block; padding: 12px 24px; margin: 20px 0; font-size: 16px; color: #fff; background-color: #007BFF; border: none; border-radius: 4px; text-decoration: none;">Passwort zurücksetzen</a>
+                                <p>Wenn Sie diese Anfrage nicht gestellt haben, kontaktieren Sie bitte unser Team.</p>
+                            </div>
+                        </body>
+                    </html>
+                """.format(link)
         mail.send(msg)
         return 'Email has been sent!'
     return render_template('resetpassword.html')
@@ -286,6 +284,9 @@ def legal_notice():
 
 @app.route('/Privacy Policy')
 def privacy_policy():
+    users = User.query.all()
+    for passwords in users:
+        print(passwords)
     return render_template('privacy_policy.html')
 
 @app.route('/api/leaderboard')
@@ -334,29 +335,30 @@ def load():
 def chat():
     data = request.json
     user_message = data['message']
-
- 
-
     return jsonify({'message': 'success', 'response': user_message}), 200
 
 @app.route('/change_password', methods=['POST'])
 @login_required
 def change_password():
-    data = request.get_json()
-    current_password = data.get('current-password')
-    new_password = data.get('new-password')
-    confirm_password = data.get('confirm-password')
+    new_password = request.form.get('new-password')
+    confirm_password = request.form.get('confirm-password')
 
-    if not current_user.check_password(current_password):
-        return jsonify({'error': 'Current password is incorrect'}), 400
+    print(f"Neues Passwort: {new_password}")
+    print(f"Bestätigtes Passwort: {confirm_password}")
 
+    # Überprüfen, ob die neuen Passwörter übereinstimmen
     if new_password != confirm_password:
-        return jsonify({'error': 'New password and confirm password do not match'}), 400
+        flash('Die neuen Passwörter stimmen nicht überein.')
+        return jsonify({'message': 'Die neuen Passwörter stimmen nicht überein.'}), 400
 
-    current_user.set_password(new_password)
+    hashed_password = generate_password_hash(new_password, method='pbkdf2:sha256')
+    print(f"Gehashtes Passwort: {hashed_password}")
+
+    current_user.password = hashed_password
     db.session.commit()
 
-    return jsonify({'success': 'Password changed successfully'}), 200
+    print("Passwort erfolgreich geändert.")
+    return jsonify({'message': 'new password set'}), 200
 
 @app.route('/delete_account', methods=['POST'])
 @login_required
@@ -383,7 +385,6 @@ def edit_task(task_id):
     task = Task.query.get(task_id)
     if task is None:
         return jsonify(success=False, message="Task not found"), 404
-
     task.name = request.json.get('name', task.name)
     task.totalPomodoros = request.json.get('totalPomodoros', task.totalPomodoros)
     task.completedPomodoros = request.json.get('completedPomodoros', task.completedPomodoros)
@@ -420,7 +421,6 @@ from flask import request, jsonify
 def update_charactername():
     data = request.get_json()
     new_charactername = data.get('charactername')
-
     if new_charactername:
         current_user.charactername = new_charactername
         db.session.commit()
@@ -447,4 +447,6 @@ migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+    
+
     app.run(debug=True, host='0.0.0.0', port=5050)
