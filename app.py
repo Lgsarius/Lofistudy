@@ -240,7 +240,7 @@ def sort_by_pomodoro_time_count(users):
 def home():
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 0
-    current_user.pomodoro_time_count = 32
+    
     db.session.commit()
     music_dirs = []
     music_files = []
