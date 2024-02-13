@@ -169,6 +169,9 @@ def signup():
         if not re.match(r"[^@]+@[^@]+\.[^@]+", username):
             flash('Invalid email address.')
             return redirect(url_for('signup'))
+        if re.match(r"[^@]+@[^@]+\.[^@]+", charactername):
+            flash('Invalid Username.')
+            return redirect(url_for('signup'))
         if password != repeat_password:
             flash('Passwords do not match.')
             return redirect(url_for('signup'))
@@ -248,7 +251,7 @@ def home():
     wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     username = User.query.filter_by(username=current_user.username).first()
-    leaderboard = User.query.filter(User.charactername.isnot(None)).order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(10).all()
+    leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
     leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
     charactername = current_user.charactername
     for music_dir in music_dirs:
