@@ -145,12 +145,12 @@ def login_google():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('email')
+        username_or_charactername = request.form.get('email')
         password = request.form.get('password')
-        user = User.query.filter_by(username=username).first()
-        #if not user or not check_password_hash(user.password, password):
-        #   flash('Invalid username or password.')
-       #    return redirect(url_for('login'))
+        user = User.query.filter((User.username == username_or_charactername) | (User.charactername == username_or_charactername)).first()
+        if not user or not check_password_hash(user.password, password):
+           flash('Invalid username/character name or password.')
+           return redirect(url_for('login'))
         if user is None:
             flash('User does not exist.')
             return redirect(url_for('login'))
