@@ -73,13 +73,7 @@
                 event.preventDefault();
                 var newCharacterName = document.getElementById('characterName').value;
                 if (newCharacterName) {
-                    const response = await fetch('/update_charactername', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ charactername: newCharacterName })
-                    });
+                   
                     const data = await response.json();
                     if (data.success) {
                         alert('Character name updated successfully!');
