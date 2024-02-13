@@ -929,11 +929,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(data => {
           let leaderboardHTML = '';
           data.forEach((user, index) => {
-              if (index === 0) { // If the user is the first in the list
-                  leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
-              } else {
-                  leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
-              }
+            if (index === 0) { // If the user is the first in the list
+              leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
+          } else if (index === 1) { 
+              leaderboardHTML += `<li><span class="second-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
+          } else if (index === 2) {
+              leaderboardHTML += `<li><span class="third-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
+          } else {
+              leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
+          }
           });
           document.querySelector('#leaderboard-window .window-content ul').innerHTML = leaderboardHTML;
       });
