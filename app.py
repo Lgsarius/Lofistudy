@@ -151,6 +151,9 @@ def login():
         #if not user or not check_password_hash(user.password, password):
         #   flash('Invalid username or password.')
        #    return redirect(url_for('login'))
+        if user is None:
+            flash('User does not exist.')
+            return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('home'))
     return render_template('login.html')
