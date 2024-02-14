@@ -60,53 +60,76 @@
         <script>
       var videoFiles = {{ video_files | tojson | safe }};
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var charactername = "{{ charactername }}";
-            console.log(charactername + " logged in");
-        
-            if (charactername == "null" || charactername == "None" || charactername == "") {
-                document.getElementById('characterNameModal').style.display = 'block';
-            }
-        
-            document.getElementById('characterNameForm').addEventListener('submit', async function (event) {
-                event.preventDefault();
-                var newCharacterName = document.getElementById('characterName').value;
-                if (newCharacterName) {
-                   
-                    const data = await response.json();
-                    if (data.success) {
-                        alert('Character name updated successfully!');
-                        charactername = newCharacterName;
-                        document.getElementById('characterNameModal').style.display = 'none';
-                    } else {
-                        alert('Failed to update character name.');
-                    }
-                }
-            });
-        });
-        document.addEventListener("DOMContentLoaded", function () {
-            $(document).ready(function(){
-                // Get the current value from the server when the page loads
-                $.get('/get-checkbox-value', function(response) {
-                    $('input[type="checkbox"]').prop('checked', response.checked);
-                    $("#clockgroß").toggle(response.checked);
-                });
-        
-                $('input[type="checkbox"]').click(function(){
-                    var isChecked = $(this).prop("checked");
-                    // Update the value on the server when the checkbox is clicked
-                    $.post('/update-checkbox-value', {checked: isChecked}, function(response) {
-                        $("#clockgroß").toggle(isChecked);
-                    });
-                });
-            });
-        });
-    </script>         
+       
         <script>
       var musicFiles = {{ music_files | tojson | safe }};
     </script>
         <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var charactername = "{{ charactername }}";
+                console.log(charactername + " logged in");
+            
+                if (charactername == "null" || charactername == "None" || charactername == "") {
+                    document.getElementById('characterNameModal').style.display = 'block';
+                }
+            
+                document.getElementById('characterNameForm').addEventListener('submit', async function (event) {
+                    event.preventDefault();
+                    var newCharacterName = document.getElementById('characterName').value;
+                    if (newCharacterName) {
+                        try {
+                            const response = await fetch('/updateCharacterName', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ name: newCharacterName }),
+                            });
+                
+                            const data = await response.json();
+                            if (data.success) {
+                                alert('Character name updated successfully!');
+                                charactername = newCharacterName;
+                                document.getElementById('characterNameModal').style.display = 'none';
+                            } else {
+                                alert('Failed to update character name.');
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                            alert('Failed to update character name.');
+                        }
+                    }
+                });
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                $(document).ready(function(){
+                    // Get the current value from the server when the page loads
+                    $.get('/get-checkbox-value', function(response) {
+                        console.log('GET response:', response);  // Print the response from the server
+                        $('#watchCheckbox').prop('checked', response.checked);
+                        $("#clockgroß").toggle(response.checked);
+                    });
+            
+                    $('#watchCheckbox').click(function(){
+                        var isChecked = $(this).prop("checked");
+                        console.log('Checkbox checked:', isChecked);  // Print the current state of the checkbox
+                        // Update the value on the server when the checkbox is clicked
+                        $.ajax({
+                            url: '/update-checkbox-value',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({checked: isChecked}),
+                            success: function(response) {
+                                console.log('POST response:', response);  // Print the response from the server
+                                $("#clockgroß").toggle(isChecked);
+                            }
+                        });
+                    });
+                });
+            });
+           
+        </script>
     </head>
     <body>
         <div id="background">
@@ -137,22 +160,23 @@
                 <i class="fas fa-video" data-window="video-window"></i>
                 <span class="tooltiptext">Youtube Player</span>
             </div>
-            <div class="tooltip">
+             <!-- <div class="tooltip">
                 <i class="fas fa-comments" data-window="gpt-window"></i>
                 <span class="tooltiptext">Chatbot</span>
-            </div>
+            </div>  -->
           
             <div class="tooltip">
                 <i class="fas fa-clipboard" data-window="task-window"></i>
                 <span class="tooltiptext">Task Tracker</span>
             </div>
-            <div class="tooltip">
-                <i class="fas fa-image" data-window="wallpaper-window"></i>
-                <span class="tooltiptext">Switch Background</span>
-            </div>
+          
             <div class="tooltip">
                 <i class="fas fa-link" data-window="url-window"></i>
                 <span class="tooltiptext">Save URLs</span>
+            </div>
+            <div class="tooltip">
+                <i class="fas fa-image" data-window="wallpaper-window"></i>
+                <span class="tooltiptext">Switch Background</span>
             </div>
             <div class="tooltip">
                 <i class="fas fa-clock" data-window="clock-window"></i>
@@ -567,7 +591,7 @@
                     <div class="settings-item">
                         <span class="settings-text">Enable Watch</span>
                         <label class="switch">
-                            <input type="checkbox" />
+                            <input type="checkbox" id="watchCheckbox" />
                             <span class="slider round"></span>
                         </label>
                     </div>

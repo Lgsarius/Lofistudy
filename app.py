@@ -302,7 +302,7 @@ def privacy_policy():
 
 @app.route('/api/leaderboard')
 def leaderboard_api():
-    leaderboard = User.query.filter(User.charactername.isnot(None)).order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(10).all()
+    leaderboard =  User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
     leaderboard_data = []
     for user in leaderboard:
         leaderboard_data.append({
@@ -466,7 +466,9 @@ def get_checkbox_value():
 @app.route('/update-checkbox-value', methods=['POST'])
 @login_required
 def update_checkbox_value():
-    current_user.checked = request.json.get('checked', False)
+    print("Updating checkbox value for user:", current_user.charactername)
+    checkbox_value = request.json.get('checked', False)
+    current_user.checked = checkbox_value == True
     db.session.commit()
     return jsonify({'success': True})
 
