@@ -1407,7 +1407,7 @@ input:checked + .slider:before {
 
 #add-task-btn,
 #save-task-btn {
-  background-color: blue;
+  background-color: #ff800050;
   color: white;
   border: none;
   border-radius: 3px;
@@ -1418,7 +1418,7 @@ input:checked + .slider:before {
 
 #add-task-btn:hover,
 #save-task-btn:hover {
-  background-color: darkblue;
+  background-color: #ff800050;
 }
 
 #nextButton {

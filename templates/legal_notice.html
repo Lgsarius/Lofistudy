@@ -24,13 +24,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            background-size: contain;
-            object-fit: contain;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
             background-image: url("{{ url_for('static', filename='leagal_bg.jpg') }}");
-          }
+            background-size: cover;  /* Change from 'contain' to 'cover' */
+            background-repeat: no-repeat;  /* Add this to prevent image from repeating */
+            background-position: center;  /* Add this to center the background image */
+        }
           .content {
             margin-top: 50px;
             color: #fff;

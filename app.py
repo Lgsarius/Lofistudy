@@ -186,6 +186,27 @@ def signup():
         return redirect(url_for('home'))  # Redirect to home page
     return render_template('signup.html')
 
+@app.route('/submit_contact', methods=['POST'])
+def submit_contact():
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+
+    msg = Message(f'New Contact From: {name} <{email}>',  # Use f-string for formatting
+                  sender=app.config['MAIL_DEFAULT_SENDER'],
+                  recipients=[app.config['MAIL_USERNAME']])
+    msg.body = f'\n\n{message}'
+    mail.send(msg)
+    
+    flash('Your message was successfully sent!', 'success')
+    return redirect(url_for('home'))
+    
+   
+
+ 
+
+
+
 @app.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword():
     if request.method == 'POST':
