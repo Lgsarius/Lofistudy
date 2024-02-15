@@ -261,7 +261,7 @@ def sort_by_pomodoro_time_count(users):
 @app.route('/')
 def index():
     return render_template('homepage.html')
-@app.route('/home')
+@app.route('/app')
 @login_required
 def home():
     if current_user.pomodoro_time_count is None:
