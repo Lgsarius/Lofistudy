@@ -17,10 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
 </head>
-<body class="login-body" style="background-image: url('{{ url_for('static', filename='loginbg.png') }}'); background-size: cover;">
+<body class="login-body" style="background-image: linear-gradient(rgba(0,0,0,0.396),rgba(0, 0, 0, 0.396)),url(https://i.ibb.co/mRv6Vh9/loginbg.png);">
     <div class="container">
         <div class="login-form">
-            <img src="{{ url_for('static', filename='loginlogo.png') }}" alt="" class="login-logo">
+            <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
             <h1 class="login-title">Register To Continue</h1>
             {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -48,6 +48,15 @@
             </form>
             <a onclick="myFunction()" href="{{ url_for('login') }}" class="signup-link">Already have an Account? Login In</a>
         </div>
-    </div>
+        <div class="settings-footer">
+            <div class="settings-item">
+                <a href="{{ url_for('legal_notice') }}"
+                    class="settings-link">Legal Notice</a>
+            </div>
+            <div class="settings-item">
+                <a href="{{ url_for('privacy_policy') }}"
+                    class="settings-link">Privacy Policy</a>
+            </div>
+        </div>
 </body>
 </html>

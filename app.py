@@ -258,8 +258,10 @@ def static_from_root():
 @app.template_filter('sort_by_pomodoro_time_count')
 def sort_by_pomodoro_time_count(users):
     return sorted(users, key=lambda user: int(user.pomodoro_time_count) if user.pomodoro_time_count is not None else 0, reverse=True)
-
 @app.route('/')
+def index():
+    return render_template('homepage.html')
+@app.route('/home')
 @login_required
 def home():
     if current_user.pomodoro_time_count is None:
