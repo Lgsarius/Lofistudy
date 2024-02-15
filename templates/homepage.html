@@ -22,12 +22,12 @@
     <div class="main">
       <div class="section1">
         <div class="header">
-          <a href="youtube"> <div class="logo">Lofistudy</div></a>  
+            <a href="youtube"> <div class="logo">Lofistudy</div></a>  
           <div class="nav-btn">
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Products</a></li>
-              <li><a href="#">About</a></li>
+              <li><a onclick="myFunction()" href="{{ url_for('contact') }}"><span class="acc">Contact</a></li>
+              <li><a onclick="myFunction()" href="{{ url_for('FAQ') }}"><span class="acc">FAQ</a></li>
+          
               <li>
                 <a onclick="myFunction()" href="{{ url_for('login') }}"><span class="acc">Login </span></a>
               </li>
@@ -58,13 +58,13 @@
       <div class="section2"></div>
     </div>
     <div class="settings-footer">
-        <div class="settings-item">
-            <a href="{{ url_for('legal_notice') }}"
-                class="settings-link">Legal Notice</a>
-        </div>
-        <div class="settings-item">
-            <a href="{{ url_for('privacy_policy') }}"
-                class="settings-link">Privacy Policy</a>
+        <div class="footer-links">
+            <div class="settings-item">
+                <a href="{{ url_for('legal_notice') }}" class="settings-link">Legal Notice</a>
+            </div>
+            <div class="settings-item">
+                <a href="{{ url_for('privacy_policy') }}" class="settings-link">Privacy Policy</a>
+            </div>
         </div>
     </div>
   </body>
