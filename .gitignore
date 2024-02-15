@@ -4,3 +4,4 @@ instance/db.sqlite
 myenv
 /venv
 venv
+pgweb2.exe
