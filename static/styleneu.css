@@ -49,7 +49,7 @@ ul li{
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: .2em;
     color: rgb(255, 255, 255);
-    border: solid #f3a953 4px;
+    
     border-bottom: -20em;
     border-radius: 10px;
     cursor: pointer;
@@ -100,14 +100,20 @@ grid-template-rows: 1fr;
     animation-duration: 2s;
    }
 
-   .hero-img-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px ;
+   .hero-img-btn {
+    display: block;
+    margin: auto auto auto 70px; /* 20px left margin */
+    height: 40px;
     width: 120px;
+    text-align: center;
     border: solid 4px #f3a953;
-   }
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-img-btn:hover {
+    background-color: #f3a953; /* Change color on hover */
+    transform: scale(1.1); /* Scale up on hover */
+}
    
    .brandName{
    font-size: 100px;
@@ -115,10 +121,16 @@ grid-template-rows: 1fr;
    font-weight: 900;
    }
 
-   .hero-text{
+   .hero-text {
+    display: flex; /* Add this line */
     margin-top: -60px;
     margin-bottom: 20px;
-   }
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center; /* Add this line */
+}
   
 
 
@@ -132,7 +144,12 @@ grid-template-rows: 1fr;
     margin-top: -12px;
     margin-left: 20px;
     border: solid 2px #f3a953;
-    
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add this line */
+}
+
+.header .nav-btn ul li:nth-child(3):hover {
+    background-color: #f3a953; /* Change color on hover */
+    transform: scale(1.1); /* Scale up on hover */
 }
 
 .header .nav-btn ul li:nth-child(3) .acc{
@@ -171,3 +188,17 @@ grid-template-rows: 1fr;
 .settings-item {
     margin: 0 10px; /* Add some margin to the left and right of each link */
 }
+
+
+.login-logo {
+    
+    width: 300px; /* Adjust this to make the image smaller or larger */
+    height: 300px; /* Adjust this to make the image smaller or larger */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.19)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.23));
+    display: flex; /* Add this line */
+    margin-bottom: 100px ; /* Add this line */
+  }
+  
+  .white-logo {
+    filter: invert(1) brightness(100);
+  }
