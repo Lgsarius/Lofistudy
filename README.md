@@ -21,7 +21,7 @@ Lofi Study is a platform that combines the lo-fi artstyle with a simple, distrac
 3. Set your study timer.
 4. Start studying!
 
-![Lofi Study Interface](https://github.com/Lgsarius/Lofistudy/blob/main/static/media/Macchrome.webp)
+![Lofi Study Interface](https://github.com/Lgsarius/Lofistudy/blob/main/static/media/Macchrome.svg)
 
 ## License
 
