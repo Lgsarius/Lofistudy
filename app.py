@@ -18,6 +18,7 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from uuid import uuid4
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import google
+from flask_sitemap import Sitemap
 
 s = URLSafeTimedSerializer('your-secret-key')
 db = SQLAlchemy()
@@ -122,7 +123,7 @@ def sitemap():
         pages.append(
             [urljoin(request.url, page),ten_days_ago]
         )
-    sitemap_xml = render_template('sitemap_template.xml', pages=pages)
+    sitemap_xml = render_template('sitemap.xml', pages=pages)
     response= make_response(sitemap_xml)
     response.headers["Content-Type"] = "application/xml"    
     return response
