@@ -397,16 +397,21 @@
                             id="js-btn">
                             Start
                         </button>
+                        <select class="main-button" data-action="start" id="js-btn" onchange="changeAudioSource(this)">
+                            <option value="break.mp3">Sound 1</option>
+                            <option value="break1.mp3">Sound 2</option>
+                            <option value="break2.mp3">Sound 3</option>
+                        </select>
                     </div>
                 </main>
                 <div class="hidden">
-                    <audio
-                        src="{{ url_for('static', filename='backtowork.mp3') }}"
+                    <audio id="pomodoroAudio"
+                        src="{{ url_for('static', filename='break.mp3') }}"
                         data-sound="pomodoro"></audio>
-                    <audio
+                    <audio id="shortBreakAudio"
                         src="{{ url_for('static', filename='break.mp3') }}"
                         data-sound="shortBreak"></audio>
-                    <audio
+                    <audio id="longBreakAudio"
                         src="{{ url_for('static', filename='break.mp3') }}"
                         data-sound="longBreak"></audio>
                 </div>

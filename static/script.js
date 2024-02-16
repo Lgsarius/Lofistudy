@@ -943,3 +943,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+function changeAudioSource(selectElement) {
+  var audioElements = ['pomodoroAudio', 'shortBreakAudio', 'longBreakAudio'];
+  audioElements.forEach(function(id) {
+      var audioElement = document.getElementById(id);
+      audioElement.src = "{{ url_for('static', filename='" + selectElement.value + "') }}";
+  });
+}
+});
