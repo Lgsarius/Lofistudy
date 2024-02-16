@@ -163,3 +163,69 @@ body::-webkit-scrollbar {
     height: 100%;
     border-radius: 19px;
 }
+
+
+.footer {
+    background-color: #343a40;
+    padding: 40px 0;
+    color: #fff;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.settings-item {
+    text-align: center;
+}
+
+.settings-link {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.settings-link:hover {
+    color: #ddd;
+}
+.footer {
+    width: 100%;
+    max-height: 50px;
+    box-sizing: border-box;
+    /* other styles... */
+}
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around; /* Adjusts the space around items */
+    align-items: center;
+}
+
+.footer-left, .footer-middle, .footer-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin: 0 -400px; /* Adds horizontal margin */
+
+}
+    .reduced-size {
+        width: 30%;
+    }
+
+    .row-with-line {
+        border-top: 1px solid white;
+    }

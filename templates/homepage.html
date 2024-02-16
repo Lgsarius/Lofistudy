@@ -15,6 +15,10 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preload" as="image" href="https://i.ibb.co/TPcxv5G/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.png">
+    <link rel="preload" as="image" href="https://i.ibb.co/G0BSJZc/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.png">
+    <link rel="preload" as="image" href="https://i.ibb.co/pKWWqZb/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.png">
+    <link rel="preload" as="image" href="https://i.ibb.co/48kYHCd/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -83,16 +87,16 @@
                
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/TPcxv5G/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.png" alt="First slide">
+                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/TPcxv5G/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.png" alt="First slide">
                       </div>
                       <div class="carousel-item">
-                        <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/G0BSJZc/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.png" alt="First slide">
+                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/G0BSJZc/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.png" alt="First slide">
                       </div>
                       <div class="carousel-item">
-                        <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/pKWWqZb/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.png" alt="First slide">
+                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/pKWWqZb/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.png" alt="First slide">
                       </div>
                       <div class="carousel-item">
-                        <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/48kYHCd/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.png" alt="First slide">
+                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/48kYHCd/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.png" alt="First slide">
                       </div>
                 </div>
             </div>
@@ -129,29 +133,45 @@
               <img id="image1" src="{{ url_for('static', filename='media/Macchrome.svg') }}" alt="website preview" class="web-prev img-shadow smooth-transition">
             </div>
         </div>
-        
-
-    
-        
-    
    
-
-     <footer class="footer bg-dark text-white">
-            <div class="container text-center py-3">
-                <div class="footer-links">
-                    <div class="settings-item py-2">
-                        <a href="{{ url_for('legal_notice') }}" class="settings-link text-white">Legal Notice</a>
+        <div class="row row-with-line">
+            <div class="container py-3 footer-with-line">
+                <div class="footer-content d-flex justify-content-between align-items-center">
+                    <!-- Copyright and logo on the left -->
+                    <div class="footer-left">
+                        <div class="logo py-2">
+                            <img class="logo-shadow reduced-size" src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
+                        </div>
+                        <div class="copyright py-2">
+                            <p class="text-white">Copyright © 2024 Lofistudy</p>
+                        </div>
                     </div>
-                    <div class="settings-item py-2">
-                        <a href="{{ url_for('privacy_policy') }}" class="settings-link text-white">Privacy Policy</a>
+                    <!-- Legal and Privacy in the middle -->
+                    <div class="footer-middle">
+                        <div class="settings-item py-2">
+                            <a href="{{ url_for('legal_notice') }}" class="settings-link text-white">Legal Notice</a>
+                        </div>
+                        <div class="settings-item py-2">
+                            <a href="{{ url_for('privacy_policy') }}" class="settings-link text-white">Privacy Policy</a>
+                        </div>
+                    </div>
+                    <!-- Social media links on the right -->
+                    <div class="footer-right">
+                        <div class="settings-item py-2">
+                            <a href="https://www.instagram.com/your_instagram_handle" class="settings-link text-white">Instagram</a>
+                        </div>
+                        <div class="settings-item py-2">
+                            <a href="https://twitter.com/your_twitter_handle" class="settings-link text-white">Twitter</a>
+                        </div>
                     </div>
                 </div>
             </div>      
-        </footer>
+        </div>     
   
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
+       // document.addEventListener('contextmenu', event => event.preventDefault());
         $(document).ready(function() {
           var current = 0;
           var images = $(".prev-image > img");
@@ -183,6 +203,26 @@
               interval: 1500
             })
         });
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+          
+            if ("IntersectionObserver" in window) {
+              let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                  if (entry.isIntersecting) {
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                    lazyImageObserver.unobserve(lazyImage);
+                  }
+                });
+              });
+          
+              lazyImages.forEach(function(lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+              });
+            }
+          });
         </script>
       </script>
 </body>
