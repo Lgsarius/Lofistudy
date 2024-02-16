@@ -17,51 +17,108 @@
     />
     <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <title>Lofistudy Homepage</title>
-  </head>
-  <body>
-    <div class="main">
-      <div class="section1">
-        <div class="header">
-            <a href=""> <div class="logo"></div></a>  
-          <div class="nav-btn">
-            <ul>
-              <li><a onclick="myFunction()" href="{{ url_for('contact') }}"><span class="acc">Contact</a></li>
-              <li><a onclick="myFunction()" href="{{ url_for('FAQ') }}"><span class="acc">FAQ</a></li>
-          
-              <li>
-                <a onclick="myFunction()" href="{{ url_for('login') }}"><span class="acc">Login </span></a>
-              </li>
+</head>
+<style>
+    body {
+        display: grid;
+        grid-template-rows: 130px 1fr;
+        background-image: linear-gradient(rgba(0,0,0,0.396),rgba(0, 0, 0, 0.396)),url('https://i.ibb.co/mRv6Vh9/loginbg.png');
+        background-size: cover;
+    }
+    .navbar {
+        background-color: transparent !important;
+    }
+    .nav-item {
+        list-style: none;
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .nav-item a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        transition: color 0.3s ease;
+        padding: 5px; /* Add padding around the text */
+    }
+    
+    .nav-item a:hover {
+        color: #F3A953;
+    }
+    
+    /* Add a special rule for the login item */
+    .nav-item a.login {
+        border: 2px solid orange; /* Add an orange border */
+        border-radius: 5px; /* Make the border corners rounded */
+    }
+    .hero-text p, .hero-img-btn {
+        color: white;
+    }
+    a {
+        color: white; /* Change this to your desired color */
+        text-decoration: none; /* This removes the underline */
+    }
+    
+    a:hover {
+        text-decoration: none; /* This removes the underline */
+        color: white; /* Change this to your desired hover color */
+    }
+    .navbar-brand img {
+        width: 20%; /* Adjust the width */
+        height: auto; /* Keep the aspect ratio */
+    }
+    
+    </style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="">
+            <img src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a onclick="myFunction()" href="{{ url_for('contact') }}"><span class="acc">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="myFunction()" href="{{ url_for('FAQ') }}"><span class="acc">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="myFunction()" href="{{ url_for('login') }}"><span class="nav-item a login">Login </span></a>
+                </li>
             </ul>
-          </div>
         </div>
-        <div class="flex-container" style="display: flex; flex-direction: row;">
-            <div class="hero-main">
-                <div class="hero-contents">
-                    <div class="content-container">
-                        <div class="hero-img">
-                            <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
-                        </div>
-                        <div class="hero-text">
-                            <p>
-                                
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+              <div class="content-container">
+                <div class="hero-img">
+                    <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
+                </div>
+                <div class="hero-text">
+                    <p>
+                        
 Your calm, digital space to
-                                <br><br><span id="typed-text"></span>
-                            </p>
-            </div>
-            <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
-        </div>
-       
-        </div>
+                        <br><br><span id="typed-text"></span>
+                    </p>
     </div>
-    <div class="prev-image" style="display: flex;  height: 80vh;">
-        <img src="{{ url_for('static', filename='media/Macchrome.svg') }}" alt="website preview" class="web-prev img-shadow">
-    </div>
+    <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
 </div>
-      <div class="section2"></div>
+
+            </div>
+            <div class="col-md-6">
+              <img id="image1" src="{{ url_for('static', filename='media/Macchrome.svg') }}" alt="website preview" class="web-prev img-shadow smooth-transition">
+            </div>
+        </div>
     </div>
-    <div class="settings-footer">
-        <div class="footer-links">
+
+    <footer class="footer mt-auto py-3">
+        <div class="container text-center">
+          <div class="footer-links">
             <div class="settings-item">
                 <a href="{{ url_for('legal_notice') }}" class="settings-link">Legal Notice</a>
             </div>
@@ -69,16 +126,38 @@ Your calm, digital space to
                 <a href="{{ url_for('privacy_policy') }}" class="settings-link">Privacy Policy</a>
             </div>
         </div>
-    </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        var typed = new Typed('#typed-text', {
-            strings: ["Work", "Study", "Chill", "Code"],
-            typeSpeed: 120,
-            backSpeed: 120,
-            backDelay: 500, // Wait for 500ms before backspacing
-            smartBackspace: true, // Only backspace what doesn't match the previous string
-            loop: true
+        $(document).ready(function() {
+          var current = 0;
+          var images = $(".prev-image > img");
+          images.first().show(); // Show the first image initially
+          images.not(':first').hide(); // Hide other images
+        
+          function cycleImages() {
+            var next = ((current + 1) % images.length);
+            $(images[current]).fadeOut('slow', function() {
+              // This callback function is executed after the current image has completely faded out
+              $(images[next]).fadeIn('slow'); // Start fading in the next image
+            });
+            current = next;
+          }
+        
+          cycleImages(); // Call cycleImages once to start the cycling immediately
+          setInterval(cycleImages, 5000);
         });
-    </script>
-  </body>
+          var typed = new Typed('#typed-text', {
+              strings: ["Work", "Study", "Chill", "Code"],
+              typeSpeed: 120,
+              backSpeed: 120,
+              backDelay: 500, // Wait for 500ms before backspacing
+              smartBackspace: true, // Only backspace what doesn't match the previous string
+              loop: true
+          });
+      </script>
+</body>
 </html>
