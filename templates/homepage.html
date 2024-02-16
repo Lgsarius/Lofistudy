@@ -10,68 +10,23 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='styleneu.css') }}"
-    />
+   
     <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='styleneu.css') }}"
+  />
     <title>Lofistudy Homepage</title>
 </head>
 <style>
-    body {
-        display: grid;
-        grid-template-rows: 130px 1fr;
-        background-image: linear-gradient(rgba(0,0,0,0.396),rgba(0, 0, 0, 0.396)),url('https://i.ibb.co/mRv6Vh9/loginbg.png');
-        background-size: cover;
-    }
     .navbar {
         background-color: transparent !important;
     }
-    .nav-item {
-        list-style: none;
-        display: inline-block;
-        margin: 0 10px;
-    }
-    
-    .nav-item a {
-        text-decoration: none;
-        color: white;
-        font-size: 16px;
-        transition: color 0.3s ease;
-        padding: 5px; /* Add padding around the text */
-    }
-    
-    .nav-item a:hover {
-        color: #F3A953;
-    }
-    
-    /* Add a special rule for the login item */
-    .nav-item a.login {
-        border: 2px solid orange; /* Add an orange border */
-        border-radius: 5px; /* Make the border corners rounded */
-    }
-    .hero-text p, .hero-img-btn {
-        color: white;
-    }
-    a {
-        color: white; /* Change this to your desired color */
-        text-decoration: none; /* This removes the underline */
-    }
-    
-    a:hover {
-        text-decoration: none; /* This removes the underline */
-        color: white; /* Change this to your desired hover color */
-    }
-    .navbar-brand img {
-        width: 20%; /* Adjust the width */
-        height: auto; /* Keep the aspect ratio */
-    }
-    
-    </style>
+</style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <a class="navbar-brand" href="">
