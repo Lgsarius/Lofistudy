@@ -20,7 +20,7 @@ body {
   left: 0;
   width: 100%;
   padding: 20px 100px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(68, 68, 68, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,7 +37,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.4),
+    rgba(67, 67, 67, 0.4),
     transparent
   );
   transition: 0.5s;
@@ -200,4 +200,19 @@ button:hover {
 .register p a:hover {
   text-decoration: underline;
   color: #F39C53;
+}
+
+.settings-footer {
+  background-color: #f8f9fa00;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: rgb(247, 247, 247);
+}
+
+a {
+  color: #ffffff;
 }
