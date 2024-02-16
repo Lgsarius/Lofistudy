@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,45 +8,48 @@
             content="LofiStudy is a website that helps you to study by giving you a distraction free enviroment." />
         <meta name="author" content="LofiStudy" />
         <title>LofiStudy</title>
-    <meta property="og:image" href="{{ url_for('static', filename='picture.png') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&family=Figtree:wght@700&display=swap" rel="stylesheet">
+        <meta property="og:image" href="{{ url_for('static', filename='picture.png') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='loginstyles.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
-</head>    
-<body class="login-body" style="background-image: linear-gradient(rgba(0,0,0,0.396),rgba(0, 0, 0, 0.396)),url(https://i.ibb.co/mRv6Vh9/loginbg.png);">
-    <div class="container">
-        <div class="login-form">
-            <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
-                            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="alert alert-warning">
-                    {{ messages[0] }}
-                    </div>
-                {% endif %}
-                {% endwith %}
-                <h1 class="login-title">Sign in to continue</h1>
-              <!--  <a href="{{ url_for('login_google') }}" class="google-login-button">
-            <!--        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Google Login Button">
-                </a>-->
-                <form action="{{ url_for('login') }}" method="post">
-                <div class="inp">
-                    <input type="text" name="email" id="email" placeholder="Email">
+</head>
+<body>
+    <div class="main">
+   
+<video autoplay loop muted plays-inline class="vid" >
+    <source src="https://res.cloudinary.com/dgp0pgxb8/video/upload/f_auto:video,q_auto/hwxbyk6mq8a0iduh9xf2" >
+</video>
+    <div class="card">
+          <form action="{{ url_for('login') }}" method="post">
+            <h1>Lofistudy Login</h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-warning">
+                {{ messages[0] }}
                 </div>
-                <div class="inp password-div1">
-                    <input type="password" name="password" id="password" class="password-field" placeholder="Password">
-                    <svg class="field-icon toggle-password" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path class="eye-path" fill="#38a4ef" d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z"/><path fill="#38a4ef" d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z"/></svg>
-                </div>
-                <div class="forgot-password">
-                    <a onclick="myFunction()" href="{{ url_for('resetpassword') }}" class="signup-link">Forgot Password?</a>
-                </div>
-                <button type="submit" class="login-button">Sign in</button>
-            </form>
-            <a onclick="myFunction()" href="{{ url_for('signup') }}" class="signup-link">Dont have a account? Sign up</a>
-        </div>
+            {% endif %}
+            {% endwith %}
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input name="email" id="email" type="email" required>
+                <label for="">Email</label>
+            </div>
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <input name="password" id="password" type="password" required>
+                <label for="">Password</label>
+            </div>
+            <div class="forget">
+                <label for=""><input type="checkbox">Remember Me</label>
+                <a onclick="myFunction()" href="{{ url_for('resetpassword') }}" class="signup-link">Forget Password</a>
+            </div>
+            <button>Log in</button>
+      
+            <div class="register">
+                <p>Don't have a account  <a onclick="myFunction()" href="{{ url_for('signup') }}" class="signup-link">Register</a></p>
+            </div>
+        </form>
     </div>
     <div class="settings-footer">
         <div class="settings-item">
@@ -58,5 +61,6 @@
                 class="settings-link">Privacy Policy</a>
         </div>
     </div>
+</div>
 </body>
 </html>
