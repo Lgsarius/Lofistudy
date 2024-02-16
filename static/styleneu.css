@@ -172,7 +172,7 @@ body::-webkit-scrollbar {
 }
 
 .container {
-    max-width: 960px;
+   
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -228,4 +228,14 @@ body::-webkit-scrollbar {
 
     .row-with-line {
         border-top: 1px solid white;
+    }
+
+
+    .icon-class {
+        font-size: 2em; /* Adjust this value to change the size of the icon */
+    }
+
+    .typed-cursor {
+        color: #F3A953;
+        font-weight: bold; 
     }

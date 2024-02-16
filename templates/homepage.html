@@ -15,6 +15,9 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="preload" as="image" href="https://i.ibb.co/TPcxv5G/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.png">
     <link rel="preload" as="image" href="https://i.ibb.co/G0BSJZc/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.png">
     <link rel="preload" as="image" href="https://i.ibb.co/pKWWqZb/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.png">
@@ -114,25 +117,46 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-              <div class="content-container">
-                <div class="hero-img">
-                    <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
-                </div>
-                
-                <div class="hero-text">
-                    <p>Your calm, digital space to
-                        <br><br><span id="typed-text"></span>
-                    </p>
+            <div class="container px-4 px-lg-5">
+                <h2 class="text-center mt-0">Lofistudy Features</h2>
+                <hr class="divider">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-2">
+                            <i class="fas fa-clock fa-4x"></i>
+                            <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Pomodoro Timer</h3>
+                            <p class="text-muted mb-0">Boost productivity with our Pomodoro Timer feature, helping you stay focused and efficient.</p>
+                        </div>
                     </div>
-                    <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-2">
+                            <i class="fab fa-soundcloud fa-4x"></i>
+                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Curated Music</h3>
+                            <p class="text-muted mb-0">Enhance your study sessions with our vast collection of curated music playlists suitable for every mood.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-2">
+                            <i class="fas fa-clipboard fa-4x"></i>
+                            <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Task Planner</h3>
+                            <p class="text-muted mb-0">Stay organized and on top of your tasks with our intuitive Task Planner</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-2">
+                            <i class="fas fa-sticky-note fa-4x"></i>
+                            <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Notes Window</h3>
+                            <p class="text-muted mb-0">Capture your thoughts and ideas effortlessly with our Notes Window</p>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-            <div class="col-md-6">
-              <img id="image1" src="{{ url_for('static', filename='media/Macchrome.svg') }}" alt="website preview" class="web-prev img-shadow smooth-transition">
             </div>
         </div>
+        
    
         <div class="row row-with-line">
             <div class="container py-3 footer-with-line">
