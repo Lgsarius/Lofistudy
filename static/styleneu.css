@@ -4,14 +4,30 @@
         margin: 0;
         color: white;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        overflow-x: hidden;
-        overflow-y: hidden;
+        height: 100%;
+        overflow: auto;
+        scroll-behavior: smooth;
     }
+
     body {
         display: grid;
         grid-template-rows: 130px 1fr;
-        background-image: linear-gradient(rgba(0,0,0,0.396),rgba(0, 0, 0, 0.396)),url('https://i.ibb.co/mRv6Vh9/loginbg.png');
-        background-size: cover;
+        background-size: 400% 400%;
+        background: linear-gradient(-45deg, #151515, #383536, #151515, #111111);
+        animation: gradient 30s ease-in-out infinite;
+        height: 100vh;
+    }
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
    
     .nav-item {
@@ -64,15 +80,7 @@
     .web-prev:hover {
         transform: perspective(800px) rotateY(-4deg);
     }
-    .footer-links {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background: #f8f9fa00; /* Change this to match your site's footer background color */
-        display: flex; /* Add this line */
-        justify-content: center; /* Add this line */
-        padding: 10px 0; /* Add some padding */
-    }
+
 .login-logo {
     
     width: 300px; /* Adjust this to make the image smaller or larger */
@@ -101,5 +109,57 @@
 
 .hero-img-btn:hover {
     background-color: #F39C53; /* Change to your preferred hover color */
+    color: white !important; /* Change to your preferred hover text color */
     transform: scale(1.1); /* Makes the button slightly larger when hovered */
+}
+a.navbar-brand {
+    margin-left: 33px;
+}
+
+.row {
+    margin-top: 190px;
+}
+
+
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+.col-md-6 {
+   
+    padding-left: 120px;
+    padding-right: 25px;
+  
+}
+.col-md-3 {
+    padding-right: 200px;
+}
+
+
+
+
+  
+
+.img{
+    border-radius: 10px;
+}
+
+#image1 {
+    border-radius: 19px;
+   box-shadow: 0 0 20px #F39C53;
+}
+.footer {
+    margin-top: 190px;
+}
+
+
+.carousel.slide {
+    border-radius: 19px;
+    box-shadow: 0 0 20px #F39C53;
+}
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 19px;
 }
