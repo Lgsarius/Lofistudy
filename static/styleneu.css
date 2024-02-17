@@ -246,3 +246,9 @@ body::-webkit-scrollbar {
         color: #F3A953;
         font-weight: bold; 
     }
+
+    .wallaper-selection-image {
+        width: 300px !important;
+        height: 200px !important;
+        object-fit: cover !important;
+    }

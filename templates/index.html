@@ -133,7 +133,7 @@
     </head>
     <body>
         <div id="background">
-            <video id="background-video" autoplay loop muted>
+            <video id="background-video" autoplay loop muted oncontextmenu="return false;">
                 <source
                     id="video-source"
                     src="{{ url_for('static', filename=wallpaper) }}"
