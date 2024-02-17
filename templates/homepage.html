@@ -66,20 +66,17 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
-              <div class="content-container">
+            <div class="col-md-6" >
                 <div class="hero-img">
                     <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
                 </div>
                 <div class="hero-text">
-                    <p>Your calm, digital space to
+                    <p style="font-size: 2em;">Your calm, digital space to
                         <br><br><span id="typed-text"></span>
                     </p>
                     </div>
                     <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
                 </div>
-
-            </div>
             <div class="col-md-6">
               <img id="image1" src="{{ url_for('static', filename='media/Macchrome.webp') }}" alt="website preview" class="web-prev img-shadow smooth-transition">
             </div>
@@ -108,12 +105,12 @@
                 </div>
             </div>
         </div>
-              <div class="col-md-6">
+              <div class="col-md-5" >
                 <div class = "content-container">
                 <div class="hero-text">
-            
+                    <h1>Craft your focus environment</h1>
                     <p>Whether you prefer getting work done in the cozy atmosphere of a cafe or escaping to the tranquil shores of the beach, lofistudy offers you both experiences and much more.
-                        <br><br><span id="typed-text"></span>
+                       
                     </p>
                     </div>
                 </div>
@@ -167,10 +164,9 @@
                 <div class="footer-content d-flex justify-content-between align-items-center">
                     <!-- Copyright and logo on the left -->
                     <div class="footer-left">
-                        <div class="logo py-2">
-                            <img class="logo-shadow reduced-size" src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
-                        </div>
+                      
                         <div class="copyright py-2">
+                            <img class="logo-shadow reduced-size" src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
                             <p class="text-white">Copyright © 2024 Lofistudy</p>
                         </div>
                     </div>
@@ -187,12 +183,12 @@
                     <div class="footer-right">
                         <div class="settings-item py-2">
                             <a href="https://www.instagram.com/your_instagram_handle" class="settings-link text-white">
-                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-instagram fa-3x"></i>
                             </a>
                         </div>
                         <div class="settings-item py-2">
                             <a href="https://twitter.com/your_twitter_handle" class="settings-link text-white">
-                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-twitter fa-3x"></i>
                             </a>
                         </div>
                     </div>
@@ -203,7 +199,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-       document.addEventListener('contextmenu', event => event.preventDefault());
+      // document.addEventListener('contextmenu', event => event.preventDefault());
         $(document).ready(function() {
           var current = 0;
           var images = $(".prev-image > img");
