@@ -161,7 +161,7 @@ def login():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
+   
     return render_template('404.html'), 404
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -207,12 +207,6 @@ def submit_contact():
     flash('Your message was successfully sent!', 'success')
     return redirect(url_for('home'))
     
-   
-
- 
-
-
-
 @app.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword():
     if request.method == 'POST':
@@ -276,8 +270,9 @@ def home():
     db.session.commit()
     music_dirs = []
     music_files = []
-    video_files = [url_for('static', filename=f) for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
-    wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
+    video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
+    print(video_files)
+    wallpaper =  "media/videos/" + current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     username = User.query.filter_by(username=current_user.username).first()
     leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
@@ -360,6 +355,7 @@ def save():
 def set_wallpaper():
     data = request.get_json()
     if 'wallpaper' in data:
+        print(f"Setting wallpaper to {data['wallpaper']}")
         current_user.wallpaper = data['wallpaper']
         db.session.commit()
         return jsonify({'message': 'Wallpaper set successfully'}), 200

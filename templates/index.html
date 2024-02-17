@@ -1,856 +1,883 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-            name="description"
-            content="LofiStudy is a website that helps you to study by giving you a distraction free enviroment." />
-        <meta name="author" content="LofiStudy" />
-        <title>LofiStudy</title>
-        <meta
-            property="og:image"
-            href="{{ url_for('static', filename='picture.png') }}" />
-        <link
-            rel="icon"
-            type="image/x-icon"
-            href="{{ url_for('static', filename='favicon.ico') }}" />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="{{ url_for('static', filename='styles.css') }}" />
-        <link
-            rel="music"
-            type="music"
-            href="{{ url_for('static', filename='button-sound.mp3') }}" />
-        <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <div id="button-sound-path" style="display: none;">
-            {{ url_for('static', filename='button-sound.mp3') }}
-        </div>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        <link
-            href="https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.css"
-            rel="stylesheet" />
-        <script
-            src="https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
-        <script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lofistudy is a website that helps you to study by giving you a distraction free enviroment."
+    />
+    <meta name="author" content="Lofistudy" />
+    <title>Lofistudy</title>
+    <meta
+      property="og:image"
+      href="{{ url_for('static', filename='picture.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      rel="music"
+      type="music"
+      href="{{ url_for('static', filename='media/sounds/button-sound.mp3') }}"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div id="button-sound-path" style="display: none">
+      {{ url_for('static', filename='media/sounds/button-sound.mp3') }}
+    </div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/fullcalendar@4.0.0-alpha.4/dist/fullcalendar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script>
       var videoFiles = {{ video_files | tojson | safe }};
     </script>
-       
-        <script>
+
+    <script>
       var musicFiles = {{ music_files | tojson | safe }};
     </script>
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var charactername = "{{ charactername }}";
-                console.log(charactername + " logged in");
-            
-                if (charactername == "null" || charactername == "None" || charactername == "") {
-                    document.getElementById('characterNameModal').style.display = 'block';
-                }
-            
-                document.getElementById('characterNameForm').addEventListener('submit', async function (event) {
-                    event.preventDefault();
-                    var newCharacterName = document.getElementById('characterName').value;
-                    if (newCharacterName) {
-                        try {
-                            const response = await fetch('/updateCharacterName', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({ name: newCharacterName }),
-                            });
-                
-                            const data = await response.json();
-                            if (data.success) {
-                                alert('Character name updated successfully!');
-                                charactername = newCharacterName;
-                                document.getElementById('characterNameModal').style.display = 'none';
-                            } else {
-                                alert('Failed to update character name.');
-                            }
-                        } catch (error) {
-                            console.error('Error:', error);
-                            alert('Failed to update character name.');
-                        }
-                    }
-                });
-            });
-            document.addEventListener("DOMContentLoaded", function () {
-                $(document).ready(function(){
-                    // Get the current value from the server when the page loads
-                    $.get('/get-checkbox-value', function(response) {
-                        console.log('GET response:', response);  // Print the response from the server
-                        $('#watchCheckbox').prop('checked', response.checked);
-                        $("#clockgroß").toggle(response.checked);
-                    });
-            
-                    $('#watchCheckbox').click(function(){
-                        var isChecked = $(this).prop("checked");
-                        console.log('Checkbox checked:', isChecked);  // Print the current state of the checkbox
-                        // Update the value on the server when the checkbox is clicked
-                        $.ajax({
-                            url: '/update-checkbox-value',
-                            type: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify({checked: isChecked}),
-                            success: function(response) {
-                                console.log('POST response:', response);  // Print the response from the server
-                                $("#clockgroß").toggle(isChecked);
-                            }
-                        });
-                    });
-                });
-            });
-           
-        </script>
-    </head>
-    <body>
-        <div id="background">
-            <video id="background-video" autoplay loop muted oncontextmenu="return false;">
-                <source
-                    id="video-source"
-                    src="{{ url_for('static', filename=wallpaper) }}"
-                    type="video/mp4" />
-            </video>
-        </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+      document.addEventlistener("DOMcontentLoaded", function () {
+        var charactername = "{{ charactername }}";
+        console.log(charactername + " logged in");
+      });
+      document.addEventlistener("DOMcontentLoaded", function () {
+        $(document).ready(function () {
+          // Get the current value from the server when the page loads
+          $.get("/get-checkbox-value", function (response) {
+            console.log("GET response:", response); // print the response from the server
+            $("#watchCheckbox").prop("checked", response.checked);
+            $("#clockgroß").toggle(response.checked);
+          });
 
-        <div id="clockgroß" style="display: none;"></div>
+          $("#watchCheckbox").click(function () {
+            var isChecked = $(this).prop("checked");
+            console.log("Checkbox checked:", isChecked); // print the current state of the checkbox
+            // update the value on the server when the checkbox is clicked
+            $.ajax({
+              url: "/update-checkbox-value",
+              type: "pOsT",
+              contenttype: "application/json",
+              data: JsON.stringify({ checked: isChecked }),
+              success: function (response) {
+                console.log("pOsT response:", response); // print the response from the server
+                $("#clockgroß").toggle(isChecked);
+              },
+            });
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="background">
+      <video
+        id="background-video"
+        autoplay
+        loop
+        muted
+        oncontextmenu="return false;"
+      >
+        <source
+          id="video-source"
+          src="{{ url_for('static', filename=wallpaper) }}"
+          type="video/mp4"
+        />
+      </video>
+    </div>
 
-      
-        <button id="fullscreen-btn"><i class="fas fa-expand"></i></button>
-        <div id="early-access-banner">Alpha</div>
-        <div id="timer"></div>
-        <div id="selection-bar">
-            <div class="tooltip">
-                <i class="fab fa-soundcloud" data-window="spotify-window"></i>
-                <span class="tooltiptext">Soundcloud</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-volume-up" data-window="sound-window"></i>
-                <span class="tooltiptext">Sounds</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-video" data-window="video-window"></i>
-                <span class="tooltiptext">Youtube Player</span>
-            </div>
-             <!-- <div class="tooltip">
+    <div id="clockgroß" style="display: none"></div>
+
+    <button id="fullscreen-btn"><i class="fas fa-expand"></i></button>
+    <div id="early-access-banner">alpha</div>
+    <div id="timer"></div>
+    <div id="selection-bar">
+      <div class="tooltip">
+        <i class="fab fa-soundcloud" data-window="spotify-window"></i>
+        <span class="tooltiptext">soundcloud</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-volume-up" data-window="sound-window"></i>
+        <span class="tooltiptext">sounds</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-video" data-window="video-window"></i>
+        <span class="tooltiptext">Youtube player</span>
+      </div>
+      <!-- <div class="tooltip">
                 <i class="fas fa-comments" data-window="gpt-window"></i>
                 <span class="tooltiptext">Chatbot</span>
             </div>  -->
-          
-            <div class="tooltip">
-                <i class="fas fa-clipboard" data-window="task-window"></i>
-                <span class="tooltiptext">Task Tracker</span>
-            </div>
-          
-            <div class="tooltip">
-                <i class="fas fa-link" data-window="url-window"></i>
-                <span class="tooltiptext">Save URLs</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-image" data-window="wallpaper-window"></i>
-                <span class="tooltiptext">Switch Background</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-clock" data-window="clock-window"></i>
-                <span class="tooltiptext">Pomodoro</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-sticky-note"
-                    data-window="sticky-note-window"></i>
-                <span class="tooltiptext">Notes</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-trophy" data-window="leaderboard-window"></i>
-                <span class="tooltiptext">Leaderboard</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-cog" data-window="settings-window"></i>
-                <span class="tooltiptext">Settings</span>
-            </div>
-            <div class="tooltip">
-                <i class="fas fa-ellipsis-v dropdown-button" data-window="other-window"></i>
-                
-                <div class="dropdown-menu">
-                    <a href="{{ url_for('contact') }}"><i class="fas fa-envelope"></i> Contact Us</a>
-                    <a href="/about"><i class="fas fa-info-circle"></i> About Us</a>
-                    <a href="{{ url_for('FAQ') }}"><i class="fas fa-question-circle"></i> Faq</a>
-                    <a href="https://forms.gle/As5D7UjNY3oUCJRE6"><i class="fas fa-comment-dots"></i> Share Feedback</a>
-                </div>
-                
-            </div>
+
+      <div class="tooltip">
+        <i class="fas fa-clipboard" data-window="task-window"></i>
+        <span class="tooltiptext">Task tracker</span>
+      </div>
+
+      <div class="tooltip">
+        <i class="fas fa-link" data-window="url-window"></i>
+        <span class="tooltiptext">save uRLs</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-image" data-window="wallpaper-window"></i>
+        <span class="tooltiptext">switch background</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-clock" data-window="clock-window"></i>
+        <span class="tooltiptext">pomodoro</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-sticky-note" data-window="sticky-note-window"></i>
+        <span class="tooltiptext">Notes</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-trophy" data-window="leaderboard-window"></i>
+        <span class="tooltiptext">Leaderboard</span>
+      </div>
+      <div class="tooltip">
+        <i class="fas fa-cog" data-window="settings-window"></i>
+        <span class="tooltiptext">settings</span>
+      </div>
+      <div class="tooltip">
+        <i
+          class="fas fa-ellipsis-v dropdown-button"
+          data-window="other-window"
+        ></i>
+
+        <div class="dropdown-menu">
+          <a href="{{ url_for('contact') }}"
+            ><i class="fas fa-envelope"></i> Contact us</a
+          >
+          <a href="/about"><i class="fas fa-info-circle"></i> about us</a>
+          <a href="{{ url_for('FAQ') }}"
+            ><i class="fas fa-question-circle"></i> Faq</a
+          >
+          <a href="https://forms.gle/as5D7ujNY3ouCJRE6"
+            ><i class="fas fa-comment-dots"></i> share Feedback</a
+          >
         </div>
-        <div id="about-us" class="overlay">
-            <button id="close-button" class="close-button">X</button>
-            <img src="{{ url_for('static', filename='logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
-            <h1 class="mv-l">About us</h1>
-            <p class="center-txt">As students ourselves, we get the struggle of staying focused amidst digital clutter. That's why we made Lofistudy – your all-in-one solution for studying, working, or unwinding. No more juggling between devices or battling ads. Just a calm, distraction-free space to help you thrive. <br><br>Welcome to Lofistudy.<br><br> We are constantly improving, make sure to follow our socials to stay updated!</p>
-            <div class="social-icons">
-                <div class="icon-box" id="twitter-box">
-                    <i class="fab fa-twitter-square"></i> <span>@lofistudy</span>
-                </div>
-                <div class="icon-box" id="instagram-box">
-                    <i class="fab fa-instagram"></i> <span>@lofistudy</span>
-                </div>
-                <div class="icon-box" id="email-box">
-                    <i class="fas fa-envelope"></i> <span>support@mousewerk.de</span>
-                </div>
+      </div>
+    </div>
+    <div id="about-us" class="overlay">
+      <button id="close-button" class="close-button">X</button>
+      <img
+        src="{{ url_for('static', filename='logo_text.svg') }}"
+        alt="Lofistudy Logo"
+        class="login-logo white-logo"
+      />
+      <h1 class="mv-l">about us</h1>
+      <p class="center-txt">
+        as students ourselves, we get the struggle of staying focused amidst
+        digital clutter. that's why we made Lofistudy – your all-in-one solution
+        for studying, working, or unwinding. No more juggling between devices or
+        battling ads. Just a calm, distraction-free space to help you thrive.
+        <br /><br />Welcome to Lofistudy.<br /><br />
+        We are constantly improving, make sure to follow our socials to stay
+        updated!
+      </p>
+      <div class="social-icons">
+        <div class="icon-box" id="twitter-box">
+          <i class="fab fa-twitter-square"></i> <span>@lofistudy</span>
         </div>
-            
-        <div class="links-footer">
-            <a href="{{ url_for('legal_notice') }}">Legal Notice</a>
-            <a>      |   	</a>
-            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+        <div class="icon-box" id="instagram-box">
+          <i class="fab fa-instagram"></i> <span>@lofistudy</span>
+        </div>
+        <div class="icon-box" id="email-box">
+          <i class="fas fa-envelope"></i> <span>support@mousewerk.de</span>
+        </div>
+      </div>
+
+      <div class="links-footer">
+        <a href="{{ url_for('legal_notice') }}">Legal Notice</a>
+        <a> | </a>
+        <a href="{{ url_for('privacy_policy') }}">privacy policy</a>
+      </div>
+    </div>
+
+    <div id="wallpaper-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Change the Lofistudy background</span>
+          <span>background selection</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <div class="wallaper-selection">
+          <video id="video1" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video2" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp2.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video3" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp3.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video4" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp4.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video5" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp5.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video5" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp6.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video5" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp7.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+          <video id="video5" class="wallaper-selection-image" preload="auto">
+            <source
+              src="{{ url_for('static', filename='media/videos/bg_wp8.mp4') }}"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      </div>
+    </div>
+    <div id="music-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">this is the tooltip text</span>
+          <span>Music</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="song-selection">
+        <ul id="song-list"></ul>
+      </div>
+      <div class="window-music-content">
+        <div class="music-controls">
+          <div id="music_prev" class="music-control">
+            <i class="fas fa-step-backward"></i>
+          </div>
+          <div id="music_play_pause" class="music-control">
+            <i class="fas fa-play"></i>
+          </div>
+          <div id="music_next" class="music-control">
+            <i class="fas fa-step-forward"></i>
+          </div>
+
+          <div id="music_shuffle" class="music-control">
+            <i class="fas fa-random"></i>
+          </div>
+
+          <input
+            type="range"
+            id="volume_slider"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+          />
+        </div>
+        <span id="track_name"></span>
+        <div id="time_controls">
+          <input
+            type="range"
+            id="progress_slider"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0"
+          />
+
+          <span id="current_time">0:00</span> /
+          <span id="total_time">0:00</span>
+        </div>
+      </div>
+    </div>
+    <div id="clock-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">use a pomodoro timer for productivity</span>
+          <span>pomodoro</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <main class="app">
+          <div class="timer">
+            <progress id="js-progress" max="100"></progress>
+            <div class="button-group mode-buttons" id="js-mode-buttons">
+              <button
+                data-mode="pomodoro"
+                class="button active mode-button"
+                id="js-pomodoro"
+              >
+                pomodoro
+              </button>
+              <button
+                data-mode="shortbreak"
+                class="button mode-button"
+                id="js-short-break"
+              >
+                short break
+              </button>
+              <button
+                data-mode="longbreak"
+                class="button mode-button"
+                id="js-long-break"
+              >
+                Long break
+              </button>
+            </div>
+            <div class="clock" id="js-clock">
+              <span id="js-minutes">25</span>
+              <span class="separator">:</span>
+              <span id="js-seconds">00</span>
+            </div>
+            <button class="main-button" data-action="start" id="js-btn">
+              start
+            </button>
+            <select
+              class="main-button"
+              data-action="start"
+              style="height: 25px"
+              id="js-btn"
+              onchange="changeaudiosource(this)"
+            >
+              <option value="break.mp3">Gong sound</option>
+              <option value="break1.mp3">sound off</option>
+            </select>
+          </div>
+        </main>
+        <div class="hidden">
+          <audio
+            id="pomodoroaudio"
+            src="{{ url_for('static', filename='media/sounds/break.mp3') }}"
+            data-sound="pomodoro"
+          ></audio>
+          <audio
+            id="shortbreakaudio"
+            src="{{ url_for('static', filename='media/sounds/break.mp3') }}"
+            data-sound="shortbreak"
+          ></audio>
+          <audio
+            id="longbreakaudio"
+            src="{{ url_for('static', filename='media/sounds/break.mp3') }}"
+            data-sound="longbreak"
+          ></audio>
+        </div>
+      </div>
+    </div>
+    <div id="calendar-alt-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">this is the tooltip text</span>
+          <span>Calendar</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <div id="calendar"></div>
+      </div>
+    </div>
+    <div id="task-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Keep track of tasks and stay organized</span>
+          <span>Task tracker</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <button
+          id="add-task-btn"
+          style="background-color: #ff800050; color: white"
+        >
+          add
+        </button>
+        <div id="task-form" style="display: none">
+          <input type="text" id="task-name" placeholder="Task Name" />
+          <input type="hidden" id="username" value="{{ username }}" />
+          <input
+            type="number"
+            id="pomodoro-count"
+            placeholder="pomodoro Count"
+          />
+          <button id="save-task-btn">save</button>
+        </div>
+        <div id="tasks-list">
+          {% for task in tasks %}
+          <p hidden>{{ task.name }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div id="leaderboard-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">pomodoro Leaderboard</span>
+          <span>pomodoro Leaderboard</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <ul>
+          {% for user in leaderboard|sort_by_pomodoro_time_count %}
+          <li>
+            {% if loop.index == 1 %}
+            <i class="fas fa-crown"></i>
+            <span class="first-place">{{ user.charactername }}</span>
+            {% elif loop.index == 2 %}
+            <span class="second-place">{{ user.charactername }}</span>
+            {% elif loop.index == 3 %}
+            <span class="third-place">{{ user.charactername }}</span>
+            {% else %} {{ user.charactername }} {% endif %} : {{
+            user.pomodoro_time_count|int }}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div id="sticky-note-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Create and manage quick notes</span>
+          <span>Notes</span>
+        </div>
+        <button id="load-button" class="load-window">
+          <i class="fas fa-upload"></i>
+        </button>
+        <button id="save-button" class="save-window">
+          <i class="fas fa-save"></i>
+        </button>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <div id="sticky-note-editorjs"></div>
+      </div>
+    </div>
+    <div id="account-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Manage Your account</span>
+          <span>LOFi-study account</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <form id="account-form">
+          <form id="password-form" action="/change_password" method="post">
+            <div class="form-group">
+              <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                placeholder="New password"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm New password"
+              />
+            </div>
+            <div class="form-group">
+              <button type="submit">Change password</button>
+            </div>
+          </form>
+        </form>
+
+        <div class="form-group">
+          <button
+            type="button"
+            onclick="confirmdelete()"
+            style="background-color: red"
+          >
+            delete account
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Customize your Lofistudy settings</span>
+          <span>settings</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <i
+          class="fas fa-user-circle fa-3x user-icon"
+          data-window="account-window"
+        ></i>
+        <span class="settings-text">{{ charactername }}</span>
+        <div class="settings-container">
+          <div class="settings-item">
+            <span class="settings-text">pomodoro</span>
+            <input type="number" id="pomodoro-time" min="1" />
+          </div>
+          <div class="settings-item">
+            <span class="settings-text">short break</span>
+            <input type="number" id="short-break-time" min="1" />
+          </div>
+          <div class="settings-item">
+            <span class="settings-text">Long break</span>
+            <input type="number" id="long-break-time" min="1" />
+          </div>
+          <div class="settings-item">
+            <span class="settings-text">Long break interval</span>
+            <input type="number" id="long-break-interval" min="1" />
+          </div>
+          <div class="settings-item">
+            <span class="settings-text">Enable Watch</span>
+            <label class="switch">
+              <input type="checkbox" id="watchCheckbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <span class="settings-text">placeholder 2</span>
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <span class="settings-text">placeholder 3</span>
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="settings-footer">
+            <div class="settings-item">
+              <a href="{{ url_for('legal_notice') }}" class="settings-link"
+                >Legal Notice</a
+              >
+            </div>
+            <div class="settings-item">
+              <a
+                href="{{ url_for('logout') }}"
+                class="settings-link"
+                style="color: red"
+                >Logout</a
+              >
+            </div>
+            <div class="settings-item">
+              <a href="{{ url_for('privacy_policy') }}" class="settings-link"
+                >privacy policy</a
+              >
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="video-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Watch and enjoy YouTube videos</span>
+          <span>Youtube</span>
         </div>
-       
-        <div id="wallpaper-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Change the LofiStudy
-                        Background</span>
-                    <span>Background Selection</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <div class="wallaper-selection">
-                    <video id="video1" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video2" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp2.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video3" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp3.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video4" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp4.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video5" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp5.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video5" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp6.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video5" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp7.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                    <video id="video5" class="wallaper-selection-image"
-                        preload="auto">
-                        <source
-                            src="{{ url_for('static', filename='bg_wp8.mp4') }}"
-                            type="video/mp4" />
-                    </video>
-                </div>
-            </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content" style="position: relative">
+        <div id="youtube-url-container">
+          <input
+            type="text"
+            id="youtube-url"
+            placeholder="paste YouTube uRL here"
+          />
         </div>
-        <div id="music-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">This is the tooltip text</span>
-                    <span>Music</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+        <div id="youtube-video"></div>
+      </div>
+    </div>
+    <div id="sound-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">background sounds</span>
+          <span>sounds</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <div class="sound-control">
+          <button class="sound-icon" id="street-sound-icon">
+            <img
+              src="{{ url_for('static', filename='media/rain.svg') }}"
+              alt="Rain"
+            />
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            id="street-volume"
+            class="win10-thumb"
+          />
+          <audio
+            id="street-audio"
+            src="{{ url_for('static', filename='media/sounds/rain.mp3') }}"
+          ></audio>
+        </div>
+        <div class="sound-control">
+          <button class="sou nd-icon" id="rain-sound-icon">
+            <img
+              src="{{ url_for('static', filename='media/wind.svg') }}"
+              alt="Wind"
+            />
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            id="rain-volume"
+            class="win10-thumb"
+          />
+          <audio
+            id="rain-audio"
+            src="{{ url_for('static', filename='media/sounds/wind.mp3') }}"
+          ></audio>
+        </div>
+        <div class="sound-control">
+          <button class="sound-icon" id="snow-sound-icon">
+            <img
+              src="{{ url_for('static', filename='media/keyboard.svg') }}"
+              alt="Keyboard"
+            />
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            id="snow-volume"
+            class="win10-thumb"
+          />
+          <audio
+            id="snow-audio"
+            src="{{ url_for('static', filename='media/sounds/keyboard.mp3') }}"
+          ></audio>
+        </div>
+      </div>
+    </div>
+    <div id="url-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">save and manage your uRLs</span>
+          <span>uRLs</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <div id="url-input-container">
+          <input
+            type="text"
+            id="url-input"
+            placeholder="Type uRL here and press Enter"
+          />
+        </div>
+        <div id="url-list"></div>
+      </div>
+    </div>
+    <div id="spotify-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">Explore and enjoy music on soundcloud</span>
+          <span>soundcloud</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <div class="soundcloud-container">
+          <select id="soundcloud-select">
+            <option value="soundcloud-1">Lofi</option>
+            <option value="soundcloud-2">Jazz</option>
+            <option value="soundcloud-3">Deep ambient</option>
+            <option value="soundcloud-4">synthwave</option>
+            <option value="soundcloud-5">Classic - Dark academia</option>
+            <option value="soundcloud-6">Chillstep</option>
+          </select>
+          <div class="volume-slider">
+            <input
+              type="range"
+              id="volume"
+              name="volume"
+              min="0"
+              max="100"
+              orient="vertical"
+            />
+            <span class="volume-icon">&#128266;</span>
 
-            <div class="song-selection">
-                <ul id="song-list"></ul>
-            </div>
-            <div class="window-music-content">
-                <div class="music-controls">
-                    <div id="music_prev" class="music-control">
-                        <i class="fas fa-step-backward"></i>
-                    </div>
-                    <div id="music_play_pause" class="music-control">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div id="music_next" class="music-control">
-                        <i class="fas fa-step-forward"></i>
-                    </div>
-
-                    <div id="music_shuffle" class="music-control">
-                        <i class="fas fa-random"></i>
-                    </div>
-
-                    <input
-                        type="range"
-                        id="volume_slider"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value="1" />
-                </div>
-                <span id="track_name"></span>
-                <div id="time_controls">
-                    <input
-                        type="range"
-                        id="progress_slider"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value="0" />
-
-                    <span id="current_time">0:00</span> /
-                    <span id="total_time">0:00</span>
-                </div>
-            </div>
-        </div>
-        <div id="clock-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Use a Pomodoro timer for
-                        productivity</span>
-                    <span>Pomodoro</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <main class="app">
-                    <div class="timer">
-                        <progress id="js-progress" max="100"></progress>
-                        <div class="button-group mode-buttons"
-                            id="js-mode-buttons">
-                            <button
-                                data-mode="pomodoro"
-                                class="button active mode-button"
-                                id="js-pomodoro">
-                                Pomodoro
-                            </button>
-                            <button
-                                data-mode="shortBreak"
-                                class="button mode-button"
-                                id="js-short-break">
-                                Short break
-                            </button>
-                            <button
-                                data-mode="longBreak"
-                                class="button mode-button"
-                                id="js-long-break">
-                                Long break
-                            </button>
-                        </div>
-                        <div class="clock" id="js-clock">
-                            <span id="js-minutes">25</span>
-                            <span class="separator">:</span>
-                            <span id="js-seconds">00</span>
-                        </div>
-                        <button class="main-button" data-action="start"
-                            id="js-btn">
-                            Start
-                        </button>
-                        <select class="main-button" data-action="start" style="height: 25px;" id="js-btn" onchange="changeAudioSource(this)">
-                            <option value="break.mp3">Gong Sound</option>
-                            <option value="break1.mp3">Sound off</option>
-                           
-                        </select>
-                    </div>
-                </main>
-                <div class="hidden">
-                    <audio id="pomodoroAudio"
-                        src="{{ url_for('static', filename='break.mp3') }}"
-                        data-sound="pomodoro"></audio>
-                    <audio id="shortBreakAudio"
-                        src="{{ url_for('static', filename='break.mp3') }}"
-                        data-sound="shortBreak"></audio>
-                    <audio id="longBreakAudio"
-                        src="{{ url_for('static', filename='break.mp3') }}"
-                        data-sound="longBreak"></audio>
-                </div>
-            </div>
-        </div>
-        <div id="calendar-alt-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">This is the tooltip text</span>
-                    <span>Calendar</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <div id="calendar"></div>
-            </div>
-        </div>
-        <div id="task-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Keep track of tasks and stay
-                        organized</span>
-                    <span>Task Tracker</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <button id="add-task-btn"
-                    style="background-color: #ff800050; color: white;">
-                    ADD
-                </button>
-                <div id="task-form" style="display: none;">
-                    <input type="text" id="task-name" placeholder="Task Name" />
-                    <input type="hidden" id="username" value="{{ username }}">
-                    <input
-                        type="number"
-                        id="pomodoro-count"
-                        placeholder="Pomodoro Count" />
-                    <button id="save-task-btn">Save</button>
-                </div>
-                <div id="tasks-list">
-                    {% for task in tasks %}
-                    <p hidden>{{ task.name }}</p>
-                {% endfor %}
-                </div>
-            
-               
-            </div>
-        </div>
-        <div id="leaderboard-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Pomodoro Leaderboard</span>
-                    <span>Pomodoro Leaderboard</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <ul>
-                    {% for user in leaderboard|sort_by_pomodoro_time_count %}
-                    <li>
-                        {% if loop.index == 1 %}
-                            <i class="fas fa-crown"></i>
-                            <span class="first-place">{{ user.charactername }}</span>
-                        {% elif loop.index == 2 %}
-                            <span class="second-place">{{ user.charactername }}</span>
-                        {% elif loop.index == 3 %}
-                            <span class="third-place">{{ user.charactername }}</span>
-                        {% else %}
-                            {{ user.charactername }}
-                        {% endif %}
-                        : {{ user.pomodoro_time_count|int }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div id="sticky-note-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Create and manage quick notes</span>
-                    <span>Notes</span>
-                </div>
-                <button id="load-button" class="load-window">
-                    <i class="fas fa-upload"></i>
-                </button>
-                <button id="save-button" class="save-window">
-                    <i class="fas fa-save"></i>
-                </button>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <div id="sticky-note-editorjs"></div>
-            </div>
-        </div>
-        <div id="account-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Manage Your Account</span>
-                    <span>LOFI-Study Account</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <form id="account-form">
-                    <form id="password-form" action="/change_password" method="post">
-                        <div class="form-group">
-                            <input
-                                type="password"
-                                id="new-password"
-                                name="new-password"
-                                placeholder="New Password" />
-                        </div>
-                        <div class="form-group">
-                            <input
-                                type="password"
-                                id="confirm-password"
-                                name="confirm-password"
-                                placeholder="Confirm New Password" />
-                        </div>
-                        <div class="form-group">
-                            <button type="submit">Change Password</button>
-                        </div>
-                    </form>
-                </form>
-
-                <div class="form-group">
-                    <button type="button" onclick="confirmDelete()" style="background-color: red;">Delete Account</button>
-                </div>
-            </div>
-        </div>
-        >
-        <div id="settings-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Customize your LofiStudy
-                        Settings</span>
-                    <span>Settings</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content">
-                <i
-                    class="fas fa-user-circle fa-3x user-icon"
-                    data-window="account-window"></i>
-                      <span class="settings-text">{{ charactername }}</span>
-                <div class="settings-container">
-                    <div class="settings-item">
-                        <span class="settings-text">Pomodoro</span>
-                        <input type="number" id="pomodoro-time" min="1" />
-                    </div>
-                    <div class="settings-item">
-                        <span class="settings-text">Short Break</span>
-                        <input type="number" id="short-break-time" min="1" />
-                    </div>
-                    <div class="settings-item">
-                        <span class="settings-text">Long Break</span>
-                        <input type="number" id="long-break-time" min="1" />
-                    </div>
-                    <div class="settings-item">
-                        <span class="settings-text">Long Break Interval</span>
-                        <input type="number" id="long-break-interval" min="1" />
-                    </div>
-                    <div class="settings-item">
-                        <span class="settings-text">Enable Watch</span>
-                        <label class="switch">
-                            <input type="checkbox" id="watchCheckbox" />
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="settings-item">
-                        <span class="settings-text">Placeholder 2</span>
-                        <label class="switch">
-                            <input type="checkbox" />
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="settings-item">
-                        <span class="settings-text">Placeholder 3</span>
-                        <label class="switch">
-                            <input type="checkbox" />
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                 
-                    <div class="settings-footer">
-                        <div class="settings-item">
-                            <a href="{{ url_for('legal_notice') }}"
-                                class="settings-link">Legal Notice</a>
-                        </div>
-                        <div class="settings-item">
-                            <a
-                                href="{{ url_for('logout') }}"
-                                class="settings-link"
-                                style="color: red;">Logout</a>
-                        </div>
-                        <div class="settings-item">
-                            <a href="{{ url_for('privacy_policy') }}"
-                                class="settings-link">Privacy Policy</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="video-window" class="window draggable">
-            <div class="window-header">
-                <div class="info">
-                    <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Watch and enjoy YouTube
-                        videos</span>
-                    <span>Youtube</span>
-                </div>
-                <button class="close-window">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="window-content" style="position: relative;">
-                <div id="youtube-url-container">
-                    <input
-                        type="text"
-                        id="youtube-url"
-                        placeholder="Paste YouTube URL here" />
-                </div>
-                <div id="youtube-video" style=>
-                </div>
-            </div>
-        </div>
-            <div id="sound-window" class="window draggable">
-                <div class="window-header">
-                    <div class="info">
-                        <i class="fa fa-info-circle"></i>
-                        <span class="info-text">Background Sounds</span>
-                        <span>Sounds</span>
-                    </div>
-                    <button class="close-window">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="window-content">
-                    <div class="sound-control">
-                        <button class="sound-icon" id="street-sound-icon">
-                            <img
-                                src="{{ url_for('static', filename='media/rain.svg') }}"
-                                alt="Rain" />
-                        </button>
-                        <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
-                            id="street-volume"
-                            class="win10-thumb" />
-                        <audio
-                            id="street-audio"
-                            src="{{ url_for('static', filename='media/rain.mp3') }}"></audio>
-                    </div>
-                    <div class="sound-control">
-                        <button class="sound-icon" id="rain-sound-icon">
-                            <img
-                                src="{{ url_for('static', filename='media/wind.svg') }}"
-                                alt="Wind" />
-                        </button>
-                        <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
-                            id="rain-volume"
-                            class="win10-thumb" />
-                        <audio
-                            id="rain-audio"
-                            src="{{ url_for('static', filename='media/wind.mp3') }}"></audio>
-                    </div>
-                    <div class="sound-control">
-                        <button class="sound-icon" id="snow-sound-icon">
-                            <img
-                                src="{{ url_for('static', filename='media/keyboard.svg') }}"
-                                alt="Keyboard" />
-                        </button>
-                        <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
-                            id="snow-volume"
-                            class="win10-thumb" />
-                        <audio
-                            id="snow-audio"
-                            src="{{ url_for('static', filename='media/keyboard.mp3') }}"></audio>
-                    </div>
-                </div>
-            </div>
-            <div id="url-window" class="window draggable">
-                <div class="window-header">
-                    <div class="info">
-                        <i class="fa fa-info-circle"></i>
-                        <span class="info-text">Save and manage your URLs</span>
-                        <span>URLs</span>
-                    </div>
-                    <button class="close-window">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="window-content">
-                    <div id="url-input-container">
-                        <input
-                            type="text"
-                            id="url-input"
-                            placeholder="Type URL here and press Enter" />
-                    </div>
-                    <div id="url-list"></div>
-                </div>
-            </div>
-            <div id="spotify-window" class="window draggable">
-                <div class="window-header">
-                    <div class="info">
-                        <i class="fa fa-info-circle"></i>
-                        <span class="info-text">Explore and enjoy music on
-                            Soundcloud</span>
-                        <span>Soundcloud</span>
-                    </div>
-                    <button class="close-window">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="window-content">
-                    <div class="soundcloud-container">
-                        <select id="soundcloud-select">
-                            <option value="soundcloud-1">Lofi</option>
-                            <option value="soundcloud-2">Jazz</option>
-                            <option value="soundcloud-3">Deep Ambient</option>
-                            <option value="soundcloud-4">Synthwave</option>
-                            <option value="soundcloud-5">Classic - Dark Academia</option>
-                            <option value="soundcloud-6">Chillstep</option>
-                        </select>
-                        <div class="volume-slider">
-                            <input
-                                type="range"
-                                id="volume"
-                                name="volume"
-                                min="0"
-                                max="100"
-                                orient="vertical" />
-                            <span class="volume-icon">&#128266;</span>
-                        
-                           
-                           <!-- <button id="nextButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-skip-forward">
+            <!-- <button id="nextbutton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-skip-forward">
                                     <polygon points="5 4 15 12 5 20 5 4"></polygon>
                                     <line x1="19" y1="5" x2="19" y2="19"></line>
                                 </svg>
                             </button>-->
-                        
-                        </div>
-                        <iframe
-                            id="soundcloud-1"
-                            width="80%"
-                            height="300"
-                            scrolling="no"
-                            frameborder="no"
-                            allow="autoplay"
-                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746424434&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                        <iframe
-                            id="soundcloud-2"
-                            width="80%"
-                            height="300"
-                            scrolling="no"
-                            frameborder="no"
-                            allow="autoplay"
-                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1711780743&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                        <iframe
-                            id="soundcloud-3"
-                            width="80%"
-                            height="300"
-                            scrolling="no"
-                            frameborder="no"
-                            allow="autoplay"
-                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1573126828&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                        <iframe
-                            id="soundcloud-4"
-                            width="80%"
-                            height="300"
-                            scrolling="no"
-                            frameborder="no"
-                            allow="autoplay"
-                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746426879&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                            <iframe  id="soundcloud-5" width="80%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1168183702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                        
+          </div>
+          <iframe
+            id="soundcloud-1"
+            width="80%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3a//api.soundcloud.com/playlists/1746424434&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
+          <iframe
+            id="soundcloud-2"
+            width="80%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3a//api.soundcloud.com/playlists/1711780743&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
+          <iframe
+            id="soundcloud-3"
+            width="80%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3a//api.soundcloud.com/playlists/1573126828&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
+          <iframe
+            id="soundcloud-4"
+            width="80%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3a//api.soundcloud.com/playlists/1746426879&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
+          <iframe
+            id="soundcloud-5"
+            width="80%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3a//api.soundcloud.com/playlists/1168183702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
 
-
-                        <iframe
-                        id="soundcloud-6"
-                        width="80%"
-                        height="300"
-                        scrolling="no"
-                        frameborder="no"
-                        allow="autoplay"
-                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1540663750&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                </div>
-            </div>
-            </div>
-            <div id="gpt-window" class="window draggable">
-                <div class="window-header">
-                    <div class="info">
-                        <i class="fa fa-info-circle"></i>
-                        <span class="info-text">Interact with a conversational
-                            chatbot</span>
-                        <span>Chatbot</span>
-                    </div>
-                    <button class="close-window">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="window-content">
-                    <form id="chat-form"></form>
-                    <div id="chat-output"></div>
-                    <div id="coming-soon">
-                        <h1>Coming Soon...</h1>
-                    </div>
-                </div>
-            </div>
+          <iframe
+            id="soundcloud-6"
+            width="80%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3a//api.soundcloud.com/playlists/1540663750&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
         </div>
-        </body>
-    </html>
+      </div>
+    </div>
+    <div id="gpt-window" class="window draggable">
+      <div class="window-header">
+        <div class="info">
+          <i class="fa fa-info-circle"></i>
+          <span class="info-text">interact with a conversational chatbot</span>
+          <span>Chatbot</span>
+        </div>
+        <button class="close-window">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="window-content">
+        <form id="chat-form"></form>
+        <div id="chat-output"></div>
+        <div id="coming-soon">
+          <h1>Coming soon...</h1>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1680 @@
+body,
+html {
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+  background-color: #333;
+}
+
+.google-login-button {
+  display: block;
+  width: 200px;
+  margin: 0 auto 20px;
+  /* Zentriert den Button und fügt einen unteren Abstand hinzu */
+}
+
+#clockgroß {
+  position: absolute;
+  /* or 'fixed' if you want it to stay at the top left even when scrolling */
+  top: 10px;
+  left: 10px;
+  /* changed from 'right' to 'left' */
+  color: white;
+  font-size: 24px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+#early-access-banner {
+  position: absolute;
+  top: 10px;
+  user-select: none;
+  right: -50px;
+  width: 200px;
+  height: 50px;
+  background: rgba(207, 207, 207, 0.16);
+  /* semi-transparent black */
+  color: rgba(255, 255, 255, 0.342);
+  text-align: center;
+  line-height: 50px;
+  /* vertically center the text */
+  transform: rotate(40deg);
+  /* rotate the banner */
+  font-family: "Courier New", Courier, monospace;
+}
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: contain;
+  object-fit: contain;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -100;
+  zoom: 0.3;
+  transform: translate(-50%, -50%);
+  background: no-repeat;
+  background-size: contain;
+}
+
+#pomodoro-app {
+  font-size: 1.5em;
+}
+
+#timer {
+  margin: 1em;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+progress {
+  border-radius: 2px;
+  width: 100%;
+  height: 12px;
+  align-self: center;
+  top: 0;
+  left: 0;
+}
+
+progress::-webkit-progress-bar {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+progress::-webkit-progress-value {
+  background-color: #fff;
+}
+
+.timer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  text-align: center;
+}
+
+.clock {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  font-family: arial, sans-serif;
+}
+
+.mode-button {
+  font-size: 16px;
+  height: 28px;
+  cursor: pointer;
+  box-shadow: none;
+  font-weight: 300;
+  color: #fff;
+  border: 1px solid transparent;
+  margin: 0px;
+  border-radius: 4px;
+  padding: 2px 12px;
+  background: none;
+}
+
+.mode-button.active {
+  border-color: #fff;
+}
+
+.main-button {
+  cursor: pointer;
+  box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+  font-size: 22px;
+  height: 55px;
+  text-transform: uppercase;
+  color: hsl(175, 26%, 41%);
+  font-weight: bold;
+  width: 200px;
+  background-color: white;
+  border-width: initial;
+  border-style: none;
+  margin: 20px 0px 0px;
+  padding: 0px 12px;
+  border-radius: 4px;
+  transition: color 0.5s ease-in-out 0s;
+}
+
+button:focus,
+button:active {
+  outline: none;
+}
+
+.main-button.active {
+  transform: translateY(6px);
+  box-shadow: none;
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .clock {
+    font-size: 8rem;
+  }
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(100%);
+}
+
+.text {
+  width: 50%;
+  text-align: center;
+}
+
+.text.study {
+  color: white;
+}
+
+input:checked + .slider .text.study {
+  color: #2196f3;
+}
+
+.text.break {
+  color: #2196f3;
+}
+
+input:checked + .slider .text.break {
+  color: white;
+}
+
+#buttons {
+  margin: 0.5em;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+select {
+  width: 100px;
+  margin-left: 10px;
+}
+
+#selection-bar {
+  position: fixed;
+  bottom: 20px;
+  /* Lassen Sie die Leiste über dem unteren Rand schweben */
+  left: 5%;
+  /* Zentrieren Sie die Auswahlleiste */
+  width: 90%;
+  /* Reduzieren Sie die Breite, um die abgerundeten Ecken sichtbar zu machen */
+  height: 80px;
+  /* oder die gewünschte Höhe */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  /* optionaler heller Rand */
+  display: flex;
+  justify-content: space-around;
+  /* Verteilen Sie die Icons gleichmäßig */
+  align-items: center;
+  color: white;
+  /* Textfarbe */
+  font-size: 20px;
+  /* Schriftgröße */
+  border-radius: 10px;
+  /* Halbe Höhe für vollständig abgerundete Ecken */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  /* Schatten für den "Schwebe"-Effekt */
+}
+
+#selection-bar i {
+  font-size: 40px;
+  /* Size of the icons */
+  margin: 0 20px;
+  /* Space between the icons */
+  transition: transform 0.3s ease;
+  /* Smooth transition for hover effect */
+}
+
+#selection-bar i:hover {
+  transform: scale(1.1);
+  /* Increase the size of the icon when hovered */
+  color: #f3a953;
+  /* Change the color when hovered */
+}
+
+#selection-bar i:active {
+  transform: scale(0.9);
+  /* Decrease the size of the icon when clicked */
+}
+
+.window {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Same as the selection bar */
+  display: none;
+  /* Hide windows by default */
+  justify-content: space-around;
+  /* Same as the selection bar */
+  align-items: center;
+  /* Same as the selection bar */
+  color: white;
+  /* Same as the selection bar */
+  font-size: 20px;
+  /* Same as the selection bar */
+  border-radius: 10px;
+  /* Same as the selection bar */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  /* Same as the selection bar */
+  left: 5%;
+  /* Same as the selection bar */
+  bottom: 20px;
+  /* Same as the selection bar */
+}
+
+#music-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#account-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#clock-window {
+  height: 470px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#calendar-alt-window {
+  height: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#sticky-note-window {
+  height: 600px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+
+  width: 600px;
+}
+
+#settings-window {
+  height: 600px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+
+  width: 600px;
+  user-select: none;
+}
+
+#leaderboard-window {
+  height: 400px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+  width: 300px;
+  user-select: none;
+}
+
+#gpt-window {
+  height: 600px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+  width: 600px;
+  user-select: none;
+}
+
+#wallpaper-window {
+  position: fixed;
+  top: 80%;
+  height: 28vh;
+  /* Adjust this value as needed */
+  margin: auto;
+  width: 40%;
+  left: 50%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+}
+
+#url-window {
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  resize: both;
+  user-select: none;
+}
+
+#video-window {
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 300px;
+  resize: both;
+  overflow: hidden;
+  user-select: none;
+}
+
+#sound-window {
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 200px;
+  user-select: none;
+}
+
+#spotify-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#task-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+.playlist-selection {
+  padding: 10px;
+}
+
+#video-window .window-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#youtube-url-container {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ccc;
+}
+
+#youtube-url-container input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#youtube-video {
+  width: 100%;
+  height: 80%;
+  position: absolute;
+  top: 0;
+  margin-top: 11%;
+  left: 0;
+}
+
+#youtube-video iframe {
+  width: 100%;
+  height: 100%;
+}
+
+#playlist-selector {
+  width: 90%;
+  height: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+.window-header {
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  color: white;
+  padding: 10px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-content {
+  width: auto;
+  height: auto;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ce-toolbar__actions.ce-toolbar__actions--opened {
+  width: 2rem !important;
+}
+
+.cdx-marker {
+  background-color: #f3a953 !important;
+}
+
+.ce-conversion-toolbar__tools {
+  color: black !important;
+}
+
+.ce-inline-toolbar__toggler-and-button-wrapper {
+  color: black !important;
+}
+
+.ce-toolbar__plus,
+.ce-toolbar__actions,
+.ce-toolbar__settings-btn {
+  left: 0 !important;
+  color: white !important;
+}
+
+.ce-block {
+  padding-left: 55px;
+  z-index: 1;
+}
+
+::selection {
+  background: #ff800050 !important;
+  color: white;
+}
+
+.ce-toolbar__plus:hover {
+  background: #ff800050 !important;
+  color: inherit;
+}
+
+.ce-block--selected .ce-block__content {
+  background: #ff800050 !important;
+}
+
+#sticky-note-textarea {
+  margin-top: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  backdrop-filter: blur(10px);
+  flex-grow: 1;
+  height: 100%;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  resize: none;
+}
+
+.close-window {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.close-window i {
+  color: white;
+}
+
+#calendar {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+.window-music-content .music-control.shuffle-enabled i.fa-random {
+  color: #ff800050;
+}
+
+.parent-container {
+  position: relative;
+}
+
+.window-music-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 2rem;
+  width: 90%;
+}
+
+.song-selection {
+  height: 50%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  padding-top: 0px !important;
+  font-size: 16px;
+}
+
+#song-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#song-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#song-list li:hover {
+  background-color: #ff800050;
+  cursor: pointer;
+}
+
+#track_name {
+  order: 1;
+}
+
+#current_time,
+#progress_slider,
+#time_controls,
+#total_time {
+  order: 2;
+  width: 60%;
+  text-align: center;
+}
+
+.logout-button {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.legal_notice-button {
+  position: fixed;
+  left: 20px;
+  top: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.legal_notice-button a,
+.privacy_policy-button a,
+#next-button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  width: 200px;
+  height: 50px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.legal_notice-button a:hover {
+  background-color: #45a049;
+}
+
+.privacy_policy-button {
+  position: fixed;
+  left: 20px;
+  top: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+#next-button {
+  position: fixed;
+  left: 20px;
+  top: 230px;
+  display: flex;
+  flex-direction: column;
+  line-height: 50px;
+  font-size: 16px;
+}
+
+.privacy_policy-button a:hover {
+  background-color: #45a049;
+}
+
+#next-button:hover {
+  background-color: #45a049;
+}
+
+.music-controls {
+  order: 3;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.music-control svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+  height: 50px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+#url-input-container {
+  padding: 10px;
+  color: #000;
+}
+
+#url-input {
+  width: 97%;
+
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #ffffff;
+  height: 25px;
+  font-size: 16px;
+  background-color: #0a0a0a;
+}
+
+#url-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.url-item span {
+  color: #333;
+  background-color: #0a0a0a;
+  font-size: 40%;
+}
+
+.url-item {
+  margin-bottom: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  background-color: #0a0a0a;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
+.url-item a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.sound-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sound-icon {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.sound-icon img {
+  width: 100%;
+  height: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.sound-icon:active {
+  transform: rotate(15deg);
+}
+
+.wallaper-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallaper-selection-image {
+  display: center;
+  border-radius: 10px;
+  width: 20%;
+  margin: 10px;
+  transition: transform 0.3s ease;
+}
+
+.wallaper-selection-image:hover {
+  transform: scale(1.1);
+}
+
+#background-video {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.wallaper-selection-image::-webkit-media-controls {
+  display: none !important;
+}
+
+.window-content iframe {
+  display: none;
+}
+
+.window-content #soundcloud-1 {
+  display: block;
+}
+
+#soundcloud-select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  position: center;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+#soundcloud-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.volume-slider {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a0a;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.volume-icon {
+  margin-right: 10px;
+}
+
+.volume-slider input[type="range"] {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  width: 8px;
+  height: 200px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+}
+
+.volume-slider label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+iframe {
+  width: 80%;
+}
+
+.soundcloud-container {
+  display: flex;
+  width: 100%;
+  border-radius: 1px;
+  border: 1px solid #e5e5e5;
+}
+
+.overlay-container {
+  position: relative;
+}
+
+#soundcloud-select {
+  position: absolute;
+  width: 90%;
+  color: #ffffff;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  top: 330px;
+  left: 20px;
+  background-color: #0a0a0a;
+
+  margin-top: 20px;
+}
+
+#soundcloud-select::-ms-expand {
+  color: #ffffff;
+}
+
+.volume-slider,
+iframe {
+  order: -1;
+}
+
+.parent-container {
+  position: relative;
+}
+
+.soundcloud-container iframe {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.settings-container {
+  padding: 20px;
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 0;
+}
+
+.settings-text {
+  font-size: 16px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.settings-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.settings-item {
+  margin: 0 10px;
+}
+
+.settings-link {
+  color: grey;
+  text-decoration: underline;
+}
+
+#save-button {
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  border: none;
+  padding: 10px 20px;
+  transition: transform 0.1s;
+}
+
+#save-button:active {
+  transform: scale(0.9);
+}
+
+#load-button {
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  border: none;
+  padding: 10px 20px;
+  transition: transform 0.1s;
+}
+
+#load-button:active {
+  transform: scale(0.9);
+}
+
+#sticky-note-editorjs {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+#coming-soon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  animation: fadeIn 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+}
+
+.form-group input {
+  width: 60%;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  /* Center the input */
+  margin: auto;
+  /* Center the input */
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  /* Add box-shadow when input is focused */
+}
+
+.form-group input::placeholder {
+  color: lightgrey;
+  /* Light grey placeholder text */
+}
+
+.form-group button {
+  width: 60%;
+  max-width: 500px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  /* Center the input */
+  margin: auto;
+  /* Center the input */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: block;
+  /* Center the button */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.form-group button:hover {
+  transform: scale(1.05);
+}
+
+.form-group button[type="submit"] {
+  background-color: #007bff;
+}
+
+.form-group button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.form-group button[style="background-color: red;"] {
+  background-color: #dc3545;
+}
+
+.form-group button[style="background-color: red;"]:hover {
+  background-color: #c82333;
+}
+
+/* Change the button color based on its function */
+/* Make the form responsive */
+@media (max-width: 600px) {
+  .form-group input,
+  .form-group button {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  /* Position the tooltip above the icon */
+  left: 50%;
+  margin-left: -60px;
+  /* Use half of the tooltip width to center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.info {
+  position: relative;
+  display: inline-block;
+}
+
+.info-icon {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.info-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  left: 125%;
+  bottom: 75%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  /* adjust this value to change the size of the text */
+}
+
+.info:hover .info-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+#fullscreen-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  color: #ffffff;
+  font-size: 30px;
+  /* Increase this value to make the icon bigger */
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#fullscreen-btn:hover {
+  transform: scale(1.15);
+}
+
+.user-icon {
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: left top;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+  color: #f3a953;
+}
+
+#user-icon:active {
+  transform: scale(0.9) !important;
+}
+
+.swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.task:hover {
+  background-color: #f9f9f9;
+  color: #141212;
+}
+
+.task-check {
+  margin-right: 10px;
+}
+
+.task-name {
+  flex-grow: 1;
+}
+
+.task-menu {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.task-menu:hover {
+}
+
+#task-form {
+  margin-bottom: 20px;
+}
+
+#task-form input[type="text"],
+#task-form input[type="number"] {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+#add-task-btn,
+#save-task-btn {
+  background-color: #ff800050;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-task-btn:hover,
+#save-task-btn:hover {
+  background-color: #ff800050;
+}
+
+#nextButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#nextButton svg {
+  color: white; /* Change the default color to white */
+  transition: color 0.3s ease, transform 0.3s ease; /* Add transition for transform */
+}
+
+#nextButton:hover svg {
+  color: white;
+  transform: scale(1.2); /* Scale the icon when hovering */
+}
+
+#nextButton:active svg {
+  transform: scale(0.9); /* Scale the icon when clicking */
+}
+
+#nextButton.clicked svg {
+  color: #ff800050;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  bottom: 150%; /* Position the menu higher above the icon */
+  left: 50%; /* Center the menu */
+  transform: translateX(-50%); /* Adjust the position so the menu is centered */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 10px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  left: 5%;
+  min-width: 180px;
+  z-index: 1;
+}
+.dropdown-menu a {
+  color: rgb(255, 255, 255) !important;
+  padding: 8px 12px !important;
+  text-decoration: none !important;
+  display: block !important;
+  font-size: 14px !important;
+}
+.dropdown-menu a:hover {
+  background-color: #f3a953 !important;
+  color: #333 !important; 
+}
+.dropdown-menu.active {
+  display: block;
+}
+.dropdown-menu a i {
+  margin-right: 5px !important;
+  font-size: 16px !important;
+}
+.dropdown-menu a i:hover {
+  background-color: #f3a953 !important;
+  color: #333 !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: auto;
+  z-index: 9999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+
+#about-us {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  text-align: justify;
+}
+#about-us.active {
+  display: flex;
+}
+#about-us .login-logo {
+  display: block;
+  margin-top: 20px;
+  filter: invert(1) brightness(100);
+  margin: 0 auto;
+  width: 200px;
+  align-items: center;
+  height: auto;
+}
+
+#about-us h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2em;
+}
+
+#about-us p {
+ 
+  margin-top: 50px;
+  max-width: 50%;
+  text-align: center;
+  padding: auto;
+  line-height: 1.6;
+}
+#links-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+#about-us a {
+  display: flex !important;
+  font-size: 30px;
+  color: #f3a953;
+  text-decoration: none;
+  justify-content: space-between !important;
+  display: inline-block !important;
+  margin-top: 20px;
+}
+
+#about-us a:hover {
+  color: #fff;
+}
+
+.close-button {
+  position: absolute;
+  top: 30px;
+  right: 60px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 19999;
+}
+
+
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px; /* Erhöht die Breite, um die größeren .icon-box-Elemente aufzunehmen */
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.icon-box {
+  width: 30%; /* Setzt die Breite auf 30% des Containers */
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start; /* Positioniert die Icons auf der linken Seite */
+  align-items: center; /* Zentriert den Inhalt vertikal */
+  transition: transform 0.3s ease;
+  margin-right: 20px;
+  padding-left: 20px; /* Fügt etwas Platz auf der linken Seite hinzu, damit die Icons nicht direkt am Rand sind */
+}
+
+.icon-box i {
+  font-size: 2em; /* Verdoppelt die Größe der Icons */
+}
+
+.icon-box i + span {
+  font-weight: bold; /* Macht den Text dicker */
+  margin-left: 10px; /* Fügt etwas Platz zwischen dem Icon und dem Text hinzu */
+}
+.icon-box:hover {
+  transform: scale(1.1);
+}
+.icon-box:nth-child(1):hover i {
+  color: #079AEB; /* Ändert die Farbe des Twitter-Icons beim Überfahren mit der Maus auf blau */
+}
+
+.icon-box:nth-child(2):hover i {
+  color: #D8205E; /* Ändert die Farbe des Instagram-Icons beim Überfahren mit der Maus auf #D8205E */
+}
+
+.icon-box:nth-child(3):hover i {
+  color: orange; /* Ändert die Farbe des E-Mail-Icons beim Überfahren mit der Maus auf orange */
+}
+.icon-box img {
+  width: 50%;
+}
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width:100%;
+ 
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+
+@keyframes shimmer {
+  0% { text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700; }
+  50% { text-shadow: 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700, 0 0 25px #ffc700, 0 0 30px #ffc700; }
+  100% { text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700; }
+}
+
+.fas.fa-crown {
+  color: gold;
+  animation: shimmer 1s ease-in-out infinite;
+}
+.first-place {
+  color: gold;
+  font-weight: bold;
+  animation: shimmer 1s ease-in-out infinite;
+}
+
+.email-link {
+    color: inherit; /* Use the color of the parent element */
+    text-decoration: none; /* Remove underline */
+    /* Add any other styles you need */
+}
+
+.second-place {
+  color: #C0C0C0; /* Silver */
+}
+
+.third-place {
+  color: #CD7F32; /* Bronze */
+}
