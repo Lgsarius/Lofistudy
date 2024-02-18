@@ -1737,12 +1737,13 @@ ul li:last-child {
 .book {
   border: 20px solid #FFFFFF;
   width: 300px;
-  background: #715656;
+  background: #F3A953;
   border-radius: 10px;
   height: 225px;
   position: relative;
   perspective: 750px;
-  
+  background-image: linear-gradient(#fff 1px, transparent 1px);
+  background-size: 100% 1.6em;
 }
 
 .page {

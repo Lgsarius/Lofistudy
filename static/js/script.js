@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(function() {
-      document.getElementById('loadingScreen').style.display = 'none';
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    document.getElementById("loadingScreen").style.display = "none";
   }, 5000);
 });
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,27 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
       hours + ":" + minutes + ":" + seconds;
   }
   document.addEventListener("DOMContentLoaded", function () {
-    var timerInput = document.getElementById('timerInput');
-    var playButton = document.getElementById('playButton');
-    var alarmSound = document.getElementById('alarmSound');
+    var timerInput = document.getElementById("timerInput");
+    var playButton = document.getElementById("playButton");
+    var alarmSound = document.getElementById("alarmSound");
     var timerId = null;
 
-    playButton.addEventListener('click', function () {
-        // Clear any existing timer
-        if (timerId !== null) {
-            clearTimeout(timerId);
-        }
+    playButton.addEventListener("click", function () {
+      // Clear any existing timer
+      if (timerId !== null) {
+        clearTimeout(timerId);
+      }
 
-        // Get the timer value in seconds
-        var timerValue = Number(timerInput.value);
+      // Get the timer value in seconds
+      var timerValue = Number(timerInput.value);
 
-        // Start the timer
-        timerId = setTimeout(function () {
-            // Play the alarm sound when the timer reaches zero
-            alarmSound.play();
-        }, timerValue * 1000);
+      // Start the timer
+      timerId = setTimeout(function () {
+        // Play the alarm sound when the timer reaches zero
+        alarmSound.play();
+      }, timerValue * 1000);
     });
-});
+  });
 
   // Call the function once to display the time initially
   updateClock();
@@ -254,21 +254,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
           case "pomodoro":
             timer.completedPomodoros++;
             // Send a POST request to the Flask server
-            fetch('/update_pomodoros', {
-              method: 'POST',
+            fetch("/update_pomodoros", {
+              method: "POST",
               headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
               },
-              body: JSON.stringify({}) // No need to send any data
+              body: JSON.stringify({}), // No need to send any data
             })
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                console.log('Pomodoros updated successfully!');
-              } else {
-                console.log('Failed to update pomodoros.');
-              }
-            });
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  console.log("Pomodoros updated successfully!");
+                } else {
+                  console.log("Failed to update pomodoros.");
+                }
+              });
             if (timer.sessions % timer.longBreakInterval === 0) {
               switchMode("longBreak");
             } else {
@@ -277,7 +277,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             break;
           default:
             switchMode("pomodoro");
-            
         }
 
         if (Notification.permission === "granted") {
@@ -630,18 +629,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     function next() {
       soundcloudEmbeds[currentIndex].isPaused((isPaused) => {
-          if (!isPaused) {
-              soundcloudEmbeds[currentIndex].next();
-          } else {
-              currentIndex = (currentIndex + 1) % soundcloudEmbeds.length;
-              soundcloudEmbeds[currentIndex].play();
-          }
+        if (!isPaused) {
+          soundcloudEmbeds[currentIndex].next();
+        } else {
+          currentIndex = (currentIndex + 1) % soundcloudEmbeds.length;
+          soundcloudEmbeds[currentIndex].play();
+        }
       });
-  }
-
+    }
 
     volumeInput.addEventListener("input", setVolume);
-
 
     setVolume();
   };
@@ -713,25 +710,22 @@ function confirmDelete() {
 }
 var tasks = [];
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
   function fetchTasks() {
     fetch("/get-tasks")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.tasks); // Debug line
         tasks = data.tasks.map((task) => ({
           id: task.id,
           name: task.name,
-          totalPomodoros: task.totalPomodoros,
-          completedPomodoros: 0,
+          completed: task.completed,
         }));
         renderTasks();
-     
       });
   }
   fetchTasks();
-  
+
   document
     .getElementById("add-task-btn")
     .addEventListener("click", function () {
@@ -775,6 +769,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   function renderTasks() {
+    console.log(tasks); // Debug line
     tasks.forEach(function (task) {
       var taskElement = document.createElement("div");
       taskElement.className = "task";
@@ -783,16 +778,36 @@ document.addEventListener("DOMContentLoaded", function () {
       var checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.className = "task-check";
+      checkbox.checked = task.completed;
+      console.log(`Initial completed status: ${task.completed}`); // Debug line
       checkbox.addEventListener("change", function () {
         taskElement.querySelector(".task-name").style.textDecoration = this
           .checked
           ? "line-through"
           : "none";
+
+        var id = parseInt(taskElement.dataset.id);
+        fetch(`/edit-task/${id}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            completed: this.checked,
+          }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              var task = tasks.find((task) => task.id === id);
+              task.completed = this.checked;
+              console.log(`Updated completed status: ${task.completed}`); // Debug line
+            }
+          });
       });
 
       var taskName = document.createElement("span");
       taskName.className = "task-name";
-      taskName.textContent = `${task.name} -  ${task.completedPomodoros}/${task.totalPomodoros}`;
+      taskName.textContent = task.name;
+      taskName.style.textDecoration = task.completed ? "line-through" : "none";
 
       var taskMenu = document.createElement("div");
       taskMenu.className = "task-menu";
@@ -803,15 +818,15 @@ document.addEventListener("DOMContentLoaded", function () {
       trashCan.addEventListener("click", function () {
         var id = Number(this.parentNode.dataset.id); // Convert id to a number
         fetch(`/delete-task/${id}`, { method: "DELETE" })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    tasks = tasks.filter((task) => task.id !== id);
-                    document.getElementById("tasks-list").innerHTML = "";
-                    renderTasks();
-                }
-            });
-    });
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              tasks = tasks.filter((task) => task.id !== id);
+              document.getElementById("tasks-list").innerHTML = "";
+              renderTasks();
+            }
+          });
+      });
 
       taskElement.appendChild(checkbox);
       taskElement.appendChild(trashCan);
@@ -828,12 +843,23 @@ document.addEventListener("DOMContentLoaded", function () {
       var task = tasks.find((task) => task.id === id);
 
       var taskName = prompt("Edit Task Name", task.name);
-      var pomodoroCount = prompt("Edit Pomodoro Count", task.totalPomodoros);
 
-      task.name = taskName;
-      task.totalPomodoros = parseInt(pomodoroCount);
-
-      e.target.previousSibling.textContent = `${taskName} - ${task.completedPomodoros}/${pomodoroCount}`;
+      if (taskName !== null) {
+        fetch(`/edit-task/${id}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            name: taskName,
+          }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              task.name = taskName;
+              e.target.previousSibling.textContent = `${taskName} `;
+            }
+          });
+      }
     }
   });
 });
@@ -852,101 +878,82 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-//window.addEventListener("DOMContentLoaded", (event) => {
- ////   .getElementById("password-form")
-   ////    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .querySelector(".dropdown-button")
+    .addEventListener("click", function () {
+      var dropdownMenu = this.nextElementSibling;
+      dropdownMenu.classList.toggle("active");
+    });
+});
 
-  ////    var currentPassword = document.getElementById("current-password").value;
-  ////    var newPassword = document.getElementById("new-password").value;
-  ////    var confirmPassword = document.getElementById("confirm-password").value;
-
-    ////  fetch("/change_password", {
-   ////     method: "POST",
-    ////    headers: {
-     ////     "Content-Type": "application/json",
-     ////   },
-    ////    body: JSON.stringify({
-  ////        "current-password": currentPassword,
-   ////       "new-password": newPassword,
-    ////      "confirm-password": confirmPassword,
-    ////    }),
- ////     })
-   ////     .then((response) => response.json())
-     ////   .then((data) => {
-      ////    if (data.error) {
-     ////       alert(data.error);
-     ////     } else {
-     ////       alert(data.success);
-    ////      }
-   ////     })
-  ////      .catch((error) => {
-   ////       console.error("Error:", error);
-  ////      });
- ////   });
-////})////;
+document.addEventListener("DOMContentLoaded", (event) => {
+  document
+    .querySelector('a[href="/about"]')
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      document.getElementById("about-us").classList.add("active");
+    });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector('.dropdown-button').addEventListener('click', function() {
-    var dropdownMenu = this.nextElementSibling;
-    dropdownMenu.classList.toggle('active');
-  });
-  });
-  
-  document.addEventListener("DOMContentLoaded", (event) => {
-  document.querySelector('a[href="/about"]').addEventListener('click', function(event) {
-    event.preventDefault();
-    document.getElementById('about-us').classList.add('active');
-  });
-  });
-  
-  document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById('close-button').addEventListener('click', function() {
-    document.getElementById('about-us').classList.remove('active');
-  });
-  });
-  document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById('twitter-box').addEventListener('click', function() {
-    window.open('https://twitter.com/lofistudy', '_blank');
-});
+  document
+    .getElementById("close-button")
+    .addEventListener("click", function () {
+      document.getElementById("about-us").classList.remove("active");
+    });
 });
 document.addEventListener("DOMContentLoaded", function () {
-document.getElementById('instagram-box').addEventListener('click', function() {
-    window.open('https://instagram.com/lofistudy', '_blank');
-});
-});
-document.addEventListener("DOMContentLoaded", function () {
-document.getElementById('email-box').addEventListener('click', function() {
-    window.location.href = 'mailto:support@mousewerk.de';
-});
+  document.getElementById("twitter-box").addEventListener("click", function () {
+    window.open("https://twitter.com/lofistudy", "_blank");
+  });
 });
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector('#leaderboard-window').addEventListener('click', function() {
-      fetch('/api/leaderboard')
-      .then(response => response.json())
-      .then(data => {
-          let leaderboardHTML = '';
+  document
+    .getElementById("instagram-box")
+    .addEventListener("click", function () {
+      window.open("https://instagram.com/lofistudy", "_blank");
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("email-box").addEventListener("click", function () {
+    window.location.href = "mailto:support@mousewerk.de";
+  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .querySelector("#leaderboard-window")
+    .addEventListener("click", function () {
+      fetch("/api/leaderboard")
+        .then((response) => response.json())
+        .then((data) => {
+          let leaderboardHTML = "";
           data.forEach((user, index) => {
-            if (index === 0) { // If the user is the first in the list
-              leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
-          } else if (index === 1) { 
-              leaderboardHTML += `<li><span class="second-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
-          } else if (index === 2) {
-              leaderboardHTML += `<li><span class="third-place">${ user.charactername} </span>: ${ user.pomodoro_time_count }</li>`;
-          } else {
+            if (index === 0) {
+              // If the user is the first in the list
+              leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${user.charactername} </span>: ${user.pomodoro_time_count}</li>`;
+            } else if (index === 1) {
+              leaderboardHTML += `<li><span class="second-place">${user.charactername} </span>: ${user.pomodoro_time_count}</li>`;
+            } else if (index === 2) {
+              leaderboardHTML += `<li><span class="third-place">${user.charactername} </span>: ${user.pomodoro_time_count}</li>`;
+            } else {
               leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
-          }
+            }
           });
-          document.querySelector('#leaderboard-window .window-content ul').innerHTML = leaderboardHTML;
-      });
-  });
+          document.querySelector(
+            "#leaderboard-window .window-content ul"
+          ).innerHTML = leaderboardHTML;
+        });
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-function changeAudioSource(selectElement) {
-  var audioElements = ['pomodoroAudio', 'shortBreakAudio', 'longBreakAudio'];
-  audioElements.forEach(function(id) {
+  function changeAudioSource(selectElement) {
+    var audioElements = ["pomodoroAudio", "shortBreakAudio", "longBreakAudio"];
+    audioElements.forEach(function (id) {
       var audioElement = document.getElementById(id);
-      audioElement.src = "{{ url_for('static', filename='" + selectElement.value + "') }}";
-  });
-}
+      audioElement.src =
+        "{{ url_for('static', filename='" + selectElement.value + "') }}";
+    });
+  }
 });

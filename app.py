@@ -46,15 +46,14 @@ class Note(db.Model):
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=True)
-    totalPomodoros = db.Column(db.Integer, nullable=True)
-    completedPomodoros = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    completed = db.Column(db.Boolean, default=False)
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-            'totalPomodoros': self.totalPomodoros,
-        }  
+            'completed': self.completed,
+        }
       
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
@@ -407,7 +406,7 @@ def delete_account():
 @app.route('/add-task', methods=['POST'])
 @login_required
 def add_task():
-    task = Task(name=request.json['name'], totalPomodoros=request.json['totalPomodoros'], user_id=current_user.id)
+    task = Task(name=request.json['name'], user_id=current_user.id)
     db.session.add(task)
     db.session.commit()
     print(task.id)
@@ -415,17 +414,19 @@ def add_task():
     print("test")
     return jsonify(success=True, id=task.id)
 
+
 @app.route('/edit-task/<int:task_id>', methods=['PUT'])
 @login_required
 def edit_task(task_id):
     task = Task.query.get(task_id)
-    if task is None:
-        return jsonify(success=False, message="Task not found"), 404
-    task.name = request.json.get('name', task.name)
-    task.totalPomodoros = request.json.get('totalPomodoros', task.totalPomodoros)
-    task.completedPomodoros = request.json.get('completedPomodoros', task.completedPomodoros)
-    db.session.commit()
-    return jsonify(success=True, id=task.id)
+    if task and task.user_id == current_user.id:
+        task.name = request.json.get('name', task.name)
+        task.completed = request.json.get('completed', task.completed)
+        db.session.commit()
+        return jsonify(success=True)
+    else:
+        return jsonify(success=False), 404
+    
 
 @app.route('/get-tasks')
 @login_required
