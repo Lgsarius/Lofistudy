@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(function() {
+      document.getElementById('loadingScreen').style.display = 'none';
+  }, 5000);
+});
 document.addEventListener("DOMContentLoaded", function () {
   function updateClock() {
     var now = new Date();

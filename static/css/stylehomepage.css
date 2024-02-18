@@ -124,8 +124,6 @@ a.navbar-brand {
     margin-top: 190px;
 }
 
-
-
 body::-webkit-scrollbar {
     width: 0;
 }
@@ -142,11 +140,6 @@ body::-webkit-scrollbar {
 .col-md-3 {
     padding-right: 200px;
 }
-
-
-
-
-  
 
 .img{
     border-radius: 10px;
