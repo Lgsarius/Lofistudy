@@ -785,7 +785,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .checked
           ? "line-through"
           : "none";
-
+//
         var id = parseInt(taskElement.dataset.id);
         fetch(`/edit-task/${id}`, {
           method: "PUT",
