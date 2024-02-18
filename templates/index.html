@@ -102,8 +102,13 @@
     </head>
     <body>
         <div id="loadingScreen" class="loading-screen">
+            <div class="loader book">
+                <figure class="page"></figure>
+                <figure class="page"></figure>
+                <figure class="page"></figure>
+              </div>
             <img src="{{ url_for('static', filename='media/SVG/logo_text.svg') }}" alt="LofiStudy Logo" class="login-logo white-logo">
-            <div class="spinner"></div>
+           
         </div>
         <div id="background">
             <video id="background-video" autoplay loop muted oncontextmenu="return false;">
