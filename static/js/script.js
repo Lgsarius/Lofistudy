@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const timer = {
-  pomodoro: 1,
+  pomodoro: 25,
   shortBreak: 5,
   longBreak: 15,
   longBreakInterval: 4,
