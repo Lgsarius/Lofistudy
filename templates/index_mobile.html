@@ -146,11 +146,11 @@
             </ul>
           </div>
           </nav>
-          <div class="Pomodoro-container">
+          <div class="Pomodoro2-container">
             <div class="container centered-content">
         </div>
     </div>
-        <div class="Pomodoro-container">
+     <div class="Pomodoro-container">
           <div class="container centered-content">
             <div class="row">
                 <div class="col-sm">
@@ -406,38 +406,49 @@
                 switchMode("pomodoro");
               });
      
-        document.addEventListener('DOMContentLoaded', function () {
-            const links = document.querySelectorAll('.nav-link');
-            const container = document.getElementById('content-container');
-        
-            links.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-        
-                    const content = this.getAttribute('data-content');
-                    switch (content) {
-                        case 'home':
-                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
-                            break;
-                        case 'user':
-                            container.innerHTML = document.querySelector('.test1-container').outerHTML;
-                            break;
-                        case 'envelope':
-                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
-                            break;
-                        case 'bell':
-                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
-                            break;
-                        case 'cog':
-                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
-                            break;
-                        case 'clock':
-                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
-                            break;
-                    }
+              document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('.nav-link');
+                const containers = document.querySelectorAll('.Pomodoro-container, .test1-container, .Pomodoro2-container, .Pomodoro3-container, .Pomodoro4-container');
+            
+                // Hide all containers and show the default one
+                containers.forEach(container => container.style.display = 'none');
+                document.querySelector('.Pomodoro-container').style.display = 'block';
+            
+                links.forEach(link => {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault();
+            
+                        const content = this.getAttribute('data-content');
+                        switch (content) {
+                            case 'clock':
+                            case 'home':
+                                setActiveContainer('.Pomodoro-container');
+                                break;
+                            case 'user':
+                                setActiveContainer('.test1-container');
+                                break;
+                            case 'envelope':
+                                setActiveContainer('.Pomodoro2-container');
+                                break;
+                            case 'bell':
+                                setActiveContainer('.Pomodoro3-container');
+                                break;
+                            case 'cog':
+                                setActiveContainer('.Pomodoro4-container');
+                                break;
+                        }
+                    });
                 });
+            
+                function setActiveContainer(selector) {
+                    // Hide all containers
+                    containers.forEach(container => container.style.display = 'none');
+            
+                    // Show the active container
+                    const activeContainer = document.querySelector(selector);
+                    activeContainer.style.display = 'block';
+                }
             });
-        });
     </script>
     </body>
 </html>
