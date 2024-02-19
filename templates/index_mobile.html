@@ -132,20 +132,25 @@
                 <a class="nav-link" href="#"><i class="fas fa-home fa-2x"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-user fa-2x"></i></a>
+                <a class="nav-link" href="#" data-content="clock"><i class="fas fa-clock fa-2x"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-envelope fa-2x"></i></a>
+                <a class="nav-link" href="#" data-content="sounds"><i class="fas fa-envelope fa-2x"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-bell fa-2x"></i></a>
+                <a class="nav-link" href="#" data-content="music"><i class="fas fa-bell fa-2x"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-cog fa-2x"></i></a>
+                <a class="nav-link" href="#"data-content="task" ><i class="fas fa-cog fa-2x"></i></a>
               </li>
             </ul>
           </div>
           </nav>
+          <div class="Pomodoro-container">
+            <div class="container centered-content">
+        </div>
+    </div>
+        <div class="Pomodoro-container">
           <div class="container centered-content">
             <div class="row">
                 <div class="col-sm">
@@ -206,6 +211,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <!-- Include Bootstrap JS and its dependencies -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -399,6 +405,39 @@
               
                 switchMode("pomodoro");
               });
-        </script>
+     
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.nav-link');
+            const container = document.getElementById('content-container');
+        
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+        
+                    const content = this.getAttribute('data-content');
+                    switch (content) {
+                        case 'home':
+                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
+                            break;
+                        case 'user':
+                            container.innerHTML = document.querySelector('.test1-container').outerHTML;
+                            break;
+                        case 'envelope':
+                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
+                            break;
+                        case 'bell':
+                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
+                            break;
+                        case 'cog':
+                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
+                            break;
+                        case 'clock':
+                            container.innerHTML = document.querySelector('.Pomodoro-container').outerHTML;
+                            break;
+                    }
+                });
+            });
+        });
+    </script>
     </body>
 </html>
