@@ -1746,6 +1746,7 @@ ul li:last-child {
   background-size: 100% 1.6em;
 }
 
+
 .page {
   display: block;
   border-radius: 10px;
@@ -1782,7 +1783,7 @@ ul li:last-child {
   animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.2s infinite;
 }
 
-/* Page turn */
+
 
 @-webkit-keyframes pageTurn {
   0% {
@@ -1864,6 +1865,7 @@ ul li:last-child {
   pointer-events: none;
   position: relative !important;
 }
+
 .ce-popover {
   background-color: #f3a953 !important;
   color: #ffffff !important;

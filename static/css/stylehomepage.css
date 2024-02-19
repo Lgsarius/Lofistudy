@@ -245,3 +245,72 @@ body::-webkit-scrollbar {
         height: 200px !important;
         object-fit: cover !important;
     }
+
+
+    @media screen and (max-width: 480px) {
+        /* Styles for mobile devices */
+        body, html {
+            font-size: 16px; /* Adjust font size for mobile */
+        }
+        .navbar {
+            width: 100%; /* Make the navbar fit the screen width */
+            height: fit-content;
+        }
+        .logo-shadow {
+            width: 50px !important; /* Adjust logo size for mobile */
+            height: 50px !important; /* Adjust logo size for mobile */
+           
+        }
+        .content-container {
+            width: 100%; /* Make the content fit the screen width */
+            margin-left: 0; /* Remove the left margin */
+            padding: 0 20px; /* Add some padding on the sides */
+        }
+        .nav-item a {
+            font-size: 14px; /* Adjust nav item font size for mobile */
+        }
+    
+        .hero-text p, .hero-img-btn {
+            padding-left: 20px; /* Adjust padding for mobile */
+            padding-right: 40px; /* Adjust padding for mobile */
+        }
+    
+        .navbar-brand img {
+            width: 50%; /* Adjust logo size for mobile */
+        }
+        .p{
+            padding-left: 20px;
+        }
+        .login-logo {
+            width: 150px; /* Adjust logo size for mobile */
+            height: 150px; /* Adjust logo size for mobile */
+        }
+    
+        .content-container {
+            margin-left: 20px; /* Adjust margin for mobile */
+        }
+    
+        .col-md-6 {
+            padding-left: 20px; /* Adjust padding for mobile */
+            padding-bottom: 40px; /* Adjust padding for mobile */
+            padding-right: 40px; /* Adjust padding for mobile */
+        }
+    
+        .col-md-3 {
+            padding-right: 20px; /* Adjust padding for mobile */
+            padding-right: 40px;
+        }
+    
+        .footer-left, .footer-middle, .footer-right {
+            margin: 0 20px; /* Adjust margin for mobile */
+        }
+    
+        .reduced-size {
+            width: 100%; /* Adjust width for mobile */
+        }
+    
+        .wallaper-selection-image {
+            width: 100% !important; /* Adjust width for mobile */
+            height: auto !important; /* Adjust height for mobile */
+        }
+    }
