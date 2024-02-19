@@ -286,27 +286,6 @@ def home():
     else:
         return render_template('index.html', music_files=music_files, video_files=video_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)	
 
-@app.route('/app_mobile')
-@login_required
-def home_mobile():
-    if current_user.pomodoro_time_count is None:
-        current_user.pomodoro_time_count = 0
-
-    db.session.commit()
-    music_dirs = []
-    music_files = []
-    video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
-    print(video_files)
-    wallpaper =  "media/videos/" + current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
-    tasks = Task.query.filter_by(user_id=current_user.id).all()
-    username = User.query.filter_by(username=current_user.username).first()
-    leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
-    leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
-    charactername = current_user.charactername
-    for music_dir in music_dirs:
-        dir_path = os.path.join(app.static_folder, music_dir)
-        music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
-    return render_template('index_mobile.html', music_files=music_files, video_files=video_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
 
 @app.route('/get_songs')
 @login_required
