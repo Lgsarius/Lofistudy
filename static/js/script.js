@@ -554,7 +554,21 @@ document.addEventListener("DOMContentLoaded", function () {
         imgElement.style.filter = ""; // Reset SVG color
       }
     });
-
+    document
+    .getElementById("wind2-icon")
+    .addEventListener("click", function () {
+      const audioElement = document.getElementById("wind2-audio");
+      audioElement.loop = true; // Set loop to true
+      const imgElement = this.querySelector("img");
+      if (audioElement.paused) {
+        audioElement.play();
+        imgElement.style.filter = "brightness(0) invert(1)"; // Make SVG white
+      } else {
+        audioElement.pause();
+        imgElement.style.filter = ""; // Reset SVG color
+      }
+    });
+    
   document.querySelectorAll(".win10-thumb").forEach((slider) => {
     slider.addEventListener("input", function () {
       const audioElement = document.getElementById(
