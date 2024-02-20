@@ -408,7 +408,7 @@ select {
   user-select: none;
 }
 
-#gpt-window {
+#statistic-window{
   height: 600px;
   position: absolute;
   justify-content: center;

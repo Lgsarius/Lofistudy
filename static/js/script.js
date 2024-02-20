@@ -957,3 +957,79 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    fetch('/pomo_data')
+      .then(response => response.json())
+      .then(data => {
+        // Get the context of the canvas element we want to select
+        var ctxBar = document.getElementById('PomodorChart').getContext('2d');
+        var ctxPie = document.getElementById('PomodorPieChart').getContext('2d');
+    
+        // Check if data is empty, if so, provide example data
+        var labels = data.months.length > 0 ? data.months : ['January', 'February', 'March', 'April', 'May'];
+        var pomodors = data.pomodors.length > 0 ? data.pomodors : [83, 100, 23, 45, 52];
+    
+        // Create the bar chart
+        var myBarChart = new Chart(ctxBar, {
+          type: 'bar',
+          data: {
+            labels: labels, // Months from your data
+            datasets: [{
+              label: '# of Pomodors',
+              data: pomodors, // Pomodors from your data
+              backgroundColor: '#F3A953',
+              borderColor: '#F3A953',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  color: 'white' // changes the color of the scale text
+                }
+              },
+              x: {
+                ticks: {
+                  color: 'white' // changes the color of the scale text
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false // hides the legend
+              }
+            }
+          }
+        });
+    
+        // Create the pie chart
+        var myPieChart = new Chart(ctxPie, {
+          type: 'pie',
+          data: {
+            labels: ['Data 1', 'Data 2', 'Data 3', 'Data 4'], // Your four data strings
+            datasets: [{
+              data: [25, 25, 25, 25], // Each data string is 25% of the pie
+              backgroundColor: ['#F3A953', '#4BC0C0', '#FFCE56', '#E7E9ED'], // Four different colors
+              borderColor: ['#F3A953', '#4BC0C0', '#FFCE56', '#E7E9ED'], // Same as the background colors
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'white' // changes the color of the legend text
+                }
+              }
+            }
+          }
+        });
+      });
+    });

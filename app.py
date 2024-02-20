@@ -9,7 +9,7 @@ from extensions import db
 from flask_login import UserMixin
 from urllib.parse import urljoin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import cast, Integer
+from sqlalchemy import cast, Integer, extract
 from datetime import datetime, timedelta
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -54,7 +54,17 @@ class Task(db.Model):
             'name': self.name,
             'completed': self.completed,
         }
-      
+class Pomodoro(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    date_completed = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+class Pomodorostats(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
+    completed = db.Column(db.Boolean, default=False)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")  # or other relevant config var
@@ -478,6 +488,10 @@ def update_pomodoros():
         current_user.pomodoro_time_count = 1
     else:
         current_user.pomodoro_time_count = int(current_user.pomodoro_time_count) + 1
+
+    new_pomodoro = Pomodorostats(user_id=current_user.id)
+    db.session.add(new_pomodoro)
+
     try:
         db.session.commit()
         print("Successfully updated pomodoros")
@@ -502,6 +516,21 @@ def update_checkbox_value():
     current_user.checked = checkbox_value == True
     db.session.commit()
     return jsonify({'success': True})
+
+@app.route('/pomo_data')
+@login_required
+def pomo_data():
+    pomodoros = db.session.query(
+        extract('month', Pomodoro.date_completed), 
+        db.func.count(Pomodoro.id)
+    ).filter(Pomodoro.user_id == current_user.id
+    ).group_by(extract('month', Pomodoro.date_completed)
+    ).all()
+
+    months = [p[0] for p in pomodoros]
+    counts = [p[1] for p in pomodoros]
+
+    return jsonify({'months': months, 'pomodors': counts})
 
 migrate = Migrate(app, db)
 if __name__ == '__main__':
