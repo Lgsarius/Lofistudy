@@ -719,6 +719,23 @@
                             id="wind2-audio"
                             src="{{ url_for('static', filename='media/sounds/wind2.mp3') }}"></audio>
                     </div>
+                    <div class="sound-control">
+                        <button class="sound-icon" id="ocean-icon">
+                            <img
+                                src="{{ url_for('static', filename='media/SVG/ocean.svg') }}"
+                                alt="ocean" />
+                        </button>
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            id="ocean-volume"
+                            class="win10-thumb" />
+                        <audio
+                            id="ocean-audio"
+                            src="{{ url_for('static', filename='media/sounds/ocean.mp3') }}"></audio>
+                    </div>
                 </div>
             </div>
             <div id="url-window" class="window draggable">
