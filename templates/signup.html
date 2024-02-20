@@ -27,7 +27,7 @@
     <source src="https://res.cloudinary.com/dgp0pgxb8/video/upload/f_auto:video,q_auto/hwxbyk6mq8a0iduh9xf2" >
 </video>
     <div class="card">
-          <form action="{{ url_for('login') }}" method="post">
+          <form action="{{ url_for('signup') }}" method="post">
             <h1>Sign up for Lofistudy</h1>
             {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -38,7 +38,12 @@
             {% endwith %}
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input name ="email" id="username" type="email" required>
+                <input name ="charactername" id="charactername" type="charactername" required>
+                <label for="">Username</label>
+            </div>
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input name ="email" id="email" type="email" required>
                 <label for="">Email</label>
             </div>
             <div class="inputbox">
