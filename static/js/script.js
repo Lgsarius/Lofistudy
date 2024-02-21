@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   leftArrow.addEventListener('click', function() {
-      container.scrollLeft -= 100; // Adjust this value as needed
+      container.scrollLeft -= 400; // Adjust this value as needed
   });
 
   rightArrow.addEventListener('click', function() {
-      container.scrollLeft += 100; // Adjust this value as needed
+      container.scrollLeft += 400; // Adjust this value as needed
   });
 });
 
