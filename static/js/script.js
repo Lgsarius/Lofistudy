@@ -3,46 +3,52 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loadingScreen").style.display = "none";
   }, 5000);
 });
-document.addEventListener("DOMContentLoaded", function () {
-  function updateClock() {
-    var now = new Date();
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    var seconds = now.getSeconds();
-    if (hours < 10) hours = "0" + hours;
-    if (minutes < 10) minutes = "0" + minutes;
-    if (seconds < 10) seconds = "0" + seconds;
-    document.getElementById("clockgroß").textContent =
-      hours + ":" + minutes + ":" + seconds;
-  }
-  document.addEventListener("DOMContentLoaded", function () {
-    var timerInput = document.getElementById("timerInput");
-    var playButton = document.getElementById("playButton");
-    var alarmSound = document.getElementById("alarmSound");
-    var timerId = null;
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.querySelector('.wallaper-selection');
+  var leftArrow = document.querySelector('.scroll-arrow.left');
+  var rightArrow = document.querySelector('.scroll-arrow.right');
 
-    playButton.addEventListener("click", function () {
-      // Clear any existing timer
-      if (timerId !== null) {
-        clearTimeout(timerId);
+  container.addEventListener('wheel', function(e) {
+      if (e.deltaY != 0) {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
       }
-
-      // Get the timer value in seconds
-      var timerValue = Number(timerInput.value);
-
-      // Start the timer
-      timerId = setTimeout(function () {
-        // Play the alarm sound when the timer reaches zero
-        alarmSound.play();
-      }, timerValue * 1000);
-    });
   });
 
-  // Call the function once to display the time initially
-  updateClock();
+  leftArrow.addEventListener('click', function() {
+      container.scrollLeft -= 100; // Adjust this value as needed
+  });
 
-  // Then call the function every second to update the time
-  setInterval(updateClock, 1000);
+  rightArrow.addEventListener('click', function() {
+      container.scrollLeft += 100; // Adjust this value as needed
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.querySelector('.wallaper-selection');
+  var startX, scrollLeft;
+
+  container.addEventListener('mousedown', function(e) {
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.classList.add('active');
+      e.preventDefault();
+  });
+
+  container.addEventListener('mouseleave', function() {
+      container.classList.remove('active');
+  });
+
+  container.addEventListener('mouseup', function() {
+      container.classList.remove('active');
+  });
+
+  container.addEventListener('mousemove', function(e) {
+      if (!container.classList.contains('active')) return;
+      var x = e.pageX - container.offsetLeft;
+      var walk = (x - startX) * 1; //scroll-fast
+      container.scrollLeft = scrollLeft - walk;
+  });
 });
 
 document.addEventListener("DOMContentLoaded", function () {

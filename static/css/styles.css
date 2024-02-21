@@ -298,7 +298,11 @@ select {
   transition: transform 0.3s ease;
   /* Smooth transition for hover effect */
 }
-
+@media (max-width: 600px) {
+  #selection-bar .tooltip:nth-child(n+6) {
+    display: none;
+  }
+}
 #selection-bar i:hover {
   transform: scale(1.1);
   /* Increase the size of the icon when hovered */
@@ -886,26 +890,72 @@ select {
 .sound-icon:active {
   transform: rotate(15deg);
 }
-
 .wallaper-selection {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden; /* Disables vertical scrolling */
+  white-space: nowrap;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.wallaper-selection::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari and Opera */
 }
 
 .wallaper-selection-image {
-  display: center;
+ 
   border-radius: 10px;
-  width: 20%;
-  margin: 10px;
+  width: 350px;
+    height: 200px;
+    margin-right: 10px;
   transition: transform 0.3s ease;
 }
 
 .wallaper-selection-image:hover {
   transform: scale(1.1);
 }
+.scroll-arrow {
+  position: fixed;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
+.scroll-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.scroll-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: black;
+  transition: transform 0.3s;
+}
+
+.scroll-arrow.left {
+  left: 0;
+}
+
+.scroll-arrow.left:hover svg {
+  transform: translateX(-5px);
+}
+
+.scroll-arrow.right {
+  right: 0;
+}
+
+.scroll-arrow.right:hover svg {
+  transform: translateX(5px);
+}
 #background-video {
   transition: opacity 0.5s ease-in-out;
 }
