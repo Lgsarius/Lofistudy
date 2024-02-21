@@ -269,7 +269,7 @@ def home():
     db.session.commit()
     music_dirs = []
     music_files = []
-    video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4']]
+    video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4', 'bg_wp9.mp4', 'bg_wp10.mp4', 'bg_wp11.mp4', 'bg_wp12.mp4', 'bg_wp13.mp4', 'bg_wp14.mp4', 'bg_wp15.mp4']]
     print(video_files)
     wallpaper =  "media/videos/" + current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
