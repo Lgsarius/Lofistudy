@@ -905,9 +905,9 @@ select {
 
 .wallaper-selection-image {
  
-  border-radius: 10px;
-  width: 350px;
-    height: 200px;
+  border-radius: 20px;
+  width: 300px;
+    height: auto;
     margin-right: 10px;
   transition: transform 0.3s ease;
 }
