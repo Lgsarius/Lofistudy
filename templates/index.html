@@ -98,7 +98,11 @@
                     });
                 });
             });
-           
+            window.onload = function() {
+                document.getElementById('pomodoroAudio').volume = 0.3;
+                document.getElementById('shortBreakAudio').volume = 0.3;
+                document.getElementById('longBreakAudio').volume = 0.3;
+            }
         </script>
     </head>
     <body>

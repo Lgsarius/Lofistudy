@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
       container.classList.remove('active');
   });
 
+
+  876
   container.addEventListener('mousemove', function(e) {
       if (!container.classList.contains('active')) return;
       var x = e.pageX - container.offsetLeft;
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function () {
   var backgroundVideo = document.getElementById("background-video");
   var wallpaperSelection = document.querySelectorAll(
-    ".wallaper-selection-image"
+    ".        nmnjhm789uibyk,gllaper-selection-image"
   );
 
   wallpaperSelection.forEach(function (video) {
