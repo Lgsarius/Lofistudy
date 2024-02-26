@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function () {
   var backgroundVideo = document.getElementById("background-video");
   var wallpaperSelection = document.querySelectorAll(
-    "wallaper-selection-image"
+    ".wallaper-selection-image"
   );
 
   wallpaperSelection.forEach(function (video) {
