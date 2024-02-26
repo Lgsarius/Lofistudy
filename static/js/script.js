@@ -654,6 +654,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       SC.Widget(document.getElementById("soundcloud-5")),
       SC.Widget(document.getElementById("soundcloud-6")),
       SC.Widget(document.getElementById("soundcloud-7")),
+      SC.Widget(document.getElementById("soundcloud-8")),
     ];
 
     var currentIndex = 0; // Keep track of the current embed
