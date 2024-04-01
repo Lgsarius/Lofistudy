@@ -340,7 +340,153 @@ select {
   bottom: 20px;
   /* Same as the selection bar */
 }
-
+@media (max-width: 600px) {
+  #music-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #account-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #clock-window {
+    height: 235px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #calendar-alt-window {
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #sticky-note-window {
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+  
+    width: 300px;
+  }
+  
+  #settings-window {
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+  
+    width: 300px;
+    user-select: none;
+  }
+  
+  #leaderboard-window {
+    height: 200px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+    width: 150px;
+    user-select: none;
+  }
+  
+  #statistic-window{
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+    width: 300px;
+    user-select: none;
+  }
+  
+  #wallpaper-window {
+    position: fixed;
+    top: 80%;
+    height: 28vh;
+    /* Adjust this value as needed */
+    margin: auto;
+    width: 40%;
+    left: 50%;
+    user-select: none;
+    transform: translate(-50%, -50%);
+  }
+  
+  #url-window {
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    resize: both;
+    user-select: none;
+  }
+  
+  #video-window {
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 150px;
+    resize: both;
+    overflow: hidden;
+    user-select: none;
+  }
+  
+  #sound-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 100px;
+    user-select: none;
+  }
+  
+  #spotify-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #task-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+}
 #music-window {
   height: 400px;
   position: absolute;
