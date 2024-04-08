@@ -4,6 +4,10 @@ from flask_login import UserMixin, login_user, login_required, logout_user, curr
 import os
 from oauthlib.oauth2 import TokenExpiredError
 import re
+from itsdangerous import URLSafeTimedSerializer as Serializer
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime
+from flask import current_app
 from flask_dance.contrib.google import make_google_blueprint, google
 from extensions import db
 from flask_login import UserMixin
@@ -36,6 +40,20 @@ class User(UserMixin, db.Model):
     
     fs_uniquifier = db.Column(db.Text, nullable=False)
     checked = db.Column(db.Boolean, default=False)
+    
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+            email = data['email']
+        except Exception as e:
+            print(f"Failed to decode token: {e}")  # Debug output
+            return None
+        user = User.query.filter_by(username=email).first()
+        if user is None:
+            print(f"No user found with email: {email}")  # Debug output
+        return user
     
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -211,9 +229,10 @@ def resetpassword():
     if request.method == 'POST':
         email = request.form['email']
         user = User.query.filter_by(username=email).first()
-        print(app.config.get('MAIL_USERNAMES'))
         if user:
-            token = s.dumps(email, salt='email-confirm')
+            s = Serializer(current_app.config['SECRET_KEY'])
+            token = s.dumps({'email': email}, salt='email-confirm')
+            print(f"Generated token: {token}") 
             print(app.config.get('MAIL_USERNAMES'))
             msg = Message('Password Reset Request for Lofistudy.social', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
             link = url_for('reset_token', token=token, _external=True)
@@ -236,19 +255,25 @@ def resetpassword():
 
 @app.route('/reset/<token>', methods=['GET', 'POST'])
 def reset_token(token):
+    print(f"Token: {token}")  # Debug output
     user = User.verify_reset_token(token)
+    print(f"User: {user}")  # Debug output
     if not user:
-        # Wenn der Token ungültig ist, leiten Sie den Benutzer zu einer Fehlerseite weiter
         return redirect(url_for('token_invalid'))
-
     if request.method == 'POST':
-        new_password = request.form['password']
+        new_password = request.form.get('password')
+        if not new_password:
+            return 'Password is required!', 400
         hashed_password = generate_password_hash(new_password, method='pbkdf2:sha256')
         user.password = hashed_password
         db.session.commit()
         return 'Password has been changed!'
     else:
         return render_template('reset_token.html', token=token)
+
+@app.route('/token_invalid')
+def token_invalid():
+    return render_template('token_invalid.html')
 
 @app.route('/robots.txt')
 def static_from_root():
@@ -502,7 +527,14 @@ def update_checkbox_value():
     current_user.checked = checkbox_value == True
     db.session.commit()
     return jsonify({'success': True})
-
+def reset_pomodoro_time_count():
+    pomodoro_time_counts = current_user.pomodoro_time_count.query.all()
+    for pomodoro_time_count in pomodoro_time_counts:
+        pomodoro_time_count.completed = 0
+    db.session.commit()
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=23, minute=59, second=59)
+scheduler.start()
 migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():
