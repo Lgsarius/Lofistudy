@@ -95,23 +95,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-document.addEventListener("DOMContentLoaded", function () {
-function toggleVideo() {
-  var checkbox = document.getElementById("video-switch");
-  var localVideo = document.getElementById("background-video");
-  var youtubeVideo = document.getElementById("youtube-bg-video");
 
-  if (checkbox.checked) {
-      // Switch to YouTube video
-      localVideo.style.display = "none";
-      youtubeVideo.style.display = "block";
-  } else {
-      // Switch to local video
-      localVideo.style.display = "block";
-      youtubeVideo.style.display = "none";
+  function toggleVideo() {
+    var checkbox = document.getElementById("video-switch");
+    var localVideo = document.getElementById("background-video");
+    var youtubeVideo = document.getElementById("youtube-bg-video");
+
+    if (checkbox.checked) {
+        // Switch to YouTube video
+        localVideo.style.display = "none";
+        youtubeVideo.style.display = "block";
+    } else {
+        // Switch to local video
+        localVideo.style.display = "block";
+        youtubeVideo.style.display = "none";
+    }
   }
-}
-});
+
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
