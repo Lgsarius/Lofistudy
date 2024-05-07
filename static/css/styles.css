@@ -2061,7 +2061,9 @@ ul li:last-child {
   pointer-events: none;
   position: relative !important;
 }
-
+#youtube-bg-video {
+  display: none;
+}
 .ce-popover {
   background-color: #f3a953 !important;
   color: #ffffff !important;
