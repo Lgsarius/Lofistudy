@@ -61,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var checkbox = document.getElementById("backgroundSwitch");
 
   function showVideoBackground() {
-    backgroundVideo.style.opacity = 1;
+    backgroundVideo.style.display = "block";
     wallpaperSelection.forEach(function (wallpaper) {
       wallpaper.style.display = "none";
     });
   }
 
   function showWallpapers() {
-    backgroundVideo.style.opacity = 0;
+    backgroundVideo.style.display = "none";
     wallpaperSelection.forEach(function (wallpaper) {
       wallpaper.style.display = "block";
     });
@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
