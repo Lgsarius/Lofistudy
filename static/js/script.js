@@ -112,8 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-// Call the updateClock function to start the clock
-updateClock();
+
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
