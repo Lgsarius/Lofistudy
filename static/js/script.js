@@ -58,6 +58,36 @@ document.addEventListener("DOMContentLoaded", function () {
   var wallpaperSelection = document.querySelectorAll(
     ".wallaper-selection-image"
   );
+  var checkbox = document.getElementById("backgroundSwitch");
+
+  function showVideoBackground() {
+    backgroundVideo.style.opacity = 1;
+    wallpaperSelection.forEach(function (wallpaper) {
+      wallpaper.style.display = "none";
+    });
+  }
+
+  function showWallpapers() {
+    backgroundVideo.style.opacity = 0;
+    wallpaperSelection.forEach(function (wallpaper) {
+      wallpaper.style.display = "block";
+    });
+  }
+
+  checkbox.addEventListener("change", function () {
+    if (checkbox.checked) {
+      showVideoBackground();
+    } else {
+      showWallpapers();
+    }
+  });
+
+  // Initially set the background based on the checkbox state
+  if (checkbox.checked) {
+    showVideoBackground();
+  } else {
+    showWallpapers();
+  }
 
   wallpaperSelection.forEach(function (video) {
     video.addEventListener("click", function () {
@@ -95,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   document
