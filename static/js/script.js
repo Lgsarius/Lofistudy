@@ -111,7 +111,29 @@ document.addEventListener("DOMContentLoaded", function () {
         youtubeVideo.style.display = "none";
     }
   }
+  function updateClock() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
 
+    // Format hours, minutes, and seconds to ensure they are always two digits
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+    // Construct the time string
+    var timeString = hours + ':' + minutes + ':' + seconds;
+
+    // Update the content of the clock div
+    document.getElementById('clockgroß').innerHTML = timeString;
+
+    // Schedule the update to happen again in 1 second
+    setTimeout(updateClock, 1000);
+}
+
+// Call the updateClock function to start the clock
+updateClock();
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
