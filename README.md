@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/logo_text.svg" alt="Lofi Study Logo" width="100">
+  <img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/media/SVG/logo_text.svg" alt="Lofi Study Logo" width="100">
   <h1 align="center">Lofi Study</h1>
 </p>
 
@@ -21,7 +21,7 @@ Lofi Study is a platform that combines the lo-fi artstyle with a simple, distrac
 3. Set your study timer.
 4. Start studying!
 
-![Lofi Study Interface](https://github.com/Lgsarius/Lofistudy/blob/main/static/media/Macchrome.svg)
+![Lofi Study Interface](https://github.com/Lgsarius/Lofistudy/blob/main/static/media/SVG/Macchrome.svg)
 
 ## License
 
