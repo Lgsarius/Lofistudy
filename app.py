@@ -321,7 +321,7 @@ def home():
     music_dirs = []
     music_files = []
     #video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4', 'bg_wp9.mp4', 'bg_wp10.mp4', 'bg_wp11.mp4', 'bg_wp12.mp4', 'bg_wp13.mp4', 'bg_wp14.mp4']]
-    wallpaper =  "media/videos/" + current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
+    wallpaper =  current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     username = User.query.filter_by(username=current_user.username).first()
     leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
