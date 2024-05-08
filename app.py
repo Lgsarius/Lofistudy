@@ -293,6 +293,24 @@ def sort_by_pomodoro_time_count(users):
 @app.route('/')
 def index():
     return render_template('homepage.html')
+
+
+@app.route('/media/videos/<path:filename>')
+@login_required
+def serve_video(filename):
+    video_path = os.path.join(app.static_folder, 'media', 'videos', filename)
+    
+    # Check if the file exists
+    if not os.path.isfile(video_path):
+        return "Video not found", 404
+
+    # Set cache-control headers for the video files
+    response = make_response(send_from_directory(os.path.join(app.static_folder, 'media', 'videos'), filename))
+    response.headers['Cache-Control'] = 'max-age=86400'  # Cache for 1 day (86400 seconds)
+    
+    return response
+
+
 @app.route('/app')
 @login_required
 def home():
