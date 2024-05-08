@@ -1,11 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-  var volumeToggle = document.getElementById("volume-toggle");
-  var youtubeVideo = document.getElementById("youtube-bg-video");
 
-  volumeToggle.addEventListener("change", function() {
-      youtubeVideo.muted = !volumeToggle.checked;
-  });
-});
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     document.getElementById("loadingScreen").style.display = "none";
@@ -119,7 +112,16 @@ document.addEventListener("DOMContentLoaded", function () {
         youtubeVideo.style.display = "none";
     }
   }
+  function toggleVolume() {
+    var video = document.getElementById("youtube-bg-video");
+    var volumeToggle = document.getElementById("volumeToggle");
 
+    if (volumeToggle.checked) {
+        video.src = video.src.replace("&mute=1", ""); // Remove mute parameter
+    } else {
+        video.src += "&mute=1"; // Add mute parameter
+    }
+}
 
 
 var highestZIndex = 0;
