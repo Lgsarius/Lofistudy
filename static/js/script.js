@@ -122,7 +122,14 @@ document.addEventListener("DOMContentLoaded", function () {
         video.src += "&mute=1"; // Add mute parameter
     }
 }
-
+function adjustVolume(volume) {
+  var video = document.getElementById("youtube-bg-video");
+  video.contentWindow.postMessage(JSON.stringify({
+      event: 'command',
+      func: 'setVolume',
+      args: [volume / 100]
+  }), '*');
+}
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
