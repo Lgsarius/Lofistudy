@@ -112,22 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        var volumeToggle = document.getElementById("volume-toggle");
-        var youtubeVideo = document.getElementById("youtube-bg-video");
+  document.addEventListener("DOMContentLoaded", function() {
+    var volumeToggle = document.getElementById("volume-toggle");
+    var youtubeVideo = document.getElementById("youtube-bg-video");
 
-        if (volumeToggle && youtubeVideo) {
-            volumeToggle.addEventListener("change", function() {
-                if (volumeToggle.checked) {
-                    youtubeVideo.muted = false;
-                } else {
-                    youtubeVideo.muted = true;
-                }
-            });
-        } else {
-            console.error("Could not find volume toggle or YouTube video element.");
-        }
+    volumeToggle.addEventListener("change", function() {
+        youtubeVideo.muted = !volumeToggle.checked;
     });
+});
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
