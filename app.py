@@ -23,6 +23,7 @@ from uuid import uuid4
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import google
 from flask_sitemap import Sitemap
+from flask import send_from_directory, make_response
 
 s = URLSafeTimedSerializer('your-secret-key')
 db = SQLAlchemy()
@@ -223,7 +224,14 @@ def submit_contact():
     
     flash('Your message was successfully sent!', 'success')
     return redirect(url_for('home'))
-    
+
+@app.route('/static/<path:filename>')
+@login_required
+def static_files(filename):
+    response = make_response(send_from_directory('static', filename))
+    response.headers['Cache-Control'] = 'max-age=86400'  # Cache for 1 hour
+    return response
+
 @app.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword():
     if request.method == 'POST':
