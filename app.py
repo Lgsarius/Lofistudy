@@ -320,7 +320,7 @@ def home():
     db.session.commit()
     music_dirs = []
     music_files = []
-    video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4', 'bg_wp9.mp4', 'bg_wp10.mp4', 'bg_wp11.mp4', 'bg_wp12.mp4', 'bg_wp13.mp4', 'bg_wp14.mp4']]
+    #video_files = [url_for('static', filename=f'media/videos/{f}') for f in ['bg_wp.mp4', 'bg_wp2.mp4', 'bg_wp3.mp4', 'bg_wp4.mp4', 'bg_wp5.mp4', 'bg_wp6.mp4', 'bg_wp7.mp4', 'bg_wp8.mp4', 'bg_wp9.mp4', 'bg_wp10.mp4', 'bg_wp11.mp4', 'bg_wp12.mp4', 'bg_wp13.mp4', 'bg_wp14.mp4']]
     print(video_files)
     wallpaper =  "media/videos/" + current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
@@ -333,9 +333,9 @@ def home():
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
     user_agent = request.headers.get('User-Agent')
     if "Mobile" in user_agent:
-         return render_template('index_mobile.html', music_files=music_files, video_files=video_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
+         return render_template('index_mobile.html', music_files=music_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
     else:
-        return render_template('index.html', music_files=music_files, video_files=video_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)	
+        return render_template('index.html', music_files=music_files,  leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)	
 
 
 @app.route('/get_songs')
