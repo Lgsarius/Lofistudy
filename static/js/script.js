@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", function() {
+  var volumeToggle = document.getElementById("volume-toggle");
+  var youtubeVideo = document.getElementById("youtube-bg-video");
+
+  volumeToggle.addEventListener("change", function() {
+      youtubeVideo.muted = !volumeToggle.checked;
+  });
+});
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     document.getElementById("loadingScreen").style.display = "none";
@@ -112,14 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
-    var volumeToggle = document.getElementById("volume-toggle");
-    var youtubeVideo = document.getElementById("youtube-bg-video");
 
-    volumeToggle.addEventListener("change", function() {
-        youtubeVideo.muted = !volumeToggle.checked;
-    });
-});
 
 var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
