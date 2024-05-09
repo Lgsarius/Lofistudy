@@ -123,12 +123,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 function adjustVolume(volume) {
-  var video = document.getElementById("youtube-bg-video");
-  video.contentWindow.postMessage(JSON.stringify({
-      event: 'command',
-      func: 'setVolume',
-      args: [volume / 100]
-  }), '*');
+  var iframe = document.getElementById("youtube-bg-video");
+  var player = new YT.Player(iframe, {
+      events: {
+          'onReady': function(event) {
+              event.target.setVolume(volume);
+          }
+      }
+  });
 }
 
 
