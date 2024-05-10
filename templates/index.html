@@ -59,7 +59,7 @@
         <script
             src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
             <!-- Include this script tag in the HTML document -->
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+
 
       
        
@@ -68,7 +68,7 @@
     </script>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
         <script>
-            eruda.init();
+        
             document.addEventListener("DOMContentLoaded", function () {
                 var charactername = "{{ charactername }}";
                 console.log(charactername + " logged in");
