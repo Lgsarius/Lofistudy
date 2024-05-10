@@ -131,21 +131,12 @@ sitemap = Sitemap(app=app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/sitemap.xml', methods=['GET'])
-def sitemap():
-    """Generate sitemap.xml. Makes a list of urls and date modified."""
-    pages=[]
-    ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
-    # static pages
-    static_pages = url_for('static', filename='robots.txt'), url_for('static', filename='sitemap.xml')
-    for page in static_pages:
-        pages.append(
-            [urljoin(request.url, page),ten_days_ago]
-        )
-    sitemap_xml = render_template('sitemap.xml', pages=pages)
-    response= make_response(sitemap_xml)
-    response.headers["Content-Type"] = "application/xml"    
-    return response
+@sitemap.register_generator
+def generate_urls():
+    # Yield URLs dynamically here
+    yield 'index', {}, 1.0  # Example: ('route_name', {'param': 'value'}, lastmod)
+    yield 'login', {}, 0.8
+    yield 'FAQ', {}, 0.7 
 
 @app.route('/sitemap.xml', methods=['GET'])
 def generate_sitemap():
