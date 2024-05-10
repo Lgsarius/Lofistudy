@@ -92,12 +92,17 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("New video loaded");
             backgroundVideo.style.opacity = 1;
           };
+
+          backgroundVideo.onerror = function () {
+            console.error("Error loading the new video:", source.src);
+          };
         },
         { once: true }
       );
     });
   });
 });
+
 
 
   function toggleVideo() {
