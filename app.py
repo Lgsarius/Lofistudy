@@ -24,6 +24,7 @@ from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import google
 from flask_sitemap import Sitemap
 from flask import send_from_directory, make_response
+from flask_sitemap import Sitemap
 
 s = URLSafeTimedSerializer('your-secret-key')
 db = SQLAlchemy()
@@ -125,7 +126,7 @@ with app.app_context():
 db.init_app(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
-
+sitemap = Sitemap(app=app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -145,6 +146,10 @@ def sitemap():
     response= make_response(sitemap_xml)
     response.headers["Content-Type"] = "application/xml"    
     return response
+
+@app.route('/sitemap.xml', methods=['GET'])
+def generate_sitemap():
+    return sitemap.generate()
 
 @app.route('/google/authorized')
 def login_google():
@@ -242,7 +247,7 @@ def resetpassword():
             token = s.dumps({'email': email}, salt='email-confirm')
             print(f"Generated token: {token}") 
             print(app.config.get('MAIL_USERNAMES'))
-            msg = Message('Password Reset Request for Lofistudy.social', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
+            msg = Message('Password Reset Request for Lofistudy.net', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
             link = url_for('reset_token', token=token, _external=True)
             msg.html = r"""
                     <html>

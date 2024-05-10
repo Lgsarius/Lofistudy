@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /resetpassword
 Disallow: /login
 
-Sitemap: https://www.lofistudy.social/sitemap.xml
+Sitemap: https://www.lofistudy.net/sitemap.xml
