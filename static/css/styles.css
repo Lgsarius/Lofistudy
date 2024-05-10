@@ -1135,14 +1135,20 @@ select {
 /* Media query for macOS */
 @media only screen and (min-device-width: 1224px) and (max-device-width: 1600px) {
   #background {
-      background-color: red;
+      background-image: url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
   }
 }
 
 /* Media query for iOS */
 @media only screen and (max-device-width: 768px) {
   #background {
-      background-color: red;
+      background-image: url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
   }
 }
 
