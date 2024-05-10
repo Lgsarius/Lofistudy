@@ -14,7 +14,7 @@ from flask_login import UserMixin
 from urllib.parse import urljoin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import cast, Integer
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_mail import Mail, Message
@@ -133,11 +133,12 @@ def load_user(user_id):
 
 @sitemap.register_generator
 def generate_urls():
- 
-    # Each yield returns ('route', {}, {'lastmod': '2024-01-01', 'priority': 1.0})
-    yield 'index', {}, {'lastmod': '2024-01-01', 'priority': 1.0}  # Homepage, highest priority
-    yield 'login', {}, {'lastmod': '2024-01-01', 'priority': 0.8}  # Login page, slightly lower priority
-    yield 'FAQ', {}, {'lastmod': '2024-01-01', 'priority': 0.7}    # FAQ page, lower priority
+    today = date.today().isoformat()  # Get today's date in 'YYYY-MM-DD' format
+
+    yield 'index', {}, {'lastmod': today, 'priority': 1.0}  # Home page
+    yield 'login', {}, {'lastmod': today, 'priority': 0.8}  # Login page
+    yield 'FAQ', {}, {'lastmod': today, 'priority': 0.7}    # FAQ page
+    
   
 @app.route('/sitemap.xml', methods=['GET'])
 def generate_sitemap():
