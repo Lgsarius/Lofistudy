@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener("DOMContentLoaded", function () {
   var backgroundVideo = document.getElementById("background-video");
-  var wallpaperSelection = document.querySelectorAll(
-    ".wallaper-selection-image"
-  );
+  var wallpaperSelection = document.querySelectorAll(".wallaper-selection-image");
 
   wallpaperSelection.forEach(function (video) {
     video.addEventListener("click", function () {
       var newWallpaper = video.querySelector("source").src;
       var newWallpapersave = video.querySelector("source").src.split("/").pop();
+
+      console.log("Wallpaper selected:", newWallpapersave);
 
       // Save the selected wallpaper for the logged-in user
       fetch("/set_wallpaper", {
@@ -74,20 +74,22 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify({ wallpaper: newWallpapersave }),
       });
 
-      // Set the opacity to 0
+      // Fade-out transition
+      backgroundVideo.style.transition = "opacity 0.5s";
       backgroundVideo.style.opacity = 0;
 
-      // Wait for the end of the transition animation
       backgroundVideo.addEventListener(
         "transitionend",
         function () {
-          // Change the video and load it
-          backgroundVideo.querySelector("source").src = newWallpaper;
+          console.log("Transition ended");
+
+          // Change the video source and reload it
+          var source = backgroundVideo.querySelector("source");
+          source.src = newWallpaper;
           backgroundVideo.load();
 
-          // Wait until the video is loaded
           backgroundVideo.onloadeddata = function () {
-            // Set the opacity back to 1
+            console.log("New video loaded");
             backgroundVideo.style.opacity = 1;
           };
         },
@@ -96,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
 
   function toggleVideo() {
     var checkbox = document.getElementById("video-switch");
