@@ -133,11 +133,12 @@ def load_user(user_id):
 
 @sitemap.register_generator
 def generate_urls():
-    # Yield URLs dynamically here
-    yield 'index', {}, 1.0  # Example: ('route_name', {'param': 'value'}, lastmod)
-    yield 'login', {}, 0.8
-    yield 'FAQ', {}, 0.7 
-
+ 
+    # Each yield returns ('route', {}, {'lastmod': '2024-01-01', 'priority': 1.0})
+    yield 'index', {}, {'lastmod': '2024-01-01', 'priority': 1.0}  # Homepage, highest priority
+    yield 'login', {}, {'lastmod': '2024-01-01', 'priority': 0.8}  # Login page, slightly lower priority
+    yield 'FAQ', {}, {'lastmod': '2024-01-01', 'priority': 0.7}    # FAQ page, lower priority
+  
 @app.route('/sitemap.xml', methods=['GET'])
 def generate_sitemap():
     return sitemap.generate()
