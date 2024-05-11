@@ -25,6 +25,7 @@ from flask_dance.contrib.google import google
 from flask_sitemap import Sitemap
 from flask import send_from_directory, make_response
 from flask_sitemap import Sitemap
+from sqlalchemy import func
 
 s = URLSafeTimedSerializer('your-secret-key')
 db = SQLAlchemy()
@@ -74,7 +75,27 @@ class Task(db.Model):
             'name': self.name,
             'completed': self.completed,
         }
-      
+class Pomodoro(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
+    duration = db.Column(db.Interval)  # Duration of the session
+    pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    completed = db.Column(db.Boolean, default=False)
+    date = db.Column(db.Date, nullable=False)  # Date of the session
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'start_time': self.start_time,
+            'end_time': self.end_time,
+            'duration': str(self.duration),  # Convert to string for JSON serialization
+            'pomodoro_time_count': self.pomodoro_time_count,
+            'completed': self.completed,
+            'date': self.date
+        }
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")  # or other relevant config var
@@ -516,20 +537,31 @@ def update_charactername():
     else:
         return jsonify({'success': False}), 400
     
+from datetime import datetime
+
 @app.route('/update_pomodoros', methods=['POST'])
 @login_required
 def update_pomodoros():
     print("Updating pomodoros for user:", current_user.charactername)
+    start_time = datetime.now()  # Record session start time
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 1
     else:
         current_user.pomodoro_time_count = int(current_user.pomodoro_time_count) + 1
     try:
         db.session.commit()
+        end_time = datetime.now()  # Record session end time
+        duration = end_time - start_time  # Calculate session duration
+        new_pomodoro = Pomodoro(start_time=start_time, end_time=end_time, duration=duration,
+                                pomodoro_time_count=current_user.pomodoro_time_count,
+                                user_id=current_user.id, completed=True, date=datetime.now().date())
+        db.session.add(new_pomodoro)
+        db.session.commit()
         print("Successfully updated pomodoros")
     except Exception as e:
         print("Error updating pomodoros:", e)
     return jsonify({'success': True})
+
 
 class Checkbox(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -548,11 +580,35 @@ def update_checkbox_value():
     current_user.checked = checkbox_value == True
     db.session.commit()
     return jsonify({'success': True})
+
+
+# Example function to retrieve pomodoros per month
+def get_pomodoros_per_month(user_id):
+    # Assuming `date` is the field representing the date of each session
+    result = db.session.query(func.count(Pomodoro.id), func.extract('month', Pomodoro.date)) \
+        .filter(Pomodoro.user_id == user_id) \
+        .group_by(func.extract('month', Pomodoro.date)) \
+        .all()
+    return result
+
+@app.route('/get_statistics')
+@login_required
+def get_statistics():
+    # Fetch statistics data from the database or any other source
+    pomodorData = [10, 20, 30, 40];  # Example data, replace with actual data
+    pomodorLabels = ['Jan', 'Feb', 'Mar', 'Apr'];  # Example labels, replace with actual labels
+
+    pieData = [25, 25, 25, 25];  # Example data, replace with actual data
+    pieLabels = ['Category A', 'Category B', 'Category C', 'Category D'];  # Example labels, replace with actual labels
+
+    return jsonify({'pomodoroData': pomodorData, 'pomodoroLabels': pomodorLabels, 'pieData': pieData, 'pieLabels': pieLabels})
+
 def reset_pomodoro_time_count():
     pomodoro_time_counts = current_user.pomodoro_time_count.query.all()
     for pomodoro_time_count in pomodoro_time_counts:
         pomodoro_time_count.completed = 0
     db.session.commit()
+    
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=23, minute=59, second=59)
 scheduler.start()

@@ -104,6 +104,76 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Function to fetch statistics data from the backend
+function fetchStatistics() {
+  // Make an AJAX request to fetch statistics data
+  // Replace 'endpoint' with your actual backend endpoint to fetch statistics
+  fetch('/get_statistics')
+      .then(response => response.json())
+      .then(data => {
+          renderCharts(data); // Render charts with the fetched data
+      })
+      .catch(error => {
+          console.error('Error fetching statistics:', error);
+      });
+}
+
+// Function to render charts using Chart.js
+function renderCharts(data) {
+  // Extract data for PomodorChart
+  const pomodorData = data.pomodoroData;
+  const pomodorLabels = data.pomodoroLabels;
+
+  // Render PomodorChart
+  const pomodorChartCtx = document.getElementById('PomodorChart').getContext('2d');
+  new Chart(pomodorChartCtx, {
+      type: 'line',
+      data: {
+          labels: pomodorLabels,
+          datasets: [{
+              label: 'Pomodoros Per Month',
+              data: pomodorData,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+
+  // Extract data for PomodorPieChart
+  const pieData = data.pieData;
+  const pieLabels = data.pieLabels;
+
+  // Render PomodorPieChart
+  const pieChartCtx = document.getElementById('PomodorPieChart').getContext('2d');
+  new Chart(pieChartCtx, {
+      type: 'pie',
+      data: {
+          labels: pieLabels,
+          datasets: [{
+              data: pieData,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(54, 162, 235, 0.6)',
+                  'rgba(255, 206, 86, 0.6)',
+                  'rgba(75, 192, 192, 0.6)',
+                  'rgba(153, 102, 255, 0.6)'
+              ]
+          }]
+      }
+  });
+}
+
+// Fetch statistics when the window is loaded
+window.addEventListener('load', fetchStatistics);
 
   function toggleVideo() {
     var checkbox = document.getElementById("video-switch");
@@ -146,7 +216,7 @@ var highestZIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelectorAll(
-      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
+      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-chart-bar, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
     )
     .forEach((icon) => {
       icon.addEventListener("click", function () {
