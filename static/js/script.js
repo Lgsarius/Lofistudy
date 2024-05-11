@@ -148,6 +148,7 @@ function renderCharts(data) {
           }
       }
   });
+}
 
 
 
