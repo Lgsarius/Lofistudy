@@ -127,12 +127,13 @@ function renderCharts(data) {
   // Render PomodorChart
   const pomodorChartCtx = document.getElementById('PomodorChart').getContext('2d');
   new Chart(pomodorChartCtx, {
-      type: 'line',
+      type: 'bar', // Set type to 'bar' for a bar chart
       data: {
           labels: pomodorLabels,
           datasets: [{
               label: 'Pomodoros Per Month',
               data: pomodorData,
+              backgroundColor: '#F3A953', // Set the background color for all bars
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1
           }]
@@ -148,29 +149,8 @@ function renderCharts(data) {
       }
   });
 
-  // Extract data for PomodorPieChart
-  const pieData = data.pieData;
-  const pieLabels = data.pieLabels;
 
-  // Render PomodorPieChart
-  const pieChartCtx = document.getElementById('PomodorPieChart').getContext('2d');
-  new Chart(pieChartCtx, {
-      type: 'pie',
-      data: {
-          labels: pieLabels,
-          datasets: [{
-              data: pieData,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.6)',
-                  'rgba(54, 162, 235, 0.6)',
-                  'rgba(255, 206, 86, 0.6)',
-                  'rgba(75, 192, 192, 0.6)',
-                  'rgba(153, 102, 255, 0.6)'
-              ]
-          }]
-      }
-  });
-}
+
 
 // Fetch statistics when the window is loaded
 window.addEventListener('load', fetchStatistics);

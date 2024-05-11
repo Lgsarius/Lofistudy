@@ -598,10 +598,9 @@ def get_statistics():
     pomodorData = [10, 20, 30, 40];  # Example data, replace with actual data
     pomodorLabels = ['Jan', 'Feb', 'Mar', 'Apr'];  # Example labels, replace with actual labels
 
-    pieData = [25, 25, 25, 25];  # Example data, replace with actual data
-    pieLabels = ['Category A', 'Category B', 'Category C', 'Category D'];  # Example labels, replace with actual labels
+  
 
-    return jsonify({'pomodoroData': pomodorData, 'pomodoroLabels': pomodorLabels, 'pieData': pieData, 'pieLabels': pieLabels})
+    return jsonify({'pomodoroData': pomodorData, 'pomodoroLabels': pomodorLabels})
 
 def reset_pomodoro_time_count():
     pomodoro_time_counts = current_user.pomodoro_time_count.query.all()
