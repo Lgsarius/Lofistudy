@@ -604,7 +604,17 @@ def get_pomodoros_per_month(user_id):
         .filter(Pomodoro.user_id == user_id) \
         .group_by(func.extract('month', Pomodoro.date)) \
         .all()
-    return result
+
+    # Convert the result into a dictionary for easy lookup
+    pomodoro_data_dict = dict(result)
+
+    # Generate a list of (month, pomodoro_count) tuples for the last 12 months
+    last_12_months = [(datetime.now() - timedelta(days=30 * i)).strftime('%m') for i in range(11, -1, -1)]
+
+    # Fill in missing months with 0 pomodoros
+    pomodoro_data_for_last_12_months = [(pomodoro_data_dict.get(month, 0)) for month in last_12_months]
+
+    return pomodoro_data_for_last_12_months
 
 def reset_pomodoro_time_count():
     pomodoro_time_counts = current_user.pomodoro_time_count.query.all()
