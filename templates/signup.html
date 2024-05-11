@@ -7,7 +7,7 @@
             name="description"
             content="LofiStudy is a website that helps you to study by giving you a distraction free enviroment." />
         <meta name="author" content="LofiStudy" />
-        <title>LofiStudy - Singup</title>
+        <title>lo-fi.study Singup</title>
         <meta property="og:image" href="{{ url_for('static', filename='picture.png') }}">
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,7 +28,7 @@
 </video>
     <div class="card">
           <form action="{{ url_for('signup') }}" method="post">
-            <h1>Sign up for Lofistudy</h1>
+            <h1>Sign up for lo-fi.study</h1>
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="alert alert-warning">

@@ -240,7 +240,7 @@ def resetpassword():
             token = s.dumps({'email': email}, salt='email-confirm')
             print(f"Generated token: {token}") 
             print(app.config.get('MAIL_USERNAMES'))
-            msg = Message('Password Reset Request for Lofistudy.net', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
+            msg = Message('Password Reset Request for lo-fi.study', sender=os.environ.get("MAIL_USERNAMES"), recipients=[email])
             link = url_for('reset_token', token=token, _external=True)
             msg.html = r"""
                     <html>
