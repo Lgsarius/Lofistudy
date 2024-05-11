@@ -582,25 +582,29 @@ def update_checkbox_value():
     return jsonify({'success': True})
 
 
+@app.route('/get_statistics')
+@login_required
+def get_statistics():
+    user_id = current_user.id  # Assuming you have access to current_user object
+
+    # Fetch pomodoros per month for the last 12 months
+    today = datetime.now()
+    last_12_months = [(today - timedelta(days=30 * i)).strftime('%b') for i in range(11, -1, -1)]
+    pomodoro_data = get_pomodoros_per_month(user_id)
+
+    # Prepare pomodoro data and labels
+    pomodor_data_dict = dict(pomodoro_data)  # Convert list of tuples to dictionary
+    pomodor_data_for_last_12_months = [pomodor_data_dict.get(month, 0) for month in last_12_months]
+
+    return jsonify({'pomodoroData': pomodor_data_for_last_12_months, 'pomodoroLabels': last_12_months})
+
 # Example function to retrieve pomodoros per month
 def get_pomodoros_per_month(user_id):
-    # Assuming `date` is the field representing the date of each session
     result = db.session.query(func.count(Pomodoro.id), func.extract('month', Pomodoro.date)) \
         .filter(Pomodoro.user_id == user_id) \
         .group_by(func.extract('month', Pomodoro.date)) \
         .all()
     return result
-
-@app.route('/get_statistics')
-@login_required
-def get_statistics():
-    # Fetch statistics data from the database or any other source
-    pomodorData = [10, 20, 30, 40];  # Example data, replace with actual data
-     # Generate labels for the last 12 months
-    today = datetime.now()
-    last_12_months = [(today - timedelta(days=30 * i)).strftime('%b') for i in range(11, -1, -1)]
-
-    return jsonify({'pomodoroData': pomodorData, 'pomodoroLabels': last_12_months})
 
 def reset_pomodoro_time_count():
     pomodoro_time_counts = current_user.pomodoro_time_count.query.all()
