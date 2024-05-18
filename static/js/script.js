@@ -8,8 +8,8 @@ function updateBIGClock() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  updateBIGClock();
-  setInterval(updateBIGClock, 1000);
+  updateBIGClock(); // Initial update
+  setInterval(updateBIGClock, 1000); // Update every second
 });
 
 
