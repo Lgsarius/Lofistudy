@@ -7,8 +7,10 @@ function updateBIGClock() {
   document.getElementById('bigclock').textContent = timeString;
 }
 
-updateBIGClock();
-setInterval(updateBIGClock, 1000);
+document.addEventListener('DOMContentLoaded', function() {
+  updateBIGClock();
+  setInterval(updateBIGClock, 1000);
+});
 
 
 document.addEventListener("DOMContentLoaded", function () {
