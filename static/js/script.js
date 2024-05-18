@@ -1,5 +1,4 @@
 function updateBIGClock() {
-  console.log('Updating clock...'); // Log function execution
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -12,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   updateBIGClock(); // Initial update
   setInterval(updateBIGClock, 1000); // Update every second
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
