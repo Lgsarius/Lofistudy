@@ -1722,6 +1722,7 @@ input:checked + .slider:before {
 
 
 #about-us {
+  user-select: none;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -1801,6 +1802,7 @@ input:checked + .slider:before {
 }
 
 .icon-box {
+  user-select: none;
   width: 30%; /* Setzt die Breite auf 30% des Containers */
   height: 80px;
   background: rgba(255, 255, 255, 0.1);
@@ -1824,6 +1826,7 @@ input:checked + .slider:before {
 }
 .icon-box:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 .icon-box:nth-child(1):hover i {
   color: #079AEB; /* Ändert die Farbe des Twitter-Icons beim Überfahren mit der Maus auf blau */
