@@ -1739,7 +1739,6 @@ input:checked + .slider:before {
 #about-us .login-logo {
   display: block;
   margin-top: 20px;
- 
   margin: 0 auto;
   width: 200px;
   align-items: center;
@@ -1941,9 +1940,7 @@ ul li:last-child {
 
 .white-logo {
   width: 300px; /* Adjust this to make the image smaller or larger */
-  height: 300px; /* Adjust this to make the image smaller or larger */
-
-}
+  height: 300px; /* Adjust this to make the image smaller or larger */}
 
 .loader {
   margin: 5% auto 30px;
