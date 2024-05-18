@@ -1,13 +1,14 @@
-<p align="center">
-  <img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/media/SVG/logo_text.svg" alt="Lofi Study Logo" width="100">
-  <h1 align="center">Lofi Study</h1>
+lo-fi.study`<p align="center">`
+  `<img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/media/SVG/logo_text.svg" alt="Lofi Study Logo" width="100">`
+
+<h1 align="center">lo-fi.study</h1>
 </p>
 
-Welcome to Lofi Study, a website dedicated to providing a relaxing environment for studying.
+Welcome to lo-fi.study, a website dedicated to providing a relaxing environment for studying.
 
 ## About
 
-Lofi Study is a platform that combines the lo-fi artstyle with a simple, distraction-free interface to help you focus on your studies. 
+lo-fi.study is a platform that combines the lo-fi artstyle with a simple, distraction-free interface to help you focus on your studies.
 
 ## Features
 
@@ -25,4 +26,4 @@ Lofi Study is a platform that combines the lo-fi artstyle with a simple, distrac
 
 ## License
 
-This project is licensed under the terms of the MIT license. 
+This project is licensed under the terms of the MIT license.
