@@ -2,16 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 import os
-from oauthlib.oauth2 import TokenExpiredError
+from authlib.integrations.flask_client import OAuth
 import re
 from itsdangerous import URLSafeTimedSerializer as Serializer
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 from flask import current_app
-from flask_dance.contrib.google import make_google_blueprint, google
 from extensions import db
 from flask_login import UserMixin
-from urllib.parse import urljoin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import cast, Integer
 from datetime import datetime, timedelta, date
@@ -20,8 +18,6 @@ from flask_migrate import Migrate
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from uuid import uuid4
-from flask_dance.consumer import oauth_authorized
-from flask_dance.contrib.google import google
 from flask_sitemap import Sitemap
 from flask import send_from_directory, make_response
 from flask_sitemap import Sitemap
@@ -110,44 +106,12 @@ app.config['MAIL_DEFAULT_SENDER'] = 'support@mousewerk.de'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-
-google_blueprint = make_google_blueprint(
-    client_id="97309802024-m1bt3vd3dgfcs8g7k7idngrkmvlvdb8m.apps.googleusercontent.com",
-    client_secret="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",
-     scope=[
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "openid",
-        "https://www.googleapis.com/auth/userinfo.email",
-    ],
-    redirect_url="/google/authorized"
-)
-
-app.register_blueprint(google_blueprint, url_prefix="/login/google")
-
-with app.app_context():
-    @oauth_authorized.connect_via(google)
-    def google_logged_in(blueprint, token):
-        if not token:
-            flash("Failed to log in with Google.", category="error")
-            return False
-        try:
-            resp = blueprint.session.get("/oauth2/v1/userinfo")
-        except TokenExpiredError:
-            blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
-            resp = blueprint.session.get("/oauth2/v1/userinfo")
-        if not resp.ok:
-            msg = "Failed to fetch user info from Google."
-            flash(msg, category="error")
-            return False
-        info = resp.json()
-        blueprint.token = token
-        if blueprint.token.get('expires_in') <= 0:
-            blueprint.session.refresh_token(blueprint.token_uri, refresh_token=blueprint.token.get('refresh_token'))
-           
+oauth = OAuth(app)
 db.init_app(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 sitemap = Sitemap(app=app)
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -165,20 +129,35 @@ def generate_urls():
 def generate_sitemap():
     return sitemap.generate()
 
-@app.route('/google/authorized')
-def login_google():
-    if not google.authorized:
-        return redirect(url_for("google.login"))
-    resp = google.get("/oauth2/v1/userinfo")
-    if resp.ok:
-        session['username'] = resp.json()['email']
-        user = User.query.filter_by(username=session['username']).first()
-        if user is None:
-            user = User(username=session['username'])
-            db.session.add(user)
-            db.session.commit()
-        login_user(user)
-    return redirect(url_for('home'))
+# Initialize OAuth
+google = oauth.register(
+    name='google',
+    client_id=os.getenv('GOOGLE_CLIENT_ID'),
+    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    userinfo_endpoint='https://www.googleapis.com/oauth2/v1/userinfo',
+    client_kwargs={'scope': 'openid profile email'},
+)
+
+@app.route('/google_login')
+def google_login():
+    redirect_uri = url_for('google_authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+@app.route('/google_authorize')
+def google_authorize():
+    token = google.authorize_access_token()
+    user_info = google.get('userinfo').json()
+    user = User.query.filter_by(username=user_info['email']).first()
+    if user is None:
+        user = User(username=user_info['email'], fs_uniquifier=str(uuid4()), password='', charactername=user_info['name'])
+        db.session.add(user)
+        db.session.commit()
+    login_user(user)
+    return redirect(url_for('protected'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -364,25 +343,6 @@ def get_songs():
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
     return jsonify(music_files=music_files)
 
-@app.route('/calendar_events')
-@login_required
-def calendar_events():
-    if not google.authorized:
-        return jsonify([])  # Return an empty list if the user is not logged in
-    resp = google.get("https://www.googleapis.com/calendar/v3/calendars/primary/events")
-    if resp.ok:
-        events = resp.json()['items']
-        fullcalendar_events = [
-            {
-                'title': event['summary'],
-                'start': event['start']['dateTime'],
-                'end': event['end']['dateTime'],
-            }
-            for event in events
-        ]
-    else:
-        fullcalendar_events = []  # Return an empty list if there was an error
-    return jsonify(fullcalendar_events)
 
 @app.route('/Legal Notice')
 def legal_notice():
