@@ -16,16 +16,29 @@ html {
   /* Zentriert den Button und fügt einen unteren Abstand hinzu */
 }
 
-#clockgroß {
-  position: absolute;
-  /* or 'fixed' if you want it to stay at the top left even when scrolling */
+.clock-container {
+  position: fixed;
   top: 10px;
   left: 10px;
-  /* changed from 'right' to 'left' */
-  color: white;
-  font-size: 24px;
-  font-family: "Courier New", Courier, monospace;
-  user-select: none;
+  z-index: 9999;
+}
+
+.clock {
+  font-size: 36px;
+  padding: 10px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  animation: pulse 1s infinite alternate;
+  z-index: 9999;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
 }
 
 #early-access-banner {

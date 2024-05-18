@@ -36,7 +36,7 @@ class User(UserMixin, db.Model):
     notecontent = db.Column(db.Text, nullable=True)
     tasks = db.Column(db.Text, nullable=True)
     pomodoro_time_count = db.Column(db.Integer, nullable=True, default=0)
-    
+    pomodoro_time_count_alltime = db.Column(db.Integer, nullable=True, default=0)
     fs_uniquifier = db.Column(db.Text, nullable=False)
     checked = db.Column(db.Boolean, default=False)
     
@@ -71,6 +71,9 @@ class Task(db.Model):
             'name': self.name,
             'completed': self.completed,
         }
+class Checkbox(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    checked = db.Column(db.Boolean, default=False)
 class Pomodoro(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     start_time = db.Column(db.DateTime, nullable=False)
@@ -508,24 +511,22 @@ def update_pomodoros():
         current_user.pomodoro_time_count = 1
     else:
         current_user.pomodoro_time_count = int(current_user.pomodoro_time_count) + 1
+    
+    if current_user.pomodoro_time_count_alltime is None:
+        current_user.pomodoro_time_count_alltime = 1
+    else:
+        current_user.pomodoro_time_count_alltime = int(current_user.pomodoro_time_count_alltime) + 1
+    
     try:
-        db.session.commit()
-        end_time = datetime.now()  # Record session end time
-        duration = end_time - start_time  # Calculate session duration
-        new_pomodoro = Pomodoro(start_time=start_time, end_time=end_time, duration=duration,
-                                pomodoro_time_count=current_user.pomodoro_time_count,
-                                user_id=current_user.id, completed=True, date=datetime.now().date())
-        db.session.add(new_pomodoro)
         db.session.commit()
         print("Successfully updated pomodoros")
     except Exception as e:
         print("Error updating pomodoros:", e)
+        
     return jsonify({'success': True})
 
 
-class Checkbox(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    checked = db.Column(db.Boolean, default=False)
+
 
 @app.route('/get-checkbox-value')
 @login_required
@@ -542,53 +543,29 @@ def update_checkbox_value():
     return jsonify({'success': True})
 
 
-@app.route('/get_statistics')
+@app.route('/test')
 @login_required
-def get_statistics():
-    user_id = current_user.id  # Assuming you have access to current_user object
+def test():
+    user_id = current_user.id 
+    
+    return render_template('test.html')
 
-    # Fetch pomodoros per month for the last 12 months
-    today = datetime.now()
-    last_12_months = [(today - timedelta(days=30 * i)).strftime('%b') for i in range(11, -1, -1)]
-    pomodoro_data = get_pomodoros_per_month(user_id)
-
-    # Prepare pomodoro data and labels
-    pomodor_data_dict = dict(pomodoro_data)  # Convert list of tuples to dictionary
-    pomodor_data_for_last_12_months = [pomodor_data_dict.get(month, 0) for month in last_12_months]
-
-    return jsonify({'pomodoroData': pomodor_data_for_last_12_months, 'pomodoroLabels': last_12_months})
-
-# Example function to retrieve pomodoros per month
-def get_pomodoros_per_month(user_id):
-    result = db.session.query(func.count(Pomodoro.id), func.extract('month', Pomodoro.date)) \
-        .filter(Pomodoro.user_id == user_id) \
-        .group_by(func.extract('month', Pomodoro.date)) \
-        .all()
-
-    # Convert the result into a dictionary for easy lookup
-    pomodoro_data_dict = dict(result)
-
-    # Generate a list of (month, pomodoro_count) tuples for the last 12 months
-    last_12_months = [(datetime.now() - timedelta(days=30 * i)).strftime('%m') for i in range(11, -1, -1)]
-
-    # Fill in missing months with 0 pomodoros
-    pomodoro_data_for_last_12_months = [(pomodoro_data_dict.get(month, 0)) for month in last_12_months]
-
-    return pomodoro_data_for_last_12_months
 
 def reset_pomodoro_time_count():
-    pomodoro_time_counts = current_user.pomodoro_time_count.query.all()
-    for pomodoro_time_count in pomodoro_time_counts:
-        pomodoro_time_count.completed = 0
+    users = User.query.all()
+    for user in users:
+        user.pomodoro_time_count = 0
     db.session.commit()
     
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=23, minute=59, second=59)
-scheduler.start()
+
 migrate = Migrate(app, db)
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        scheduler.start()
+        reset_pomodoro_time_count()
     
 
     app.run(debug=True, host='0.0.0.0', port=5050)
