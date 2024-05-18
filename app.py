@@ -109,7 +109,6 @@ app.config['MAIL_DEFAULT_SENDER'] = 'support@mousewerk.de'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-oauth = OAuth(app)
 db.init_app(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
@@ -132,35 +131,7 @@ def generate_urls():
 def generate_sitemap():
     return sitemap.generate()
 
-# Initialize OAuth
-google = oauth.register(
-    name='google',
-    client_id=os.getenv('GOOGLE_CLIENT_ID'),
-    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    authorize_params=None,
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    access_token_params=None,
-    userinfo_endpoint='https://www.googleapis.com/oauth2/v1/userinfo',
-    client_kwargs={'scope': 'openid profile email'},
-)
 
-@app.route('/google_login')
-def google_login():
-    redirect_uri = url_for('google_authorize', _external=True)
-    return google.authorize_redirect(redirect_uri)
-
-@app.route('/google_authorize')
-def google_authorize():
-    token = google.authorize_access_token()
-    user_info = google.get('userinfo').json()
-    user = User.query.filter_by(username=user_info['email']).first()
-    if user is None:
-        user = User(username=user_info['email'], fs_uniquifier=str(uuid4()), password='', charactername=user_info['name'])
-        db.session.add(user)
-        db.session.commit()
-    login_user(user)
-    return redirect(url_for('protected'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
