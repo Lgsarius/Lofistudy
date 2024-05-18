@@ -20,7 +20,7 @@ html {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 9999;
+ 
 }
 
 .bigclock {
@@ -29,7 +29,7 @@ html {
   border: 2px solid #fff;
   border-radius: 5px;
   animation: pulse 1s infinite alternate;
-  z-index: 9999;
+
 }
 
 @keyframes pulse {
