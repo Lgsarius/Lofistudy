@@ -30,9 +30,11 @@
                 </div>
             {% endif %}
             {% endwith %}
+            <div class="inputbox">
             <a href="{{ url_for('google_login') }}" style="background-color: #ffffff; color: #757575; padding: 10px 20px; border: 1px solid #dcdcdc; border-radius: 10px; text-decoration: none; display: inline-block; font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo" style="height: 20px; width: auto; margin-right: 10px;">Login with Google
             </a>
+        </div>
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
                 <input name="email" id="email" type="email" required>
