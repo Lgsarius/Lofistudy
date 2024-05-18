@@ -16,14 +16,14 @@ html {
   /* Zentriert den Button und fügt einen unteren Abstand hinzu */
 }
 
-.clock-container {
+.bigclock-container {
   position: fixed;
   top: 10px;
   left: 10px;
   z-index: 9999;
 }
 
-.clock {
+.bigclock {
   font-size: 36px;
   padding: 10px;
   border: 2px solid #fff;
