@@ -1,3 +1,12 @@
+document.getElementById('watchCheckbox').addEventListener('change', function() {
+  var bigClock = document.getElementById('bigclock');
+  if (this.checked) {
+      bigClock.style.display = 'block';
+  } else {
+      bigClock.style.display = 'none';
+  }
+});
+
 function updateBIGClock() {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
