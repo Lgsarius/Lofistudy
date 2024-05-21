@@ -1,10 +1,7 @@
-document.getElementById('watchCheckbox').addEventListener('change', function() {
-  var bigClock = document.getElementById('bigclock');
-  if (this.checked) {
-      bigClock.style.display = 'block';
-  } else {
-      bigClock.style.display = 'none';
-  }
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    document.getElementById("loadingScreen").style.display = "none";
+  }, 5000);
 });
 
 function updateBIGClock() {
@@ -24,11 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-    document.getElementById("loadingScreen").style.display = "none";
-  }, 5000);
-});
+
 document.addEventListener('DOMContentLoaded', function() {
   var container = document.querySelector('.wallaper-selection');
   var leftArrow = document.querySelector('.scroll-arrow.left');
