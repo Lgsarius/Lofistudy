@@ -1,3 +1,6 @@
+\\C37L13SR0412\Studenten_Austausch
+
+
 lo-fi.study`<p align="center">`
   `<img src="https://github.com/Lgsarius/Lofistudy/blob/main/static/media/SVG/logo_text.svg" alt="Lofi Study Logo" width="100">`
 
