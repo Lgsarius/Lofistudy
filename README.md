@@ -1,4 +1,3 @@
-\\C37L13SR0412\Studenten_Austausch
 
 
 lo-fi.study`<p align="center">`
