@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function() {
   setupWatchCheckbox();
   setupBigClock();
@@ -17,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
   setupSocialLinks();
   setupLeaderboard();
   setupAudioSourceChange();
+=======
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    document.getElementById("loadingScreen").style.display = "none";
+  }, 5000);
+>>>>>>> fb28f435b95ec51a01792cf543ab5789a0ee0f79
 });
 
 function setupWatchCheckbox() {
@@ -40,6 +47,7 @@ function setupBigClock() {
   setInterval(updateBIGClock, 1000); // Update every second
 }
 
+<<<<<<< HEAD
 function setupLoadingScreen() {
   setTimeout(function() {
       document.getElementById("loadingScreen").style.display = "none";
@@ -50,6 +58,16 @@ function setupWallpaperSelection() {
   const container = document.querySelector('.wallaper-selection');
   const leftArrow = document.querySelector('.scroll-arrow.left');
   const rightArrow = document.querySelector('.scroll-arrow.right');
+=======
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.querySelector('.wallaper-selection');
+  var leftArrow = document.querySelector('.scroll-arrow.left');
+  var rightArrow = document.querySelector('.scroll-arrow.right');
+>>>>>>> fb28f435b95ec51a01792cf543ab5789a0ee0f79
 
   container.addEventListener('wheel', function(e) {
       if (e.deltaY != 0) {
