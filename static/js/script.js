@@ -565,36 +565,33 @@ function changeAudioSource(selectElement) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('/daily-goals')
-        .then(response => response.json())
-        .then(goals => {
-            const goalsList = document.getElementById('daily-goals-list');
-            goals.forEach(goal => {
-                const listItem = document.createElement('li');
-                listItem.textContent = goal.goal;
-                if (goal.completed) {
-                    listItem.style.textDecoration = 'line-through';
-                }
-                goalsList.appendChild(listItem);
-            });
-        });
+// Ensure to include this script in your main JS file or script section
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dailyGoalsContainer = document.getElementById('daily-goals-container');
+    const toggleButton = document.getElementById('toggle-daily-goals');
+    const closeButton = dailyGoalsContainer.querySelector('.close-window');
+
+    toggleButton.addEventListener('click', function () {
+        if (dailyGoalsContainer.style.right === '0px') {
+            dailyGoalsContainer.style.right = '-300px';
+        } else {
+            dailyGoalsContainer.style.right = '0px';
+        }
+    });
+
+    closeButton.addEventListener('click', function () {
+        dailyGoalsContainer.style.right = '-300px';
+    });
 
     document.getElementById('add-goal-button').addEventListener('click', function () {
-        const goalText = document.getElementById('new-goal-input').value;
-        fetch('/daily-goals', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ goal: goalText }),
-        })
-        .then(response => response.json())
-        .then(newGoal => {
-            const goalsList = document.getElementById('daily-goals-list');
-            const listItem = document.createElement('li');
-            listItem.textContent = newGoal.goal;
-            goalsList.appendChild(listItem);
-        });
+        const goalInput = document.getElementById('new-goal-input');
+        const goalList = document.getElementById('daily-goals-list');
+        if (goalInput.value.trim() !== '') {
+            const newGoal = document.createElement('li');
+            newGoal.textContent = goalInput.value;
+            goalList.appendChild(newGoal);
+            goalInput.value = '';
+        }
     });
 });

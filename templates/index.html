@@ -640,14 +640,26 @@
                 </div>
             </div>
         </div>
-        <div id="daily-goals-container">
-            <h2>Daily Goals</h2>
-            <ul id="daily-goals-list">
-                <!-- Goals will be dynamically added here -->
-            </ul>
-            <input type="text" id="new-goal-input" placeholder="New goal">
-            <button id="add-goal-button">Add Goal</button>
+        <div id="daily-goals-container" class="window draggable">
+            <div class="window-header">
+                <div class="info">
+                    <i class="fa fa-info-circle"></i>
+                    <span class="info-text">Track your daily goals</span>
+                    <span>Daily Goals</span>
+                </div>
+                <button class="close-window"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="window-content">
+                <h2>Daily Goals</h2>
+                <ul id="daily-goals-list">
+                    <!-- Goals will be dynamically added here -->
+                </ul>
+                <input type="text" id="new-goal-input" placeholder="New goal">
+                <button id="add-goal-button">Add Goal</button>
+            </div>
         </div>
+        <button id="toggle-daily-goals" class="toggle-button">Daily Goals</button>
+        
         <div id="gpt-window" class="window draggable">
             <div class="window-header">
                 <div class="info">

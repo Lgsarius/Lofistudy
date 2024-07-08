@@ -1567,10 +1567,29 @@ only screen and (max-device-width: 768px) {
 
 
 #daily-goals-container {
-  display: block; /* Ensure it is not set to 'none' */
-  visibility: visible; /* Ensure it is not set to 'hidden' */
-  width: 100%; /* Ensure it has width */
-  height: auto; /* Ensure it has height */
-  padding: 20px; /* Optional: Add some padding */
-  background-color: #f0f0f0; /* Optional: Add a background color for visibility */
+  position: fixed;
+  top: 50%;
+  right: -300px; /* Start hidden off the screen */
+  width: 300px;
+  height: auto;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 10px 0 0 10px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+#toggle-daily-goals {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1001;
+  border-radius: 10px 0 0 10px;
 }
