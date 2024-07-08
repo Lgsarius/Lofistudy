@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lofi Study Environment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_neu.css') }}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid d-flex flex-column vh-100">
+    <div class="container-fluid vh-100 d-flex flex-column">
         <div class="row flex-grow-1">
-            <div class="col-md-3 left-panel p-3">
+            <div class="col-md-3 left-panel">
                 <h2>Todo Tracker</h2>
                 <ul id="todo-list" class="list-group">
                     <li class="list-group-item">Example Task 1</li>
@@ -23,8 +23,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 main-panel d-flex flex-column align-items-center justify-content-center p-3">
-                <div id="threejs-scene"></div>
+            <div class="col-md-6 main-panel d-flex flex-column align-items-center justify-content-center">
+                <div id="threejs-scene" class="w-100"></div>
                 <div class="pomodoro-timer mt-4">
                     <h2>Pomodoro Timer</h2>
                     <div class="circle-progress d-flex align-items-center justify-content-center">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 bottom-panel p-3">
+            <div class="col-md-3 bottom-panel d-flex align-items-center justify-content-center">
                 <audio id="music-player" controls class="w-100">
                     <source src="{{ url_for('static', filename='lofi-music.mp3') }}" type="audio/mp3">
                     Your browser does not support the audio element.
@@ -52,7 +52,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script type="module">
         import { GLTFLoader } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/loaders/GLTFLoader.js';
-        import { initScene, startPomodoro, handleTodoList } from "{{ url_for('static', filename='js/scripts.js') }}";
+        import { initScene, startPomodoro, handleTodoList } from "{{ url_for('static', filename='js/script_neu.js') }}";
 
         document.addEventListener('DOMContentLoaded', () => {
             initScene(GLTFLoader);
