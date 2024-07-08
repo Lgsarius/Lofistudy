@@ -128,7 +128,7 @@ function setupDraggableWindows() {
   let highestZIndex = 0;
 
   document.querySelectorAll(
-      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-chart-bar, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
+      ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-chart-bar, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle, .fas.fa-info-circle"
   ).forEach((icon) => {
       icon.addEventListener("click", function() {
           const windowId = this.dataset.window;

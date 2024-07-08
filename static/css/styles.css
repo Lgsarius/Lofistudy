@@ -1578,7 +1578,7 @@ only screen and (max-device-width: 768px) {
   border-radius: 10px 0 0 10px;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   transition: right 0.3s ease;
-  z-index: 1000;
+  z-index: 10000000;
 }
 
 #toggle-daily-goals {
