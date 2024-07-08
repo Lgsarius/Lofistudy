@@ -1,11 +1,12 @@
+
 body,
 html {
-  font-family: sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #2C2C2C;
 }
 
 .google-login-button {
@@ -38,7 +39,6 @@ html {
   text-align: center;
   line-height: 50px;
   transform: rotate(40deg);
-  font-family: "Courier New", Courier, monospace;
 }
 
 #background {
@@ -47,11 +47,9 @@ html {
   left: 0;
   min-width: 100%;
   min-height: 100%;
-  background-size: contain;
-  object-fit: contain;
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
-  height: 100%;
-  width: 100%;
 }
 
 #background-video {
@@ -61,10 +59,9 @@ html {
   min-width: 100%;
   min-height: 100%;
   z-index: -100;
-  zoom: 0.3;
   transform: translate(-50%, -50%);
   background: no-repeat;
-  background-size: contain;
+  background-size: cover;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -301,6 +298,7 @@ select {
   left: 5%;
   bottom: 20px;
 }
+
 #daily-goals-window,
 #music-window,
 #account-window,
@@ -385,6 +383,8 @@ select {
   padding: 10px;
   cursor: move;
   display: flex;
+
+
   justify-content: space-between;
   align-items: center;
 }
@@ -802,7 +802,9 @@ music-control svg {
   left: 20px;
   background-color: #0a0a0a;
   margin-top: 20px;
-  outline: none;
+  outline:
+
+ none;
   border-color: #007bff;
 }
 
@@ -1197,7 +1199,9 @@ iframe {
 }
 
 .dropdown-menu a i {
-  margin-right: 5px !important;
+  margin-right: 5
+
+px !important;
   font-size: 16px !important;
 }
 
@@ -1558,11 +1562,12 @@ ul li:last-child {
 @media only screen and (min-device-width: 1224px) and (max-device-width: 1600px),
 only screen and (max-device-width: 768px) {
   #background {
-    background-image: url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
+    background-image:
+
+ url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
   }
 }
-
 
