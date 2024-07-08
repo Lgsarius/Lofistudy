@@ -4,49 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lofi Study Environment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_neu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="left-panel">
-            <h2>Todo Tracker</h2>
-            <ul id="todo-list">
-                <li>Example Task 1</li>
-                <li>Example Task 2</li>
-            </ul>
-            <input type="text" id="new-todo" placeholder="New task...">
-            <button id="add-todo">Add Task</button>
-        </div>
-        <div class="main-panel">
-            <div id="threejs-scene"></div>
-            <div class="pomodoro-timer">
-                <h2>Pomodoro Timer</h2>
-                <div class="circle-progress">
-                    <span id="timer-display">25:00</span>
-                </div>
-                <div class="controls">
-                    <button id="start">Start</button>
-                    <button id="stop">Stop</button>
-                    <button id="reset">Reset</button>
-                </div>
-                <div class="settings">
-                    <label>Work Time (minutes): <input type="number" id="work-time" value="25"></label>
-                    <label>Break Time (minutes): <input type="number" id="break-time" value="5"></label>
+    <div class="container-fluid d-flex flex-column vh-100">
+        <div class="row flex-grow-1">
+            <div class="col-md-3 left-panel p-3">
+                <h2>Todo Tracker</h2>
+                <ul id="todo-list" class="list-group">
+                    <li class="list-group-item">Example Task 1</li>
+                    <li class="list-group-item">Example Task 2</li>
+                </ul>
+                <div class="input-group mt-3">
+                    <input type="text" id="new-todo" class="form-control" placeholder="New task...">
+                    <div class="input-group-append">
+                        <button id="add-todo" class="btn btn-primary">Add Task</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bottom-panel">
-            <audio id="music-player" controls>
-                <source src="{{ url_for('static', filename='lofi-music.mp3') }}" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
+            <div class="col-md-6 main-panel d-flex flex-column align-items-center justify-content-center p-3">
+                <div id="threejs-scene"></div>
+                <div class="pomodoro-timer mt-4">
+                    <h2>Pomodoro Timer</h2>
+                    <div class="circle-progress d-flex align-items-center justify-content-center">
+                        <span id="timer-display">25:00</span>
+                    </div>
+                    <div class="controls mt-3">
+                        <button id="start" class="btn btn-success">Start</button>
+                        <button id="stop" class="btn btn-danger">Stop</button>
+                        <button id="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                    <div class="settings mt-3">
+                        <label class="d-block">Work Time (minutes): <input type="number" id="work-time" class="form-control d-inline-block w-auto" value="25"></label>
+                        <label class="d-block">Break Time (minutes): <input type="number" id="break-time" class="form-control d-inline-block w-auto" value="5"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 bottom-panel p-3">
+                <audio id="music-player" controls class="w-100">
+                    <source src="{{ url_for('static', filename='lofi-music.mp3') }}" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script type="module">
         import { GLTFLoader } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/loaders/GLTFLoader.js';
-        import { initScene, loadModel, startPomodoro, handleTodoList } from "{{ url_for('static', filename='js/script_neu.js') }}";
-        
+        import { initScene, startPomodoro, handleTodoList } from "{{ url_for('static', filename='js/scripts.js') }}";
+
         document.addEventListener('DOMContentLoaded', () => {
             initScene(GLTFLoader);
             startPomodoro();

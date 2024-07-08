@@ -2,9 +2,9 @@
 
 export function initScene(GLTFLoader) {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 800 / 450, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(800, 450);
+    renderer.setSize(window.innerWidth * 0.6, window.innerHeight * 0.5);
     document.getElementById('threejs-scene').appendChild(renderer.domElement);
 
     // Lighting
@@ -89,6 +89,8 @@ export function startPomodoro() {
         const seconds = time % 60;
         document.getElementById('timer-display').innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }
+
+    updateDisplay(workTime); // Initialize the display with the work time
 }
 
 export function handleTodoList() {
@@ -97,6 +99,7 @@ export function handleTodoList() {
         if (newTodo.trim() !== '') {
             const li = document.createElement('li');
             li.textContent = newTodo;
+            li.className = 'list-group-item';
             document.getElementById('todo-list').appendChild(li);
             document.getElementById('new-todo').value = '';
         }
