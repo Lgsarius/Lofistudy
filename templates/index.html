@@ -425,18 +425,94 @@
                 </div>
                 <button class="close-window"><i class="fas fa-times"></i></button>
             </div>
-            <div class="window-content">
-                {% for sound in sounds %}
-                <div class="sound-control">
-                    <button class="sound-icon" id="{{ sound.id }}">
-                        <img src="{{ url_for('static', filename='media/SVG/' ~ sound.image) }}" alt="{{ sound.name }}">
-                    </button>
-                    <input type="range" min="0" max="1" step="0.01" id="{{ sound.id }}-volume" class="win10-thumb">
-                    <audio id="{{ sound.id }}-audio" src="{{ url_for('static', filename='media/sounds/' ~ sound.file) }}"></audio>
+                    <div class="window-content">
+                        <div class="sound-control">
+                            <button class="sound-icon" id="street-sound-icon">
+                                <img
+                                    src="{{ url_for('static', filename='media/SVG/rain.svg') }}"
+                                    alt="Rain" />
+                            </button>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                id="street-volume"
+                                class="win10-thumb" />
+                            <audio
+                                id="street-audio"
+                                src="{{ url_for('static', filename='media/sounds/rain.mp3') }}"></audio>
+                        </div>
+                        <div class="sound-control">
+                            <button class="sound-icon" id="rain-sound-icon">
+                                <img
+                                    src="{{ url_for('static', filename='media/SVG/wind.svg') }}"
+                                    alt="Wind" />
+                            </button>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                id="rain-volume"
+                                class="win10-thumb" />
+                            <audio
+                                id="rain-audio"
+                                src="{{ url_for('static', filename='media/sounds/wind.mp3') }}"></audio>
+                        </div>
+                        <div class="sound-control">
+                            <button class="sound-icon" id="snow-sound-icon">
+                                <img
+                                    src="{{ url_for('static', filename='media/SVG/keyboard.svg') }}"
+                                    alt="Keyboard" />
+                            </button>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                id="snow-volume"
+                                class="win10-thumb" />
+                            <audio
+                                id="snow-audio"
+                                src="{{ url_for('static', filename='media/sounds/keyboard.mp3') }}"></audio>
+                        </div>
+                        <div class="sound-control">
+                            <button class="sound-icon" id="wind2-icon">
+                                <img
+                                    src="{{ url_for('static', filename='media/SVG/wind2.svg') }}"
+                                    alt="snow" />
+                            </button>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                id="wind2-volume"
+                                class="win10-thumb" />
+                            <audio
+                                id="wind2-audio"
+                                src="{{ url_for('static', filename='media/sounds/wind2.mp3') }}"></audio>
+                        </div>
+                        <div class="sound-control">
+                            <button class="sound-icon" id="ocean-icon">
+                                <img
+                                    src="{{ url_for('static', filename='media/SVG/ocean.svg') }}"
+                                    alt="ocean" />
+                            </button>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                id="ocean-volume"
+                                class="win10-thumb" />
+                            <audio
+                                id="ocean-audio"
+                                src="{{ url_for('static', filename='media/sounds/ocean.mp3') }}"></audio>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
         <div id="url-window" class="window draggable">
             <div class="window-header">
                 <div class="info">
