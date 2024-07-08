@@ -1,121 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-        #video-background {
-            position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -100;
-  zoom: 0.3;
-  transform: translate(-50%, -50%);
-  background: no-repeat;
-  background-size: contain;
-   
-}
-
-        .icon-bar {
-            position: fixed;
-            bottom: 0;
-            width: 80%;
-            left: 10%;
-            background-color: rgba(255, 255, 255, 0.1);
-            overflow: auto;
-            border-radius: 50px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-        .icon-bar a {
-            float: left;
-            width: 20%;
-            text-align: center;
-            padding: 12px 0;
-            transition: all 0.3s ease;
-            color: white;
-            font-size: 36px;
-        }
-        .icon-bar a:hover {
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-        .active {
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-        @media (max-width: 576px) {
-  .icon-bar {
-    width: 100%;
-    left: 0;
-  }
-  .icon-bar a {
-    font-size: 24px;
-  }
-}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lofi Study Environment</title>
+    <link rel="stylesheet" href="styles_neu.css">
 </head>
 <body>
-
-    <video autoplay loop id="video-background" class="position-absolute end-0 bottom-0 h-auto w-auto">
-        <source src="https://res.cloudinary.com/dgp0pgxb8/video/upload/f_auto:video,q_auto/hwxbyk6mq8a0iduh9xf2" type="video/mp4"> Your brower is old
-    </video>
-
-    <div class="icon-bar d-flex justify-content-around">
-        <a class="icon active" id="icon1" href="#">
-            <div class="tooltip">
-                <i class="fab fa-soundcloud" data-window="spotify-window"></i>
-                <span class="tooltiptext">Soundcloud</span>
+    <div class="container">
+        <div class="left-panel">
+            <h2>Todo Tracker</h2>
+            <ul id="todo-list">
+                <li>Example Task 1</li>
+                <li>Example Task 2</li>
+            </ul>
+            <input type="text" id="new-todo" placeholder="New task...">
+            <button id="add-todo">Add Task</button>
+        </div>
+        <div class="main-panel">
+            <div id="threejs-scene"></div>
+            <div class="pomodoro-timer">
+                <h2>Pomodoro Timer</h2>
+                <div class="circle-progress">
+                    <span id="timer-display">25:00</span>
+                </div>
+                <div class="controls">
+                    <button id="start">Start</button>
+                    <button id="stop">Stop</button>
+                    <button id="reset">Reset</button>
+                </div>
+                <div class="settings">
+                    <label>Work Time (minutes): <input type="number" id="work-time" value="25"></label>
+                    <label>Break Time (minutes): <input type="number" id="break-time" value="5"></label>
+                </div>
             </div>
-        </a>
-        <a class="icon" id="icon2" href="#">
-            <div class="tooltip">
-                <i class="fas fa-volume-up" data-window="sound-window"></i>
-                <span class="tooltiptext">Sounds</span>
-            </div>
-        </a>
-
-<div id="modal1" class="modal" title="Modal Title 1" style="display: none;">
-    <p>Modal content for Icon 1...</p>
-</div>
-
-<div id="modal2" class="modal" title="Modal Title 2" style="display: none;">
-    <p>Modal content for Icon 2...</p>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script>
-    $(function() {
-        $(".modal").dialog({
-            autoOpen: false,
-            width: 'auto',
-            height: 'auto',
-            fluid: true,
-            resizable: true,
-            draggable: true
-        });
-
-        $(".icon").on("click", function(e) {
-            e.preventDefault();
-            var modalId = "#modal" + this.id.replace("icon", "");
-            var isOpen = $(modalId).dialog("isOpen");
-
-            if (isOpen) {
-                $(modalId).dialog("close");
-            } else {
-                $(modalId).dialog("open");
-            }
-        });
-    });
-</script>
+        </div>
+        <div class="bottom-panel">
+            <audio id="music-player" controls>
+                <source src="lofi-music.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script_neu.js"></script>
 </body>
 </html>
