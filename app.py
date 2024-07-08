@@ -292,6 +292,10 @@ def home():
     user_agent = request.headers.get('User-Agent')
     
     return render_template('index.html', music_files=music_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
+@app.route('/app_neu')
+@login_required
+def home_neu():
+    return render_template('index_neu.html')
 
 @app.route('/get_songs')
 @login_required

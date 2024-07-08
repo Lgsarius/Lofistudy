@@ -15,7 +15,7 @@ scene.add(pointLight);
 
 // Detailed Models
 const loader = new THREE.GLTFLoader();
-loader.load('models/study_room.glb', (gltf) => {
+loader.load('static/models/study_room.glb', (gltf) => {
     const model = gltf.scene;
     scene.add(model);
 }, undefined, (error) => {
