@@ -1564,3 +1564,13 @@ only screen and (max-device-width: 768px) {
     background-position: center;
   }
 }
+
+
+#daily-goals-container {
+  display: block; /* Ensure it is not set to 'none' */
+  visibility: visible; /* Ensure it is not set to 'hidden' */
+  width: 100%; /* Ensure it has width */
+  height: auto; /* Ensure it has height */
+  padding: 20px; /* Optional: Add some padding */
+  background-color: #f0f0f0; /* Optional: Add a background color for visibility */
+}
