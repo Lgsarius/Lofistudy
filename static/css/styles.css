@@ -5,6 +5,7 @@ html {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: sans-serif;
   background-color: #333;
 }
 
@@ -12,19 +13,24 @@ html {
   display: block;
   width: 200px;
   margin: 0 auto 20px;
+  /* Zentriert den Button und fügt einen unteren Abstand hinzu */
 }
 
 .bigclock-container {
   position: fixed;
   top: 10px;
   left: 10px;
+ 
 }
 
 .bigclock {
   font-size: 36px;
   padding: 10px;
-  color: #fff;
+  color : #fff;  
+
 }
+
+
 
 #early-access-banner {
   position: absolute;
@@ -34,10 +40,13 @@ html {
   width: 200px;
   height: 50px;
   background: rgba(207, 207, 207, 0.16);
+  /* semi-transparent black */
   color: rgba(255, 255, 255, 0.342);
   text-align: center;
   line-height: 50px;
+  /* vertically center the text */
   transform: rotate(40deg);
+  /* rotate the banner */
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -65,7 +74,6 @@ html {
   transform: translate(-50%, -50%);
   background: no-repeat;
   background-size: contain;
-  transition: opacity 0.5s ease-in-out;
 }
 
 #pomodoro-app {
@@ -79,7 +87,7 @@ html {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 120px;
   height: 34px;
 }
 
@@ -99,26 +107,10 @@ html {
   background-color: #ccc;
   transition: 0.4s;
   border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 progress {
@@ -126,6 +118,8 @@ progress {
   width: 100%;
   height: 12px;
   align-self: center;
+  top: 0;
+  left: 0;
 }
 
 progress::-webkit-progress-bar {
@@ -146,21 +140,24 @@ progress::-webkit-progress-value {
 }
 
 .clock {
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 5rem;
   line-height: 1;
   display: flex;
   align-items: center;
+  font-family: arial, sans-serif;
 }
 
 .mode-button {
   font-size: 16px;
   height: 28px;
   cursor: pointer;
+  box-shadow: none;
   font-weight: 300;
   color: #fff;
   border: 1px solid transparent;
-  margin: 0;
+  margin: 0px;
   border-radius: 4px;
   padding: 2px 12px;
   background: none;
@@ -180,11 +177,12 @@ progress::-webkit-progress-value {
   font-weight: bold;
   width: 200px;
   background-color: white;
-  border: none;
-  margin: 20px 0 0;
-  padding: 0 12px;
+  border-width: initial;
+  border-style: none;
+  margin: 20px 0px 0px;
+  padding: 0px 12px;
   border-radius: 4px;
-  transition: color 0.5s ease-in-out;
+  transition: color 0.5s ease-in-out 0s;
 }
 
 button:focus,
@@ -195,6 +193,7 @@ button:active {
 .main-button.active {
   transform: translateY(6px);
   box-shadow: none;
+  outline: none;
 }
 
 .hidden {
@@ -205,6 +204,26 @@ button:active {
   .clock {
     font-size: 8rem;
   }
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(100%);
 }
 
 .text {
@@ -250,40 +269,54 @@ select {
 #selection-bar {
   position: fixed;
   bottom: 20px;
+  /* Lassen Sie die Leiste über dem unteren Rand schweben */
   left: 5%;
+  /* Zentrieren Sie die Auswahlleiste */
   width: 90%;
+  /* Reduzieren Sie die Breite, um die abgerundeten Ecken sichtbar zu machen */
   height: 80px;
+  /* oder die gewünschte Höhe */
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  /* optionaler heller Rand */
   display: flex;
   justify-content: space-around;
+  /* Verteilen Sie die Icons gleichmäßig */
   align-items: center;
   color: white;
+  /* Textfarbe */
   font-size: 20px;
+  /* Schriftgröße */
   border-radius: 10px;
+  /* Halbe Höhe für vollständig abgerundete Ecken */
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  /* Schatten für den "Schwebe"-Effekt */
 }
 
 #selection-bar i {
   font-size: 40px;
+  /* Size of the icons */
   margin: 0 20px;
+  /* Space between the icons */
   transition: transform 0.3s ease;
+  /* Smooth transition for hover effect */
 }
-
+@media (max-width: 600px) {
+  #selection-bar .tooltip:nth-child(n+6) {
+    display: none;
+  }
+}
 #selection-bar i:hover {
   transform: scale(1.1);
+  /* Increase the size of the icon when hovered */
   color: #f3a953;
+  /* Change the color when hovered */
 }
 
 #selection-bar i:active {
   transform: scale(0.9);
-}
-
-@media (max-width: 600px) {
-  #selection-bar .tooltip:nth-child(n + 6) {
-    display: none;
-  }
+  /* Decrease the size of the icon when clicked */
 }
 
 .window {
@@ -291,62 +324,327 @@ select {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Same as the selection bar */
   display: none;
+  /* Hide windows by default */
   justify-content: space-around;
+  /* Same as the selection bar */
   align-items: center;
+  /* Same as the selection bar */
   color: white;
+  /* Same as the selection bar */
   font-size: 20px;
+  /* Same as the selection bar */
   border-radius: 10px;
+  /* Same as the selection bar */
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  /* Same as the selection bar */
   left: 5%;
+  /* Same as the selection bar */
   bottom: 20px;
+  /* Same as the selection bar */
 }
-
-#music-window,
-#account-window,
-#clock-window,
-#calendar-alt-window,
-#sticky-note-window,
-#settings-window,
-#leaderboard-window,
-#statistic-window,
-#wallpaper-window,
-#url-window,
-#video-window,
-#sound-window,
-#spotify-window,
-#task-window {
+@media (max-width: 600px) {
+  #music-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #account-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #clock-window {
+    height: 235px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #calendar-alt-window {
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #sticky-note-window {
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+  
+    width: 300px;
+  }
+  
+  #settings-window {
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+  
+    width: 300px;
+    user-select: none;
+  }
+  
+  #leaderboard-window {
+    height: 200px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+    width: 150px;
+    user-select: none;
+  }
+  
+  #statistic-window{
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    top: 86.5px;
+    left: 600px;
+    width: 300px;
+    user-select: none;
+  }
+  
+  #wallpaper-window {
+    position: fixed;
+    top: 80%;
+    height: 28vh;
+    /* Adjust this value as needed */
+    margin: auto;
+    width: 40%;
+    left: 50%;
+    user-select: none;
+    transform: translate(-50%, -50%);
+  }
+  
+  #url-window {
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    resize: both;
+    user-select: none;
+  }
+  
+  #video-window {
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 150px;
+    resize: both;
+    overflow: hidden;
+    user-select: none;
+  }
+  
+  #sound-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 100px;
+    user-select: none;
+  }
+  
+  #spotify-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+  
+  #task-window {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: 200px;
+    user-select: none;
+  }
+}
+#music-window {
   height: 400px;
-  width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;
+
+  width: 400px;
   user-select: none;
 }
 
-@media (max-width: 600px) {
-  #music-window,
-  #account-window,
-  #clock-window,
-  #calendar-alt-window,
-  #sticky-note-window,
-  #settings-window,
-  #leaderboard-window,
-  #statistic-window,
-  #wallpaper-window,
-  #url-window,
-  #video-window,
-  #sound-window,
-  #spotify-window,
-  #task-window {
-    height: 200px;
-    width: 200px;
-  }
+#account-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
 }
 
-.playlist-selection,
-.song-selection {
+#clock-window {
+  height: 470px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#calendar-alt-window {
+  height: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#sticky-note-window {
+  height: 600px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+
+  width: 600px;
+}
+
+#settings-window {
+  height: 600px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+
+  width: 600px;
+  user-select: none;
+}
+
+#leaderboard-window {
+  height: 400px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+  width: 300px;
+  user-select: none;
+}
+
+#statistic-window{
+  height: 600px;
+  position: absolute;
+  justify-content: center;
+  top: 86.5px;
+  left: 600px;
+  width: 600px;
+  user-select: none;
+}
+
+#wallpaper-window {
+  position: fixed;
+  top: 80%;
+  height: 28vh;
+  /* Adjust this value as needed */
+  margin: auto;
+  width: 40%;
+  left: 50%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+}
+
+#url-window {
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  resize: both;
+  user-select: none;
+}
+
+#video-window {
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 300px;
+  resize: both;
+  overflow: hidden;
+  user-select: none;
+}
+
+#sound-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 200px;
+  user-select: none;
+}
+
+#spotify-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+#task-window {
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  user-select: none;
+}
+
+.playlist-selection {
   padding: 10px;
+}
+
+#video-window .window-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 #youtube-url-container {
@@ -367,13 +665,24 @@ select {
   width: 100%;
   height: 80%;
   position: absolute;
-  top: 11%;
+  top: 0;
+  margin-top: 11%;
   left: 0;
 }
 
 #youtube-video iframe {
   width: 100%;
   height: 100%;
+}
+
+#playlist-selector {
+  width: 90%;
+  height: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
 }
 
 .window-header {
@@ -403,12 +712,15 @@ select {
   width: 2rem !important;
 }
 
-.cdx-marker,
-.ce-conversion-toolbar__tools,
-.ce-inline-toolbar__toggler-and-button-wrapper,
-.ce-toolbar__plus,
-.ce-toolbar__actions,
-.ce-toolbar__settings-btn {
+.cdx-marker {
+  background-color: #f3a953 !important;
+}
+
+.ce-conversion-toolbar__tools {
+  color: black !important;
+}
+
+.ce-inline-toolbar__toggler-and-button-wrapper {
   color: black !important;
 }
 
@@ -416,6 +728,7 @@ select {
 .ce-toolbar__actions,
 .ce-toolbar__settings-btn {
   left: 0 !important;
+  color: white !important;
 }
 
 .ce-block {
@@ -426,6 +739,15 @@ select {
 ::selection {
   background: #ff800050 !important;
   color: white;
+}
+
+.ce-toolbar__plus:hover {
+  background: #ff800050 !important;
+  color: inherit;
+}
+
+.ce-block--selected .ce-block__content {
+  background: #ff800050 !important;
 }
 
 #sticky-note-textarea {
@@ -482,7 +804,8 @@ select {
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  padding: 20px 20px 0 20px;
+  padding: 20px;
+  padding-top: 0px !important;
   font-size: 16px;
 }
 
@@ -535,13 +858,18 @@ select {
   background-color: #d32f2f;
 }
 
-.legal_notice-button,
-.privacy_policy-button,
-#next-button {
+.legal_notice-button {
   position: fixed;
   left: 20px;
+  top: 70px;
   display: flex;
   flex-direction: column;
+}
+
+.legal_notice-button a,
+.privacy_policy-button a,
+#next-button {
+  display: block;
   margin-bottom: 10px;
   padding: 10px 20px;
   width: 200px;
@@ -554,27 +882,35 @@ select {
   text-align: center;
   line-height: 50px;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
-.legal_notice-button a,
-.privacy_policy-button a {
-  display: block;
-}
-
-.legal_notice-button {
-  top: 70px;
+.legal_notice-button a:hover {
+  background-color: #45a049;
 }
 
 .privacy_policy-button {
+  position: fixed;
+  left: 20px;
   top: 150px;
+  display: flex;
+  flex-direction: column;
 }
 
 #next-button {
+  position: fixed;
+  left: 20px;
   top: 230px;
+  display: flex;
+  flex-direction: column;
+  line-height: 50px;
+  font-size: 16px;
 }
 
-.legal_notice-button a:hover,
-.privacy_policy-button a:hover,
+.privacy_policy-button a:hover {
+  background-color: #45a049;
+}
+
 #next-button:hover {
   background-color: #45a049;
 }
@@ -586,7 +922,7 @@ select {
   width: 80%;
 }
 
-music-control svg {
+.music-control svg {
   width: 24px;
   height: 24px;
   fill: currentColor;
@@ -595,6 +931,7 @@ music-control svg {
 ::-webkit-scrollbar {
   width: 20px;
   height: 50px;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar-track {
@@ -621,6 +958,7 @@ music-control svg {
   width: 100%;
   height: 100%;
   overflow: auto;
+  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -639,6 +977,7 @@ music-control svg {
 
 #url-input {
   width: 97%;
+
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -661,7 +1000,8 @@ music-control svg {
 
 .url-item {
   margin-bottom: 5px;
-  padding: 5px 10px;
+  padding: 5px;
+  padding-left: 10px;
   background-color: #0a0a0a;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -693,37 +1033,38 @@ music-control svg {
 .sound-icon img {
   width: 100%;
   height: auto;
-  margin: 0 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .sound-icon:active {
   transform: rotate(15deg);
 }
-
 .wallaper-selection {
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden; /* Disables vertical scrolling */
   white-space: nowrap;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 }
 
 .wallaper-selection::-webkit-scrollbar {
-  display: none;
+  display: none; /* For Chrome, Safari and Opera */
 }
 
 .wallaper-selection-image {
+ 
   border-radius: 20px;
   width: 300px;
-  height: auto;
-  margin-right: 10px;
+    height: auto;
+    margin-right: 10px;
   transition: transform 0.3s ease;
 }
 
 .wallaper-selection-image:hover {
   transform: scale(1.1);
 }
-
 .scroll-arrow {
   position: fixed;
   top: 50%;
@@ -765,6 +1106,9 @@ music-control svg {
 .scroll-arrow.right:hover svg {
   transform: translateX(5px);
 }
+#background-video {
+  transition: opacity 0.5s ease-in-out;
+}
 
 .wallaper-selection-image::-webkit-media-controls {
   display: none !important;
@@ -776,6 +1120,98 @@ music-control svg {
 
 .window-content #soundcloud-1 {
   display: block;
+}
+
+#soundcloud-select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  position: center;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+/* Media query for macOS */
+@media only screen and (min-device-width: 1224px) and (max-device-width: 1600px) {
+  #background {
+      background-image: url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+}
+
+/* Media query for iOS */
+@media only screen and (max-device-width: 768px) {
+  #background {
+      background-image: url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+}
+
+#soundcloud-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.volume-slider {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a0a;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.volume-icon {
+  margin-right: 10px;
+}
+
+.volume-slider input[type="range"] {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  width: 8px;
+  height: 200px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+}
+
+.volume-slider label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+iframe {
+  width: 80%;
 }
 
 .soundcloud-container {
@@ -801,51 +1237,21 @@ music-control svg {
   top: 330px;
   left: 20px;
   background-color: #0a0a0a;
+
   margin-top: 20px;
-  outline: none;
-  border-color: #007bff;
 }
 
-.volume-slider {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #0a0a0a;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+#soundcloud-select::-ms-expand {
+  color: #ffffff;
 }
 
-.volume-slider input[type="range"] {
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-  width: 8px;
-  height: 200px;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-}
-
-.volume-slider input[type="range"]::-webkit-slider-thumb,
-.volume-slider input[type="range"]::-moz-range-thumb {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #4caf50;
-  cursor: pointer;
-}
-
-.volume-slider label {
-  display: block;
-  margin-top: 10px;
-  font-size: 14px;
-  color: #333;
-}
-
+.volume-slider,
 iframe {
-  width: 80%;
+  order: -1;
+}
+
+.parent-container {
+  position: relative;
 }
 
 .soundcloud-container iframe {
@@ -860,11 +1266,55 @@ iframe {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 10px 0;
 }
 
 .settings-text {
   font-size: 16px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 
 .slider.round {
@@ -893,16 +1343,26 @@ iframe {
   text-decoration: underline;
 }
 
-#save-button,
-#load-button {
-  color: #fff;
+#save-button {
+  color: rgb(255, 255, 255);
   font-size: 1.5em;
   border: none;
   padding: 10px 20px;
   transition: transform 0.1s;
 }
 
-#save-button:active,
+#save-button:active {
+  transform: scale(0.9);
+}
+
+#load-button {
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  border: none;
+  padding: 10px 20px;
+  transition: transform 0.1s;
+}
+
 #load-button:active {
   transform: scale(0.9);
 }
@@ -952,17 +1412,22 @@ iframe {
   border: 1px solid #ced4da;
   border-radius: 4px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  /* Center the input */
   margin: auto;
+  /* Center the input */
 }
 
 .form-group input:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  /* Add box-shadow when input is focused */
 }
 
 .form-group input::placeholder {
   color: lightgrey;
+  /* Light grey placeholder text */
 }
 
 .form-group button {
@@ -974,22 +1439,38 @@ iframe {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  display: block;
+  /* Center the input */
   margin: auto;
+  /* Center the input */
   transition: background-color 0.3s ease, transform 0.3s ease;
+  display: block;
+  /* Center the button */
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .form-group button:hover {
   transform: scale(1.05);
 }
 
+.form-group button[type="submit"] {
+  background-color: #007bff;
+}
+
 .form-group button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+.form-group button[style="background-color: red;"] {
+  background-color: #dc3545;
 }
 
 .form-group button[style="background-color: red;"]:hover {
   background-color: #c82333;
 }
 
+/* Change the button color based on its function */
+/* Make the form responsive */
 @media (max-width: 600px) {
   .form-group input,
   .form-group button {
@@ -998,13 +1479,45 @@ iframe {
   }
 }
 
-.tooltip,
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  /* Position the tooltip above the icon */
+  left: 50%;
+  margin-left: -60px;
+  /* Use half of the tooltip width to center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
 .info {
   position: relative;
   display: inline-block;
 }
 
-.tooltip .tooltiptext,
+.info-icon {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 .info-text {
   visibility: hidden;
   width: 120px;
@@ -1015,24 +1528,14 @@ iframe {
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  transition: opacity 0.3s;
-}
-
-.tooltip .tooltiptext {
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-}
-
-.info-text {
   left: 125%;
   bottom: 75%;
   opacity: 0;
+  transition: opacity 0.3s;
   font-size: 12px;
+  /* adjust this value to change the size of the text */
 }
 
-.tooltip:hover .tooltiptext,
 .info:hover .info-text {
   visibility: visible;
   opacity: 1;
@@ -1043,8 +1546,9 @@ iframe {
   top: 10px;
   right: 10px;
   padding: 5px;
-  color: #fff;
+  color: #ffffff;
   font-size: 30px;
+  /* Increase this value to make the icon bigger */
   cursor: pointer;
   z-index: 1000;
   transition: background-color 0.3s ease;
@@ -1105,7 +1609,8 @@ iframe {
   transition: color 0.3s ease;
 }
 
-.task-menu:hover {}
+.task-menu:hover {
+}
 
 #task-form {
   margin-bottom: 20px;
@@ -1143,17 +1648,17 @@ iframe {
 }
 
 #nextButton svg {
-  color: white;
-  transition: color 0.3s ease, transform 0.3s ease;
+  color: white; /* Change the default color to white */
+  transition: color 0.3s ease, transform 0.3s ease; /* Add transition for transform */
 }
 
 #nextButton:hover svg {
   color: white;
-  transform: scale(1.2);
+  transform: scale(1.2); /* Scale the icon when hovering */
 }
 
 #nextButton:active svg {
-  transform: scale(0.9);
+  transform: scale(0.9); /* Scale the icon when clicking */
 }
 
 #nextButton.clicked svg {
@@ -1163,22 +1668,23 @@ iframe {
 .dropdown-menu {
   display: none;
   position: absolute;
-  bottom: 150%;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 150%; /* Position the menu higher above the icon */
+  left: 50%; /* Center the menu */
+  transform: translateX(-50%); /* Adjust the position so the menu is centered */
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: none;
   justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 10px;
   border-radius: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  left: 5%;
   min-width: 180px;
   z-index: 1;
 }
-
 .dropdown-menu a {
   color: rgb(255, 255, 255) !important;
   padding: 8px 12px !important;
@@ -1186,21 +1692,17 @@ iframe {
   display: block !important;
   font-size: 14px !important;
 }
-
 .dropdown-menu a:hover {
   background-color: #f3a953 !important;
-  color: #333 !important;
+  color: #333 !important; 
 }
-
 .dropdown-menu.active {
   display: block;
 }
-
 .dropdown-menu a i {
   margin-right: 5px !important;
   font-size: 16px !important;
 }
-
 .dropdown-menu a i:hover {
   background-color: #f3a953 !important;
   color: #333 !important;
@@ -1222,6 +1724,7 @@ iframe {
   display: block;
 }
 
+
 #about-us {
   user-select: none;
   display: none;
@@ -1235,15 +1738,15 @@ iframe {
   margin: 0 auto;
   text-align: justify;
 }
-
 #about-us.active {
   display: flex;
 }
-
 #about-us .login-logo {
   display: block;
   margin-top: 20px;
+  margin: 0 auto;
   width: 200px;
+  align-items: center;
   height: auto;
 }
 
@@ -1254,24 +1757,26 @@ iframe {
 }
 
 #about-us p {
+ 
   margin-top: 50px;
   max-width: 50%;
   text-align: center;
   padding: auto;
   line-height: 1.6;
 }
-
 #links-footer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 20px;
 }
-
 #about-us a {
+  display: flex !important;
   font-size: 30px;
   color: #f3a953;
   text-decoration: none;
+  justify-content: space-between !important;
+  display: inline-block !important;
   margin-top: 20px;
 }
 
@@ -1291,66 +1796,66 @@ iframe {
   z-index: 19999;
 }
 
+
 .social-icons {
   display: flex;
   justify-content: space-between;
-  width: 1000px;
+  width: 1000px; /* Erhöht die Breite, um die größeren .icon-box-Elemente aufzunehmen */
   margin: 0 auto;
   gap: 20px;
 }
 
 .icon-box {
   user-select: none;
-  width: 30%;
+  width: 30%; /* Setzt die Breite auf 30% des Containers */
   height: 80px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: flex-start; /* Positioniert die Icons auf der linken Seite */
+  align-items: center; /* Zentriert den Inhalt vertikal */
   transition: transform 0.3s ease;
   margin-right: 20px;
-  padding-left: 20px;
+  padding-left: 20px; /* Fügt etwas Platz auf der linken Seite hinzu, damit die Icons nicht direkt am Rand sind */
 }
 
 .icon-box i {
-  font-size: 2em;
+  font-size: 2em; /* Verdoppelt die Größe der Icons */
 }
 
 .icon-box i + span {
-  font-weight: bold;
-  margin-left: 10px;
+  font-weight: bold; /* Macht den Text dicker */
+  margin-left: 10px; /* Fügt etwas Platz zwischen dem Icon und dem Text hinzu */
 }
-
 .icon-box:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
-
 .icon-box:nth-child(1):hover i {
-  color: #079aeb;
+  color: #079AEB; /* Ändert die Farbe des Twitter-Icons beim Überfahren mit der Maus auf blau */
 }
 
 .icon-box:nth-child(2):hover i {
-  color: #d8205e;
+  color: #D8205E; /* Ändert die Farbe des Instagram-Icons beim Überfahren mit der Maus auf #D8205E */
 }
 
 .icon-box:nth-child(3):hover i {
-  color: orange;
+  color: orange; /* Ändert die Farbe des E-Mail-Icons beim Überfahren mit der Maus auf orange */
 }
-
 .icon-box img {
   width: 50%;
 }
+
 
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%;
+  width:100%;
+ 
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 }
 
 ul li {
@@ -1364,25 +1869,17 @@ ul li:last-child {
   border-bottom: none;
 }
 
+
 @keyframes shimmer {
-  0% {
-    text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700;
-  }
-
-  50% {
-    text-shadow: 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700, 0 0 25px #ffc700, 0 0 30px #ffc700;
-  }
-
-  100% {
-    text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700;
-  }
+  0% { text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700; }
+  50% { text-shadow: 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700, 0 0 25px #ffc700, 0 0 30px #ffc700; }
+  100% { text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700, 0 0 15px #ffc700, 0 0 20px #ffc700; }
 }
 
 .fas.fa-crown {
   color: gold;
   animation: shimmer 1s ease-in-out infinite;
 }
-
 .first-place {
   color: gold;
   font-weight: bold;
@@ -1390,23 +1887,24 @@ ul li:last-child {
 }
 
 .email-link {
-  color: inherit;
-  text-decoration: none;
+    color: inherit; /* Use the color of the parent element */
+    text-decoration: none; /* Remove underline */
+    /* Add any other styles you need */
 }
 
 .second-place {
-  color: #c0c0c0;
+  color: #C0C0C0; /* Silver */
 }
 
 .third-place {
-  color: #cd7f32;
+  color: #CD7F32; /* Bronze */
 }
 
 .loading-screen {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #14141d;
+  background: #14141D;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1420,17 +1918,19 @@ ul li:last-child {
   border-top: 16px solid #ffffff;
   width: 120px;
   height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
 
-  100% {
-    transform: rotate(360deg);
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .title {
@@ -1446,18 +1946,17 @@ ul li:last-child {
 }
 
 .white-logo {
-  width: 300px;
-  height: 300px;
-}
-
+  width: 300px; /* Adjust this to make the image smaller or larger */
+  height: 300px; /* Adjust this to make the image smaller or larger */}
+  
 .loader {
   margin: 5% auto 30px;
 }
 
 .book {
-  border: 20px solid #fff;
+  border: 20px solid #FFFFFF;
   width: 300px;
-  background: #f3a953;
+  background: #F3A953;
   border-radius: 10px;
   height: 225px;
   position: relative;
@@ -1466,58 +1965,104 @@ ul li:last-child {
   background-size: 100% 1.6em;
 }
 
+
 .page {
   display: block;
   border-radius: 10px;
   width: 150px;
   height: 225px;
-  border: 20px solid #fff;
-  border-left: 5px solid #f3a953;
+  border: 20px solid #FFFFFF;
+  border-left: 5px solid #F3A953;
   margin: 0;
   position: absolute;
   right: -20px;
   top: -20px;
   overflow: hidden;
-  background: #f3a953;
+  background: #F3A953;
   transform-style: preserve-3d;
+  -webkit-transform-origin: left center;
   transform-origin: left center;
   background-image: linear-gradient(#fff 1px, transparent 1px);
   background-size: 100% 1.6em;
 }
 
+
 .book .page:nth-child(1) {
+  -webkit-animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.6s infinite;
   animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.6s infinite;
 }
 
 .book .page:nth-child(2) {
+  -webkit-animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.45s infinite;
   animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.45s infinite;
 }
 
 .book .page:nth-child(3) {
+  -webkit-animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.2s infinite;
   animation: pageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.2s infinite;
+}
+
+
+
+@-webkit-keyframes pageTurn {
+  0% {
+    -webkit-transform: rotateY( 0deg);
+    transform: rotateY( 0deg);
+  }
+  20% {
+    background: #F3A953;
+  }
+  40% {
+    background: #F3A953;
+    -webkit-transform: rotateY( -180deg);
+    transform: rotateY( -180deg);
+  }
+  100% {
+    background: #F3A953;
+    -webkit-transform: rotateY( -180deg);
+    transform: rotateY( -180deg);
+  }
 }
 
 @keyframes pageTurn {
   0% {
-    transform: rotateY(0deg);
+    transform: rotateY( 0deg);
     background-image: linear-gradient(#fff 1px, transparent 1px);
+  background-size: 100% 1.6em;
   }
-
   20% {
-    background: #f3a953;
+    background: #F3A953;
     background-image: linear-gradient(#fff 1px, transparent 1px);
+  background-size: 100% 1.6em;
   }
-
   40% {
-    background: #f3a953;
-    transform: rotateY(-180deg);
+    background: #F3A953;
+    transform: rotateY( -180deg);
     background-image: linear-gradient(#fff 1px, transparent 1px);
+  background-size: 100% 1.6em;
   }
-
   100% {
-    background: #f3a953;
-    transform: rotateY(-180deg);
+    background: #F3A953;
+    transform: rotateY( -180deg);
     background-image: linear-gradient(#fff 1px, transparent 1px);
+  background-size: 100% 1.6em;
+  }
+}
+
+/* Dots */
+
+@-webkit-keyframes Dots {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
   }
 }
 
@@ -1525,42 +2070,37 @@ ul li:last-child {
   0% {
     content: "";
   }
-
   33% {
     content: ".";
   }
-
   66% {
     content: "..";
   }
-
   100% {
     content: "...";
   }
 }
-
-.ce-toolbox {
+.ce-toolbox{
   pointer-events: none;
   position: relative !important;
 }
-
+#youtube-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Use viewport width instead of percentage */
+  height: 100vh; /* Use viewport height instead of percentage */
+  z-index: -1;
+  pointer-events: none;
+  display: none;
+}
 .ce-popover {
   background-color: #f3a953 !important;
-  color: #fff !important;
+  color: #ffffff !important;
   border: none !important;
   border-radius: 5px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
-  position: relative;
-  top: 40px;
-  z-index: 9999 !important;
-}
-
-@media only screen and (min-device-width: 1224px) and (max-device-width: 1600px),
-only screen and (max-device-width: 768px) {
-  #background {
-    background-image: url('https://images.hdqwalls.com/download/lofi-girl-coffee-in-hand-od-2880x1800.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
+  position: relative; /* Add this line if the element is not already positioned */
+  top: 40px; /* Add this line */
+  z-index: 9999 !important; /* Add this line */
 }
