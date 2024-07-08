@@ -563,3 +563,38 @@ function changeAudioSource(selectElement) {
       audioElement.src = `/static/audio/${selectElement.value}`;
   });
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('/daily-goals')
+        .then(response => response.json())
+        .then(goals => {
+            const goalsList = document.getElementById('daily-goals-list');
+            goals.forEach(goal => {
+                const listItem = document.createElement('li');
+                listItem.textContent = goal.goal;
+                if (goal.completed) {
+                    listItem.style.textDecoration = 'line-through';
+                }
+                goalsList.appendChild(listItem);
+            });
+        });
+
+    document.getElementById('add-goal-button').addEventListener('click', function () {
+        const goalText = document.getElementById('new-goal-input').value;
+        fetch('/daily-goals', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ goal: goalText }),
+        })
+        .then(response => response.json())
+        .then(newGoal => {
+            const goalsList = document.getElementById('daily-goals-list');
+            const listItem = document.createElement('li');
+            listItem.textContent = newGoal.goal;
+            goalsList.appendChild(listItem);
+        });
+    });
+});
