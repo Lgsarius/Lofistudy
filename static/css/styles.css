@@ -301,7 +301,7 @@ select {
   left: 5%;
   bottom: 20px;
 }
-
+#daily-goals-window,
 #music-window,
 #account-window,
 #clock-window,
@@ -1566,30 +1566,3 @@ only screen and (max-device-width: 768px) {
 }
 
 
-#daily-goals-container {
-  position: fixed;
-  top: 50%;
-  right: -300px; /* Start hidden off the screen */
-  width: 300px;
-  height: auto;
-  background-color: #333;
-  color: white;
-  padding: 20px;
-  border-radius: 10px 0 0 10px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-  transition: right 0.3s ease;
-  z-index: 10000000;
-}
-
-#toggle-daily-goals {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1001;
-  border-radius: 10px 0 0 10px;
-}
