@@ -270,12 +270,28 @@ def serve_video(filename):
 def home():
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 0
+    
     db.session.commit()
+    music_dirs = []
+    music_files = []
+    
     wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
+    username = User.query.filter_by(username=current_user.username).first()
     leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
+    leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
     charactername = current_user.charactername
-    return render_template('index.html', leaderboard=leaderboard, wallpaper=wallpaper, notes=current_user.notecontent, tasks=tasks, charactername=charactername)
+    
+    for music_dir in music_dirs:
+        dir_path = os.path.join(app.static_folder, music_dir)
+        music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
+
+    if not music_files:
+        music_files = []  # Ensure music_files is a list, even if empty
+
+    user_agent = request.headers.get('User-Agent')
+    
+    return render_template('index.html', music_files=music_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
 
 @app.route('/get_songs')
 @login_required
