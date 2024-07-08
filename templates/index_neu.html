@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lofi Study Environment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_neu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_neu.css') }}">
 </head>
 <body>
     <div class="container">
@@ -43,7 +43,15 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/GLTFLoader.js"></script>
-    <script src="{{ url_for('static', filename='js/script_neu.js') }}"></script>
+    <script type="module">
+        import { GLTFLoader } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/loaders/GLTFLoader.js';
+        import { initScene, loadModel, startPomodoro, handleTodoList } from "{{ url_for('static', filename='js/script_neu.js') }}";
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initScene(GLTFLoader);
+            startPomodoro();
+            handleTodoList();
+        });
+    </script>
 </body>
 </html>
