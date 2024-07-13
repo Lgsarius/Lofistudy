@@ -149,14 +149,9 @@ def validate_date_format(date_str):
 @sitemap.register_generator
 def generate_urls():
     today = date.today().isoformat()
-    urls = [
-        ('index', {}, {'lastmod': today, 'priority': 1.0}),
-        ('login', {}, {'lastmod': today, 'priority': 0.8}),
-        ('FAQ', {}, {'lastmod': today, 'priority': 0.7})
-    ]
-    for url in urls:
-        yield url[0], url[1], {'lastmod': url[2]['lastmod'], 'priority': url[2]['priority']}
-
+    yield 'index', {}, {'lastmod': today, 'priority': '1.0'}
+    yield 'login', {}, {'lastmod': today, 'priority': '0.8'}
+    yield 'FAQ', {}, {'lastmod': today, 'priority': '0.7'}
 
 @app.route('/sitemap.xml', methods=['GET'])
 def generate_sitemap():
