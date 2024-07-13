@@ -138,10 +138,18 @@ class DailyGoal(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Sitemap generator
+def validate_date_format(date_str):
+    # ISO 8601 date format (YYYY-MM-DD)
+    iso_date_regex = r'^\d{4}-\d{2}-\d{2}$'
+    if re.match(iso_date_regex, date_str):
+        return True
+    return False
+
 @sitemap.register_generator
 def generate_urls():
     today = date.today().isoformat()
+    if not validate_date_format(today):
+        raise ValueError("Ungültiges Datum gefunden: {}".format(today))
     yield 'index', {}, {'lastmod': today, 'priority': 1.0}
     yield 'login', {}, {'lastmod': today, 'priority': 0.8}
     yield 'FAQ', {}, {'lastmod': today, 'priority': 0.7}
