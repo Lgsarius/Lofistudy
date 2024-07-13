@@ -141,7 +141,16 @@
                 height: 100%;
                 z-index: -1;
                 transform: scale(1.2);
-                pointer-events: none;" id="youtube-bg-video-wave" src="https://www.youtube-nocookie.com/embed/4xDzrJKXOOY?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" oncontextmenu="return false;" frameborder="0" allowfullscreen></iframe></div>
+                pointer-events: none;" id="youtube-bg-video-wave" src="https://www.youtube-nocookie.com/embed/4xDzrJKXOOY?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" oncontextmenu="return false;" frameborder="0" allowfullscreen></iframe>
+                <iframe style="position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                transform: scale(1.2);
+                pointer-events: none;" id="youtube-bg-video-deep" src="https://www.youtube-nocookie.com/embed/S_MOd40zlYU?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" oncontextmenu="return false;" frameborder="0" allowfullscreen></iframe>
+            </div>
                 <div class="bigclock" id="bigclock" style="
     color: #fff;
     font-size: x-large;
@@ -652,6 +661,20 @@
                         <span class="settings-text">Wave Boy Volume</span>
                         <label class="switch">
                             <input type="checkbox" id="volumeTogglewave" onchange="toggleVolumewave()" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-text">Switch to Deep Boy</span>
+                        <label class="switch">
+                            <input type="checkbox" id="video-switch-deep" onchange="toggleVideodeep()" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-text">Deep Boy Volume</span>
+                        <label class="switch">
+                            <input type="checkbox" id="volumeToggledeep" onchange="toggleVolumedeep()" />
                             <span class="slider round"></span>
                         </label>
                     </div>

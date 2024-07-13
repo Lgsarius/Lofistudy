@@ -240,6 +240,31 @@ function updateBIGClock() {
         video.src += "&mute=1"; // Add mute parameter
     }
 }
+function toggleVideodeep() {
+  var checkbox = document.getElementById("video-switch-deep");
+  var localVideo = document.getElementById("background-video");
+  var youtubeVideo = document.getElementById("youtube-bg-video-deep");
+
+  if (checkbox.checked) {
+      // Switch to YouTube video
+      localVideo.style.display = "none";
+      youtubeVideo.style.display = "block";
+  } else {
+      // Switch to local video
+      localVideo.style.display = "block";
+      youtubeVideo.style.display = "none";
+  }
+}
+function toggleVolumedeep() {
+  var video = document.getElementById("youtube-bg-video-deep");
+  var volumeToggle = document.getElementById("volumeToggledeep");
+
+  if (volumeToggle.checked) {
+      video.src = video.src.replace("&mute=1", ""); // Remove mute parameter
+  } else {
+      video.src += "&mute=1"; // Add mute parameter
+  }
+}
   
   
   var highestZIndex = 0;
