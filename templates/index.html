@@ -59,7 +59,8 @@
         <script
             src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
             <script src="https://www.youtube.com/iframe_api"></script>
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
+        </head>
             <!-- Include this script tag in the HTML document -->
 
 
@@ -157,17 +158,11 @@
                 <i class="fas fa-volume-up" data-window="sound-window"></i>
                 <span class="tooltiptext">Sounds</span>
             </div>
-           <!-- <div class="tooltip">
-                <i class="fas fa-video" data-window="video-window"></i>
-                <span class="tooltiptext">Youtube Player</span>
-                
-            </div>
-            -->
-           <!--  <div class="tooltip">
-                <i class="fas fa-chart-bar" data-window="statistic-window"></i>
-                <span class="tooltiptext">Study Stats </span>
+         <div class="tooltip">
+                <i class="fas fa-chat" data-window="chat-room"></i>
+                <span class="tooltiptext">Study Chat</span>
             </div> 
-          -->
+         
 
             <div class="tooltip">
                 <i class="fas fa-clipboard" data-window="task-window"></i>
@@ -211,15 +206,15 @@
         </div>
         <div id="about-us" class="overlay">
             <button id="close-button" class="close-button">X</button>
-            <img src="{{ url_for('static', filename='media/SVG/SVG/lo-fi.study.svg') }}" alt="lo-fi.study Logo" class="login-logo">
+            <img src="{{ url_for('static', filename='media/SVG/SVG/lo-fi.study svg') }}" alt="lo-fi.study Logo" class="login-logo">
             <h1 class="mv-l">About us</h1>
-            <p class="center-txt">As students ourselves, we get the struggle of staying focused amidst digital clutter. That's why we made lo-fi.study – your all-in-one solution for studying, working, or unwinding. No more juggling between devices or battling ads. Just a calm, distraction-free space to help you thrive. <br><br>Welcome to lo-fi.study.<br><br> We are constantly improving, make sure to follow our socials to stay updated!</p>
+            <p class="center-txt">As students ourselves, we get the struggle o  staying focused amidst digital clutter. That's why we made lo-fi.study – your all-in-one solution for studying, working, or unwinding. No more juggling between devices or battling ads. Just a calm, distraction-free space to help you thrive. <br><br>Welcome to lo-fi.study.<br><br> We are constantly improving, make sure to follow our socials to stay updated!</p>
             <div class="social-icons">
                 <div class="icon-box" id="twitter-box">
-                    <i class="fab fa-square-x-twitter"></i> <span>@lo-fi.study</span>
+                    <i class="fab fa-square-x-twitter"></i> <span>@lo-fi.study /span>
                 </div>
                 <div class="icon-box" id="instagram-box">
-                    <i class="fab fa-instagram"></i> <span>@lo-fi.study</span>
+                    <i class="fab fa-instagram"></i> <span>@lo-fi.study</span> 
                 </div>
                 <div class="icon-box" id="email-box">
                     <i class="fas fa-envelope"></i> <span>support@mousewerk.de</span>
@@ -503,9 +498,7 @@
                     {% for task in tasks %}
                     <p hidden>{{ task.name }}</p>
                 {% endfor %}
-                </div>
-            
-               
+                </div>  
             </div>
         </div>
         <div id="leaderboard-window" class="window draggable">
@@ -599,7 +592,6 @@
                 </div>
             </div>
         </div>
-        
         <div id="settings-window" class="window draggable">
             <div class="window-header">
                 <div class="info">
@@ -846,9 +838,6 @@
                             <option value="soundcloud-5">Synthwave</option>
                             <option value="soundcloud-8">Synthwave ambient</option>
                             <option value="soundcloud-7">Chillstep</option>
-                            
-                            
-                            
                         </select>
                         <div class="volume-slider">
                             <input
@@ -858,16 +847,7 @@
                                 min="0"
                                 max="100"
                                 orient="vertical" />
-                            <span class="volume-icon">&#128266;</span>
-                        
-                           
-                           <!-- <button id="nextButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-skip-forward">
-                                    <polygon points="5 4 15 12 5 20 5 4"></polygon>
-                                    <line x1="19" y1="5" x2="19" y2="19"></line>
-                                </svg>
-                            </button>-->
-                        
+                            <span class="volume-icon">&#128266;</span>	
                         </div>
                         <iframe
                         id="soundcloud-1"
@@ -911,9 +891,6 @@
                             allow="autoplay"
                             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746426879&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
                             <iframe  id="soundcloud-6" width="80%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1168183702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"></iframe>
-                        
-
-
                         <iframe
                         id="soundcloud-7"
                         width="80%"
@@ -952,24 +929,23 @@
                     </div>
             </div>
             </div>
-            <div id="gpt-window" class="window draggable">
+            <div id="chat-window" class="window draggable">
                 <div class="window-header">
                     <div class="info">
                         <i class="fa fa-info-circle"></i>
-                        <span class="info-text">Interact with a conversational
-                            chatbot</span>
-                        <span>Chatbot</span>
+                        <span class="info-text">Chat with other students</span>
+                        <span>Study Chat</span>
                     </div>
                     <button class="close-window">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-                <div class="window-content">
-                    <form id="chat-form"></form>
-                    <div id="chat-output"></div>
-                    <div id="coming-soon">
-                        <h1>Coming Soon...</h1>
-                    </div>
+                <div class="window-content" id="messages">
+                    <!-- Messages will appear here -->
+                </div>
+                <div class="input-area">
+                    <input id="message-input" type="text" placeholder="Type a message...">
+                    <button onclick="sendMessage()">Send</button>
                 </div>
             </div>
         </div>

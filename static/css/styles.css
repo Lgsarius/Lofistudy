@@ -594,7 +594,29 @@ select {
   resize: both;
   user-select: none;
 }
-
+#chat-window {
+  height: 300px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  user-select: none;
+}
+.input-area {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+.input-area input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+}
+.input-area button {
+  border: none;
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+}
 #video-window {
   height: 100px;
   position: absolute;

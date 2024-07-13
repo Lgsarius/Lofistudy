@@ -228,7 +228,7 @@ function updateBIGClock() {
   document.addEventListener("DOMContentLoaded", function () {
     document
       .querySelectorAll(
-        ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-chart-bar, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
+        ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-chat, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
       )
       .forEach((icon) => {
         icon.addEventListener("click", function () {
@@ -1116,7 +1116,28 @@ function updateBIGClock() {
           });
       });
   });
-  
+  document.addEventListener("DOMContentLoaded", (event) => {
+    var charactername = "{{ charactername }}";
+    var socket = io();
+
+    socket.on('message', function(msg) {
+        var messages = document.getElementById('messages');
+        var messageElement = document.createElement('div');
+        messageElement.textContent = msg;
+        messages.appendChild(messageElement);
+    });
+
+    document.getElementById('send-button').addEventListener('click', function() {
+        sendMessage();
+    });
+
+    function sendMessage() {
+        var input = document.getElementById('message-input');
+        var message = charactername + ": " + input.value;
+        socket.send(message);
+        input.value = '';
+    }
+});
   document.addEventListener("DOMContentLoaded", function () {
     function changeAudioSource(selectElement) {
       var audioElements = ["pomodoroAudio", "shortBreakAudio", "longBreakAudio"];

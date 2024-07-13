@@ -13,6 +13,7 @@ from datetime import datetime, timedelta, date
 import os
 import re
 import json
+from flask_socketio import SocketIO, send
 import logging
 from uuid import uuid4
 logging.basicConfig(level=logging.DEBUG)
@@ -27,6 +28,7 @@ migrate = Migrate()
 
 # Application setup
 app = Flask(__name__)
+socketio = SocketIO(app)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")
 if uri and uri.startswith("postgres://"):
@@ -511,9 +513,15 @@ def reset_pomodoro_time_count():
 
 scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=22, minute=00, second=00)
 
+@socketio.on('message')
+def handle_message(msg):
+    send(msg, broadcast=True)
+    
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         scheduler.start()
         logging.info("Scheduler started")
+        socketio.run(app, debug=True)
+
         app.run(debug=False, host='0.0.0.0', port=5050)
