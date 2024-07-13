@@ -16,6 +16,7 @@ import json
 from flask_socketio import SocketIO, send
 import logging
 from uuid import uuid4
+
 logging.basicConfig(level=logging.DEBUG)
 
 # Initialize extensions
@@ -28,7 +29,6 @@ migrate = Migrate()
 
 # Application setup
 app = Flask(__name__)
-socketio = SocketIO(app)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")
 if uri and uri.startswith("postgres://"):
@@ -48,6 +48,8 @@ login_manager.init_app(app)
 mail.init_app(app)
 sitemap.init_app(app)
 migrate.init_app(app, db)
+
+socketio = SocketIO(app)
 
 # User model
 class User(UserMixin, db.Model):
@@ -110,7 +112,7 @@ class Pomodoro(db.Model):
             'completed': self.completed,
             'date': self.date
         }
-        
+
 class DailyGoal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     goal = db.Column(db.String(200), nullable=False)
@@ -296,6 +298,7 @@ def home():
     user_agent = request.headers.get('User-Agent')
     
     return render_template('index.html', music_files=music_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
+
 @app.route('/app_neu')
 @login_required
 def home_neu():
@@ -455,6 +458,7 @@ def update_checkbox_value():
 @login_required
 def test():
     return render_template('test.html')
+
 @app.route('/daily-goals', methods=['GET'])
 @login_required
 def get_daily_goals():
@@ -522,4 +526,4 @@ if __name__ == '__main__':
         db.create_all()
         scheduler.start()
         logging.info("Scheduler started")
-        socketio.run(app, debug=False, host='0.0.0.0', port=5050)
+        socketio.run(app, debug=True, host='0.0.0.0', port=5050)

@@ -325,7 +325,24 @@ function updateBIGClock() {
           }
         });
       });
+
+  var socket = io();
+  var charactername = "{{ charactername }}";
+
+  socket.on('message', function(msg) {
+      var messages = document.getElementById('messages');
+      var messageElement = document.createElement('div');
+      messageElement.textContent = msg;
+      messages.appendChild(messageElement);
   });
+
+  window.sendMessage = function() {
+      var input = document.getElementById('message-input');
+      var message = charactername + ": " + input.value;
+      socket.send(message);
+      input.value = '';
+  }
+});
   
   const timer = {
     pomodoro: 25,
@@ -1116,28 +1133,7 @@ function updateBIGClock() {
           });
       });
   });
-  document.addEventListener("DOMContentLoaded", (event) => {
-    var charactername = "{{ charactername }}";
-    var socket = io();
 
-    socket.on('message', function(msg) {
-        var messages = document.getElementById('messages');
-        var messageElement = document.createElement('div');
-        messageElement.textContent = msg;
-        messages.appendChild(messageElement);
-    });
-
-    document.getElementById('send-button').addEventListener('click', function() {
-        sendMessage();
-    });
-
-    function sendMessage() {
-        var input = document.getElementById('message-input');
-        var message = charactername + ": " + input.value;
-        socket.send(message);
-        input.value = '';
-    }
-});
   document.addEventListener("DOMContentLoaded", function () {
     function changeAudioSource(selectElement) {
       var audioElements = ["pomodoroAudio", "shortBreakAudio", "longBreakAudio"];
