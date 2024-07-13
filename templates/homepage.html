@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lo-fi.study - Improve Your Focus and Productivity</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="description" content="lo-fi.study is a website that helps you to study by giving you a distraction-free environment.">
+    <meta name="author" content="lo-fi.study">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775/xh+aqXr64RbjtDQmPMYxd0hb4W6cBS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-pzjw8f+ua7Kw1TIqQUqKOITfLBy+6Zj2xEAa7rnr+K5rq6b08+TRR5O0B/m41+P2" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stylehomepage.css') }}">
-
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light" style="position: fixed; width: 100%; top: 0; z-index: 100;">
-        <a class="navbar-brand" href="">
-            <img class="logo-shadow" src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img class="logo-shadow" src="{{ url_for('static', filename='favicon.ico') }}" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,9 +40,9 @@
                 <div class="hero-img">
                     <img src="{{ url_for('static', filename='media/SVG/SVG/lo-fi.study.svg') }}" alt="lo-fi.study Logo" class="login-logo">
                 </div>
-                <div class="hero-text" style="text-align: center;">
-                    <p style="font-size: 2em;">Your calm, digital space to
-                        <br><br><span style="text-align: center;" id="typed-text"></span>
+                <div class="hero-text">
+                    <p>Your calm, digital space to
+                        <br><br><span id="typed-text"></span>
                     </p>
                 </div>
                 <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
@@ -54,19 +57,19 @@
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 90%;">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/K0qdm4r/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.webp" alt="First slide">
+                            <img class="d-block w-100 lazy" style="border-radius: 10px !important;" data-src="https://i.ibb.co/K0qdm4r/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.webp" alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/fGQQfWr/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.webp" alt="Second slide">
+                            <img class="d-block w-100 lazy" style="border-radius: 10px !important;" data-src="https://i.ibb.co/fGQQfWr/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.webp" alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/pdsgshq/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.webp" alt="Third slide">
+                            <img class="d-block w-100 lazy" style="border-radius: 10px !important;" data-src="https://i.ibb.co/pdsgshq/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.webp" alt="Third slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/PG0bPhB/lgsarius-Lofi-study-girl-on-desk-plants-rain-coffee-rain-02e5bc5f-943e-4c0b-b986-1cf5d7362034.webp" alt="Fourth slide">
+                            <img class="d-block w-100 lazy" style="border-radius: 10px !important;" data-src="https://i.ibb.co/PG0bPhB/lgsarius-Lofi-study-girl-on-desk-plants-rain-coffee-rain-02e5bc5f-943e-4c0b-b986-1cf5d7362034.webp" alt="Fourth slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/m9QYfwJ/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.webp" alt="Fifth slide">
+                            <img class="d-block w-100 lazy" style="border-radius: 10px !important;" data-src="https://i.ibb.co/m9QYfwJ/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.webp" alt="Fifth slide">
                         </div>
                     </div>
                 </div>
@@ -89,7 +92,6 @@
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-2">
                             <i class="fas fa-clock fa-4x"></i>
-                            <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
                             <h3 class="h4 mb-2">Pomodoro Timer</h3>
                             <p class="text-muted mb-0">Boost productivity with our Pomodoro Timer feature, helping you stay focused and efficient.</p>
                         </div>
@@ -97,7 +99,6 @@
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-2">
                             <i class="fab fa-soundcloud fa-4x"></i>
-                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
                             <h3 class="h4 mb-2">Curated Music</h3>
                             <p class="text-muted mb-0">Enhance your study sessions with our vast collection of curated music playlists suitable for every mood.</p>
                         </div>
@@ -105,7 +106,6 @@
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-2">
                             <i class="fas fa-clipboard fa-4x"></i>
-                            <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
                             <h3 class="h4 mb-2">Task Planner</h3>
                             <p class="text-muted mb-0">Stay organized and on top of your tasks with our intuitive Task Planner</p>
                         </div>
@@ -113,7 +113,6 @@
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-2">
                             <i class="fas fa-sticky-note fa-4x"></i>
-                            <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
                             <h3 class="h4 mb-2">Notes Window</h3>
                             <p class="text-muted mb-0">Capture your thoughts and ideas effortlessly with our Notes Window</p>
                         </div>
@@ -127,7 +126,7 @@
                 <div class="footer-content d-flex justify-content-between align-items-center">
                     <div class="footer-left">
                         <div class="copyright py-2">
-                            <img class="logo-shadow reduced-size" src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
+                            <img class="logo-shadow reduced-size" src="{{ url_for('static', filename='favicon.ico') }}" alt="Logo">
                             <p class="text-white">Copyright © 2024 lo-fi.study</p>
                         </div>
                     </div>
@@ -156,9 +155,10 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Minimize and load JS asynchronously -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIyGknwOVxgI5tkDVTiFfRVxQqAHpBsMZ/M8B0q8" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
@@ -179,8 +179,7 @@
             }
         });
 
-        $(document).ready(function() {
-            $('.carousel').carousel({ interval: 1500 });
+        document.addEventListener("DOMContentLoaded", function() {
             new Typed('#typed-text', {
                 strings: ["Work", "Study", "Chill", "Code"],
                 typeSpeed: 120,
@@ -189,6 +188,10 @@
                 smartBackspace: true,
                 loop: true
             });
+        });
+
+        $(document).ready(function() {
+            $('.carousel').carousel({ interval: 1500 });
         });
     </script>
 </body>

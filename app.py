@@ -15,7 +15,7 @@ import os
 import re
 import json
 from flask_socketio import SocketIO, send
-from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_socketio import emit, join_room, leave_room
 import logging
 from uuid import uuid4
 import eventlet
@@ -52,12 +52,12 @@ db.init_app(app)
 login_manager.init_app(app)
 mail.init_app(app)
 sitemap.init_app(app)
-migrate.init_app(app, db)
+migrate.init_app(app)
 
 socketio = SocketIO(app, async_mode='eventlet', cors_allowed_origins=["https://lo-fi.study/"])
 
-
 active_users = set()
+
 # User model
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -251,8 +251,10 @@ def token_invalid():
     return render_template('token_invalid.html')
 
 @app.route('/robots.txt')
-def static_from_root():
-    return send_from_directory(app.static_folder, request.path[1:])
+def robots_txt():
+    response = make_response("User-Agent: *\nDisallow:\nSitemap: https://lo-fi.study/sitemap.xml")
+    response.headers['Content-Type'] = 'text/plain'
+    return response
 
 @app.template_filter('sort_by_pomodoro_time_count')
 def sort_by_pomodoro_time_count(users):
@@ -260,7 +262,7 @@ def sort_by_pomodoro_time_count(users):
 
 @app.route('/')
 def index():
-    return render_template('homepage.html')
+    return render_template('homepage.html', title='Home', description='Welcome to Lo-Fi Study', keywords='study, pomodoro, focus')
 
 @app.route('/media/videos/<path:filename>')
 @login_required
