@@ -205,12 +205,6 @@ def submit_contact():
     flash('Your message was successfully sent!', 'success')
     return redirect(url_for('home'))
 
-@app.route('/static/<path:filename>')
-@login_required
-def static_files(filename):
-    response = make_response(send_from_directory('static', filename))
-    response.headers['Cache-Control'] = 'max-age=86400'
-    return response
 
 @app.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword():
