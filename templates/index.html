@@ -825,6 +825,26 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
+            </div>
+            <div id="chat-window" class="window draggable">
+                <div class="window-header">
+                    <div class="info">
+                        <i class="fa fa-info-circle"></i>
+                        <span class="info-text">Chat with other students</span>
+                        <span>Study Chat</span>
+                    </div>
+                    <button class="close-window">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="window-content" id="messages">
+                    <!-- Messages will appear here -->
+                </div>
+                <div class="input-area">
+                    <input id="message-input" type="text" placeholder="Type a message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
                 <div class="window-content">
                     <div class="soundcloud-container">
                         <select id="soundcloud-select">
@@ -929,24 +949,6 @@
                     </div>
             </div>
             </div>
-            <div id="chat-window" class="window draggable">
-                <div class="window-header">
-                    <div class="info">
-                        <i class="fa fa-info-circle"></i>
-                        <span class="info-text">Chat with other students</span>
-                        <span>Study Chat</span>
-                    </div>
-                    <button class="close-window">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="window-content" id="messages">
-                    <!-- Messages will appear here -->
-                </div>
-                <div class="input-area">
-                    <input id="message-input" type="text" placeholder="Type a message...">
-                    <button onclick="sendMessage()">Send</button>
-                </div>
-            </div>
+       
         </body>
     </html>
