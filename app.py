@@ -522,4 +522,4 @@ if __name__ == '__main__':
         db.create_all()
         scheduler.start()
         logging.info("Scheduler started")
-        socketio.run(app, debug=True, host='0.0.0.0', port=5050)
+        socketio.run(app, debug=False, host='0.0.0.0', port=5050)
