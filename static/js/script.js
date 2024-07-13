@@ -1108,37 +1108,32 @@ function updateBIGClock() {
       window.location.href = "mailto:support@mousewerk.de";
     });
   });
-  <div id="leaderboard-window" class="window draggable">
-  <div class="window-header">
-      <div class="info">
-          <i class="fa fa-info-circle"></i>
-          <span class="info-text">Weekly Pomodoro Leaderboard</span>
-          <span>Weekly Leaderboard</span>
-      </div>
-      <button class="close-window">
-          <i class="fas fa-times"></i>
-      </button>
-  </div>
-  <div class="window-content">
-      <ul>
-          {% for user in leaderboard|sort_by_pomodoro_time_count %}
-          <li>
-              {% if loop.index == 1 %}
-                  <i class="fas fa-crown"></i>
-                  <span class="first-place">{{ user.charactername }}</span>
-              {% elif loop.index == 2 %}
-                  <span class="second-place">{{ user.charactername }}</span>
-              {% elif loop.index == 3 %}
-                  <span class="third-place">{{ user.charactername }}</span>
-              {% else %}
-                  {{ user.charactername }}
-              {% endif %}
-              : {{ user.pomodoro_time_count|int }}
-          </li>
-          {% endfor %}
-      </ul>
-  </div>
-</div>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .querySelector("#leaderboard-window")
+      .addEventListener("click", function () {
+        fetch("/api/leaderboard")
+          .then((response) => response.json())
+          .then((data) => {
+            let leaderboardHTML = "";
+            data.forEach((user, index) => {
+              if (index === 0) {
+                // If the user is the first in the list
+                leaderboardHTML += `<li><i class="fas fa-crown"></i><span class="first-place">${user.charactername} </span>: ${user.pomodoro_time_count}</li>`;
+              } else if (index === 1) {
+                leaderboardHTML += `<li><span class="second-place">${user.charactername} </span>: ${user.pomodoro_time_count}</li>`;
+              } else if (index === 2) {
+                leaderboardHTML += `<li><span class="third-place">${user.charactername} </span>: ${user.pomodoro_time_count}</li>`;
+              } else {
+                leaderboardHTML += `<li>${user.charactername}: ${user.pomodoro_time_count}</li>`;
+              }
+            });
+            document.querySelector(
+              "#leaderboard-window .window-content ul"
+            ).innerHTML = leaderboardHTML;
+          });
+      });
+  });
 
   document.addEventListener("DOMContentLoaded", function () {
     function changeAudioSource(selectElement) {
