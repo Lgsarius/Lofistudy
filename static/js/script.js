@@ -197,6 +197,31 @@ function updateBIGClock() {
           video.src += "&mute=1"; // Add mute parameter
       }
   }
+  function toggleVideowave() {
+    var checkbox = document.getElementById("video-switch");
+    var localVideo = document.getElementById("background-video");
+    var youtubeVideo = document.getElementById("youtube-bg-video-wave");
+
+    if (checkbox.checked) {
+        // Switch to YouTube video
+        localVideo.style.display = "none";
+        youtubeVideo.style.display = "block";
+    } else {
+        // Switch to local video
+        localVideo.style.display = "block";
+        youtubeVideo.style.display = "none";
+    }
+  }
+  function toggleVolumewave() {
+    var video = document.getElementById("youtube-bg-video-wave");
+    var volumeToggle = document.getElementById("volumeToggle");
+
+    if (volumeToggle.checked) {
+        video.src = video.src.replace("&mute=1", ""); // Remove mute parameter
+    } else {
+        video.src += "&mute=1"; // Add mute parameter
+    }
+}
   function adjustVolume(volume) {
     var iframe = document.getElementById("youtube-bg-video");
     var player = new YT.Player(iframe, {
