@@ -492,10 +492,12 @@ def delete_daily_goal(goal_id):
     db.session.commit()
     return jsonify({'success': True})
 
-@app.route('/manual_reset', methods=['POST'])
+@app.route('/manual_reset', methods=['GET', 'POST'])
+@login_required
 def manual_reset():
     reset_pomodoro_time_count()
     return 'Pomodoro time counts reset manually.', 200
+
 def reset_pomodoro_time_count():
     logging.info("Starting reset of pomodoro time counts")
     users = User.query.all()
