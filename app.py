@@ -10,6 +10,7 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from apscheduler.schedulers.background import BackgroundScheduler
 from sqlalchemy import cast, Integer, func
 from datetime import datetime, timedelta, date
+from flask_cors import CORS
 import os
 import re
 import json
@@ -31,6 +32,7 @@ scheduler = BackgroundScheduler()
 migrate = Migrate()
 
 # Application setup
+CORS(app, resources={r"/*": {"origins": ["https://lo-fi.study/"]}})
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")
@@ -52,9 +54,8 @@ mail.init_app(app)
 sitemap.init_app(app)
 migrate.init_app(app, db)
 
-socketio = SocketIO(app,  logger=True,
-    engineio_logger=True,
-    cors_allowed_origins="*")
+socketio = SocketIO(app, async_mode='eventlet', cors_allowed_origins=["https://lo-fi.study/"])
+
 
 active_users = set()
 # User model
