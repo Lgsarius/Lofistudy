@@ -4,17 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lo-fi.study - Improve Your Focus and Productivity</title>
-    <meta
-    name="description"
-    content="lo-fi.study is a website that helps you to study by giving you a distraction free enviroment." />
-<meta name="author" content="lo-fi.study" />
+    <meta name="description" content="lo-fi.study is a website that helps you to study by giving you a distraction free environment. Enjoy ambient music and focus better.">
+    <meta name="author" content="lo-fi.study">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stylehomepage.css') }}">
- <link
-            rel="icon"
-            type="image/x-icon"
-            href="{{ url_for('static', filename='favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="lo-fi.study - Improve Your Focus and Productivity">
+    <meta property="og:description" content="lo-fi.study is a website that helps you to study by giving you a distraction free environment. Enjoy ambient music and focus better.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.lo-fi.study">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="lo-fi.study - Improve Your Focus and Productivity">
+    <meta name="twitter:description" content="lo-fi.study is a website that helps you to study by giving you a distraction free environment. Enjoy ambient music and focus better.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/twitter-image.jpg') }}">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.lo-fi.study",
+      "name": "lo-fi.study",
+      "description": "lo-fi.study is a website that helps you to study by giving you a distraction free environment. Enjoy ambient music and focus better.",
+      "author": {
+        "@type": "Person",
+        "name": "lo-fi.study"
+      }
+    }
+    </script>
+</head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light" style="position: fixed; width: 100%; top: 0; z-index: 100;">
         <a class="navbar-brand" href="">
