@@ -17,6 +17,8 @@ from flask_socketio import SocketIO, send
 from flask_socketio import SocketIO, emit, join_room, leave_room
 import logging
 from uuid import uuid4
+import eventlet
+eventlet.monkey_patch()
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -50,7 +52,7 @@ mail.init_app(app)
 sitemap.init_app(app)
 migrate.init_app(app, db)
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='eventlet')
 active_users = set()
 # User model
 class User(UserMixin, db.Model):
@@ -277,11 +279,11 @@ def serve_video(filename):
 def home():
     if current_user.pomodoro_time_count is None:
         current_user.pomodoro_time_count = 0
-    
+
     db.session.commit()
     music_dirs = []
     music_files = []
-    
+
     wallpaper = current_user.wallpaper if current_user.wallpaper else 'bg_wp.mp4'
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     username = User.query.filter_by(username=current_user.username).first()
@@ -289,7 +291,7 @@ def home():
     leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
     charactername = current_user.charactername
     all_active_users = User.query.filter(User.charactername.isnot(None)).all()
-    
+
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
         music_files += [url_for('static', filename=music_dir + '/' + f) for f in os.listdir(dir_path) if f.endswith('.mp3')]
@@ -298,7 +300,7 @@ def home():
         music_files = []  # Ensure music_files is a list, even if empty
 
     user_agent = request.headers.get('User-Agent')
-    
+
     return render_template('index.html', 
                            music_files=music_files, 
                            leaderboard=leaderboard, 
