@@ -326,23 +326,24 @@ function updateBIGClock() {
         });
       });
 
-  var socket = io();
-  var charactername = "{{ charactername }}";
+      var socket = io();
+      var charactername = "{{ charactername }}";
 
-  socket.on('message', function(msg) {
-      var messages = document.getElementById('messages');
-      var messageElement = document.createElement('div');
-      messageElement.textContent = msg;
-      messages.appendChild(messageElement);
+      socket.on('message', function(msg) {
+          var messages = document.getElementById('messages');
+          var messageElement = document.createElement('div');
+          messageElement.textContent = msg;
+          messages.appendChild(messageElement);
+          messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
+      });
+
+      window.sendMessage = function() {
+          var input = document.getElementById('message-input');
+          var message = charactername + ": " + input.value;
+          socket.send(message);
+          input.value = '';
+      }
   });
-
-  window.sendMessage = function() {
-      var input = document.getElementById('message-input');
-      var message = charactername + ": " + input.value;
-      socket.send(message);
-      input.value = '';
-  }
-});
   
   const timer = {
     pomodoro: 25,
