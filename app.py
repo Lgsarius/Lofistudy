@@ -145,18 +145,25 @@ def validate_date_format(date_str):
         return True
     return False
 
+# Sitemap generator
 @sitemap.register_generator
 def generate_urls():
     today = date.today().isoformat()
-    if not validate_date_format(today):
-        raise ValueError("Ungültiges Datum gefunden: {}".format(today))
-    yield 'index', {}, {'lastmod': today, 'priority': 1.0}
-    yield 'login', {}, {'lastmod': today, 'priority': 0.8}
-    yield 'FAQ', {}, {'lastmod': today, 'priority': 0.7}
+    urls = [
+        ('index', {}, {'lastmod': today, 'priority': 1.0}),
+        ('login', {}, {'lastmod': today, 'priority': 0.8}),
+        ('FAQ', {}, {'lastmod': today, 'priority': 0.7})
+    ]
+    for url in urls:
+        yield url[0], url[1], {'lastmod': url[2]['lastmod'], 'priority': url[2]['priority']}
+
 
 @app.route('/sitemap.xml', methods=['GET'])
 def generate_sitemap():
-    return sitemap.generate()
+    sitemap_xml = sitemap.generate()
+    response = make_response(sitemap_xml)
+    response.headers['Content-Type'] = 'application/xml'
+    return response
 
 # Routes
 @app.route('/login', methods=['GET', 'POST'])
