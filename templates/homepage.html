@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>lo-fi.study - Improve Your Focus and Productivity</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylehomepage.css') }}">
-        <style>
-    .navbar {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        backdrop-filter: blur(10px) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-bottom-left-radius: 10px !important;
-        border-bottom-right-radius: 10px !important;
-    }
-</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lo-fi.study - Improve Your Focus and Productivity</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylehomepage.css') }}">
+</head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light" style="position: fixed; width: 100%; top: 0; z-index: 100;">
         <a class="navbar-brand" href="">
@@ -41,7 +33,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6" >
+            <div class="col-md-6">
                 <div class="hero-img">
                     <img src="{{ url_for('static', filename='media/SVG/SVG/lo-fi.study.svg') }}" alt="lo-fi.study Logo" class="login-logo">
                 </div>
@@ -49,47 +41,44 @@
                     <p style="font-size: 2em;">Your calm, digital space to
                         <br><br><span style="text-align: center;" id="typed-text"></span>
                     </p>
-                    </div>
-                    <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
                 </div>
+                <a onclick="myFunction()" href="{{ url_for('signup') }}" class="hero-img-btn">Register now</a>
+            </div>
             <div class="col-md-6">
-              <img id="image1" src="{{ url_for('static', filename='media/webpm/Macchrome.webp') }}" alt="website preview" class="web-prev img-shadow smooth-transition">
+                <img id="image1" src="{{ url_for('static', filename='media/webpm/Macchrome.webp') }}" alt="website preview" class="web-prev img-shadow smooth-transition">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 90%;">
-               
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/K0qdm4r/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.webp" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/fGQQfWr/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.webp" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/pdsgshq/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.webp" alt="Third slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/PG0bPhB/lgsarius-Lofi-study-girl-on-desk-plants-rain-coffee-rain-02e5bc5f-943e-4c0b-b986-1cf5d7362034.webp" alt="Fourth slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 " style="border-radius: 10px !important;" src="https://i.ibb.co/m9QYfwJ/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.webp" alt="Fifth slide">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 90%;">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/K0qdm4r/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.webp" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/fGQQfWr/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.webp" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/pdsgshq/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.webp" alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/PG0bPhB/lgsarius-Lofi-study-girl-on-desk-plants-rain-coffee-rain-02e5bc5f-943e-4c0b-b986-1cf5d7362034.webp" alt="Fourth slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" style="border-radius: 10px !important;" src="https://i.ibb.co/m9QYfwJ/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.webp" alt="Fifth slide">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-              <div class="col-md-5" >
-                <div class = "content-container">
-                <div class="hero-text">
-                    <h1 style="text-align: center;">Craft your focus environment</h1>
-                    <p style="text-align: center;">Whether you prefer getting work done in the cozy atmosphere of a cafe or escaping to the tranquil shores of the beach, lo-fi.study offers you both experiences and much more.
-                       
-                    </p>
+            <div class="col-md-5">
+                <div class="content-container">
+                    <div class="hero-text">
+                        <h1 style="text-align: center;">Craft your focus environment</h1>
+                        <p style="text-align: center;">Whether you prefer getting work done in the cozy atmosphere of a cafe or escaping to the tranquil shores of the beach, lo-fi.study offers you both experiences and much more.</p>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -132,20 +121,16 @@
                 </div>
             </div>
         </div>
-        
-   
+
         <div class="row row-with-line">
             <div class="container py-3 footer-with-line">
                 <div class="footer-content d-flex justify-content-between align-items-center">
-                    <!-- Copyright and logo on the left -->
                     <div class="footer-left">
-                      
                         <div class="copyright py-2">
                             <img class="logo-shadow reduced-size" src={{ url_for('static', filename='favicon.ico') }} alt="Logo">
                             <p class="text-white">Copyright © 2024 lo-fi.study</p>
                         </div>
                     </div>
-                    <!-- Legal and Privacy in the middle -->
                     <div class="footer-middle">
                         <div class="settings-item py-2">
                             <a href="{{ url_for('legal_notice') }}" class="settings-link text-white">Legal Notice</a>
@@ -154,7 +139,6 @@
                             <a href="{{ url_for('privacy_policy') }}" class="settings-link text-white">Privacy Policy</a>
                         </div>
                     </div>
-                    <!-- Social media links on the right -->
                     <div class="footer-right">
                         <div class="settings-item py-2">
                             <a href="https://www.instagram.com/your_instagram_handle" class="settings-link text-white">
@@ -168,42 +152,43 @@
                         </div>
                     </div>
                 </div>
-            </div>      
-        </div>     
-  
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-              var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-              if ("IntersectionObserver" in window) {
-                  let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-                      entries.forEach(function(entry) {
-                          if (entry.isIntersecting) {
-                              let lazyImage = entry.target;
-                              lazyImage.src = lazyImage.dataset.src;
-                              lazyImage.classList.remove("lazy");
-                              lazyImageObserver.unobserve(lazyImage);
-                          }
-                      });
-                  });
-                  lazyImages.forEach(function(lazyImage) {
-                      lazyImageObserver.observe(lazyImage);
-                  });
-              }
-          });
-      
-          $(document).ready(function() {
-              $('.carousel').carousel({ interval: 1500 });
-              new Typed('#typed-text', {
-                  strings: ["Work", "Study", "Chill", "Code"],
-                  typeSpeed: 120,
-                  backSpeed: 120,
-                  backDelay: 500,
-                  smartBackspace: true,
-                  loop: true
-              });
-          });
-        </script>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+
+        $(document).ready(function() {
+            $('.carousel').carousel({ interval: 1500 });
+            new Typed('#typed-text', {
+                strings: ["Work", "Study", "Chill", "Code"],
+                typeSpeed: 120,
+                backSpeed: 120,
+                backDelay: 500,
+                smartBackspace: true,
+                loop: true
+            });
+        });
+    </script>
 </body>
 </html>
