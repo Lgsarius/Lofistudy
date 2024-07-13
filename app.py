@@ -52,7 +52,10 @@ mail.init_app(app)
 sitemap.init_app(app)
 migrate.init_app(app, db)
 
-socketio = SocketIO(app, async_mode='eventlet')
+socketio = SocketIO(app,  logger=True,
+    engineio_logger=True,
+    cors_allowed_origins="*")
+
 active_users = set()
 # User model
 class User(UserMixin, db.Model):
