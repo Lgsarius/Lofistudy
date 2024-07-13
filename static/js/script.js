@@ -228,7 +228,7 @@ function updateBIGClock() {
   document.addEventListener("DOMContentLoaded", function () {
     document
       .querySelectorAll(
-        ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-chat, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
+        ".fas.fa-music, .fas.fa-clock, .fas.fa-clipboard, .far.fa-calendar-alt, .fas.fa-sticky-note, .fas.fa-cog, .fas.fa-trophy, .fas.fa-volume-up, .fas.fa-video, .fas.fa-link, .fas.fa-image, .fas.fa-comments, .fab.fa-soundcloud, .fas.fa-comments, .fas.fa-user-circle"
       )
       .forEach((icon) => {
         icon.addEventListener("click", function () {
