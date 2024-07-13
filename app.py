@@ -13,7 +13,9 @@ from datetime import datetime, timedelta, date
 import os
 import re
 import json
+import logging
 from uuid import uuid4
+logging.basicConfig(level=logging.DEBUG)
 
 # Initialize extensions
 db = SQLAlchemy()
@@ -490,11 +492,20 @@ def delete_daily_goal(goal_id):
     db.session.commit()
     return jsonify({'success': True})
 
+@app.route('/manual_reset', methods=['POST'])
+def manual_reset():
+    reset_pomodoro_time_count()
+    return 'Pomodoro time counts reset manually.', 200
 def reset_pomodoro_time_count():
+    logging.info("Starting reset of pomodoro time counts")
     users = User.query.all()
+    if not users:
+        logging.warning("No users found in the database")
     for user in users:
         user.pomodoro_time_count = 0
+        logging.debug(f"Reset pomodoro time count for user: {user.username}")
     db.session.commit()
+    logging.info("Finished resetting pomodoro time counts")
 
 scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=23, minute=59, second=59)
 
@@ -502,5 +513,6 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         scheduler.start()
-        reset_pomodoro_time_count()
-        app.run(debug=True, host='0.0.0.0', port=5050)
+        logging.info("Scheduler started")
+        reset_pomodoro_time_count()  # This will run once at start
+        app.run(debug=False, host='0.0.0.0', port=5050)
