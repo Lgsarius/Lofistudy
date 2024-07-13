@@ -222,16 +222,24 @@ function updateBIGClock() {
         video.src += "&mute=1"; // Add mute parameter
     }
 }
-  function adjustVolume(volume) {
-    var iframe = document.getElementById("youtube-bg-video");
-    var player = new YT.Player(iframe, {
-        events: {
-            'onReady': function(event) {
-                event.target.setVolume(volume);
-            }
+var player1, player2;
+
+        function onYouTubeIframeAPIReady() {
+            player1 = new YT.Player('youtube-bg-video', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+            player2 = new YT.Player('youtube-bg-video-wave', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
         }
-    });
-  }
+function adjustVolume(volume) {
+  player1.setVolume(volume);
+  player2.setVolume(volume);
+}
   
   
   var highestZIndex = 0;
