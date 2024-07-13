@@ -509,7 +509,7 @@ def reset_pomodoro_time_count():
     db.session.commit()
     logging.info("Finished resetting pomodoro time counts")
 
-scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=23, minute=59, second=59)
+scheduler.add_job(func=reset_pomodoro_time_count, trigger="cron", day_of_week='sun', hour=22, minute=00, second=00)
 
 if __name__ == '__main__':
     with app.app_context():
