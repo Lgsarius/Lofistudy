@@ -1,45 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="lo-fi.study is a website that helps you to study by providing a distraction-free environment. Study with us and improve your focus and productivity." />
-    <meta name="keywords" content="Study, Focus, Productivity, Distraction-free, Learning, Education, Lofi, Study, Social, Music" />
-    <meta name="author" content="lo-fi.study" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-   
-    <script src="{{ url_for('static', filename='loginscript.js') }}"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="preload" as="image" href="https://i.ibb.co/K0qdm4r/lgsarius-cyberpunk-night-study-girl-window-desklight-c1650ad7-776d-470a-a2e0-da9e78140212.webp">
-    <link rel="preload" as="image" href="https://i.ibb.co/pdsgshq/lgsarius-Lofi-girl-and-cat-studying-in-a-field-sunset-3d94459d-fd73-43ee-8c1f-c4547239bb7a.webp">
-    <link rel="preload" as="image" href="https://i.ibb.co/fGQQfWr/lgsarius-Lofi-study-girl-on-desk-cybperunk-like-coffee-rain-82a5d58d-44f1-4b9a-ae8f-1f82844543a6.webp">
-    <link rel="preload" as="image" href="https://i.ibb.co/PG0bPhB/lgsarius-Lofi-study-girl-on-desk-plants-rain-coffee-rain-02e5bc5f-943e-4c0b-b986-1cf5d7362034.webp">
-    <link rel="preload" as="image" href="https://i.ibb.co/m9QYfwJ/lgsarius-Lofi-Trainstation-sunset-648859c2-8af6-4b30-b276-dca8f45ba231.webp">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
-    <link
-    rel="stylesheet"
-    type="text/css"
-    href="{{ url_for('static', filename='css/stylehomepage.css') }}"
-  />
-  <title>lo-fi.study - Improve Your Focus and Productivity</title>
-</head>
-<style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>lo-fi.study - Improve Your Focus and Productivity</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylehomepage.css') }}">
+        <style>
     .navbar {
-        background-color: rgba(255, 255, 255, 0.1) !important; /* Semi-transparent white */
-        backdrop-filter: blur(10px) !important; /* Blur the area behind the element */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; /* Optional: Add a border */
-        border-bottom-left-radius: 10px !important; /* Rounded bottom left corner */
-        border-bottom-right-radius: 10px !important; /* Rounded bottom right corner */
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(10px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-bottom-left-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
     }
 </style>
 <body>
@@ -197,62 +171,39 @@
             </div>      
         </div>     
   
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script>
-      // document.addEventListener('contextmenu', event => event.preventDefault());
-        $(document).ready(function() {
-          var current = 0;
-          var images = $(".prev-image > img");
-          images.first().show(); // Show the first image initially
-          images.not(':first').hide(); // Hide other images
-        
-          function cycleImages() {
-            var next = ((current + 1) % images.length);
-            $(images[current]).fadeOut('slow', function() {
-              // This callback function is executed after the current image has completely faded out
-              $(images[next]).fadeIn('slow'); // Start fading in the next image
-            });
-            current = next;
-          }
-        
-          cycleImages(); // Call cycleImages once to start the cycling immediately
-          setInterval(cycleImages, 5000);
-        });
-          var typed = new Typed('#typed-text', {
-              strings: ["Work", "Study", "Chill", "Code"],
-              typeSpeed: 120,
-              backSpeed: 120,
-              backDelay: 500, // Wait for 500ms before backspacing
-              smartBackspace: true, // Only backspace what doesn't match the previous string
-              loop: true
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+              if ("IntersectionObserver" in window) {
+                  let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                      entries.forEach(function(entry) {
+                          if (entry.isIntersecting) {
+                              let lazyImage = entry.target;
+                              lazyImage.src = lazyImage.dataset.src;
+                              lazyImage.classList.remove("lazy");
+                              lazyImageObserver.unobserve(lazyImage);
+                          }
+                      });
+                  });
+                  lazyImages.forEach(function(lazyImage) {
+                      lazyImageObserver.observe(lazyImage);
+                  });
+              }
           });
-          $(document).ready(function(){
-            $('.carousel').carousel({
-              interval: 1500
-            })
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-          
-            if ("IntersectionObserver" in window) {
-              let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(function(entry) {
-                  if (entry.isIntersecting) {
-                    let lazyImage = entry.target;
-                    lazyImage.src = lazyImage.dataset.src;
-                    lazyImage.classList.remove("lazy");
-                    lazyImageObserver.unobserve(lazyImage);
-                  }
-                });
+      
+          $(document).ready(function() {
+              $('.carousel').carousel({ interval: 1500 });
+              new Typed('#typed-text', {
+                  strings: ["Work", "Study", "Chill", "Code"],
+                  typeSpeed: 120,
+                  backSpeed: 120,
+                  backDelay: 500,
+                  smartBackspace: true,
+                  loop: true
               });
-          
-              lazyImages.forEach(function(lazyImage) {
-                lazyImageObserver.observe(lazyImage);
-              });
-            }
           });
         </script>
-      </script>
 </body>
 </html>
