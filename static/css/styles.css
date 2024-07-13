@@ -706,7 +706,20 @@ select {
   background-color: #fff;
   font-size: 16px;
 }
+.separator-line {
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
 
+.current-user-alltime {
+  text-align: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
 .window-header {
   text-align: center;
   border-radius: 10px;
