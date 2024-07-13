@@ -714,7 +714,7 @@ select {
 .current-user-alltime {
   text-align: center;
   padding: 10px;
-  background-color: #f9f9f9;
+  
   position: absolute;
   bottom: 0;
   width: 100%;
