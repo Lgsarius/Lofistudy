@@ -23,6 +23,29 @@ html {
  
 }
 
+#Active-user {
+  position: fixed;
+  top: 60px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#Active-user h2 {
+  margin-top: 0;
+}
+
+#Active-user ul {
+  list-style: none;
+  padding: 0;
+}
+
+#Active-user ul li {
+  margin: 5px 0;
+}
+
 .bigclock {
   font-size: 36px;
   padding: 10px;

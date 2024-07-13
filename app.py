@@ -14,6 +14,7 @@ import os
 import re
 import json
 from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, emit, join_room, leave_room
 import logging
 from uuid import uuid4
 
@@ -287,6 +288,7 @@ def home():
     leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
     leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
     charactername = current_user.charactername
+    active_users = User.query.filter(User.charactername.isnot(None)).all()
     
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
@@ -306,8 +308,15 @@ def home():
                            username=username, 
                            tasks=tasks, 
                            charactername=charactername,
-                           pomodoro_time_count_alltime=current_user.pomodoro_time_count_alltime)
+                           pomodoro_time_count_alltime=current_user.pomodoro_time_count_alltime,
+                           active_users=active_users)
 
+@socketio.on('connect')
+def handle_connect():
+    active_users = User.query.filter(User.charactername.isnot(None)).all()
+    users_list = [{'username': user.username, 'charactername': user.charactername} for user in active_users]
+    emit('active_users', users_list, broadcast=True)
+    
 @app.route('/app_neu')
 @login_required
 def home_neu():
