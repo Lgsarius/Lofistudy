@@ -505,8 +505,8 @@
             <div class="window-header">
                 <div class="info">
                     <i class="fa fa-info-circle"></i>
-                    <span class="info-text">Weakly Leaderboard</span>
-                    <span>Weakly Pomodoro Leaderboard</span>
+                    <span class="info-text">Weekly Pomodoro Leaderboard</span>
+                    <span>Weekly Leaderboard</span>
                 </div>
                 <button class="close-window">
                     <i class="fas fa-times"></i>
@@ -530,6 +530,9 @@
                     </li>
                     {% endfor %}
                 </ul>
+                <div class="current-user-alltime">
+                    <strong>{{ leaderboard_current_user.charactername }}</strong>: {{ leaderboard_current_user.pomodoro_time_count_alltime|int }} (All time)
+                </div>
             </div>
         </div>
         <div id="sticky-note-window" class="window draggable">

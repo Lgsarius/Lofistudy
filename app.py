@@ -297,7 +297,16 @@ def home():
 
     user_agent = request.headers.get('User-Agent')
     
-    return render_template('index.html', music_files=music_files, leaderboard=leaderboard, leaderboard_current_user=leaderboard_current_user, wallpaper=wallpaper, notes=current_user.notecontent, username=username, tasks=tasks, charactername=charactername)
+    return render_template('index.html', 
+                           music_files=music_files, 
+                           leaderboard=leaderboard, 
+                           leaderboard_current_user=leaderboard_current_user, 
+                           wallpaper=wallpaper, 
+                           notes=current_user.notecontent, 
+                           username=username, 
+                           tasks=tasks, 
+                           charactername=charactername,
+                           pomodoro_time_count_alltime=current_user.pomodoro_time_count_alltime)
 
 @app.route('/app_neu')
 @login_required
