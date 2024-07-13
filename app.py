@@ -51,7 +51,7 @@ sitemap.init_app(app)
 migrate.init_app(app, db)
 
 socketio = SocketIO(app)
-
+active_users = set()
 # User model
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -288,7 +288,7 @@ def home():
     leaderboard = User.query.filter(User.charactername.isnot(None), User.pomodoro_time_count != '0').order_by(cast(User.pomodoro_time_count, Integer).desc()).limit(6).all()
     leaderboard_current_user = User.query.filter_by(username=current_user.username).first()
     charactername = current_user.charactername
-    active_users = User.query.filter(User.charactername.isnot(None)).all()
+    all_active_users = User.query.filter(User.charactername.isnot(None)).all()
     
     for music_dir in music_dirs:
         dir_path = os.path.join(app.static_folder, music_dir)
@@ -309,13 +309,24 @@ def home():
                            tasks=tasks, 
                            charactername=charactername,
                            pomodoro_time_count_alltime=current_user.pomodoro_time_count_alltime,
-                           active_users=active_users)
+                           active_users=all_active_users)
 
 @socketio.on('connect')
 def handle_connect():
-    active_users = User.query.filter(User.charactername.isnot(None)).all()
-    users_list = [{'username': user.username, 'charactername': user.charactername} for user in active_users]
-    emit('active_users', users_list, broadcast=True)
+    if current_user.is_authenticated:
+        user_info = {'username': current_user.username, 'charactername': current_user.charactername}
+        active_users.add(current_user.username)
+        emit_active_users()
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    if current_user.is_authenticated:
+        active_users.discard(current_user.username)
+        emit_active_users()
+
+def emit_active_users():
+    active_users_list = [{'username': username, 'charactername': User.query.filter_by(username=username).first().charactername} for username in active_users]
+    emit('active_users', active_users_list, broadcast=True)
     
 @app.route('/app_neu')
 @login_required
