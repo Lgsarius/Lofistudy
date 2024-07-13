@@ -1,21 +1,21 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var socket = io();
+//document.addEventListener("DOMContentLoaded", function () {
+  //var socket = io();
 
-  socket.on('connect', function() {
-      console.log('Connected to the server');
-  });
+ // socket.on('connect', function() {
+ //     console.log('Connected to the server');
+//  });
 
-  socket.on('active_users', function(users) {
-      var activeUsersList = document.getElementById('active-users-list');
-      activeUsersList.innerHTML = ''; // Clear the current list
-
-      users.forEach(function(user) {
-          var li = document.createElement('li');
-          li.textContent = user.username + ' (' + user.charactername + ')';
-          activeUsersList.appendChild(li);
-      });
-  });
-});
+ // socket.on('active_users', function(users) {
+ //     var activeUsersList = document.getElementById('active-users-list');
+  //    activeUsersList.innerHTML = ''; // Clear the current list
+//
+   //   users.forEach(function(user) {
+   //       var li = document.createElement('li');
+    //      li.textContent = user.username + ' (' + user.charactername + ')';
+    //      activeUsersList.appendChild(li);
+   //   });
+ // });
+//});
 function updateBIGClock() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
