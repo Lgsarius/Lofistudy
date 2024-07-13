@@ -30,10 +30,10 @@ mail = Mail()
 sitemap = Sitemap()
 scheduler = BackgroundScheduler()
 migrate = Migrate()
-
+app = Flask(__name__)
 # Application setup
 CORS(app, resources={r"/*": {"origins": ["https://lo-fi.study/"]}})
-app = Flask(__name__)
+
 app.config['SECRET_KEY'] = 'secret-key'
 uri = os.getenv("DATABASE_URL")
 if uri and uri.startswith("postgres://"):
