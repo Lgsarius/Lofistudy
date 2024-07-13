@@ -198,7 +198,7 @@ def submit_contact():
     flash('Your message was successfully sent!', 'success')
     return redirect(url_for('home'))
 
-@app.route('/static/<path:filename>')
+@app.route('/static/media/<path:filename>')
 @login_required
 def static_files(filename):
     response = make_response(send_from_directory('static', filename))
