@@ -198,7 +198,7 @@ function updateBIGClock() {
       }
   }
   function toggleVideowave() {
-    var checkbox = document.getElementById("video-switch");
+    var checkbox = document.getElementById("video-switch-wave");
     var localVideo = document.getElementById("background-video");
     var youtubeVideo = document.getElementById("youtube-bg-video-wave");
 
@@ -214,7 +214,7 @@ function updateBIGClock() {
   }
   function toggleVolumewave() {
     var video = document.getElementById("youtube-bg-video-wave");
-    var volumeToggle = document.getElementById("volumeToggle");
+    var volumeToggle = document.getElementById("volumeTogglewave");
 
     if (volumeToggle.checked) {
         video.src = video.src.replace("&mute=1", ""); // Remove mute parameter
