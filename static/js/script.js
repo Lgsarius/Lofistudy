@@ -172,74 +172,65 @@ function updateBIGClock() {
   // Fetch statistics when the window is loaded
   window.addEventListener('load', fetchStatistics);
   
-    function toggleVideo() {
-      var checkbox = document.getElementById("video-switch");
-      var localVideo = document.getElementById("background-video");
-      var youtubeVideo = document.getElementById("youtube-bg-video");
-  
-      if (checkbox.checked) {
-          // Switch to YouTube video
-          localVideo.style.display = "none";
-          youtubeVideo.style.display = "block";
-      } else {
-          // Switch to local video
-          localVideo.style.display = "block";
-          youtubeVideo.style.display = "none";
-      }
-    }
-    function toggleVolume() {
-      var video = document.getElementById("youtube-bg-video");
+  var player1, player2;
+
+  function onYouTubeIframeAPIReady() {
+      player1 = new YT.Player('youtube-bg-video', {
+          events: {
+              'onReady': onPlayerReady
+          }
+      });
+      player2 = new YT.Player('youtube-bg-video-wave', {
+          events: {
+              'onReady': onPlayerReady
+          }
+      });
+  }
+
+  function onPlayerReady(event) {
+      event.target.mute();
+  }
+
+  function toggleVolume() {
+      var video = player1;
       var volumeToggle = document.getElementById("volumeToggle");
-  
+
       if (volumeToggle.checked) {
-          video.src = video.src.replace("&mute=1", ""); // Remove mute parameter
+          video.unMute();
       } else {
-          video.src += "&mute=1"; // Add mute parameter
+          video.mute();
       }
   }
-  function toggleVideowave() {
-    var checkbox = document.getElementById("video-switch-wave");
-    var localVideo = document.getElementById("background-video");
-    var youtubeVideo = document.getElementById("youtube-bg-video-wave");
 
-    if (checkbox.checked) {
-        // Switch to YouTube video
-        localVideo.style.display = "none";
-        youtubeVideo.style.display = "block";
-    } else {
-        // Switch to local video
-        localVideo.style.display = "block";
-        youtubeVideo.style.display = "none";
-    }
-  }
   function toggleVolumewave() {
-    var video = document.getElementById("youtube-bg-video-wave");
-    var volumeToggle = document.getElementById("volumeTogglewave");
+      var video = player2;
+      var volumeToggle = document.getElementById("volumeTogglewave");
 
-    if (volumeToggle.checked) {
-        video.src = video.src.replace("&mute=1", ""); // Remove mute parameter
-    } else {
-        video.src += "&mute=1"; // Add mute parameter
-    }
-}
-var player1, player2;
+      if (volumeToggle.checked) {
+          video.unMute();
+      } else {
+          video.mute();
+      }
+  }
 
-        function onYouTubeIframeAPIReady() {
-            player1 = new YT.Player('youtube-bg-video', {
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-            player2 = new YT.Player('youtube-bg-video-wave', {
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-function adjustVolume(volume) {
-  player1.setVolume(volume);
-  player2.setVolume(volume);
-}
+  function toggleVideowave() {
+      var checkbox = document.getElementById("video-switch-wave");
+      var youtubeVideo1 = document.getElementById("youtube-bg-video");
+      var youtubeVideo2 = document.getElementById("youtube-bg-video-wave");
+
+      if (checkbox.checked) {
+          youtubeVideo1.style.display = "none";
+          youtubeVideo2.style.display = "block";
+      } else {
+          youtubeVideo1.style.display = "block";
+          youtubeVideo2.style.display = "none";
+      }
+  }
+
+  function adjustVolume(volume) {
+      player1.setVolume(volume);
+      player2.setVolume(volume);
+  }
   
   
   var highestZIndex = 0;
